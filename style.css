@@ -3538,11 +3538,6 @@ text-align: center;
 
 /* ── MOBILE: collapse to vertical list ── */
 @media (max-width: 800px) {
-   .bottom-player {
-  height: auto;
-  min-height: unset;
-  padding-bottom: 10px;
-}
 .bottom-player-inner {
     display: grid;
     grid-template-columns: 1fr;
@@ -5415,6 +5410,31 @@ padding: 8px 10px;
 .hero-photo-caption {
 
 display: none !important;
+
+}
+
+}
+
+@media (max-width: 768px) {
+
+.main-player-tabs,
+.player-tabs,
+.media-tabs {
+
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 6px;
+
+}
+
+.main-player-tabs button,
+.player-tabs button,
+.media-tabs button {
+
+flex: 1 1 45%;
+font-size: 0.9rem;
+padding: 8px 10px;
 
 }
 
