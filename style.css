@@ -5288,8 +5288,6 @@ box-sizing: border-box;
 max-width: 100%;
 }
 
-* {
-outline: 1px solid red;
 
 @media (max-width: 768px) {
 
@@ -5360,6 +5358,24 @@ z-index: 999;
 
 .nav-links.active {
 display: flex;
+}
+
+}
+
+@media (max-width: 768px) {
+
+.photo-caption {
+display: none;
+}
+
+}
+
+@media (max-width: 768px) {
+
+.site-tagline,
+.logo-tagline,
+.tagline {
+display: none;
 }
 
 }
