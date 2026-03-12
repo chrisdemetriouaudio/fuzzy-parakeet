@@ -161,24 +161,6 @@ ul, ol {
     letter-spacing: 0.1em;
 }
 
-.hero-tagline {
-
-    font-family: var(--font-main);
-
-    font-size: clamp(1rem, 1.6vw, 1.3rem);
-    line-height: 1.5;
-
-    max-width: 720px;
-
-    margin-top: 8px;
-
-    color: rgba(255,255,255,0.78);
-
-    letter-spacing: 0.02em;
-
-    white-space: normal;
-
-}
 
 /* Section titles and subheadings — Barlow Condensed */
 h2, h3, h4,
@@ -702,6 +684,54 @@ position:relative;
     inset: 0;
     z-index: 0;
 }
+
+
+.hero-image::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:100%;
+
+background-image:url("images/sharoncorr.jpg");
+background-size:220px;
+background-repeat:repeat;
+
+filter:
+contrast(1.3)
+saturate(1.8)
+hue-rotate(35deg);
+
+opacity:0.45;
+
+mask-image: linear-gradient(
+to right,
+transparent 0%,
+rgba(0,0,0,0.35) 12%,
+rgba(0,0,0,0.75) 25%,
+black 40%,
+black 60%,
+rgba(0,0,0,0.75) 75%,
+rgba(0,0,0,0.35) 88%,
+transparent 100%
+);
+
+-webkit-mask-image: linear-gradient(
+to right,
+transparent 0%,
+rgba(0,0,0,0.35) 12%,
+rgba(0,0,0,0.75) 25%,
+black 40%,
+black 60%,
+rgba(0,0,0,0.75) 75%,
+rgba(0,0,0,0.35) 88%,
+transparent 100%
+);
+
+z-index:2;
+}
+
 /* Soft vignette — blends hero into caption, lifts text legibility */
 .hero-image::after {
     content: '';
@@ -726,21 +756,42 @@ position:relative;
 .hero-img {
     position: absolute;
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     object-position: center 30%;
-    filter: grayscale(100%) contrast(1.1);
+
+    filter: contrast(1.1);
+
+    mask-image: linear-gradient(to right, black 55%, transparent 85%);
+    -webkit-mask-image: linear-gradient(to right, black 55%, transparent 85%);
+
     transition: filter 1.2s ease;
+
     display: block;
+
     will-change: transform;
     animation: heroZoom 18s ease-out forwards;
+
+    z-index: 0;
 }
 
 .hero-img,
 .hero-content {
     will-change: transform;
 }
+
+.hero-role,
+.hero-tagline,
+.nav-tagline {
+    display: inline-block;
+    background: rgba(5,5,5,0.55);
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
 
 .hero:hover .hero-img {
     filter: grayscale(0%) contrast(1);
@@ -751,7 +802,9 @@ position:relative;
     left: 0;
     z-index: 2;
     padding: var(--space-xl);
-    max-width: 760px;
+    max-width: 720px;
+
+    text-align: left;
 }
 
 .hero-eyebrow {
@@ -771,6 +824,7 @@ position:relative;
     font-size: clamp(4.5rem, 9vw, 12rem);
     line-height: 0.86;
     margin-bottom: 18px;
+    margin-left: 0;
 
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -787,13 +841,7 @@ position:relative;
 
 .hero-role{
 
-display:flex;
-flex-wrap:wrap;
-
-align-items:center;
-justify-content:center;
-
-gap:18px;
+text-align:left;
 
 font-family:var(--font-mono);
 font-size:0.75rem;
@@ -839,16 +887,24 @@ text-shadow:
 
 }
 
-.hero-discipline {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: rgba(255,255,255,0.65);
+hero-tagline {
+
+    font-family: var(--font-main);
+
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    line-height: 1.5;
+
+    max-width: 720px;
+
+    margin-top: 8px;
+
+    color: rgba(255,255,255,0.78);
+
+    letter-spacing: 0.02em;
+
+    white-space: normal;
+
 }
-
-
 .hero-cta { margin-top: var(--space-lg); }
 
 
@@ -896,6 +952,7 @@ z-index:10001;
 
 /* ── Waveform mark ──────────────────────────────────────── */
 .logo-mark {
+    position: relative;
     display: inline-flex;
     align-items: flex-end;
     gap: 3px;
@@ -913,6 +970,7 @@ z-index:10001;
     transform-origin: bottom center;
     animation: logo-wave 1.6s ease-in-out infinite;
     transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease, background 0.3s ease;
+    z-index: 1;
 }
 
 /* Your existing legendary animation timings */
@@ -948,24 +1006,22 @@ z-index:10001;
 .logo-mark::after {
     content: 'NO SIGNAL';
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 72%;
+    transform: translate(-50%, -50%);
     font-family: var(--font-mono);
     font-size: 0.4rem;
     letter-spacing: 0.18em;
-    color: #555;
+    color: var(--accent);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transform: translateX(4px);
-    transition: opacity 0.2s ease 0.28s, transform 0.2s ease 0.28s;
+    transition: opacity 0.2s ease 0.28s;
+    z-index: 10;
 }
-
 .hero-logo:hover .logo-mark::after {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(-50%);
 }
 
 /* Divider pip between wordmark and mark */
@@ -2305,6 +2361,57 @@ font-size:11px;
 
 letter-spacing:.06em;
 
+}
+
+
+.cdp-footer-bars{
+position:relative;
+display:flex;
+gap:4px;
+align-items:center;
+}
+
+/* Hover label */
+.cdp-footer-bars::after{
+
+content:"Showreel";
+
+position:absolute;
+bottom:140%;
+left:50%;
+
+transform:translateX(-50%) translateY(4px);
+
+font-family:var(--font-mono);
+font-size:0.6rem;
+letter-spacing:0.08em;
+text-transform:uppercase;
+
+color:#ffffff;
+
+background:rgba(5,5,5,0.92);
+border:1px solid rgba(255,255,255,0.18);
+padding:4px 8px;
+
+border-radius:3px;
+
+white-space:nowrap;
+
+opacity:0;
+pointer-events:none;
+
+backdrop-filter:blur(6px);
+
+transition:
+opacity .18s ease,
+transform .18s ease;
+
+z-index:20;
+}
+
+.cdp-footer-bars:hover::after{
+opacity:1;
+transform:translateX(-50%) translateY(0);
 }
 
 .cdp-footer-left{
