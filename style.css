@@ -5298,4 +5298,25 @@ display: none;
 }
 
 }
+
+@media (max-width: 768px) {
+
+.credit-card,
+.credits-card,
+.project-card {
+
+display: block;
+width: 100%;
+
+}
+
+.credit-card .card-grid,
+.credits-card .card-grid,
+.project-card .card-grid {
+
+display: block;
+
+}
+
+}
 }
