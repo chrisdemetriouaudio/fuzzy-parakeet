@@ -28,6 +28,10 @@
 /* ============================================================
    1. CSS VARIABLES
    ============================================================ */
+*, *::before, *::after {
+box-sizing: border-box;
+}
+
 :root {
     --bg-black:     #050505;
     --bg-dark:      #0f0f0f;
@@ -845,8 +849,6 @@ z-index:2;
     text-transform: uppercase;
 
     color: var(--text-white);
-
-    white-space: nowrap;
 
     text-shadow:
         0 0 10px rgba(255,255,255,0.15),
@@ -5274,4 +5276,14 @@ padding-top:110px;
 padding-bottom:180px;
 }
 
+}
+
+html, body {
+max-width: 100%;
+overflow-x: hidden;
+}
+
+* {
+box-sizing: border-box;
+max-width: 100%;
 }
