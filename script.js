@@ -187,14 +187,18 @@ if (menuBtn && navLinks) {
 
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        navLinks.classList.toggle('active');
-        menuBtn.classList.toggle('is-open');
+
+        const open = navLinks.classList.toggle('active');
+
+        menuBtn.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
     });
 
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             menuBtn.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
         });
     });
 
@@ -202,10 +206,10 @@ if (menuBtn && navLinks) {
         if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
             navLinks.classList.remove('active');
             menuBtn.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
         }
     });
 }
-
 
     // ─── 2. Smooth Scrolling ─────────────────────────────────────
     const CHROME_OFFSET = 108; // no fixed navbar
