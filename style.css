@@ -5465,3 +5465,31 @@ padding: 8px 10px;
 }
 
 }
+
+@media (max-width:768px){
+
+.player-tabs,
+.main-player-tabs,
+.audio-tabs,
+.tabs {
+
+display:grid !important;
+grid-template-columns:1fr 1fr !important;
+gap:8px;
+width:100%;
+
+}
+
+.player-tabs button,
+.main-player-tabs button,
+.audio-tabs button,
+.tabs button {
+
+width:100%;
+white-space:normal;
+font-size:0.9rem;
+padding:10px;
+
+}
+
+}
