@@ -5379,3 +5379,43 @@ display: none;
 }
 
 }
+
+@media (max-width: 768px) {
+
+.player-tabs,
+.media-tabs,
+.audio-tabs {
+
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+justify-content: center;
+
+}
+
+.player-tabs button,
+.media-tabs button,
+.audio-tabs button {
+
+flex: 1 1 auto;
+font-size: 0.9rem;
+padding: 8px 10px;
+
+}
+
+}
+
+@media (max-width: 768px) {
+
+.photo-caption,
+.photo-credit,
+.caption,
+.camera-icon,
+.hero-caption,
+.hero-photo-caption {
+
+display: none !important;
+
+}
+
+}
