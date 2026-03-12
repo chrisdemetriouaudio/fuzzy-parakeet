@@ -5439,3 +5439,29 @@ padding: 8px 10px;
 }
 
 }
+
+@media (max-width: 768px) {
+
+.player-tabs,
+.main-player-tabs,
+.audio-tabs,
+.tabs {
+
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+
+}
+
+.player-tabs button,
+.main-player-tabs button,
+.audio-tabs button,
+.tabs button {
+
+flex: 1 1 45%;
+font-size: 0.9rem;
+padding: 8px 10px;
+
+}
+
+}
