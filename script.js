@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     alignLogo();
     window.addEventListener('resize', alignLogo);
 
-    const menuBtn  = document.querySelector('.menu-toggle');
+    const menuBtn  = document.querySelector('.menu-btn');
     const navLinks = document.querySelector('.nav-overlay');
     const backToTop = document.getElementById('back-to-top');
 
@@ -382,19 +382,25 @@ if (menuBtn && navLinks) {
 
 
 
-});
 
-
-   // ── Radio Academy badge: auto-complete after 13 March 2026 ──
+   // ── Audio Academy badge: Attending on 13 March 2026, Complete from 14 March ──
+   // Runs inside DOMContentLoaded so the badge is updated before sortRightNowTable reads it
    (function () {
       var badge = document.getElementById('radio-academy-status');
       if (!badge) return;
-      var complete = new Date('2026-03-13T00:00:00');
-      if (new Date() >= complete) {
+      var now      = new Date();
+      var eventDay = new Date('2026-03-13T00:00:00');
+      var dayAfter = new Date('2026-03-14T00:00:00');
+      if (now >= dayAfter) {
          badge.textContent = 'Complete';
          badge.className = 'tag status-complete';
+      } else if (now >= eventDay) {
+         badge.textContent = 'Attending';
+         badge.className = 'tag status-attending';
       }
    })();
+
+});
 
    // ── Gameboard signal chain ──
    (function () {
@@ -950,7 +956,11 @@ setTimeout(function() {
             const artSrc = firstArt.replace("-large", "-t500x500");
             const apImg = document.getElementById("ap-artwork-img");
             const cdpImg = document.getElementById("cdp-artwork-img");
-            if (apImg) apImg.src = artSrc;
+            if (apImg) {
+                apImg.onload = function() { apImg.style.opacity = '1'; };
+                apImg.onerror = function() { apImg.style.opacity = '0'; };
+                apImg.src = artSrc;
+            }
             if (cdpImg) { cdpImg.src = artSrc; cdpImg.style.display = "block"; }
         }
 
@@ -1291,10 +1301,11 @@ if (mainPrevBtn) {
 
         const statusOrder = {
             "status-upcoming": 1,
-            "status-pending": 2,
-            "status-complete": 3,
-            "status-active": 4,
-            "status-discussion": 5
+            "status-attending": 2,
+            "status-pending": 3,
+            "status-complete": 4,
+            "status-active": 5,
+            "status-discussion": 6
         };
 
         rows.sort((a, b) => {
