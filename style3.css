@@ -2807,11 +2807,47 @@ margin-left:6px;
     box-shadow: 0 0 20px rgba(238, 255, 0, 0.2);
 }
 
-/* Mini bottom player: mobile only — hide on tablet & desktop */
-@media (min-width: 769px) {
-    .bottom-player { display: none !important; }
-    /* No player bar on tablet/desktop — button sits 24px from bottom */
-    .back-to-top { bottom: 24px; }
+/* ── Tablet: slim single-row player (artwork + track + controls) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .bottom-player {
+        display: flex !important;
+        height: 68px;
+    }
+    .bottom-player-inner {
+        display: grid !important;
+        grid-template-columns: 52px 1fr auto;
+        gap: 16px;
+        padding: 0 20px;
+        height: 68px;
+        align-items: center;
+    }
+    /* Hide waveform and brand on tablet — not enough room */
+    .ap-col-waveform,
+    .ap-col-brand { display: none !important; }
+    /* Show artwork, track, controls */
+    .ap-col-artwork {
+        display: flex !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+    .ap-col-artwork img,
+    .ap-col-artwork .ap-artwork {
+        width: 44px !important;
+        height: 44px !important;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .ap-col-track { display: flex !important; flex: 1; min-width: 0; }
+    .ap-col-controls { display: flex !important; }
+    .back-to-top { bottom: 84px; }
+}
+
+/* ── Desktop: full 5-column player ── */
+@media (min-width: 1025px) {
+    .bottom-player { display: flex !important; }
+    .ap-col-waveform,
+    .ap-col-brand { display: flex !important; }
+    .back-to-top { bottom: 100px; }
 }
 
 
