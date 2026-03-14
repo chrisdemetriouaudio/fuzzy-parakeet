@@ -2815,32 +2815,26 @@ margin-left:6px;
     box-shadow: 0 0 20px rgba(238, 255, 0, 0.2);
 }
 
-/* ── Tablet: two-row named-area grid ── */
-/*   art  | track | ctrl                */
-/*   art  | wave  | wave                */
+/* ── Tablet: single-row, flexible columns (no fixed widths) ─────────────────
+   artwork | track (flex) | waveform (flex) | controls
+   Brand hidden. All columns compress naturally — no wrapping, no breakage.   */
 @media (min-width: 769px) and (max-width: 1024px) {
     .bottom-player {
         display: flex !important;
-        height: auto !important;
+        height: 84px !important;
     }
     .bottom-player-inner {
         display: grid !important;
-        grid-template-columns: 56px 1fr auto !important;
-        grid-template-rows: auto auto !important;
-        grid-template-areas:
-            "art track ctrl"
-            "art wave  wave" !important;
-        gap: 4px 14px !important;
-        padding: 10px 20px !important;
+        grid-template-columns: 56px minmax(0, 180px) 1fr auto !important;
+        grid-template-rows: 1fr !important;
+        gap: 0 14px !important;
+        padding: 0 20px !important;
         align-items: center !important;
-        width: 100% !important;
-        height: auto !important;
+        height: 84px !important;
     }
-
-    .ap-col-artwork  {
+    /* Columns appear in DOM order: artwork → track → waveform → controls */
+    .ap-col-artwork {
         display: flex !important;
-        grid-area: art !important;
-        align-self: center !important;
         width: 52px !important;
         height: 52px !important;
         flex-shrink: 0;
@@ -2852,39 +2846,26 @@ margin-left:6px;
         object-fit: cover;
         border-radius: 4px;
     }
-    .ap-col-track {
-        display: flex !important;
-        grid-area: track !important;
-        min-width: 0 !important;
-        align-items: center !important;
-    }
-    .ap-col-controls {
-        display: flex !important;
-        grid-area: ctrl !important;
-        flex-shrink: 0;
-        align-items: center !important;
-    }
+    .ap-col-track  { display: flex !important; min-width: 0 !important; }
     .ap-col-waveform {
         display: flex !important;
-        grid-area: wave !important;
         min-width: 0 !important;
-        width: 100% !important;
+        overflow: hidden;
     }
-    .ap-col-waveform .ap-waveform-wrap {
-        width: 100% !important;
-    }
-    /* Timer sits inside waveform wrap — keep it visible */
-    .ap-time-overlay { display: block !important; }
+    .ap-col-waveform .ap-waveform-wrap { width: 100% !important; }
+    .ap-col-controls { display: flex !important; flex-shrink: 0; }
+    .ap-col-brand    { display: none !important; }
 
-    /* Brand hidden */
-    .ap-col-brand { display: none !important; }
-
-    .back-to-top { bottom: 108px; }
+    .back-to-top { bottom: 100px; }
 }
 
-/* ── Desktop: full 5-column player ── */
+/* ── Desktop: restore full 5-column player ── */
 @media (min-width: 1025px) {
-    .bottom-player { display: flex !important; }
+    .bottom-player { display: flex !important; height: 84px !important; }
+    .bottom-player-inner {
+        grid-template-columns: 64px 240px 1fr 220px 160px !important;
+        height: 84px !important;
+    }
     .ap-col-waveform,
     .ap-col-brand { display: flex !important; }
     .back-to-top { bottom: 100px; }
