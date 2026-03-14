@@ -1150,6 +1150,10 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             
             populateCurrentTrack();
 
+            // Cache duration once per track — PLAY_PROGRESS uses this cached value
+            // instead of calling getDuration() repeatedly (which caused audio glitches)
+            widget.getDuration(function(d) { if (d) duration = d; });
+
         });
 
         widget.bind(SC.Widget.Events.PAUSE, function () {
@@ -1188,53 +1192,50 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
         widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (e) {
 
             if (!e || typeof e.currentPosition === 'undefined') return;
+            if (!duration) return; // duration cached on PLAY — skip until ready
+
             const current = e.currentPosition;
 
-            widget.getDuration(function (totalDuration) {
+            // Use cached duration — never call getDuration() inside PLAY_PROGRESS
+            // (repeated async postMessage calls create a callback backlog that glitches audio)
+            const totalDuration = duration;
 
-                if (!totalDuration) return;
+            const mins = Math.floor(current / 60000);
+            const secs = Math.floor((current % 60000) / 1000)
+                .toString()
+                .padStart(2, '0');
 
-                duration = totalDuration;
+            const totalMins = Math.floor(totalDuration / 60000);
+            const totalSecs = Math.floor((totalDuration % 60000) / 1000)
+                .toString()
+                .padStart(2, '0');
 
-                const mins = Math.floor(current / 60000);
-                const secs = Math.floor((current % 60000) / 1000)
-                    .toString()
-                    .padStart(2, '0');
+            if (timeEl) {
+                timeEl.textContent =
+                    mins + ':' + secs + ' / ' + totalMins + ':' + totalSecs;
+            }
 
-                const totalMins = Math.floor(totalDuration / 60000);
-                const totalSecs = Math.floor((totalDuration % 60000) / 1000)
-                    .toString()
-                    .padStart(2, '0');
+            if (mainCurrent) {
+                mainCurrent.textContent = mins + ':' + secs;
+            }
 
-                if (timeEl) {
-                    timeEl.textContent =
-                        mins + ':' + secs + ' / ' + totalMins + ':' + totalSecs;
-                }
+            if (mainDuration) {
+                mainDuration.textContent = totalMins + ':' + totalSecs;
+            }
 
-                if (mainCurrent) {
-                    mainCurrent.textContent = mins + ':' + secs;
-                }
+            const percent = current / totalDuration;
 
-                if (mainDuration) {
-                    mainDuration.textContent = totalMins + ':' + totalSecs;
-                }
+            if (mainProgressFill) {
+                mainProgressFill.style.width = (percent * 100) + "%";
+            }
 
-                const percent = current / totalDuration;
+            if (mainProgressThumb) {
+                mainProgressThumb.style.left = (percent * 100) + "%";
+            }
 
-                if (mainProgressFill) {
-                    mainProgressFill.style.width = (percent * 100) + "%";
-                }
-
-                if (mainProgressThumb) {
-                    mainProgressThumb.style.left = (percent * 100) + "%";
-                }
-
-                if (ctx && canvas) {
-                    const percent = current / totalDuration;
-                    drawWave(percent);
-                }
-
-            });
+            if (ctx && canvas) {
+                drawWave(percent);
+            }
 
         });
 

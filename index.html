@@ -373,7 +373,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                <div class="cdplayer" id="cdplayer">
 
                   <!-- Hidden wrapper — iframe must render for Widget API to work; display:none breaks SC Widget API -->
-                  <div id="sc-iframe-wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
+                  <div id="sc-iframe-wrap" style="position:fixed;top:-400px;left:0;width:300px;height:166px;opacity:0;pointer-events:none;z-index:-1;">
 
 
                      <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
@@ -1466,7 +1466,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
   </div>
 
 </div>
-<script src="script.js?v=25" defer></script>
+<script src="script.js?v=26" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {
