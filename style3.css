@@ -728,21 +728,7 @@ contrast(1.25)
 saturate(1.8)
 hue-rotate(35deg);
 
-opacity:0.45;
-
-mask-image: linear-gradient(
-to right,
-transparent 0%,
-rgba(0,0,0,0.4) 20%,
-black 40%
-);
-
--webkit-mask-image: linear-gradient(
-to right,
-transparent 0%,
-rgba(0,0,0,0.4) 20%,
-black 40%
-);
+opacity:0.22;
 
 z-index:2;
 }
@@ -755,15 +741,15 @@ z-index:2;
     background:
         linear-gradient(
             to bottom,
-            transparent 30%,
-            rgba(5,5,5,0.55) 75%,
+            rgba(5,5,5,0.15) 0%,
+            rgba(5,5,5,0.55) 60%,
             rgba(5,5,5,0.92) 100%
         ),
         linear-gradient(
             to right,
-            rgba(5,5,5,0.60) 0%,
-            rgba(5,5,5,0.20) 45%,
-            transparent 70%
+            rgba(5,5,5,0.70) 0%,
+            rgba(5,5,5,0.35) 45%,
+            transparent 75%
         );
     pointer-events: none;
     z-index: 1;
@@ -1069,13 +1055,17 @@ z-index:10001;
 .tagline-phrase {
     position: absolute;
     inset: 0;
-    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     opacity: 0;
     transition: opacity 0.7s ease;
 }
 .tagline-phrase.active {
     opacity: 1;
 }
+.tg-sp { flex: 0 0 0.55em; }
 
 .nav-brand.scrolled .nav-tagline {
     color: rgba(255,255,255,0.75);
@@ -1643,7 +1633,8 @@ input[type="range"] {
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    /* animation handled entirely by JS */
+    will-change: transform;
+    /* position driven by JS rAF — no CSS animation */
 }
 
 
@@ -2773,7 +2764,7 @@ margin-left:6px;
    ============================================================ */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 84px; /* above mini player on mobile */
     right: 30px;
     width: 60px;
     height: 60px;
@@ -2814,6 +2805,13 @@ margin-left:6px;
     color: var(--accent);
     transform: translateY(-5px);
     box-shadow: 0 0 20px rgba(238, 255, 0, 0.2);
+}
+
+/* Mini bottom player: mobile only — hide on tablet & desktop */
+@media (min-width: 769px) {
+    .bottom-player { display: none !important; }
+    /* No player bar on tablet/desktop — button sits 24px from bottom */
+    .back-to-top { bottom: 24px; }
 }
 
 
@@ -2880,15 +2878,16 @@ margin-left:6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-xl);
+    gap: clamp(16px, 3vw, 40px);
     margin: var(--space-sm) 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;   /* always one row: [2 logos] [neon] [2 logos] */
 }
 
 .footer-industry-group {
     display: flex;
     align-items: center;
-    gap: var(--space-lg);
+    gap: clamp(10px, 2vw, 24px);
+    flex-shrink: 0;
 }
 
 
@@ -2902,9 +2901,9 @@ margin-left:6px;
 /* Logos */
 
 .footer-logo {
-    height: 48px;
+    height: clamp(24px, 4vw, 44px);
     width: auto;
-    max-width: 180px;
+    max-width: 140px;
     object-fit: contain;
     filter: grayscale(100%) opacity(65%);
     transition: filter 0.4s ease;
@@ -3218,6 +3217,7 @@ margin-left:6px;
 /* ── NODE CARDS ── */
 .gb-node {
    position: relative;
+   overflow: hidden;
    background: #0a0a0a;
    border: 1px solid rgba(238,255,0,0.1);
    padding: clamp(1.1rem, 2.5vw, 1.6rem);
@@ -3234,6 +3234,34 @@ margin-left:6px;
    box-shadow: 0 0 24px rgba(238,255,0,0.05), inset 0 0 20px rgba(238,255,0,0.02);
    z-index: 3;
 }
+
+/* ── BACKGROUND WATERMARK ICON ── */
+.gb-node::before {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 9rem;
+   line-height: 1;
+   opacity: 0.07;
+   color: var(--accent);
+   pointer-events: none;
+   z-index: 0;
+   font-family: var(--font-mono), monospace;
+}
+
+/* ensure all card content sits above the watermark */
+.gb-num, .gb-icon, .gb-title, .gb-body, .gb-tag {
+   position: relative;
+   z-index: 1;
+}
+.gb-node[data-area="n01"]::before { content: '◉'; }
+.gb-node[data-area="n02"]::before { content: '✦'; }
+.gb-node[data-area="n03"]::before { content: '⏺'; }
+.gb-node[data-area="n04"]::before { content: '≡'; }
+.gb-node[data-area="n05"]::before { content: '◎'; }
+.gb-node[data-area="n06"]::before { content: '▶'; }
 
 /* Turn corner indicators — subtle notch on corner node */
 .gb-node--turn-br {
@@ -3778,19 +3806,26 @@ text-align: center;
     #roles .row {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
     }
 
     #roles .section-title {
-        display: table;
-        margin: 0 auto var(--space-sm) auto;
-        text-align: center;
+        display: block;
+        margin: 0 0 var(--space-sm) 0;
+        text-align: left;
+    }
+
+    /* Contact box: remove side padding + left border so content aligns at x=24 */
+    .contact-box {
+        padding-left: 0;
+        padding-right: 0;
+        border-left: none;
     }
 
     #roles .section-title::after {
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     #roles .check-list {
@@ -4178,17 +4213,20 @@ text-align: center;
 
 .cdp-tabs .cdp-tab {
     display: flex;
-    flex: 1 1 0%;
+    flex: 1 1 0%;      /* equal share of the full row — always */
     min-width: 0;
 
     align-items: center;
     justify-content: center;
+    text-align: center;
+    white-space: normal;   /* long labels can wrap to 2 lines */
+    line-height: 1.2;
 
-    padding: 12px 8px;
+    padding: 12px 6px;
 
     font-family: var(--font-display);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    font-size: clamp(0.58rem, 1.1vw, 0.75rem);   /* shrinks gracefully */
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 
     background: transparent;
@@ -4211,21 +4249,21 @@ text-align: center;
     border-bottom: 2px solid var(--accent);
 }
 
-@media (max-width: 680px) {
-    .cdp-tabs {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        padding: 0 4px;
-        flex-wrap: nowrap;
-    }
-    .cdp-tabs::-webkit-scrollbar { display: none; }
+/* Tablet: tighter padding so all 6 labels breathe */
+@media (max-width: 900px) {
+    .cdp-tabs { padding: 0 2px; }
     .cdp-tabs .cdp-tab {
-        flex: 0 0 auto;
-        white-space: nowrap;
-        padding: 12px 10px;
-        font-size: 0.68rem;
+        padding: 10px 4px;
+        font-size: clamp(0.52rem, 1.5vw, 0.7rem);
+    }
+}
+
+/* Mobile: same equal-flex, even smaller font */
+@media (max-width: 680px) {
+    .cdp-tabs { overflow: visible; padding: 0; }
+    .cdp-tabs .cdp-tab {
+        padding: 8px 2px;
+        font-size: clamp(0.46rem, 2vw, 0.6rem);
     }
 }
 
@@ -5179,15 +5217,14 @@ height:36px;
 
 
 .footer-industry{
-flex-direction: column;
-gap: 14px;
+    flex-direction: row;   /* always: [2 logos] [neon] [2 logos] */
+    flex-wrap: nowrap;
+    gap: 10px;
 }
 
 .footer-industry-group{
-display:grid;
-grid-template-columns: repeat(2, auto);
-gap: 14px;
-justify-content:center;
+    display: flex;
+    gap: 8px;
 }
 .footer{
 padding-bottom:90px;
@@ -5698,10 +5735,29 @@ width:100%;
   }
   .hero-image::before {
     background-size: 100vw;
-    opacity: 0.25;
+    opacity: 0.22;
   }
   .hero-img {
     filter: contrast(1.1) brightness(1.4);
+  }
+  /* Role block: full bleed edge-to-edge, text indented to match content */
+  .hero-role {
+    margin-left: -24px;
+    margin-right: 0;
+    width: calc(100% + 48px);
+    padding: 10px 24px;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    letter-spacing: 0;
+    text-align: left;
+  }
+  /* Quote: pull left by its own padding so text aligns at same x as title */
+  .hero-tagline {
+    margin-left: -8px;
+  }
+  /* Credits panel: remove extra left padding so title aligns with rest of content */
+  .credits-panel {
+    padding-left: 0;
   }
 }
 
@@ -5892,3 +5948,69 @@ width:100%;
   }
 
 }
+
+
+/* ============================================================
+   MICRO-INTERACTIONS — Premium layer
+   ============================================================ */
+
+/* ── 1. Hero title glitch — fires once on page load ── */
+@keyframes hero-glitch {
+    0%   { text-shadow: none; }
+    10%  { text-shadow:  3px 0 var(--accent), -3px 0 rgba(255,30,80,0.55); }
+    20%  { text-shadow: -2px 0 var(--accent),  2px 0 rgba(0,180,255,0.45); }
+    30%  { text-shadow:  2px 0 rgba(255,30,80,0.40), -1px 0 var(--accent); }
+    42%  { text-shadow: none; }
+    54%  { text-shadow:  1px 0 var(--accent), -1px 0 rgba(255,30,80,0.3); }
+    62%  { text-shadow: none; }
+    100% { text-shadow: none; }
+}
+.hero-title.glitch-active {
+    animation: hero-glitch 0.8s ease-out forwards;
+}
+
+/* ── 2. Track row staggered entrance ── */
+@keyframes track-row-in {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+.cdp-track-item {
+    animation: track-row-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--stagger, 0s);
+}
+
+/* ── 3. Journey watermark icons — slow breathe ── */
+@keyframes watermark-breathe {
+    0%, 100% { opacity: 0.06; transform: translate(-50%, -50%) scale(1); }
+    50%       { opacity: 0.13; transform: translate(-50%, -50%) scale(1.08); }
+}
+.gb-node::before {
+    animation: watermark-breathe 5s ease-in-out infinite;
+}
+/* stagger each card's breathe so they don't all pulse together */
+.gb-node[data-area="n02"]::before { animation-delay: -0.9s; }
+.gb-node[data-area="n03"]::before { animation-delay: -1.8s; }
+.gb-node[data-area="n04"]::before { animation-delay: -2.7s; }
+.gb-node[data-area="n05"]::before { animation-delay: -3.6s; }
+.gb-node[data-area="n06"]::before { animation-delay: -4.5s; }
+
+/* ── 4. Button ripple ── */
+@keyframes btn-ripple-expand {
+    from { transform: scale(0); opacity: 1; }
+    to   { transform: scale(1); opacity: 0; }
+}
+
+/* ── 5. Nav item scramble — letter highlight bar ── */
+.nav-item {
+    position: relative;
+}
+/* subtle accent underline that slides in from left on hover */
+.nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-item:hover::after { width: 100%; }

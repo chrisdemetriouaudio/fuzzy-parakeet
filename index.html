@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style3.css?v=27">
+<link rel="stylesheet" href="style3.css?v=51">
 </head>
 <body>
   <script type="application/ld+json">
@@ -786,7 +786,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
          <tbody>
 
          <tr class="row-highlight">
-         <td data-label="Project">Counting Crows - Shrek 2</td>
+         <td data-label="Project">Counting Crows - Accidentally In Love - Shrek 2 (OST)</td>
          <td data-label="Role"><span class="tag P" data-role="Performer">P</span></td>
          <td data-label="Label / Studio · Project Type">DreamWorks Records &middot; Feature Film OST<span class="award-badge">⭐ Oscar Nominated</span></td>
          </tr>
@@ -1466,18 +1466,26 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
   </div>
 
 </div>
-<script src="script.js?v=17" defer></script>
+<script src="script.js?v=23" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {
   const phrases = document.querySelectorAll('.tagline-phrase');
   if (!phrases.length) return;
+  // Split each phrase into letter spans; spaces become a wider gap element
+  phrases.forEach(phrase => {
+    const chars = [...phrase.textContent.trim().toUpperCase()];
+    phrase.innerHTML = chars.map(c =>
+      c === ' ' ? '<span class="tg-sp"></span>' : `<span>${c}</span>`
+    ).join('');
+  });
+  // Cycle between phrases
   let current = 0;
   setInterval(() => {
     phrases[current].classList.remove('active');
     current = (current + 1) % phrases.length;
     phrases[current].classList.add('active');
-  }, 3000);
+  }, 3200);
 })();
 </script>
 </body>
