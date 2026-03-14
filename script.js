@@ -235,20 +235,15 @@ if (menuBtn && navLinks) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
-            const menuOpen = navLinks && navLinks.classList.contains('active');
-            const delay = menuOpen ? 380 : 0;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetPosition =
+                    targetElement.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    CHROME_OFFSET;
 
-            setTimeout(() => {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const offsetPosition =
-                        targetElement.getBoundingClientRect().top +
-                        window.pageYOffset -
-                        CHROME_OFFSET;
-
-                    slowScrollTo(offsetPosition, 1400);
-                }
-            }, delay);
+                slowScrollTo(offsetPosition, 700);
+            }
         });
     });
 
@@ -319,43 +314,69 @@ if (menuBtn && navLinks) {
     }
 
 
-    // ─── 8. Ticker — mobile/tablet: auto-plays, hover slows; desktop: hover plays ──
+    // ─── 8. Ticker — rAF-driven, zero-jolt infinite scroll ──────────────────────
+    // Changing CSS animation-duration restarts the keyframe, causing a visible
+    // snap.  Driving position directly in JS lets us change speed instantly with
+    // no restart and gives a perfectly seamless loop.
     (function () {
         const wrap = document.querySelector('.ticker-rows-wrap');
         if (!wrap) return;
 
-        const isMobileTablet = window.matchMedia('(max-width: 1024px)').matches;
-        const duration = isMobileTablet ? 18000 : 80000;
         const tickers = Array.from(wrap.querySelectorAll('.ticker'));
+        if (!tickers.length) return;
 
-        const anims = tickers.map(ticker => {
-            const isReverse = ticker.style.animationDirection === 'reverse';
-            const keyframes = isReverse
-                ? [{ transform: 'translateX(-50%)' }, { transform: 'translateX(0)' }]
-                : [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }];
-
-            const anim = ticker.animate(keyframes, {
-                duration,
-                iterations: Infinity,
-                easing: 'linear'
-            });
-
-            if (isMobileTablet) {
-                anim.play();
-            } else {
-                anim.pause();
-            }
-            return anim;
+        // Kill CSS animation — JS owns the transform from here
+        tickers.forEach(t => {
+            t.style.animation = 'none';
+            t.style.transform = 'translateX(0)';
         });
 
-        if (isMobileTablet) {
-            wrap.addEventListener('mouseenter', () => anims.forEach(a => a.playbackRate = 0.3));
-            wrap.addEventListener('mouseleave', () => anims.forEach(a => a.playbackRate = 1.0));
-            wrap.addEventListener('touchstart', () => anims.forEach(a => a.playbackRate = 0.3), { passive: true });
-            wrap.addEventListener('touchend',   () => anims.forEach(a => a.playbackRate = 1.0), { passive: true });
+        const isMob = window.matchMedia('(max-width: 1024px)').matches;
+        const FAST  = isMob ? 110 : 100;   // px/s — energetic but readable
+        const SLOW  = 32;                   // px/s — hover browse speed
+
+        let speed = isMob ? FAST : 0;      // desktop starts paused (plays on hover)
+        const pos = tickers.map(() => 0);  // current x offset per ticker
+        let raf   = null;
+        let last  = 0;
+
+        function frame(ts) {
+            const dt = Math.min((ts - last) / 1000, 0.05); // cap to 50 ms (tab-switch guard)
+            last = ts;
+
+            if (speed > 0) {
+                tickers.forEach((t, i) => {
+                    const half = t.scrollWidth / 2; // content is doubled in HTML
+                    if (half <= 0) return;
+                    pos[i] -= speed * dt;
+                    if (pos[i] <= -half) pos[i] += half; // seamless wrap — same visual position
+                    t.style.transform = `translateX(${pos[i]}px)`;
+                });
+            }
+            raf = requestAnimationFrame(frame);
+        }
+
+        function start() {
+            if (raf) return;
+            last = performance.now();
+            raf  = requestAnimationFrame(frame);
+        }
+
+        function stop() {
+            if (raf) { cancelAnimationFrame(raf); raf = null; }
+        }
+
+        if (isMob) {
+            start(); // always scrolling on mobile/tablet
+            wrap.addEventListener('mouseenter',  () => { speed = SLOW; });
+            wrap.addEventListener('mouseleave',  () => { speed = FAST; });
+            wrap.addEventListener('touchstart',  () => { speed = SLOW; }, { passive: true });
+            wrap.addEventListener('touchend',    () => { speed = FAST; }, { passive: true });
         } else {
-            wrap.addEventListener('mouseenter', () => anims.forEach(a => a.play()));
-            wrap.addEventListener('mouseleave', () => anims.forEach(a => a.pause()));
+            // Desktop: scroll only while the user is hovering
+            start(); // rAF running at speed=0 keeps logic simple; no CPU used when idle
+            wrap.addEventListener('mouseenter', () => { speed = FAST; });
+            wrap.addEventListener('mouseleave', () => { speed = 0; });
         }
     })();
 
@@ -805,6 +826,7 @@ setTimeout(function() {
                 const item = document.createElement("div");
                 item.className = "cdp-track-item";
                 item.dataset.index = track._playlistIndex;
+                item.style.setProperty('--stagger', (i * 0.045) + 's'); // staggered entrance
 
                 // ── Number cell with hover play icon ──
                 const numCell = document.createElement("div");
@@ -1019,6 +1041,50 @@ setTimeout(function() {
 
 }, 600); // closes setTimeout
 
+        // ── Shared helper: populate both players with current track data ──
+        function populateCurrentTrack() {
+            widget.getCurrentSound(function (sound) {
+                if (!sound) return;
+
+                if (titleEl) {
+                    titleEl.textContent = sound.title || 'Untitled';
+                    titleEl.classList.remove('is-scrolling');
+                    titleEl.style.removeProperty('--ap-scroll');
+                    requestAnimationFrame(() => {
+                        const overflow = titleEl.scrollWidth - titleEl.offsetWidth;
+                        if (overflow > 0) {
+                            titleEl.style.setProperty('--ap-scroll', `-${overflow}px`);
+                            titleEl.classList.add('is-scrolling');
+                        }
+                    });
+                }
+
+                if (mainTitleEl) mainTitleEl.textContent = sound.title || 'Untitled';
+                if (subEl && sound.user) subEl.textContent = sound.user.username || '';
+                if (extraEl) extraEl.textContent = '';
+
+                const img = document.getElementById('ap-artwork-img');
+                const mainImg = document.getElementById('cdp-artwork-img');
+                if (img || mainImg) {
+                    let art = sound.artwork_url;
+                    if (!art && sound.user && sound.user.avatar_url) art = sound.user.avatar_url;
+                    if (art) {
+                        const artSrc = art.replace('-large', '-t500x500');
+                        if (img) img.src = artSrc;
+                        if (mainImg) { mainImg.src = artSrc; mainImg.style.display = 'block'; }
+                    }
+                    if (mainTracklist && sound) {
+                        mainTracklist.querySelectorAll('.cdp-track').forEach(t => t.classList.remove('is-active'));
+                        const active = mainTracklist.querySelector('[data-sc-id="' + sound.id + '"]');
+                        if (active) { active.classList.add('is-active'); active.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+                    }
+                }
+            });
+        }
+
+        // Populate players as soon as the widget is ready (no play needed)
+        setTimeout(populateCurrentTrack, 800);
+
         widget.bind(SC.Widget.Events.PLAY, function () {
 
             if (player) player.classList.add('is-playing');
@@ -1075,73 +1141,7 @@ setTimeout(function() {
 
             });
             
-            widget.getCurrentSound(function (sound) {
-                if (!sound) return;
-
-                if (titleEl) {
-                    titleEl.textContent = sound.title || 'Untitled';
-                    titleEl.classList.remove('is-scrolling');
-                    titleEl.style.removeProperty('--ap-scroll');
-                    requestAnimationFrame(() => {
-                        const overflow = titleEl.scrollWidth - titleEl.offsetWidth;
-                        if (overflow > 0) {
-                            titleEl.style.setProperty('--ap-scroll', `-${overflow}px`);
-                            titleEl.classList.add('is-scrolling');
-                        }
-                    });
-                }
-
-                if (mainTitleEl) {
-                    mainTitleEl.textContent = sound.title || 'Untitled';
-                }
-
-                if (subEl && sound.user) {
-                    subEl.textContent = sound.user.username || '';
-                }
-
-                if (extraEl) {
-                    extraEl.textContent = '';
-                }
-
-                const img = document.getElementById('ap-artwork-img');
-                const mainImg = document.getElementById('cdp-artwork-img');
-                if (img || mainImg) {
-                    let art = sound.artwork_url;
-
-                    if (!art && sound.user && sound.user.avatar_url) {
-                        art = sound.user.avatar_url;
-                    }
-
-                    if (art) {
-                        const artSrc = art.replace('-large', '-t500x500');
-                        if (img) img.src = artSrc;
-                        if (mainImg) {
-                            mainImg.src = artSrc;
-                            mainImg.style.display = 'block';
-                        }
-                    }
-                    if (mainTracklist && sound) {
-
-                        const tracks = mainTracklist.querySelectorAll('.cdp-track');
-
-                        tracks.forEach(track => {
-                            track.classList.remove('is-active');
-                        });
-
-                        const active = mainTracklist.querySelector('[data-sc-id="' + sound.id + '"]');
-
-                        if (active) {
-                            active.classList.add('is-active');
-
-                            active.scrollIntoView({
-                                block: 'nearest',
-                                behavior: 'smooth'
-                            });
-                        }
-
-                    }
-                }
-            });
+            populateCurrentTrack();
 
         });
 
@@ -1497,3 +1497,102 @@ revealRows.forEach(function(row){
 revealObserver.observe(row);
 
 });
+
+
+/* ============================================================
+   MICRO-INTERACTIONS — Premium layer
+   ============================================================ */
+
+// ── 1. Hero title — one-shot glitch on page load ─────────────
+(function () {
+    const title = document.querySelector('.hero-title');
+    if (!title) return;
+    // Fire after fonts & layout have settled
+    setTimeout(function () {
+        title.classList.add('glitch-active');
+        title.addEventListener('animationend', function () {
+            title.classList.remove('glitch-active');
+        }, { once: true });
+    }, 700);
+})();
+
+
+// ── 2. Nav text scramble on hover ────────────────────────────
+(function () {
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·▸◉█▪';
+    const FRAMES = 18;
+
+    function scramble(el) {
+        const original = el.dataset.scrambleOrig || el.textContent;
+        el.dataset.scrambleOrig = original;
+        let frame = 0;
+
+        (function tick() {
+            el.textContent = original.split('').map(function (char, i) {
+                if (char === ' ') return ' ';
+                // Resolve letters progressively left-to-right
+                if (i < Math.floor((frame / FRAMES) * original.length)) return original[i];
+                return CHARS[Math.floor(Math.random() * CHARS.length)];
+            }).join('');
+            frame++;
+            if (frame <= FRAMES) requestAnimationFrame(tick);
+            else el.textContent = original;
+        })();
+    }
+
+    document.querySelectorAll('.nav-item').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { scramble(el); });
+    });
+})();
+
+
+// ── 3. cdplayer — subtle 3-D perspective tilt on hover ───────
+(function () {
+    const player = document.querySelector('.cdplayer');
+    if (!player) return;
+    const MAX = 2.5; // max degrees
+
+    player.addEventListener('mousemove', function (e) {
+        const r = player.getBoundingClientRect();
+        const x = (e.clientX - r.left)  / r.width  - 0.5; // -0.5 → +0.5
+        const y = (e.clientY - r.top)   / r.height - 0.5;
+        player.style.transition = 'transform 0.08s ease-out';
+        player.style.transform  = `perspective(900px) rotateY(${x * MAX * 2}deg) rotateX(${-y * MAX * 2}deg)`;
+    });
+
+    player.addEventListener('mouseleave', function () {
+        player.style.transition = 'transform 0.6s ease-out';
+        player.style.transform  = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
+    });
+})();
+
+
+// ── 4. Button click ripple ────────────────────────────────────
+(function () {
+    document.querySelectorAll('.cdp-btn, .hero-cta, .back-to-top').forEach(function (btn) {
+        btn.style.overflow = 'hidden';
+
+        btn.addEventListener('click', function (e) {
+            const r    = btn.getBoundingClientRect();
+            const x    = e.clientX - r.left;
+            const y    = e.clientY - r.top;
+            const size = Math.max(r.width, r.height) * 2.2;
+
+            const dot = document.createElement('span');
+            dot.style.cssText = [
+                'position:absolute',
+                `left:${x - size / 2}px`,
+                `top:${y - size / 2}px`,
+                `width:${size}px`,
+                `height:${size}px`,
+                'border-radius:50%',
+                'background:rgba(238,255,0,0.18)',
+                'pointer-events:none',
+                'animation:btn-ripple-expand 0.55s ease-out forwards'
+            ].join(';');
+
+            btn.appendChild(dot);
+            dot.addEventListener('animationend', function () { dot.remove(); });
+        });
+    });
+})();
