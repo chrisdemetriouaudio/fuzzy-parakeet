@@ -3623,13 +3623,6 @@ text-align: center;
 
 /* ── MOBILE: collapse to vertical list ── */
 @media (max-width: 800px) {
-.bottom-player-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 20px;
-    height: auto;
-  }
    .gameboard {
       display: flex;
       flex-direction: column;
