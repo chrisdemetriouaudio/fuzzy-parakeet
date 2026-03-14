@@ -545,15 +545,16 @@ window.addEventListener('load', function () {
     const wrapper = canvas.parentElement;
     if (!wrapper) return;
 
-    const rect = wrapper.getBoundingClientRect();
+    // Use offsetWidth — integer, not affected by stale inline styles
+    const w = wrapper.offsetWidth;
+    const h = wrapper.offsetHeight || 56;
+    if (!w) return;
 
-    if (!rect.width || rect.width === 0) return;
-
-    canvas.width  = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-
-    canvas.style.width  = rect.width + "px";
-    canvas.style.height = rect.height + "px";
+    // Set pixel buffer only — CSS width:100% on the canvas controls display size
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    // Do NOT set canvas.style.width/height — that locked canvas to a stale pixel value
+    // causing a gap between the waveform bars and the absolutely-positioned timer
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
@@ -571,30 +572,32 @@ window.addEventListener('load', function () {
 }
 
         function setupCanvas() {
-
             if (!canvas || !ctx) return;
 
-            const rect = canvas.getBoundingClientRect();
+            const wrapper = canvas.parentElement;
+            if (!wrapper) return;
 
-            // 🚨 Critical guard
-            if (!rect.width || rect.width === 0) {
-                // Try again after layout stabilises
+            // Read from wrapper (not canvas — canvas may have stale inline style from a prior call)
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight || 56;
+
+            // Critical guard — retry if layout hasn't settled yet
+            if (!w) {
                 setTimeout(setupCanvas, 100);
                 return;
             }
 
             const dpr = window.devicePixelRatio || 1;
 
-            canvas.width  = rect.width * dpr;
-            canvas.height = rect.height * dpr;
+            // Set pixel buffer only — CSS width:100% controls canvas display size
+            canvas.width  = w * dpr;
+            canvas.height = h * dpr;
+            // Deliberately not setting canvas.style.width — see resizeWaveformCanvas
 
-            canvas.style.width  = rect.width + "px";
-            canvas.style.height = rect.height + "px";
-
-            ctx.setTransform(1, 0, 0, 1, 0, 0); // reset scale
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.scale(dpr, dpr);
 
-            generateBars(rect.width, rect.height);
+            generateBars(w, h);
             drawWave(0);
         }
 
@@ -617,25 +620,25 @@ window.addEventListener('load', function () {
         function drawWave(progress = 0) {
             if (!ctx || !canvas) return;
 
-            const rect = canvas.getBoundingClientRect();
-            ctx.clearRect(0, 0, rect.width, rect.height);
+            // Derive logical (CSS-pixel) dimensions from the pixel buffer
+            // — avoids getBoundingClientRect which can return stale values
+            const dpr = window.devicePixelRatio || 1;
+            const w   = canvas.width  / dpr;
+            const h   = canvas.height / dpr;
 
-            const progressX = rect.width * progress;
+            ctx.clearRect(0, 0, w, h);
 
-            bars.forEach((h, i) => {
+            const progressX = w * progress;
+            const accent = getComputedStyle(document.documentElement)
+                               .getPropertyValue('--accent').trim();
+
+            bars.forEach((barH, i) => {
                 const x = i * (barWidth + gap);
-                const y = (rect.height - h) / 2;
+                const y = (h - barH) / 2;
 
-                if (x < progressX) {
-                    ctx.fillStyle = getComputedStyle(document.documentElement)
-                        .getPropertyValue('--accent')
-                        .trim();
-                } else {
-                    ctx.fillStyle = "white";
-                }
-
+                ctx.fillStyle   = x < progressX ? accent : 'white';
                 ctx.globalAlpha = x < progressX ? 1 : 0.25;
-                ctx.fillRect(x, y, barWidth, h);
+                ctx.fillRect(x, y, barWidth, barH);
             });
         }
 
