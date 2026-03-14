@@ -314,10 +314,9 @@ if (menuBtn && navLinks) {
     }
 
 
-    // ─── 8. Ticker — rAF-driven, zero-jolt infinite scroll ──────────────────────
-    // Changing CSS animation-duration restarts the keyframe, causing a visible
-    // snap.  Driving position directly in JS lets us change speed instantly with
-    // no restart and gives a perfectly seamless loop.
+    // ─── 8. Ticker — rAF-driven, opposite directions, always on ─────────────────
+    // Top row scrolls LEFT, bottom row scrolls RIGHT.
+    // Always running on all devices. Hover/touch pauses to let names be read.
     (function () {
         const wrap = document.querySelector('.ticker-rows-wrap');
         if (!wrap) return;
@@ -325,59 +324,59 @@ if (menuBtn && navLinks) {
         const tickers = Array.from(wrap.querySelectorAll('.ticker'));
         if (!tickers.length) return;
 
-        // Kill CSS animation — JS owns the transform from here
+        // Kill any CSS animation — JS owns the transform from here
         tickers.forEach(t => {
             t.style.animation = 'none';
             t.style.transform = 'translateX(0)';
         });
 
-        const isMob = window.matchMedia('(max-width: 1024px)').matches;
-        const FAST  = isMob ? 110 : 100;   // px/s — energetic but readable
-        const SLOW  = 32;                   // px/s — hover browse speed
+        const SPEED = 100; // px/s for all sizes
 
-        let speed = isMob ? FAST : 0;      // desktop starts paused (plays on hover)
-        const pos = tickers.map(() => 0);  // current x offset per ticker
+        // Even-index ticker (top) → left (−1),  odd-index (bottom) → right (+1)
+        const dirs = tickers.map((_, i) => i % 2 === 0 ? -1 : 1);
+        const pos  = tickers.map(() => 0);
+        const seeded = tickers.map(() => false); // right-moving needs a -half seed
+
+        let speed = SPEED; // always running — hover sets to 0
         let raf   = null;
         let last  = 0;
 
         function frame(ts) {
-            const dt = Math.min((ts - last) / 1000, 0.05); // cap to 50 ms (tab-switch guard)
+            const dt = Math.min((ts - last) / 1000, 0.05); // cap at 50 ms (tab-switch guard)
             last = ts;
 
-            if (speed > 0) {
-                tickers.forEach((t, i) => {
-                    const half = t.scrollWidth / 2; // content is doubled in HTML
-                    if (half <= 0) return;
-                    pos[i] -= speed * dt;
-                    if (pos[i] <= -half) pos[i] += half; // seamless wrap — same visual position
-                    t.style.transform = `translateX(${pos[i]}px)`;
-                });
-            }
+            tickers.forEach((t, i) => {
+                const half = t.scrollWidth / 2; // content doubled in HTML → seamless loop
+                if (half <= 0) return;
+
+                // Seed right-moving ticker at −half so it starts mid-loop (no blank run-in)
+                if (!seeded[i]) {
+                    pos[i] = dirs[i] === 1 ? -half : 0;
+                    seeded[i] = true;
+                }
+
+                if (speed > 0) {
+                    pos[i] += dirs[i] * speed * dt;
+                    // Seamless wrap for each direction
+                    if (dirs[i] === -1 && pos[i] <= -half) pos[i] += half;
+                    if (dirs[i] ===  1 && pos[i] >=    0) pos[i] -= half;
+                }
+
+                t.style.transform = `translateX(${pos[i]}px)`;
+            });
+
             raf = requestAnimationFrame(frame);
         }
 
-        function start() {
-            if (raf) return;
-            last = performance.now();
-            raf  = requestAnimationFrame(frame);
-        }
+        // Start immediately — always on, all devices
+        last = performance.now();
+        raf  = requestAnimationFrame(frame);
 
-        function stop() {
-            if (raf) { cancelAnimationFrame(raf); raf = null; }
-        }
-
-        if (isMob) {
-            start(); // always scrolling on mobile/tablet
-            wrap.addEventListener('mouseenter',  () => { speed = SLOW; });
-            wrap.addEventListener('mouseleave',  () => { speed = FAST; });
-            wrap.addEventListener('touchstart',  () => { speed = SLOW; }, { passive: true });
-            wrap.addEventListener('touchend',    () => { speed = FAST; }, { passive: true });
-        } else {
-            // Desktop: scroll only while the user is hovering
-            start(); // rAF running at speed=0 keeps logic simple; no CPU used when idle
-            wrap.addEventListener('mouseenter', () => { speed = FAST; });
-            wrap.addEventListener('mouseleave', () => { speed = 0; });
-        }
+        // Hover / touch → pause so names can be read; release → resume
+        wrap.addEventListener('mouseenter', () => { speed = 0; });
+        wrap.addEventListener('mouseleave', () => { speed = SPEED; });
+        wrap.addEventListener('touchstart', () => { speed = 0; }, { passive: true });
+        wrap.addEventListener('touchend',   () => { speed = SPEED; }, { passive: true });
     })();
 
 
