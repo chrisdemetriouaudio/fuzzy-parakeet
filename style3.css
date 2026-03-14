@@ -2807,39 +2807,65 @@ margin-left:6px;
     box-shadow: 0 0 20px rgba(238, 255, 0, 0.2);
 }
 
-/* ── Tablet: slim single-row player (artwork + track + controls) ── */
+/* ── Tablet: two-row stacked player ── */
+/* Row 1: artwork | track info | controls                          */
+/* Row 2: waveform spanning full width (minus artwork column)      */
 @media (min-width: 769px) and (max-width: 1024px) {
     .bottom-player {
         display: flex !important;
-        height: 68px;
+        height: 92px;
     }
     .bottom-player-inner {
         display: grid !important;
         grid-template-columns: 52px 1fr auto;
-        gap: 16px;
-        padding: 0 20px;
-        height: 68px;
+        grid-template-rows: auto auto;
+        gap: 4px 16px;
+        padding: 10px 20px;
         align-items: center;
+        height: 92px;
     }
-    /* Hide waveform and brand on tablet — not enough room */
-    .ap-col-waveform,
-    .ap-col-brand { display: none !important; }
-    /* Show artwork, track, controls */
+    /* Artwork spans both rows on the left */
     .ap-col-artwork {
         display: flex !important;
-        width: 44px !important;
-        height: 44px !important;
+        grid-column: 1;
+        grid-row: 1 / 3;
+        align-self: center;
+        width: 52px !important;
+        height: 52px !important;
+        flex-shrink: 0;
     }
     .ap-col-artwork img,
     .ap-col-artwork .ap-artwork {
-        width: 44px !important;
-        height: 44px !important;
+        width: 52px !important;
+        height: 52px !important;
         object-fit: cover;
         border-radius: 4px;
     }
-    .ap-col-track { display: flex !important; flex: 1; min-width: 0; }
-    .ap-col-controls { display: flex !important; }
-    .back-to-top { bottom: 84px; }
+    /* Track info — row 1, col 2 */
+    .ap-col-track {
+        display: flex !important;
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+    /* Controls — row 1, col 3 */
+    .ap-col-controls {
+        display: flex !important;
+        grid-column: 3;
+        grid-row: 1;
+        flex-shrink: 0;
+    }
+    /* Waveform — row 2, spanning cols 2–3 */
+    .ap-col-waveform {
+        display: flex !important;
+        grid-column: 2 / 4;
+        grid-row: 2;
+        min-width: 0;
+    }
+    /* Brand hidden — not enough width */
+    .ap-col-brand { display: none !important; }
+
+    .back-to-top { bottom: 108px; }
 }
 
 /* ── Desktop: full 5-column player ── */
