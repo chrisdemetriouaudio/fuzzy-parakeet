@@ -3258,7 +3258,7 @@ margin-left:6px;
 }
 .gb-node[data-area="n01"]::before { content: '◉'; }
 .gb-node[data-area="n02"]::before { content: '✦'; }
-.gb-node[data-area="n03"]::before { content: '⏺'; }
+.gb-node[data-area="n03"]::before { content: '●'; }
 .gb-node[data-area="n04"]::before { content: '≡'; }
 .gb-node[data-area="n05"]::before { content: '◎'; }
 .gb-node[data-area="n06"]::before { content: '▶'; }
