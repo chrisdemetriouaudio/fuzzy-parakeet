@@ -652,7 +652,7 @@ window.addEventListener('load', function () {
                 if (fallback) fallback.style.display = 'block';
                 if (loading)  loading.style.display = 'none';
             }
-        }, 4000);
+        }, 12000); // 12s — generous enough for slow connections; tryLoadSounds retries cancel this early
 
        widget.bind(SC.Widget.Events.READY, function () {
 
@@ -709,14 +709,17 @@ window.addEventListener('load', function () {
 }
 console.log("Widget ready test", widget);
 
-setTimeout(function() {
-
+// Retry getSounds until SC actually returns tracks (can take several seconds on live)
+let _soundsAttempt = 0;
+function tryLoadSounds() {
+    _soundsAttempt++;
     widget.getSounds(function(sounds) {
 
-        console.log("SoundCloud sounds:", sounds);
+        console.log("SoundCloud sounds (attempt " + _soundsAttempt + "):", sounds);
 
         if (!sounds || !sounds.length) {
-            console.log("SoundCloud returned no sounds", sounds);
+            console.log("SoundCloud returned no sounds yet — retrying…");
+            if (_soundsAttempt < 15) setTimeout(tryLoadSounds, 600); // retry up to ~9s
             return;
         }
 
@@ -1037,13 +1040,18 @@ setTimeout(function() {
         }, 200);
 
     }); // closes getSounds
-
-}, 600); // closes setTimeout
+} // closes tryLoadSounds
+setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         // ── Shared helper: populate both players with current track data ──
-        function populateCurrentTrack() {
+        // Retries up to 8 times if SC hasn't handed back the sound object yet
+        function populateCurrentTrack(attempt) {
+            attempt = attempt || 0;
             widget.getCurrentSound(function (sound) {
-                if (!sound) return;
+                if (!sound) {
+                    if (attempt < 8) setTimeout(function(){ populateCurrentTrack(attempt + 1); }, 700);
+                    return;
+                }
 
                 if (titleEl) {
                     titleEl.textContent = sound.title || 'Untitled';

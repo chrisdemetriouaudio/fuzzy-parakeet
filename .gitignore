@@ -1,0 +1,33 @@
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Sync databases
+*.ffs_db
+*.ffs_real
+
+# Local backups — never push these
+backup/
+backup2/
+backup3/
+backup4/
+backup5/
+backup6/
+backup7/
+backup8/
+backup9/
+backup10/
+backup11/
+backup12/
+backup13/
+backup14/
+backup15/
+backup16/
+backup17/
+backup18/
+backup19/
+backup20/
+
+# Claude workspace files
+.claude/
