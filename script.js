@@ -1033,10 +1033,16 @@ function tryLoadSounds() {
         setTimeout(function(){
             setupCanvas();
             const wrapper = canvas.parentElement;
+            // ResizeObserver handles element-level resizes (e.g. grid column changes)
             if(wrapper && 'ResizeObserver' in window){
                 const observer = new ResizeObserver(() => { resizeWaveformCanvas(); });
                 observer.observe(wrapper);
             }
+            // Window resize catches breakpoint changes (mobile→tablet→desktop)
+            window.addEventListener('resize', function(){
+                clearTimeout(window._waveResizeTimer);
+                window._waveResizeTimer = setTimeout(resizeWaveformCanvas, 80);
+            });
         }, 200);
 
     }); // closes getSounds

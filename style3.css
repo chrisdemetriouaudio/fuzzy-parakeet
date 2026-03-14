@@ -1198,6 +1198,14 @@ max-width: 100%;
   min-width: 0;
   overflow: hidden;
   position: relative;
+  align-self: stretch; /* fill full grid cell height */
+}
+
+/* Waveform wrap always fills its column/row */
+.ap-col-waveform .ap-waveform-wrap {
+  width: 100% !important;
+  flex: 1 1 100%;
+  min-width: 0;
 }
 
 .bottom-player .logo-mark {
@@ -3957,49 +3965,8 @@ text-align: center;
     }
 }
 
-/* ============================= */
-/* CLEAN MOBILE STACK */
-/* ============================= */
-
-@media (max-width: 800px) and (min-width: 769px) {
-
-  .bottom-player-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 20px;
-    height: auto;
-  }
-
-  /* Row 1: Artwork + Track */
-  .ap-col-artwork,
-  .ap-col-track {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .ap-col-track {
-    margin-left: 14px;
-  }
-
-  /* Row 2: Waveform */
-  .ap-col-waveform {
-    width: 100%;
-  }
-
-  /* Row 3: Controls */
-  .ap-col-controls {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  /* Row 4: Branding */
-  .ap-col-brand {
-    display: flex;
-    justify-content: center;
-  }
-}
+/* CLEAN MOBILE STACK block removed — tablet layout now handled by
+   the (min-width:769px) and (max-width:1024px) rule above */
 
 /* ============================= */
 /* SHOWREEL TRACKLIST           */
