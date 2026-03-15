@@ -540,22 +540,22 @@ window.addEventListener('load', function () {
     slider.style.setProperty("--vol", percent);
 }
 
-        /* ───── Waveform shared drawing ───── */
-        let bars = [];
+        /* ───── Waveform drawing ───── */
+        let bars     = [];      // bottom player — sized to its canvas width
+        let mainBars = [];      // main player   — sized to its own wider canvas
         const barWidth = 2;
         const gap      = 2;
 
-        function generateBars(width, height) {
-            bars = [];
+        function _makeBars(width, height) {
+            const arr   = [];
             const count = Math.floor(width / (barWidth + gap));
-            for (let i = 0; i < count; i++) {
-                bars.push(Math.random() * height);
-            }
+            for (let i = 0; i < count; i++) arr.push(Math.random() * height);
+            return arr;
         }
 
-        // Draw onto any canvas/ctx pair — used for both players
-        function _drawWaveOn(c, x, progress) {
-            if (!c || !x) return;
+        // Draw a specific bars array onto a specific canvas/ctx
+        function _drawWaveOn(c, x, barsArr, progress) {
+            if (!c || !x || !barsArr.length) return;
             const dpr = window.devicePixelRatio || 1;
             const w   = c.width  / dpr;
             const h   = c.height / dpr;
@@ -563,7 +563,7 @@ window.addEventListener('load', function () {
             const progressX = w * progress;
             const accent = getComputedStyle(document.documentElement)
                                .getPropertyValue('--accent').trim();
-            bars.forEach((barH, i) => {
+            barsArr.forEach((barH, i) => {
                 const px = i * (barWidth + gap);
                 const py = (h - barH) / 2;
                 x.fillStyle   = px < progressX ? accent : 'white';
@@ -572,10 +572,10 @@ window.addEventListener('load', function () {
             });
         }
 
-        // Draw on both players simultaneously
+        // Draw on both players — each uses its own bar array
         function drawWave(progress = 0) {
-            _drawWaveOn(canvas,     ctx,     progress);
-            _drawWaveOn(mainCanvas, mainCtx, progress);
+            _drawWaveOn(canvas,     ctx,     bars,     progress);
+            _drawWaveOn(mainCanvas, mainCtx, mainBars, progress);
         }
 
         // ── Bottom player canvas setup / resize ──
@@ -591,6 +591,7 @@ window.addEventListener('load', function () {
             canvas.height = h * dpr;
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.scale(dpr, dpr);
+            bars = _makeBars(w, h);   // regenerate for new width
             if (duration && duration > 0) {
                 widget.getPosition(function (pos) { drawWave(pos / duration); });
             } else {
@@ -610,7 +611,7 @@ window.addEventListener('load', function () {
             canvas.height = h * dpr;
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.scale(dpr, dpr);
-            generateBars(w, h);
+            bars = _makeBars(w, h);   // bottom player's own bar array
             drawWave(0);
         }
 
@@ -627,6 +628,7 @@ window.addEventListener('load', function () {
             mainCanvas.height = h * dpr;
             mainCtx.setTransform(1, 0, 0, 1, 0, 0);
             mainCtx.scale(dpr, dpr);
+            mainBars = _makeBars(w, h);   // regenerate for new width
             if (duration && duration > 0) {
                 widget.getPosition(function (pos) { drawWave(pos / duration); });
             } else {
@@ -639,15 +641,14 @@ window.addEventListener('load', function () {
             const wrapper = mainCanvas.parentElement;
             if (!wrapper) return;
             const w = wrapper.offsetWidth || mainCanvas.offsetWidth;
-            const h = 64; // fixed height — matches CSS; don't rely on offsetHeight before paint
+            const h = 64;
             if (!w) { setTimeout(setupMainCanvas, 150); return; }
             const dpr = window.devicePixelRatio || 1;
             mainCanvas.width  = w * dpr;
             mainCanvas.height = h * dpr;
             mainCtx.setTransform(1, 0, 0, 1, 0, 0);
             mainCtx.scale(dpr, dpr);
-            // If bars exist (bottom player already set up), reuse them; else generate fresh
-            if (!bars.length) generateBars(w, h);
+            mainBars = _makeBars(w, h);   // main player gets its own bar array at full width
             drawWave(0);
         }
 
