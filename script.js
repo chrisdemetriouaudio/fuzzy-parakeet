@@ -620,8 +620,8 @@ window.addEventListener('load', function () {
             const dpr     = window.devicePixelRatio || 1;
             const wrapper = mainCanvas.parentElement;
             if (!wrapper) return;
-            const w = wrapper.offsetWidth;
-            const h = wrapper.offsetHeight || 64;
+            const w = wrapper.offsetWidth || mainCanvas.offsetWidth;
+            const h = 64;
             if (!w) return;
             mainCanvas.width  = w * dpr;
             mainCanvas.height = h * dpr;
@@ -638,15 +638,16 @@ window.addEventListener('load', function () {
             if (!mainCanvas || !mainCtx) return;
             const wrapper = mainCanvas.parentElement;
             if (!wrapper) return;
-            const w = wrapper.offsetWidth;
-            const h = wrapper.offsetHeight || 64;
-            if (!w) { setTimeout(setupMainCanvas, 100); return; }
+            const w = wrapper.offsetWidth || mainCanvas.offsetWidth;
+            const h = 64; // fixed height — matches CSS; don't rely on offsetHeight before paint
+            if (!w) { setTimeout(setupMainCanvas, 150); return; }
             const dpr = window.devicePixelRatio || 1;
             mainCanvas.width  = w * dpr;
             mainCanvas.height = h * dpr;
             mainCtx.setTransform(1, 0, 0, 1, 0, 0);
             mainCtx.scale(dpr, dpr);
-            // Reuse the same bars already generated for the bottom player
+            // If bars exist (bottom player already set up), reuse them; else generate fresh
+            if (!bars.length) generateBars(w, h);
             drawWave(0);
         }
 
@@ -719,6 +720,12 @@ window.addEventListener('load', function () {
 
 }
 console.log("Widget ready test", widget);
+
+// Draw placeholder waveform bars immediately — visible before any track loads
+setTimeout(function() {
+    setupCanvas();
+    setupMainCanvas();
+}, 300);
 
 // Retry getSounds until SC actually returns tracks (can take several seconds on live)
 let _soundsAttempt = 0;
