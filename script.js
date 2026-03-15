@@ -1083,6 +1083,18 @@ function tryLoadSounds() {
 } // closes tryLoadSounds
 setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
+        // ── Auto-retry: if tracks still not loaded after 2 s, reset and go again ──
+        // Catches the common case where SC is slow on first load without needing interaction.
+        var _autoRetryTimers = [2000, 4000, 7000]; // escalating checkpoints
+        _autoRetryTimers.forEach(function(ms) {
+            setTimeout(function() {
+                if (!playlistLoaded) {
+                    _soundsAttempt = 0;
+                    tryLoadSounds();
+                }
+            }, ms);
+        });
+
         // ── Fallback triggers: retry if SC was slow and user starts interacting ──
 
         // 1. First click or scroll resets and retries immediately
