@@ -722,7 +722,11 @@ function tryLoadSounds() {
 
         if (!sounds || !sounds.length) {
             console.log("SoundCloud returned no sounds yet — retrying…");
-            if (_soundsAttempt < 15) setTimeout(tryLoadSounds, 600); // retry up to ~9s
+            // Up to 30 attempts: fast retries early, slower later to let SC catch up
+            if (_soundsAttempt < 30) {
+                const delay = _soundsAttempt < 6 ? 700 : _soundsAttempt < 15 ? 1200 : 2000;
+                setTimeout(tryLoadSounds, delay);
+            }
             return;
         }
 
@@ -1051,6 +1055,27 @@ function tryLoadSounds() {
     }); // closes getSounds
 } // closes tryLoadSounds
 setTimeout(tryLoadSounds, 600); // first attempt after a short delay
+
+        // ── Fallback triggers: retry if SC was slow and user starts interacting ──
+
+        // 1. First click or scroll resets and retries immediately
+        function retryOnInteraction() {
+            if (playlistLoaded) return;
+            _soundsAttempt = 0;
+            tryLoadSounds();
+        }
+        document.addEventListener('click',      retryOnInteraction, { once: true, passive: true });
+        document.addEventListener('scroll',     retryOnInteraction, { once: true, passive: true });
+        document.addEventListener('touchstart', retryOnInteraction, { once: true, passive: true });
+
+        // 2. Tab visibility — user switched away while loading, comes back when SC has caught up
+        document.addEventListener('visibilitychange', function onVisible() {
+            if (!document.hidden && !playlistLoaded) {
+                _soundsAttempt = 0;
+                setTimeout(tryLoadSounds, 300);
+            }
+            if (playlistLoaded) document.removeEventListener('visibilitychange', onVisible);
+        });
 
         // ── Shared helper: populate both players with current track data ──
         // Retries up to 8 times if SC hasn't handed back the sound object yet
