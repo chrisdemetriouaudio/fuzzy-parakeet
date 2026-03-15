@@ -5374,38 +5374,61 @@ max-width: 100%;
 
 @media (max-width: 768px) {
 
-/* Compact single-row player */
+/* ── Premium mobile mini player ── */
 .bottom-player {
   display: flex !important;
-  height: 68px;
+  height: 72px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Accent progress line along the very top edge */
+.bottom-player::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 2px;
+  width: var(--ap-progress, 0%);
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+  transition: width 0.25s linear;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .bottom-player-inner {
   display: flex !important;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  padding: 0 12px;
-  height: 68px;
+  gap: 12px;
+  padding: 0 14px;
+  height: 72px;
   grid-template-columns: unset;
 }
 
-/* Show artwork as small square */
+/* Artwork */
 .ap-col-artwork {
   display: flex !important;
-  width: 44px !important;
-  height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .ap-col-artwork img,
 .ap-col-artwork .ap-artwork {
-  width: 44px !important;
-  height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
+}
+
+/* Accent ring on artwork when playing */
+.bottom-player.is-playing .ap-col-artwork {
+  box-shadow: 0 0 0 1.5px var(--accent), 0 2px 16px rgba(238,255,0,0.18);
 }
 
 /* Hide waveform and brand */
@@ -5414,18 +5437,26 @@ max-width: 100%;
   display: none !important;
 }
 
-/* Track: single truncated line */
+/* Track: title + subtitle stacked */
 .ap-col-track {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
 }
 
 .ap-track-title {
-  font-size: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  color: #fff;
 }
 
 @keyframes ap-track-scroll {
@@ -5440,28 +5471,66 @@ max-width: 100%;
   animation: ap-track-scroll 6s ease-in-out infinite;
 }
 
-.ap-track-sub,
+/* Show subtitle, hide extra */
+.ap-track-sub {
+  display: block !important;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-grey);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .ap-track-extra {
   display: none;
 }
 
-/* Controls: compact row */
+/* Controls */
 .ap-col-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
+/* Prev / Next — minimal ghost buttons */
 .ap-btn {
-  font-size: 0.85rem;
-  padding: 4px 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-grey);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  transition: color 0.2s ease;
+  padding: 0;
 }
 
-/* Hide volume slider on mobile */
-#ap-volume {
-  display: none;
+.ap-btn:hover { color: #fff; }
+
+/* Play/pause — filled accent circle */
+.ap-play-btn {
+  background: var(--accent) !important;
+  color: #000 !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  font-size: 0.85rem !important;
 }
+
+.ap-play-btn:hover {
+  background: #fff !important;
+}
+
+/* Hide volume on mobile */
+#ap-volume { display: none; }
 
 }
 

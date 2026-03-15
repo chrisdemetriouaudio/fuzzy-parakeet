@@ -1246,6 +1246,12 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
                 drawWave(percent);
             }
 
+            // Drive the mini mobile player progress bar via CSS custom property
+            const bottomPlayer = document.getElementById('bottom-player');
+            if (bottomPlayer) {
+                bottomPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
+            }
+
         });
 
         if (canvas && ctx) {
