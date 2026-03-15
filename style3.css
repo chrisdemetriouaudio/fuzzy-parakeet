@@ -2609,50 +2609,48 @@ margin-left:6px;
     text-transform: uppercase;
     margin-top: 2px;
 }
-.cdp-progress-wrap {
+/* ── Main player waveform ── */
+.cdp-waveform-wrap {
+    position: relative;
+    width: 100%;
+    height: 64px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
+    overflow: hidden;
     border-bottom: 1px solid #1e1e1e;
-}
-.cdp-time {
-    font-size: 0.55rem;
-    letter-spacing: 0.08em;
-    color: var(--text-grey);
-    min-width: 32px;
-    text-align: center;
-}
-.cdp-progress-track {
-    flex: 1;
-    height: 3px;
-    background: #2a2a2a;
-    border-radius: 2px;
-    position: relative;
     cursor: pointer;
-    transition: height 0.15s ease;
-}
-.cdp-progress-track:hover { height: 5px; }
-.cdp-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: var(--accent);
-    border-radius: 2px;
-    pointer-events: none;
-}
-.cdp-progress-thumb {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translate(-50%, -50%);
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
     transition: opacity 0.2s ease;
 }
-.cdp-progress-track:hover .cdp-progress-thumb { opacity: 1; }
+.cdp-waveform-wrap:hover { opacity: 0.9; }
+
+#cdp-waveform {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+.cdp-waveform-wrap:hover #cdp-waveform { opacity: 1; }
+
+/* Time overlay — bottom-right, same pill style as bottom player */
+.cdp-waveform-time {
+    position: absolute;
+    right: 12px;
+    bottom: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: rgba(0,0,0,0.65);
+    padding: 3px 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.cdp-time-sep { color: var(--text-grey); }
 .cdp-controls {
     display: flex;
     align-items: center;

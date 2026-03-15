@@ -522,10 +522,12 @@ window.addEventListener('load', function () {
 
         const mainCurrent = document.getElementById('cdp-current');
         const mainDuration = document.getElementById('cdp-duration');
-        const mainProgressFill = document.getElementById('cdp-progress-fill');
-        const mainProgressThumb = document.getElementById('cdp-progress-thumb');
-        const mainProgressTrack = document.getElementById('cdp-progress-track');
+        const mainProgressFill  = null; // replaced by waveform canvas
+        const mainProgressThumb = null;
+        const mainProgressTrack = null;
         const mainTracklist = document.getElementById('cdp-tracklist');
+        const mainCanvas = document.getElementById('cdp-waveform');
+        const mainCtx = mainCanvas ? mainCanvas.getContext('2d') : null;
 
         const volumeSlider = document.getElementById('ap-volume');
         const mainVolumeSlider = document.getElementById('cdp-volume');
@@ -538,108 +540,114 @@ window.addEventListener('load', function () {
     slider.style.setProperty("--vol", percent);
 }
 
-        function resizeWaveformCanvas() {
-    if (!canvas || !ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const wrapper = canvas.parentElement;
-    if (!wrapper) return;
-
-    // Use offsetWidth — integer, not affected by stale inline styles
-    const w = wrapper.offsetWidth;
-    const h = wrapper.offsetHeight || 56;
-    if (!w) return;
-
-    // Set pixel buffer only — CSS width:100% on the canvas controls display size
-    canvas.width  = w * dpr;
-    canvas.height = h * dpr;
-    // Do NOT set canvas.style.width/height — that locked canvas to a stale pixel value
-    // causing a gap between the waveform bars and the absolutely-positioned timer
-
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
-
-    // DO NOT regenerate bars here
-    // Just redraw using current progress
-    if (duration && duration > 0) {
-        widget.getPosition(function (pos) {
-            const percent = pos / duration;
-            drawWave(percent);
-        });
-    } else {
-        drawWave(0);
-    }
-}
-
-        function setupCanvas() {
-            if (!canvas || !ctx) return;
-
-            const wrapper = canvas.parentElement;
-            if (!wrapper) return;
-
-            // Read from wrapper (not canvas — canvas may have stale inline style from a prior call)
-            const w = wrapper.offsetWidth;
-            const h = wrapper.offsetHeight || 56;
-
-            // Critical guard — retry if layout hasn't settled yet
-            if (!w) {
-                setTimeout(setupCanvas, 100);
-                return;
-            }
-
-            const dpr = window.devicePixelRatio || 1;
-
-            // Set pixel buffer only — CSS width:100% controls canvas display size
-            canvas.width  = w * dpr;
-            canvas.height = h * dpr;
-            // Deliberately not setting canvas.style.width — see resizeWaveformCanvas
-
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.scale(dpr, dpr);
-
-            generateBars(w, h);
-            drawWave(0);
-        }
-
-        /* ───── Waveform Setup ───── */
-
+        /* ───── Waveform shared drawing ───── */
         let bars = [];
         const barWidth = 2;
-        const gap = 2;
+        const gap      = 2;
 
         function generateBars(width, height) {
             bars = [];
             const count = Math.floor(width / (barWidth + gap));
-
             for (let i = 0; i < count; i++) {
-                const barHeight = Math.random() * height;
-                bars.push(barHeight);
+                bars.push(Math.random() * height);
             }
         }
 
-        function drawWave(progress = 0) {
-            if (!ctx || !canvas) return;
-
-            // Derive logical (CSS-pixel) dimensions from the pixel buffer
-            // — avoids getBoundingClientRect which can return stale values
+        // Draw onto any canvas/ctx pair — used for both players
+        function _drawWaveOn(c, x, progress) {
+            if (!c || !x) return;
             const dpr = window.devicePixelRatio || 1;
-            const w   = canvas.width  / dpr;
-            const h   = canvas.height / dpr;
-
-            ctx.clearRect(0, 0, w, h);
-
+            const w   = c.width  / dpr;
+            const h   = c.height / dpr;
+            x.clearRect(0, 0, w, h);
             const progressX = w * progress;
             const accent = getComputedStyle(document.documentElement)
                                .getPropertyValue('--accent').trim();
-
             bars.forEach((barH, i) => {
-                const x = i * (barWidth + gap);
-                const y = (h - barH) / 2;
-
-                ctx.fillStyle   = x < progressX ? accent : 'white';
-                ctx.globalAlpha = x < progressX ? 1 : 0.25;
-                ctx.fillRect(x, y, barWidth, barH);
+                const px = i * (barWidth + gap);
+                const py = (h - barH) / 2;
+                x.fillStyle   = px < progressX ? accent : 'white';
+                x.globalAlpha = px < progressX ? 1 : 0.25;
+                x.fillRect(px, py, barWidth, barH);
             });
+        }
+
+        // Draw on both players simultaneously
+        function drawWave(progress = 0) {
+            _drawWaveOn(canvas,     ctx,     progress);
+            _drawWaveOn(mainCanvas, mainCtx, progress);
+        }
+
+        // ── Bottom player canvas setup / resize ──
+        function resizeWaveformCanvas() {
+            if (!canvas || !ctx) return;
+            const dpr     = window.devicePixelRatio || 1;
+            const wrapper = canvas.parentElement;
+            if (!wrapper) return;
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight || 56;
+            if (!w) return;
+            canvas.width  = w * dpr;
+            canvas.height = h * dpr;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+            if (duration && duration > 0) {
+                widget.getPosition(function (pos) { drawWave(pos / duration); });
+            } else {
+                drawWave(0);
+            }
+        }
+
+        function setupCanvas() {
+            if (!canvas || !ctx) return;
+            const wrapper = canvas.parentElement;
+            if (!wrapper) return;
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight || 56;
+            if (!w) { setTimeout(setupCanvas, 100); return; }
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width  = w * dpr;
+            canvas.height = h * dpr;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(dpr, dpr);
+            generateBars(w, h);
+            drawWave(0);
+        }
+
+        // ── Main player canvas setup / resize ──
+        function resizeMainCanvas() {
+            if (!mainCanvas || !mainCtx) return;
+            const dpr     = window.devicePixelRatio || 1;
+            const wrapper = mainCanvas.parentElement;
+            if (!wrapper) return;
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight || 64;
+            if (!w) return;
+            mainCanvas.width  = w * dpr;
+            mainCanvas.height = h * dpr;
+            mainCtx.setTransform(1, 0, 0, 1, 0, 0);
+            mainCtx.scale(dpr, dpr);
+            if (duration && duration > 0) {
+                widget.getPosition(function (pos) { drawWave(pos / duration); });
+            } else {
+                drawWave(0);
+            }
+        }
+
+        function setupMainCanvas() {
+            if (!mainCanvas || !mainCtx) return;
+            const wrapper = mainCanvas.parentElement;
+            if (!wrapper) return;
+            const w = wrapper.offsetWidth;
+            const h = wrapper.offsetHeight || 64;
+            if (!w) { setTimeout(setupMainCanvas, 100); return; }
+            const dpr = window.devicePixelRatio || 1;
+            mainCanvas.width  = w * dpr;
+            mainCanvas.height = h * dpr;
+            mainCtx.setTransform(1, 0, 0, 1, 0, 0);
+            mainCtx.scale(dpr, dpr);
+            // Reuse the same bars already generated for the bottom player
+            drawWave(0);
         }
 
         let playlistLoaded = false;
@@ -1035,20 +1043,31 @@ function tryLoadSounds() {
         const defaultTab = document.querySelector(".cdp-tab.active");
         if(defaultTab) defaultTab.click();
 
-        // === Hide loading and setup waveform ===
+        // === Hide loading and setup both waveforms ===
         if(loading) loading.style.display = "none";
         setTimeout(function(){
             setupCanvas();
-            const wrapper = canvas.parentElement;
-            // ResizeObserver handles element-level resizes (e.g. grid column changes)
+            setupMainCanvas();
+
+            // ResizeObserver for bottom player waveform
+            const wrapper = canvas ? canvas.parentElement : null;
             if(wrapper && 'ResizeObserver' in window){
-                const observer = new ResizeObserver(() => { resizeWaveformCanvas(); });
-                observer.observe(wrapper);
+                new ResizeObserver(() => resizeWaveformCanvas()).observe(wrapper);
             }
-            // Window resize catches breakpoint changes (mobile→tablet→desktop)
+
+            // ResizeObserver for main player waveform
+            const mainWrapper = mainCanvas ? mainCanvas.parentElement : null;
+            if(mainWrapper && 'ResizeObserver' in window){
+                new ResizeObserver(() => resizeMainCanvas()).observe(mainWrapper);
+            }
+
+            // Window resize catches breakpoint changes
             window.addEventListener('resize', function(){
                 clearTimeout(window._waveResizeTimer);
-                window._waveResizeTimer = setTimeout(resizeWaveformCanvas, 80);
+                window._waveResizeTimer = setTimeout(function(){
+                    resizeWaveformCanvas();
+                    resizeMainCanvas();
+                }, 80);
             });
         }, 200);
 
@@ -1312,22 +1331,16 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         }
 
-        if (mainProgressTrack) {
-
-            mainProgressTrack.addEventListener('click', function (e) {
-
+        // Click-to-seek on main player waveform canvas
+        if (mainCanvas) {
+            mainCanvas.style.cursor = 'pointer';
+            mainCanvas.addEventListener('click', function (e) {
                 if (!duration) return;
-
-                const rect = mainProgressTrack.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-
+                const rect    = mainCanvas.getBoundingClientRect();
+                const clickX  = e.clientX - rect.left;
                 const percent = clickX / rect.width;
-                const seekTo = percent * duration;
-
-                widget.seekTo(seekTo);
-
+                widget.seekTo(percent * duration);
             });
-
         }
 
         if (playBtn) {

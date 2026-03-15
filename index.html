@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style3.css?v=59">
+<link rel="stylesheet" href="style3.css?v=60">
 </head>
 <body>
   <script type="application/ld+json">
@@ -402,14 +402,14 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                      </div>
                   </div>
 
-                  <!-- Progress -->
-                  <div class="cdp-progress-wrap">
-                     <span class="cdp-time" id="cdp-current">0:00</span>
-                     <div class="cdp-progress-track" id="cdp-progress-track">
-                        <div class="cdp-progress-fill" id="cdp-progress-fill"></div>
-                        <div class="cdp-progress-thumb" id="cdp-progress-thumb"></div>
+                  <!-- Waveform (replaces progress bar) -->
+                  <div class="cdp-waveform-wrap" id="cdp-waveform-wrap">
+                     <canvas id="cdp-waveform"></canvas>
+                     <div class="cdp-waveform-time">
+                        <span id="cdp-current">0:00</span>
+                        <span class="cdp-time-sep"> / </span>
+                        <span id="cdp-duration">0:00</span>
                      </div>
-                     <span class="cdp-time" id="cdp-duration">0:00</span>
                   </div>
 
                   <!-- Controls -->
@@ -1466,7 +1466,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
   </div>
 
 </div>
-<script src="script.js?v=32" defer></script>
+<script src="script.js?v=33" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {
