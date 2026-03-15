@@ -618,11 +618,10 @@ window.addEventListener('load', function () {
         // ── Main player canvas setup / resize ──
         function resizeMainCanvas() {
             if (!mainCanvas || !mainCtx) return;
-            const dpr     = window.devicePixelRatio || 1;
-            const wrapper = mainCanvas.parentElement;
-            if (!wrapper) return;
-            const w = wrapper.offsetWidth || mainCanvas.offsetWidth;
-            const h = 64;
+            const dpr = window.devicePixelRatio || 1;
+            // Use canvas's own rendered width — automatically respects wrapper padding
+            const w = mainCanvas.offsetWidth;
+            const h = mainCanvas.offsetHeight || 48;
             if (!w) return;
             mainCanvas.width  = w * dpr;
             mainCanvas.height = h * dpr;
@@ -638,10 +637,9 @@ window.addEventListener('load', function () {
 
         function setupMainCanvas() {
             if (!mainCanvas || !mainCtx) return;
-            const wrapper = mainCanvas.parentElement;
-            if (!wrapper) return;
-            const w = wrapper.offsetWidth || mainCanvas.offsetWidth;
-            const h = 64;
+            // Use canvas's own rendered width — automatically respects wrapper padding
+            const w = mainCanvas.offsetWidth;
+            const h = mainCanvas.offsetHeight || 48;
             if (!w) { setTimeout(setupMainCanvas, 150); return; }
             const dpr = window.devicePixelRatio || 1;
             mainCanvas.width  = w * dpr;
@@ -981,6 +979,7 @@ function tryLoadSounds() {
 
         // === Tab Filtering ===
         const tabs = document.querySelectorAll(".cdp-tab");
+        let currentTabKey = 'all'; // tracks which tab is active for prev/next nav
 
         tabs.forEach(function(tab){
 
@@ -990,6 +989,7 @@ function tryLoadSounds() {
                 this.classList.add("active");
 
                 const selected = this.dataset.tab;
+                currentTabKey = selected; // keep in sync
 
                 document.querySelectorAll(".cdp-group").forEach(function(group){
 
@@ -1185,27 +1185,26 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
                     el.classList.remove('active');
                 });
 
-               const active = document.querySelector('.cdp-track-item[data-index="' + index + '"]');
-
-               if (active) {
-
-                   active.classList.add('active');
-
-                   // Smooth scroll active row into view within tracklist
-
-                   const icon = active.querySelector('.play-icon');
-
+               // Highlight ALL matching items (track appears in both ALL group and genre group)
+               document.querySelectorAll('.cdp-track-item[data-index="' + index + '"]').forEach(function(el) {
+                   el.classList.add('active');
+                   const icon = el.querySelector('.play-icon');
                    if (icon) {
-
                        icon.innerHTML = `
                            <svg viewBox="0 0 24 24">
                                <path d="M6 5h4v14H6zm8 0h4v14h-4z"/>
                            </svg>
                        `;
-
                    }
+               });
 
-               }
+               // Scroll the VISIBLE instance into view (skip groups with display:none)
+               document.querySelectorAll('.cdp-track-item[data-index="' + index + '"]').forEach(function(el) {
+                   const group = el.closest('.cdp-group');
+                   if (group && group.style.display !== 'none') {
+                       el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                   }
+               });
 
             });
             
@@ -1237,30 +1236,57 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         });
 
-        widget.bind(SC.Widget.Events.FINISH, function () {
-
-            // Auto-advance: check if more tracks remain, then skip to next
-            widget.getCurrentSoundIndex(function (currentIndex) {
-                widget.getSounds(function (sounds) {
-
-                    const hasNext = sounds && (currentIndex + 1) < sounds.length;
-
-                    if (hasNext) {
-                        // Play the next track — PLAY event fires and handles all UI updates
-                        setTimeout(function () {
-                            widget.skip(currentIndex + 1);
-                            setTimeout(function () { widget.seekTo(0); widget.play(); }, 200);
-                        }, 350);
-                    } else {
-                        // End of playlist — reset to stopped state
-                        if (player) player.classList.remove('is-playing');
-                        if (titleEl) titleEl.classList.remove('is-scrolling');
-                        const playIcon  = document.querySelector('.ap-icon-play');
-                        const pauseIcon = document.querySelector('.ap-icon-pause');
-                        if (playIcon)  playIcon.style.display = 'inline';
-                        if (pauseIcon) pauseIcon.style.display = 'none';
-                    }
+        // ── Tab-aware navigation helpers ──────────────────────────────
+        // Returns playlist indices of all VISIBLE track items, in DOM order.
+        // A group is visible when its inline display style is not 'none'.
+        function getVisiblePlaylistIndices() {
+            const indices = [];
+            document.querySelectorAll('.cdp-group').forEach(function(group) {
+                if (group.style.display === 'none') return;
+                group.querySelectorAll('.cdp-track-item').forEach(function(item) {
+                    const idx = parseInt(item.dataset.index, 10);
+                    if (!isNaN(idx)) indices.push(idx);
                 });
+            });
+            return indices;
+        }
+
+        // Skip to prev/next track within the currently visible tab order.
+        // direction: 'prev' | 'next'
+        // onEnd: called when there is no further track in that direction
+        function skipInTab(direction, onEnd) {
+            widget.getCurrentSoundIndex(function(currentIndex) {
+                const indices = getVisiblePlaylistIndices();
+                const pos = indices.indexOf(currentIndex);
+                if (direction === 'next') {
+                    if (pos >= 0 && pos < indices.length - 1) {
+                        const nextIdx = indices[pos + 1];
+                        widget.skip(nextIdx);
+                        setTimeout(function() { widget.seekTo(0); widget.play(); }, 200);
+                    } else if (typeof onEnd === 'function') {
+                        onEnd(); // at end of tab
+                    }
+                } else { // prev
+                    if (pos > 0) {
+                        const prevIdx = indices[pos - 1];
+                        widget.skip(prevIdx);
+                        setTimeout(function() { widget.seekTo(0); widget.play(); }, 200);
+                    }
+                    // pos === 0: already at start — do nothing
+                }
+            });
+        }
+
+        widget.bind(SC.Widget.Events.FINISH, function () {
+            // Auto-advance within the active tab's track order
+            skipInTab('next', function() {
+                // End of tab — reset to stopped state
+                if (player) player.classList.remove('is-playing');
+                if (titleEl) titleEl.classList.remove('is-scrolling');
+                const playIcon  = document.querySelector('.ap-icon-play');
+                const pauseIcon = document.querySelector('.ap-icon-pause');
+                if (playIcon)  playIcon.style.display = 'inline';
+                if (pauseIcon) pauseIcon.style.display = 'none';
             });
         });
 
@@ -1362,13 +1388,13 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         if (prevBtn) {
             prevBtn.addEventListener('click', function () {
-                widget.prev();
+                skipInTab('prev'); // stays on first track if already at start
             });
         }
 
         if (nextBtn) {
             nextBtn.addEventListener('click', function () {
-                widget.next();
+                skipInTab('next'); // stops at end of active tab
             });
         }
 

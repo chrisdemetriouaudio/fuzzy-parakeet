@@ -2524,6 +2524,14 @@ margin-left:6px;
     overflow: hidden;
     position: relative;
 }
+/* Artwork image: padded and rounded so it doesn't fill flush to edges */
+#cdp-artwork-img {
+    inset: 12px !important;
+    width: calc(100% - 24px) !important;
+    height: calc(100% - 24px) !important;
+    border-radius: 8px !important;
+    object-fit: cover;
+}
 .cdp-eq {
     display: flex;
     align-items: flex-end;
@@ -2614,18 +2622,19 @@ margin-left:6px;
 .cdp-waveform-wrap {
     position: relative;
     width: 100%;
-    height: 64px;
+    padding: 12px 24px;     /* breathing room all sides — matches player controls */
     display: block;
     border-bottom: 1px solid #1e1e1e;
     cursor: pointer;
-    /* no overflow:hidden — let absolute time overlay breathe */
+    box-sizing: border-box;
 }
 
 #cdp-waveform {
     display: block;
     width: 100%;
-    height: 64px;
+    height: 48px;           /* canvas height within the padded area */
     opacity: 0.85;
+    border-radius: 4px;
     transition: opacity 0.2s ease;
 }
 .cdp-waveform-wrap:hover #cdp-waveform { opacity: 1; }
