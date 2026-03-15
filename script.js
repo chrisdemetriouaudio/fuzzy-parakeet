@@ -652,6 +652,9 @@ window.addEventListener('load', function () {
 
         let playlistLoaded = false;
         let duration = 0;
+        let currentPlayingIndex = -1; // set only by explicit skip calls; used by skipInTab to avoid async race on FINISH
+        // Expose so external play-button handlers (playerPlayToggle etc.) can update it
+        window.scSetCurrentIndex = function(idx) { currentPlayingIndex = idx; };
 
         if (player) player.style.display = 'flex';
         if (fallback) fallback.style.display = 'none';
@@ -743,6 +746,12 @@ function tryLoadSounds() {
             }
             return;
         }
+
+        // Guard: if a previous getSounds callback already completed setup (race between
+        // multiple concurrent retries), bail out immediately so we don't re-register
+        // widget.bind(PLAY/PAUSE/FINISH/PLAY_PROGRESS) a second time — double-binding
+        // causes FINISH to fire twice, skipping 2 positions instead of 1.
+        if (playlistLoaded) return;
 
         // Create grouped arrays
         const groupedTracks = {
@@ -874,6 +883,7 @@ function tryLoadSounds() {
                 playIcon.addEventListener("click", function(e){
 
                     e.stopPropagation();
+                    window.scUserInitiated = true;
 
                     widget.getCurrentSoundIndex(function(currentIndex){
 
@@ -954,6 +964,8 @@ function tryLoadSounds() {
                     item.appendChild(ripple);
                     setTimeout(function() { ripple.remove(); }, 600);
 
+                    window.scUserInitiated = true;
+                    currentPlayingIndex = track._playlistIndex;
                     widget.skip(track._playlistIndex);
                     setTimeout(function() {
                         widget.seekTo(0);
@@ -1020,9 +1032,14 @@ function tryLoadSounds() {
         // Mark as loaded so the 4s fallback timeout does NOT hide the player
         playlistLoaded = true;
         clearTimeout(timeout);
+        // Ensure the player is visible — on slow connections (especially mobile) the
+        // 12s timeout may have already hidden it before getSounds returned.
+        if (player) { player.style.display = 'flex'; player.style.removeProperty('visibility'); }
+        if (fallback) fallback.style.display = 'none';
 
         // === First track info ===
-        const first = sounds[0];
+        // Default to first track in curated showreel order, not SC playlist order
+        const first = allTracksOrdered[0] || sounds[0];
 
         if(titleEl) titleEl.textContent = first.title || "(Untitled)";
         if(mainTitleEl) mainTitleEl.textContent = first.title || "(Untitled)";
@@ -1042,6 +1059,13 @@ function tryLoadSounds() {
             }
             if (cdpImg) { cdpImg.src = artSrc; cdpImg.style.display = "block"; }
         }
+
+        // === Expose default track index so play buttons can skip to it on first press ===
+        window.scDefaultTrackIndex = (typeof first._playlistIndex === 'number') ? first._playlistIndex : 0;
+        // scUserInitiated is ONLY set true by real user actions (play button / track click).
+        // The SC widget fires internal PLAY events on load (even with auto_play=false);
+        // this flag lets us ignore those until the user has actually pressed something.
+        window.scUserInitiated = false;
 
         // === Default volume to full ===
         widget.setVolume(100);
@@ -1118,9 +1142,10 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         // ── Shared helper: populate both players with current track data ──
         // Retries up to 8 times if SC hasn't handed back the sound object yet
-        function populateCurrentTrack(attempt) {
+        function populateCurrentTrack(attempt, overrideSound) {
             attempt = attempt || 0;
-            widget.getCurrentSound(function (sound) {
+            var doPopulate = function(sound) {
+                // Block any SC-sourced update until the user has actually started playback.
                 if (!sound) {
                     if (attempt < 8) setTimeout(function(){ populateCurrentTrack(attempt + 1); }, 700);
                     return;
@@ -1159,13 +1184,27 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
                         if (active) { active.classList.add('is-active'); active.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
                     }
                 }
-            });
+            };
+            // Use overrideSound directly on init so we don't ask SC (which may not have
+            // moved yet) and then overwrite the manually-set default track title/art.
+            if (overrideSound) {
+                doPopulate(overrideSound);
+            } else {
+                widget.getCurrentSound(doPopulate);
+            }
         }
 
-        // Populate players as soon as the widget is ready (no play needed)
-        setTimeout(populateCurrentTrack, 800);
+        // Populate players on ready — pass the curated first track directly so the
+        // display shows "Wired Different" without waiting for SC to confirm its position.
+        setTimeout(function(){ populateCurrentTrack(0, first); }, 800);
 
         widget.bind(SC.Widget.Events.PLAY, function () {
+
+            // SC fires PLAY events internally (e.g. buffering the first track) even with
+            // auto_play=false. Ignore those until the user has deliberately pressed play
+            // or clicked a track — otherwise they overwrite our curated default display.
+            if (!window.scUserInitiated) return;
+            window.scHasPlayed = true; // first-play skip logic no longer needed
 
             if (player) player.classList.add('is-playing');
 
@@ -1182,6 +1221,10 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             if (mainPauseIcon) mainPauseIcon.style.display = 'inline';
 
             widget.getCurrentSoundIndex(function(index) {
+
+                // NOTE: do NOT update currentPlayingIndex here — that is only set by
+                // our own explicit widget.skip() calls. SC's async reply can race
+                // and return a stale value, corrupting the FINISH-event navigation.
 
                 document.querySelectorAll('.cdp-track-item .play-icon').forEach(function(icon){
 
@@ -1267,12 +1310,15 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
         // direction: 'prev' | 'next'
         // onEnd: called when there is no further track in that direction
         function skipInTab(direction, onEnd) {
-            widget.getCurrentSoundIndex(function(currentIndex) {
+            // Use the index cached by the PLAY event rather than asking SC async —
+            // avoids the race where FINISH fires after SC has already advanced internally.
+            function doSkip(currentIndex) {
                 const indices = getVisiblePlaylistIndices();
                 const pos = indices.indexOf(currentIndex);
                 if (direction === 'next') {
                     if (pos >= 0 && pos < indices.length - 1) {
                         const nextIdx = indices[pos + 1];
+                        currentPlayingIndex = nextIdx;
                         widget.skip(nextIdx);
                         setTimeout(function() { widget.seekTo(0); widget.play(); }, 200);
                     } else if (typeof onEnd === 'function') {
@@ -1281,12 +1327,19 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
                 } else { // prev
                     if (pos > 0) {
                         const prevIdx = indices[pos - 1];
+                        currentPlayingIndex = prevIdx;
                         widget.skip(prevIdx);
                         setTimeout(function() { widget.seekTo(0); widget.play(); }, 200);
                     }
                     // pos === 0: already at start — do nothing
                 }
-            });
+            }
+            // Use cached index if available; fall back to async SC call only when needed
+            if (currentPlayingIndex >= 0) {
+                doSkip(currentPlayingIndex);
+            } else {
+                widget.getCurrentSoundIndex(doSkip);
+            }
         }
 
         // Expose globally so the main player cdp-next/cdp-prev buttons can use it
@@ -1394,9 +1447,19 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         if (playBtn) {
             playBtn.addEventListener('click', function () {
+                window.scUserInitiated = true;
                 widget.isPaused(function (paused) {
-                    if (paused) widget.play();
-                    else widget.pause();
+                    if (paused) {
+                        if (typeof window.scDefaultTrackIndex === 'number' && !window.scHasPlayed) {
+                            if (window.scSetCurrentIndex) window.scSetCurrentIndex(window.scDefaultTrackIndex);
+                            widget.skip(window.scDefaultTrackIndex);
+                            setTimeout(function() { widget.seekTo(0); widget.play(); }, 200);
+                        } else {
+                            widget.play();
+                        }
+                    } else {
+                        widget.pause();
+                    }
                 });
             });
         }
@@ -1427,9 +1490,19 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 function playerPlayToggle() {
     if (!window.scWidget) return;
 
+    window.scUserInitiated = true;
     window.scWidget.isPaused(function(paused) {
-        if (paused) window.scWidget.play();
-        else window.scWidget.pause();
+        if (paused) {
+            if (!window.scHasPlayed && typeof window.scDefaultTrackIndex === 'number') {
+                if (window.scSetCurrentIndex) window.scSetCurrentIndex(window.scDefaultTrackIndex);
+                window.scWidget.skip(window.scDefaultTrackIndex);
+                setTimeout(function() { window.scWidget.seekTo(0); window.scWidget.play(); }, 200);
+            } else {
+                window.scWidget.play();
+            }
+        } else {
+            window.scWidget.pause();
+        }
     });
 }
 

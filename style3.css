@@ -5378,7 +5378,7 @@ max-width: 100%;
 .bottom-player {
   display: flex !important;
   height: 72px;
-  position: relative;
+  position: fixed;
   overflow: visible;
 }
 
