@@ -2524,14 +2524,7 @@ margin-left:6px;
     overflow: hidden;
     position: relative;
 }
-/* Artwork image: padded and rounded so it doesn't fill flush to edges */
-#cdp-artwork-img {
-    inset: 12px !important;
-    width: calc(100% - 24px) !important;
-    height: calc(100% - 24px) !important;
-    border-radius: 8px !important;
-    object-fit: cover;
-}
+
 .cdp-eq {
     display: flex;
     align-items: flex-end;

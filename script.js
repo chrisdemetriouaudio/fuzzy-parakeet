@@ -1277,6 +1277,9 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             });
         }
 
+        // Expose globally so the main player cdp-next/cdp-prev buttons can use it
+        window.scSkipInTab = skipInTab;
+
         widget.bind(SC.Widget.Events.FINISH, function () {
             // Auto-advance within the active tab's track order
             skipInTab('next', function() {
@@ -1419,13 +1422,13 @@ function playerPlayToggle() {
 }
 
 function playerNext() {
-    if (!window.scWidget) return;
-    window.scWidget.next();
+    if (window.scSkipInTab) { window.scSkipInTab('next'); return; }
+    if (window.scWidget) window.scWidget.next(); // fallback before READY
 }
 
 function playerPrev() {
-    if (!window.scWidget) return;
-    window.scWidget.prev();
+    if (window.scSkipInTab) { window.scSkipInTab('prev'); return; }
+    if (window.scWidget) window.scWidget.prev(); // fallback before READY
 }
 
 const mainPlayBtn = document.getElementById('cdp-play');
