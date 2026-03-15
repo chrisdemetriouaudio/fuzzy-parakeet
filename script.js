@@ -1212,15 +1212,29 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
         widget.bind(SC.Widget.Events.FINISH, function () {
 
-            if (player) player.classList.remove('is-playing');
+            // Auto-advance: check if more tracks remain, then skip to next
+            widget.getCurrentSoundIndex(function (currentIndex) {
+                widget.getSounds(function (sounds) {
 
-            if (titleEl) titleEl.classList.remove('is-scrolling');
+                    const hasNext = sounds && (currentIndex + 1) < sounds.length;
 
-            const playIcon  = document.querySelector('.ap-icon-play');
-            const pauseIcon = document.querySelector('.ap-icon-pause');
-
-            if (playIcon)  playIcon.style.display = 'inline';
-            if (pauseIcon) pauseIcon.style.display = 'none';
+                    if (hasNext) {
+                        // Play the next track — PLAY event fires and handles all UI updates
+                        setTimeout(function () {
+                            widget.skip(currentIndex + 1);
+                            setTimeout(function () { widget.seekTo(0); widget.play(); }, 200);
+                        }, 350);
+                    } else {
+                        // End of playlist — reset to stopped state
+                        if (player) player.classList.remove('is-playing');
+                        if (titleEl) titleEl.classList.remove('is-scrolling');
+                        const playIcon  = document.querySelector('.ap-icon-play');
+                        const pauseIcon = document.querySelector('.ap-icon-pause');
+                        if (playIcon)  playIcon.style.display = 'inline';
+                        if (pauseIcon) pauseIcon.style.display = 'none';
+                    }
+                });
+            });
         });
 
         widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (e) {
