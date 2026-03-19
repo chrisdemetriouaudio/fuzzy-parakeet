@@ -5518,11 +5518,16 @@ max-width: 100%;
 /* Play/pause — filled accent circle */
 .ap-play-btn {
   background: var(--accent) !important;
-  color: #000 !important;
+  color: #111 !important;
   width: 36px !important;
   height: 36px !important;
   border-radius: 50% !important;
   font-size: 0.85rem !important;
+}
+
+.ap-play-btn .ap-icon-play,
+.ap-play-btn .ap-icon-pause {
+  color: #111 !important;
 }
 
 .ap-play-btn:hover {
