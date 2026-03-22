@@ -1,0 +1,21 @@
+name: Backup to Private Repo
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Push to backup repo
+        run: |
+          git remote add backup https://chrisdemetriouaudio:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
+          git push backup main --force
