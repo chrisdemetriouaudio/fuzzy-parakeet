@@ -17,6 +17,11 @@ jobs:
           fetch-depth: 0
 
       - name: Push to backup repo
-        run: |
-          git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
-          git push backup main --force
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.BACKUP_TOKEN }}
+        with:
+          source-directory: '.'
+          destination-github-username: 'chrisdemetriouaudio'
+          destination-repository-name: 'fuzzy-parakeet-backup'
+          target-branch: main
