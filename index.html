@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Demetriou | Audio Producer for Radio, Podcasts and Audio Drama</title>
+<title>Chris Demetriou | Audio Producer & Music Composer</title>
 
 <meta name="description" content="Audio producer specialising in spoken word, podcast production, dialogue editing and sound design. Experienced in shaping interviews, stories and audio drama with strong editorial awareness. Manchester based, working with radio, podcast and audio production teams.">
 
@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style3.css?v=67">
+<link rel="stylesheet" href="style3.css?v=71">
 </head>
 <body>
   <script type="application/ld+json">
@@ -60,6 +60,7 @@
 <nav class="nav-overlay" id="nav-links">
 
               <a href="#soundcloud-section" class="nav-item">Audio Showreel</a>
+              <a href="#" class="nav-item" data-open-prod-music>Production Music</a>
               <a href="#credits" class="nav-item">Selected Credits</a>
               <a href="#about" class="nav-item">Why Audio</a>
               <a href="#career" class="nav-item">Industry Activity</a>
@@ -67,10 +68,43 @@
 
 </nav>
 
+<!-- Floating Showreel Tab -->
+<button class="reel-float-btn" id="reel-float-btn" aria-label="Watch the Showreel">
+  <span class="reel-float-icon">▶</span>
+  <span class="reel-float-label">Watch The Reel</span>
+</button>
+
+<!-- Showreel TV Modal -->
+<div class="reel-modal-overlay" id="reel-modal" role="dialog" aria-modal="true" aria-label="Showreel" aria-hidden="true">
+  <div class="reel-tv">
+    <div class="reel-tv-header">
+      <span class="reel-tv-brand">ChrisD — Showreel 2026</span>
+    </div>
+    <button class="reel-tv-close" id="reel-modal-close" aria-label="Close">✕</button>
+    <div class="reel-tv-bezel">
+      <div class="reel-tv-screen">
+        <video id="reel-video" src="video/chrisdemetriou_musicREEL_FINAL2026.mp4" controls playsinline preload="none" controlsList="nodownload"></video>
+      </div>
+    </div>
+    <div class="reel-tv-footer">
+      <div class="reel-tv-grille">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="reel-tv-knobs">
+        <div class="reel-tv-knob"></div>
+        <div class="reel-tv-knob"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="nav-brand" id="nav-brand">
 
 <a href="#" class="hero-logo">
-<span class="cdaudio-wordmark-text">CDA<span class="logo-udio">UDIO</span></span>
+<span class="cdaudio-wordmark-text">CHRIS<span class="logo-d">D</span></span>
 <span class="logo-mark" aria-hidden="true">
 <span class="bar"></span>
 <span class="bar"></span>
@@ -109,17 +143,22 @@ UK Solo Tour<br> O2 Academy Liverpool
     <h1 class="hero-title">Chris Demetriou</h1>
 
 <div class="hero-role">
-Radio & Podcast Production<br>
-Dialogue Editing • Audio Storytelling
+Audio Producer for Radio &amp; Podcast<br>
+Imaging + Music Production
 </div>
 
 <p class="hero-tagline">
-Exploring how sound, silence and rhythm shape stories.
+Exploring how sound, music and silence shape stories.
 </p>
 
-<a href="#soundcloud-section" class="btn btn-primary hero-cta">
-Hear My Work
-</a>
+<div class="hero-cta-group">
+  <a href="#soundcloud-section" class="btn btn-primary hero-cta">
+    <span class="btn-icon">▶</span> Hear My Work
+  </a>
+  <button class="btn hero-cta-prod" data-open-reel aria-label="Watch my work">
+    <svg class="btn-icon-svg" viewBox="0 0 18 13" fill="none" aria-hidden="true"><rect x="0.75" y="0.75" width="16.5" height="11.5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><polygon points="7,4 7,9 13,6.5" fill="currentColor"/></svg> Watch My Work
+  </button>
+</div>
 </div>
 </section>
 
@@ -230,12 +269,14 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                         <div class="cdp-tab" data-tab="commercial">Commercial</div>
                         <div class="cdp-tab" data-tab="imaging">Radio Imaging</div>
                         <div class="cdp-tab" data-tab="voice">Voice & Links</div>
+                        <div class="cdp-tab" data-tab="prodmusic">Prod Music</div>
                         <div class="cdp-tab-indicator" id="cdp-tab-indicator"></div>
                       </div>
                   <!-- Tracklist -->
                   <div class="cdp-tracklist" id="cdp-tracklist">
                      <div class="cdp-tracklist-loading">Loading tracks…</div>
                   </div>
+
                   <div class="cdp-footer">
 
                   <div class="cdp-footer-left">
@@ -872,6 +913,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
          <span>Pro Tools</span>
          <span>Logic Pro</span>
+         <span>Reason</span>
          <span>Adobe Audition</span>
          <span>iZotope RX</span>
          <span>Final Cut Pro</span>
@@ -940,34 +982,21 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
                      <tr>
                      <td class="status-cell">
-                     <span class="tag status-complete">Attended</span>
-                     <span class="tag cat-event">Event</span>
-                     </td>
-                     <td>
-                     <a href="https://www.bbc.co.uk/bbcaudio" target="_blank" rel="noopener" class="table-link">
-                     BBC Audio North
-                     </a>
-                     </td>
-                     <td>Freelancer Talent Pool Networking Event</td>
-                     </tr>
-
-                     <tr>
-                     <td class="status-cell">
-                     <span class="tag status-pending">Pending</span>
-                     <span class="tag cat-application">Application</span>
-                     </td>
-                     <td>
-                     <a href="https://www.bbc.co.uk/careers" target="_blank" rel="noopener" class="table-link">
-                     BBC Radio Manchester
-                     </a>
-                     </td>
-                     <td>Production Apprentice Application · Stage 3 Interview Completed</td>
-                     </tr>
-
-                     <tr>
-                     <td class="status-cell">
-                     <span class="tag status-active">Active</span>
                      <span class="tag cat-volunteer">Volunteer</span>
+                     <span class="tag status-active">Active</span>
+                     </td>
+                     <td>
+                     <a href="https://gaydio.co.uk" target="_blank" rel="noopener" class="table-link">
+                     Gaydio Breakfast with Dave Cooper
+                     </a>
+                     </td>
+                     <td>Assistant Producer · Editing interviews &amp; guest content, podcast production and broadcast imaging</td>
+                     </tr>
+
+                     <tr>
+                     <td class="status-cell">
+                     <span class="tag cat-volunteer">Volunteer</span>
+                     <span class="tag status-active">Active</span>
                      </td>
                      <td>
                      <a href="https://gaydio.co.uk" target="_blank" rel="noopener" class="table-link">
@@ -979,21 +1008,8 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
                      <tr>
                      <td class="status-cell">
-                     <span class="tag status-upcoming">Upcoming</span>
-                     <span class="tag cat-volunteer">Volunteer</span>
-                     </td>
-                     <td>
-                     <a href="https://gaydio.co.uk" target="_blank" rel="noopener" class="table-link">
-                     Gaydio
-                     </a>
-                     </td>
-                     <td>Broadcast Operations · RCS Zetta Automation, Imaging &amp; Scheduling</td>
-                     </tr>
-
-                     <tr>
-                     <td class="status-cell">
-                     <span class="tag status-active">Active</span>
-                     <span class="tag cat-portfolio">Portfolio</span>
+                     <span class="tag cat-work">Work</span>
+                     <span class="tag status-complete">Complete</span>
                      </td>
                      <td>"That'll Be The Tism"</td>
                      <td>Audio Imaging Producer · Intro, stings, beds and sonic branding</td>
@@ -1001,8 +1017,34 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
                      <tr>
                      <td class="status-cell">
-                     <span class="tag status-active">Active</span>
+                     <span class="tag cat-application">Application</span>
+                     <span class="tag status-pending">Pending</span>
+                     </td>
+                     <td>
+                     <a href="https://www.bbc.co.uk/bbcaudio" target="_blank" rel="noopener" class="table-link">
+                     BBC Audio North
+                     </a>
+                     </td>
+                     <td>Assistant Producer</td>
+                     </tr>
+
+                     <tr>
+                     <td class="status-cell">
+                     <span class="tag cat-application">Application</span>
+                     <span class="tag status-pending">Pending</span>
+                     </td>
+                     <td>
+                     <a href="https://www.bbc.co.uk/careers" target="_blank" rel="noopener" class="table-link">
+                     BBC Radio Manchester
+                     </a>
+                     </td>
+                     <td>Production Apprentice Application · Stage 3 Interview Completed</td>
+                     </tr>
+
+                     <tr>
+                     <td class="status-cell">
                      <span class="tag cat-training">Training</span>
+                     <span class="tag status-active">Active</span>
                      </td>
                      <td>
                      <a href="https://344audio.com" target="_blank" rel="noopener" class="table-link">
@@ -1014,8 +1056,17 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
                      <tr>
                      <td class="status-cell">
-                     <span id="radio-academy-status" class="tag status-attending">Attending</span>
+                     <span class="tag cat-portfolio">Portfolio</span>
+                     <span class="tag status-active">Active</span>
+                     </td>
+                     <td>CDAUDIO</td>
+                     <td>Radio imaging, original spots and podcast trailers</td>
+                     </tr>
+
+                     <tr>
+                     <td class="status-cell">
                      <span class="tag cat-event">Event</span>
+                     <span id="radio-academy-status" class="tag status-attending">Attending</span>
                      </td>
                      <td>
                      <a href="https://radioacademy.org" target="_blank" rel="noopener" class="table-link">
@@ -1023,28 +1074,6 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                      </a>
                      </td>
                      <td>Foot In The Door Industry Networking Event · University of Essex</td>
-                     </tr>
-
-                     <tr>
-                     <td class="status-cell">
-                     <span class="tag status-discussion">In Discussion</span>
-                     <span class="tag cat-volunteer">Volunteer</span>
-                     </td>
-                     <td>
-                     <a href="https://buryfm.co.uk" target="_blank" rel="noopener" class="table-link">
-                     Bury FM
-                     </a>
-                     </td>
-                     <td>Creative and Technical Production Support · Discussions in Progress</td>
-                     </tr>
-
-                     <tr>
-                     <td class="status-cell">
-                     <span class="tag status-active">Active</span>
-                     <span class="tag cat-portfolio">Portfolio</span>
-                     </td>
-                     <td>CDAUDIO</td>
-                     <td>Radio imaging, original spots and podcast trailers</td>
                      </tr>
 
                      </tbody>
@@ -1441,7 +1470,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
       <div class="ap-brand">
         <div class="ap-brand-row">
           <span class="cdaudio-wordmark-text">
-            CDA<span class="logo-udio">UDIO</span>
+            CHRIS<span class="logo-d">D</span>
           </span>
           <span class="logo-mark">
             <span class="bar"></span>
@@ -1460,7 +1489,49 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
   </div>
 
 </div>
-<script src="script.js?v=48" defer></script>
+<!-- ░░ PRODUCTION MUSIC MODAL ░░ -->
+<div class="pm-modal-overlay" id="pm-modal" role="dialog" aria-modal="true" aria-label="Production Music" aria-hidden="true">
+  <div class="pm-modal-inner">
+
+    <!-- Header -->
+    <div class="pm-modal-header">
+      <div class="pm-modal-brand">
+        <span>CHRIS</span><span class="pm-brand-d">D</span>
+        <span class="pm-brand-sep">—</span>
+        <span class="pm-brand-label">PRODUCTION MUSIC</span>
+      </div>
+      <button class="pm-close-btn" id="pm-modal-close" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Golden picture frame + YouTube embed -->
+    <div class="pm-frame">
+      <span class="pm-corner pm-corner--tl">❖</span>
+      <span class="pm-corner pm-corner--tr">❖</span>
+      <span class="pm-corner pm-corner--bl">❖</span>
+      <span class="pm-corner pm-corner--br">❖</span>
+      <div class="pm-video-wrap">
+        <!-- Replace data-src with your YouTube embed URL                    -->
+        <!-- Single video:   https://www.youtube.com/embed/VIDEO_ID           -->
+        <!-- Playlist:       https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID -->
+        <iframe
+          id="pm-youtube-iframe"
+          src=""
+          data-src="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID_HERE"
+          title="Production Music by Chris Demetriou"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="pm-subtitle">Production music composed for sync, advertising and broadcast.</p>
+
+  </div>
+</div>
+
+<script src="script.js?v=71" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {
