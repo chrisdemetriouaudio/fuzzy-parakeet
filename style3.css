@@ -6581,21 +6581,9 @@ width:100%;
     aspect-ratio: 16 / 10.5;
 }
 
-/* CRT scanlines */
+/* CRT scanlines — disabled */
 .reel-tv-screen::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,0,0,0.07) 3px,
-        rgba(0,0,0,0.07) 4px
-    );
-    pointer-events: none;
-    z-index: 2;
-    border-radius: 6px;
+    display: none;
 }
 
 /* Corner vignette */
