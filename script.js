@@ -1874,18 +1874,22 @@ function closeProdMusicModal() {
 
 // ── Showreel Modal (v71) ────────────────────────────────────────
 (function () {
-    var btn   = document.getElementById('reel-float-btn');
-    var modal = document.getElementById('reel-modal');
-    var close = document.getElementById('reel-modal-close');
-    var video = document.getElementById('reel-video');
+    var btn        = document.getElementById('reel-float-btn');
+    var modal      = document.getElementById('reel-modal');
+    var close      = document.getElementById('reel-modal-close');
+    var video      = document.getElementById('reel-video');
+    var playBtn    = document.getElementById('reel-play-btn');
 
     if (!btn || !modal) return;
+
+    function hidePlayButton() {
+        if (playBtn) playBtn.classList.add('hidden');
+    }
 
     function openReel() {
         modal.classList.add('reel-active');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        if (video) video.play().catch(function() {});
     }
 
     function closeReel() {
@@ -1893,6 +1897,23 @@ function closeProdMusicModal() {
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         if (video) { video.pause(); video.currentTime = 0; }
+        if (playBtn) playBtn.classList.remove('hidden');
+    }
+
+    // Play button click handler
+    if (playBtn) {
+        playBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (video) {
+                video.play().catch(function() {});
+                hidePlayButton();
+            }
+        });
+    }
+
+    // Hide play button when video starts playing (native controls)
+    if (video) {
+        video.addEventListener('play', hidePlayButton);
     }
 
     btn.addEventListener('click', openReel);
