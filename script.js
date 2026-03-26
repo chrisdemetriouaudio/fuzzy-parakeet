@@ -993,40 +993,46 @@ function tryLoadSounds() {
         const tabs = document.querySelectorAll(".cdp-tab");
         let currentTabKey = 'all'; // tracks which tab is active for prev/next nav
 
-        tabs.forEach(function(tab){
+        function activateTab(tabKey) {
+            // Prod Music tab opens the modal instead of filtering the tracklist
+            if (tabKey === "prodmusic") {
+                if (window.scWidget) window.scWidget.pause();
+                openProdMusicModal();
+                return;
+            }
 
-            tab.addEventListener("click", function(){
+            tabs.forEach(t => t.classList.remove("active"));
+            const tabEl = document.querySelector('.cdp-tab[data-tab="' + tabKey + '"]');
+            if (tabEl) tabEl.classList.add("active");
+            currentTabKey = tabKey;
 
-                tabs.forEach(t => t.classList.remove("active"));
-                this.classList.add("active");
+            document.querySelectorAll(".cdp-group").forEach(function(group){
 
-                const selected = this.dataset.tab;
-                currentTabKey = selected; // keep in sync
+                const type = group.dataset.group;
+                const title = group.querySelector(".cdp-track-section-title");
 
-                document.querySelectorAll(".cdp-group").forEach(function(group){
+                if (tabKey === "all") {
 
-                    const type = group.dataset.group;
-                    const title = group.querySelector(".cdp-track-section-title");
-
-                    if (selected === "all") {
-
-                        if (type === "all") {
-                            group.style.display = "";
-                        } else {
-                            group.style.display = "none";
-                        }
-
-                    } else if(type === selected && type !== "other") {
+                    if (type === "all") {
                         group.style.display = "";
-                        if(title) title.style.display = "";
-                        } else {
+                    } else {
                         group.style.display = "none";
                     }
 
-                });
+                } else if(type === tabKey && type !== "other") {
+                    group.style.display = "";
+                    if(title) title.style.display = "";
+                    } else {
+                    group.style.display = "none";
+                }
 
             });
+        }
 
+        tabs.forEach(function(tab){
+            tab.addEventListener("click", function(){
+                activateTab(this.dataset.tab);
+            });
         });
 
         // Mark as loaded so the 4s fallback timeout does NOT hide the player
@@ -1542,12 +1548,12 @@ if (mainPrevBtn) {
         const rows = Array.from(table.querySelectorAll('tr'));
 
         const statusOrder = {
-            "status-upcoming": 1,
+            "status-active": 1,
             "status-attending": 2,
-            "status-pending": 3,
-            "status-complete": 4,
-            "status-active": 5,
-            "status-discussion": 6
+            "status-upcoming": 3,
+            "status-pending": 4,
+            "status-discussion": 5,
+            "status-complete": 6
         };
 
         rows.sort((a, b) => {
@@ -1577,7 +1583,8 @@ if (mainPrevBtn) {
         rows.forEach(row => table.appendChild(row));
     }
 
-    document.addEventListener("DOMContentLoaded", sortRightNowTable);
+    // sortRightNowTable disabled — table order is set manually in HTML
+    // document.addEventListener("DOMContentLoaded", sortRightNowTable);
 
     /* Cinematic hero parallax */
 window.addEventListener("scroll", function () {
@@ -1792,4 +1799,115 @@ revealObserver.observe(row);
             dot.addEventListener('animationend', function () { dot.remove(); });
         });
     });
+})();
+
+
+/* ============================================================
+   PRODUCTION MUSIC MODAL
+   ============================================================ */
+
+function openProdMusicModal() {
+    var modal = document.getElementById('pm-modal');
+    if (!modal) return;
+
+    // Lazy-load YouTube iframe on first open
+    var iframe = document.getElementById('pm-youtube-iframe');
+    if (iframe && iframe.dataset.src && !iframe.dataset.loaded) {
+        iframe.src = iframe.dataset.src;
+        iframe.dataset.loaded = 'true';
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProdMusicModal() {
+    var modal = document.getElementById('pm-modal');
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Stop YouTube playback by briefly clearing the src
+    var iframe = document.getElementById('pm-youtube-iframe');
+    if (iframe && iframe.dataset.loaded) {
+        var savedSrc = iframe.src;
+        iframe.src = '';
+        setTimeout(function() { iframe.src = savedSrc; }, 100);
+        iframe.dataset.loaded = '';
+    }
+}
+
+(function() {
+    // All elements with data-open-prod-music (hero CTA, nav link)
+    document.querySelectorAll('[data-open-prod-music]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            openProdMusicModal();
+            // Close nav overlay if open
+            var navOverlay = document.getElementById('nav-links');
+            if (navOverlay && navOverlay.classList.contains('active')) {
+                navOverlay.classList.remove('active');
+                var menuBtn = document.getElementById('mobile-menu-btn');
+                if (menuBtn) menuBtn.classList.remove('active');
+            }
+        });
+    });
+
+    // Close button
+    var closeBtn = document.getElementById('pm-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeProdMusicModal);
+
+    // Click outside the inner modal content to close
+    var overlay = document.getElementById('pm-modal');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeProdMusicModal();
+        });
+    }
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeProdMusicModal();
+    });
+
+// ── Showreel Modal (v71) ────────────────────────────────────────
+(function () {
+    var btn   = document.getElementById('reel-float-btn');
+    var modal = document.getElementById('reel-modal');
+    var close = document.getElementById('reel-modal-close');
+    var video = document.getElementById('reel-video');
+
+    if (!btn || !modal) return;
+
+    function openReel() {
+        modal.classList.add('reel-active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (video) video.play().catch(function() {});
+    }
+
+    function closeReel() {
+        modal.classList.remove('reel-active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (video) { video.pause(); video.currentTime = 0; }
+    }
+
+    btn.addEventListener('click', openReel);
+
+    // Any element with data-open-reel also opens the showreel (e.g. hero button)
+    document.querySelectorAll('[data-open-reel]').forEach(function(el) {
+        el.addEventListener('click', function(e) { e.preventDefault(); openReel(); });
+    });
+
+    if (close) close.addEventListener('click', closeReel);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeReel();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('reel-active')) closeReel();
+    });
+})();
 })();

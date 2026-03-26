@@ -402,11 +402,19 @@ color:var(--accent) !important;
     background-color: var(--accent);
     color: #000;
     border: 2px solid var(--accent);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: var(--accent);
+    background-color: var(--accent);
+    color: #000;
+    transform: scale(1.03);
+    box-shadow: 0 0 22px rgba(238,255,0,0.35);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 10px rgba(238,255,0,0.2);
 }
 
 .btn-outline {
@@ -908,7 +916,7 @@ text-shadow:
     white-space: normal;
 
 }
-.hero-cta { margin-top: var(--space-lg); }
+.hero-cta { margin-top: 0; } /* margin moved to .hero-cta-group */
 
 
 .nav-brand{
@@ -949,7 +957,8 @@ z-index:10001;
     line-height: inherit;
     display: inline;
 }
-.logo-udio {
+.logo-udio,
+.logo-d {
     color: var(--accent);
     text-shadow: 0 0 18px rgba(238,255,0,0.45);
 }
@@ -2340,6 +2349,12 @@ letter-spacing:0.05em;
     color: #f97316;
 }
 
+.tag.cat-work {
+    background-color: transparent;
+    border: 2px solid #f59e0b;
+    color: #f59e0b;
+}
+
 /* Legacy classes */
 .tag.event         { background-color: #7C3AED; color: #fff; }
 .tag.app-apply     { background-color: #0EA5E9; color: #fff; }
@@ -2475,6 +2490,284 @@ height:30px;
 width:auto;
 vertical-align:bottom;
 margin-left:6px;
+}
+
+/* ============================================================
+   PRODUCTION MUSIC — Floating Trigger Button
+   ============================================================ */
+.pm-float-btn {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    background: #0a0a0a;
+    border: 1px solid rgba(238,255,0,0.25);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    padding: 18px 10px;
+    cursor: pointer;
+    /* opacity + pointer-events are toggled by JS to hide over the hero */
+    opacity: 0;
+    pointer-events: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.35s ease;
+    box-shadow: 3px 0 18px rgba(0,0,0,0.5);
+}
+.pm-float-btn.pm-float-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+.pm-float-btn:hover {
+    background: #111;
+    border-color: rgba(238,255,0,0.6);
+    box-shadow: 4px 0 24px rgba(238,255,0,0.12);
+}
+.pm-float-icon {
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1;
+}
+.pm-float-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   PRODUCTION MUSIC — Hero CTA Group
+   ============================================================ */
+.hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: var(--space-lg); /* was on .hero-cta directly — moved here so both buttons share the same top offset */
+}
+/* Override the .btn inline-block so flex handles sizing */
+.hero-cta-group .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-icon {
+    font-size: 0.85em;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.btn-icon-svg {
+    width: 1em;
+    height: 0.75em;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+.hero-cta-prod {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.75);
+    color: #fff;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    white-space: nowrap;
+}
+.hero-cta-prod:hover {
+    background: #fff;
+    border-color: #fff;
+    color: #000;
+    transform: scale(1.03);
+}
+.hero-cta-prod:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================
+   PRODUCTION MUSIC — Modal Overlay
+   ============================================================ */
+.pm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 40px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.pm-modal-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+.pm-modal-inner {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    transform: translateY(18px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pm-modal-overlay.is-open .pm-modal-inner {
+    transform: translateY(0) scale(1);
+}
+
+/* Modal header */
+.pm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 4px;
+}
+.pm-modal-brand {
+    font-family: var(--font-hero);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    letter-spacing: 0.04em;
+    color: #fff;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+.pm-brand-d {
+    color: var(--accent);
+    text-shadow: 0 0 18px rgba(238,255,0,0.45);
+}
+.pm-brand-sep {
+    color: var(--text-grey);
+    font-size: 0.7em;
+}
+.pm-brand-label {
+    font-family: var(--font-display);
+    font-size: clamp(0.65rem, 1.4vw, 0.85rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--text-grey);
+    text-transform: uppercase;
+    align-self: center;
+}
+.pm-close-btn {
+    background: transparent;
+    border: 1px solid #333;
+    color: var(--text-grey);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+.pm-close-btn:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* ============================================================
+   PRODUCTION MUSIC — Golden Picture Frame
+   ============================================================ */
+.pm-frame {
+    position: relative;
+    padding: 20px;
+    /* Metallic gold gradient — light hits top-left, shadow bottom-right */
+    background: linear-gradient(
+        135deg,
+        #2c1e00 0%,
+        #c8960c 10%,
+        #ffd700 22%,
+        #daa520 35%,
+        #7a5500 50%,
+        #daa520 65%,
+        #ffd700 78%,
+        #c8960c 90%,
+        #2c1e00 100%
+    );
+    border-radius: 3px;
+    box-shadow:
+        0 0 0 1px #1a1000,
+        0 0 0 4px #4a3200,
+        0 0 50px rgba(200, 148, 10, 0.3),
+        0 28px 70px rgba(0, 0, 0, 0.85);
+}
+/* Subtle inner bevel line */
+.pm-frame::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    pointer-events: none;
+    z-index: 1;
+}
+/* Corner ornaments */
+.pm-corner {
+    position: absolute;
+    color: #ffd700;
+    font-size: 18px;
+    line-height: 1;
+    z-index: 3;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.55), 0 0 2px #8b6914;
+}
+.pm-corner--tl { top:  4px; left:  7px; }
+.pm-corner--tr { top:  4px; right: 7px; }
+.pm-corner--bl { bottom: 4px; left:  7px; }
+.pm-corner--br { bottom: 4px; right: 7px; }
+
+/* Video container inside the frame */
+.pm-video-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+.pm-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Modal subtitle */
+.pm-subtitle {
+    margin: 14px 0 0;
+    font-family: var(--font-main);
+    font-size: 0.78rem;
+    color: var(--text-grey);
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
+/* ── Mobile adjustments ──────────────────────────────────── */
+@media (max-width: 500px) {
+    .pm-float-btn { padding: 14px 8px; gap: 7px; }
+    .pm-float-label { font-size: 0.52rem; }
+    .pm-frame { padding: 12px; }
+    .pm-corner { font-size: 14px; }
+    .pm-frame::before { inset: 8px; }
 }
 
 .sc-player-wrap {
@@ -6096,5 +6389,283 @@ width:100%;
     width: 0; height: 1px;
     background: var(--accent);
     transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   SHOWREEL — Floating Tab & Vintage TV Modal (v71)
+   ============================================================ */
+
+/* ── Floating Tab (right side) ── */
+.reel-float-btn {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    background: #0a0a0a;
+    border: 1px solid rgba(238,255,0,0.25);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    padding: 18px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.22s ease;
+    box-shadow: -3px 0 18px rgba(0,0,0,0.5);
+    animation: reelTabPulse 2.8s ease-in-out infinite;
+}
+
+.reel-float-btn:hover {
+    background: #111;
+    border-color: rgba(238,255,0,0.65);
+    box-shadow: -5px 0 26px rgba(238,255,0,0.14);
+    transform: translateY(-50%) translateX(-6px);
+    animation: none;
+}
+
+.reel-float-btn:active {
+    transform: translateY(-50%) translateX(-3px) scale(0.97);
+    animation: none;
+}
+
+@keyframes reelTabPulse {
+    0%, 100% {
+        box-shadow: -3px 0 18px rgba(0,0,0,0.5);
+        border-color: rgba(238,255,0,0.25);
+    }
+    50% {
+        box-shadow: -4px 0 22px rgba(238,255,0,0.16);
+        border-color: rgba(238,255,0,0.55);
+    }
+}
+
+.reel-float-icon {
+    font-size: 11px;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.reel-float-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ── Modal Overlay ── */
+.reel-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 25000;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    /* keep content clear of the fixed nav (80px) and bottom player (84px desktop / 72px mobile) */
+    padding: calc(var(--nav-height) + 12px) clamp(10px, 3vw, 24px) calc(84px + 12px);
+}
+
+.reel-modal-overlay.reel-active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ── Vintage TV Chassis ── */
+.reel-tv {
+    position: relative;
+    background: linear-gradient(160deg, #2e2e2e 0%, #222 45%, #141414 100%);
+    border-radius: 22px;
+    padding: clamp(14px, 3vw, 28px) clamp(16px, 4vw, 36px) clamp(18px, 3vw, 36px);
+    box-shadow:
+        0 0 0 1px #484848,
+        0 0 0 3px #1a1a1a,
+        0 12px 70px rgba(0,0,0,0.95),
+        inset 0 1px 3px rgba(255,255,255,0.08),
+        inset 0 -2px 5px rgba(0,0,0,0.7);
+    max-width: 860px;
+    width: 100%;
+    transform: scale(0.9) translateY(10px);
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reel-modal-overlay.reel-active .reel-tv {
+    transform: scale(1) translateY(0);
+}
+
+/* ── TV Header (brand label) ── */
+.reel-tv-header {
+    margin-bottom: 14px;
+}
+
+.reel-tv-brand {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #484848;
+    text-transform: uppercase;
+}
+
+.reel-tv-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 20;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.85);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.reel-tv:hover .reel-tv-close {
+    opacity: 1;
+}
+
+.reel-tv-close:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border-color: rgba(255,255,255,0.4);
+    transform: scale(1.08);
+}
+
+.reel-tv-close:active {
+    transform: scale(0.92);
+}
+
+/* ── Bezel (inner frame around screen) ── */
+.reel-tv-bezel {
+    background: #080808;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow:
+        inset 0 4px 10px rgba(0,0,0,0.85),
+        inset 0 -1px 3px rgba(255,255,255,0.02);
+    border: 1px solid #1e1e1e;
+}
+
+/* ── Screen ── */
+/* Container is slightly taller than 16:9 so native controls render
+   in the black strip below the video frame, clear of lower-third titles */
+.reel-tv-screen {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 10.5;
+}
+
+/* CRT scanlines */
+.reel-tv-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,0.07) 3px,
+        rgba(0,0,0,0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 6px;
+}
+
+/* Corner vignette */
+.reel-tv-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 6px;
+}
+
+.reel-tv-screen video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: top center;
+    border-radius: 6px;
+}
+
+/* ── TV Footer (speaker grille + knobs) ── */
+.reel-tv-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 0 2px;
+}
+
+.reel-tv-grille {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.reel-tv-grille span {
+    display: block;
+    width: 2px;
+    height: 10px;
+    background: #252525;
+    border-radius: 1px;
+}
+
+.reel-tv-knobs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.reel-tv-knob {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #383838, #181818);
+    border: 1px solid #2e2e2e;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.04);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .reel-float-btn { padding: 14px 8px; gap: 7px; }
+    .reel-float-label { font-size: 0.52rem; }
+    .reel-tv { border-radius: 16px; }
+    /* Mobile bottom player is 72px */
+    .reel-modal-overlay { padding-bottom: calc(72px + 12px); }
+}
+
+@media (max-width: 480px) {
+    .reel-modal-overlay { padding: 10px; }
+    .reel-tv { border-radius: 12px; }
+    .reel-tv-brand { font-size: 0.52rem; letter-spacing: 0.14em; }
+    .reel-tv-grille span { height: 7px; }
+    .reel-tv-knob { width: 8px; height: 8px; }
 }
 .nav-item:hover::after { width: 100%; }
