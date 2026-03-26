@@ -6092,7 +6092,7 @@ width:100%;
   width: 22px;
   height: 2px;
   background: #fff;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 /* Animate to X when open */
@@ -6108,6 +6108,9 @@ width:100%;
   .hero {
     min-height: 100svh;
     aspect-ratio: unset;
+  }
+  .hero-content {
+    padding-top: var(--space-lg);
   }
   .hero-image::before {
     background-size: 100vw;
@@ -6126,6 +6129,7 @@ width:100%;
     line-height: 1.8;
     letter-spacing: 0;
     text-align: left;
+    white-space: normal;
   }
   /* Quote: pull left by its own padding so text aligns at same x as title */
   .hero-tagline {
