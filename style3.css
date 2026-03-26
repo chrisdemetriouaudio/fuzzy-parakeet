@@ -6626,9 +6626,9 @@ width:100%;
     transform: translate(-50%, -50%);
     z-index: 10;
 
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 140px;
+    height: 180px;
+    border-radius: 20px;
     background: rgba(238, 255, 0, 0.95);
     border: none;
     cursor: pointer;
@@ -6638,15 +6638,35 @@ width:100%;
     color: #000;
     transition: all 0.3s ease;
     animation: reelPlayPulse 2s ease-in-out infinite;
+    padding: 0;
+}
+
+.reel-play-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .reel-play-btn svg {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+}
+
+.reel-play-text {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-align: center;
+    width: 110px;
+    word-wrap: break-word;
 }
 
 .reel-play-btn:hover {
-    transform: translate(-50%, -50%) scale(1.15);
+    transform: translate(-50%, -50%) scale(1.12);
     background: rgba(238, 255, 0, 1);
     box-shadow: 0 0 40px rgba(238, 255, 0, 0.6);
     animation: none;
