@@ -6106,8 +6106,9 @@ width:100%;
 
 @media (max-width: 680px) {
   .hero {
-    min-height: 100svh;
+    min-height: calc(100svh - 88px);
     aspect-ratio: unset;
+    margin-top: 88px;
   }
   .hero-content {
     padding-top: var(--space-xl);
