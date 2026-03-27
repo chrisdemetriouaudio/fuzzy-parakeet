@@ -6106,12 +6106,8 @@ width:100%;
 
 @media (max-width: 680px) {
   .hero {
-    min-height: calc(100svh - 88px);
+    min-height: 100svh;
     aspect-ratio: unset;
-    margin-top: 88px;
-  }
-  .hero-content {
-    padding-top: var(--space-xl);
   }
   .hero-image::before {
     background-size: 100vw;
@@ -6120,12 +6116,12 @@ width:100%;
   .hero-img {
     filter: contrast(1.1) brightness(1.4);
   }
-  /* Role block: constrained to fit under title */
+  /* Role block: full bleed edge-to-edge, text indented to match content */
   .hero-role {
-    margin-left: 0;
+    margin-left: -24px;
     margin-right: 0;
-    width: 100%;
-    padding: 10px 0;
+    width: calc(100% + 48px);
+    padding: 10px 24px;
     font-size: 0.875rem;
     line-height: 1.8;
     letter-spacing: 0;
