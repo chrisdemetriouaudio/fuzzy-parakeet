@@ -6112,7 +6112,7 @@ width:100%;
     aspect-ratio: unset;
   }
   .hero-content {
-    padding-top: 88px;
+    padding: 88px var(--space-md) var(--space-md) var(--space-md);
   }
   .hero-image::before {
     background-size: 100vw;
