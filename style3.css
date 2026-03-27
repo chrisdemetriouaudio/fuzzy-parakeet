@@ -6108,7 +6108,6 @@ width:100%;
   .hero {
     min-height: 100svh;
     aspect-ratio: unset;
-    margin-top: 88px;
   }
   .hero-image::before {
     background-size: 100vw;
