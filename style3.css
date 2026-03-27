@@ -1125,6 +1125,12 @@ max-width: 100%;
 }
 }
 
+@media (max-width: 700px) {
+.hero-content {
+  padding: 56px var(--space-md) var(--space-md) var(--space-md);
+}
+}
+
 /* ========================================= */
 /* BOTTOM PLAYER */
 /* ========================================= */
