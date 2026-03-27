@@ -6110,7 +6110,7 @@ width:100%;
     aspect-ratio: unset;
   }
   .hero-content {
-    padding: var(--space-lg) var(--space-md) var(--space-md) var(--space-md);
+    padding: var(--space-xl) var(--space-md) var(--space-md) var(--space-md);
     max-width: 100%;
   }
   .hero-image::before {
