@@ -6111,6 +6111,9 @@ width:100%;
     min-height: 100svh;
     aspect-ratio: unset;
   }
+  .hero-content {
+    padding-top: 88px;
+  }
   .hero-image::before {
     background-size: 100vw;
     opacity: 0.22;
