@@ -709,7 +709,7 @@ position:relative;
     aspect-ratio: 16 / 9;
     min-height: 520px;
     max-height: 100vh;
-    overflow: hidden;
+    overflow: visible;
     background: var(--bg-black);
 
     display: flex;
