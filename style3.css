@@ -807,9 +807,7 @@ z-index:2;
 }
 
 .hero-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
     z-index: 2;
     padding: var(--space-xl);
     max-width: 720px;
@@ -819,6 +817,8 @@ z-index:2;
     align-items: flex-start;
 
     text-align: left;
+
+    margin-top: auto;
 }
 .hero-eyebrow {
     font-family: var(--font-mono);
