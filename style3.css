@@ -703,15 +703,18 @@ position:relative;
    Full-bleed image. Text overlay bottom-left.
    Greyscale to colour on hover. Caption below hero.
    ============================================================ */
-   .hero {
-       position: relative;
-       width: 100%;
-       aspect-ratio: 16 / 9;
-       min-height: 520px;
-       max-height: 100vh;
-       overflow: hidden;
-       background: var(--bg-black);
-   }
+.hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 520px;
+    max-height: 100vh;
+    overflow: hidden;
+    background: var(--bg-black);
+
+    display: flex;
+    flex-direction: column;
+}
 .hero-image {
     position: absolute;
     inset: 0;
