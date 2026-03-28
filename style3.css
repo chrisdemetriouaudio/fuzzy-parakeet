@@ -2564,6 +2564,8 @@ margin-left:6px;
     gap: 14px;
     flex-wrap: wrap;
     margin-top: var(--space-lg); /* was on .hero-cta directly — moved here so both buttons share the same top offset */
+    position: relative;
+    z-index: 10;
 }
 /* Override the .btn inline-block so flex handles sizing */
 .hero-cta-group .btn {
