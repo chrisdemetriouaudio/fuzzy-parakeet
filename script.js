@@ -1870,4 +1870,3 @@ revealObserver.observe(row);
         if (e.key === 'Escape' && modal.classList.contains('reel-active')) closeReel();
     });
 })();
-})();
