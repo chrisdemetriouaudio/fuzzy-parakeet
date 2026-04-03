@@ -536,6 +536,30 @@ pointer-events: auto;
         0 0 30px rgba(255,255,255,0.12);
 }
 
+/* Cyber text scramble animation - slow mechanical feel */
+@keyframes cybertextScramble {
+    0% {
+        opacity: 1;
+        transform: scaleY(1) rotateX(0deg);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scaleY(0.8) rotateX(15deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1) rotateX(0deg);
+    }
+}
+
+.nav-overlay .nav-item span {
+    transition: color 0.4s ease;
+}
+
+.nav-overlay .nav-item:hover span {
+    color: var(--accent);
+}
+
 /* Accent dot on active/hover */
 .nav-overlay .nav-item::before {
     content: '';
@@ -1404,10 +1428,26 @@ pointer-events:none;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2.5px solid var(--text-white);
+  transition: all 0.3s ease;
 }
 
 .ap-play-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(238, 255, 0, 0.4);
+}
+
+.ap-play-btn[data-playing="true"] {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(238, 255, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(238, 255, 0, 0.6);
+  }
 }
 
 .ap-icon-pause {
@@ -1848,7 +1888,14 @@ input[type="range"] {
     font-size: 1.2rem;
     margin-bottom: var(--space-xs);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    font-weight: 400;
+}
+
+.check-list li strong {
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 0;
 }
 
 .check-list li::before {
@@ -3208,20 +3255,22 @@ margin-left:6px;
 }
 
 .copyright {
-    color: var(--text-grey);
-    font-size: 0.7rem;
+    color: var(--text-white);
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    opacity: 0.6;
+    opacity: 0.95;
     margin-top: 18px;
 }
 
 .footer-dev-credit {
-    color: var(--text-grey);
-    font-size: 0.65rem;
+    color: var(--text-white);
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    opacity: 0.7;
+    opacity: 0.9;
     margin-top: 6px;
     text-align: center;
 }

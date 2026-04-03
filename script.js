@@ -195,10 +195,24 @@ if (menuBtn && navLinks) {
     });
 
     navLinks.querySelectorAll('a').forEach(link => {
+        // Wrap each character in a span for cyber text effect
+        const text = link.textContent;
+        link.innerHTML = text.split('').map((char, i) => {
+            return `<span style="display:inline-block;">${char}</span>`;
+        }).join('');
+
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             menuBtn.classList.remove('is-open');
             document.body.classList.remove('menu-open');
+        });
+
+        // Add hover effect for cyber text scramble
+        link.addEventListener('mouseenter', function() {
+            const spans = this.querySelectorAll('span');
+            spans.forEach((span, i) => {
+                span.style.animation = `cybertextScramble 0.6s ease-out ${i * 0.05}s`;
+            });
         });
     });
 
@@ -994,13 +1008,6 @@ function tryLoadSounds() {
         let currentTabKey = 'all'; // tracks which tab is active for prev/next nav
 
         function activateTab(tabKey) {
-            // Prod Music tab opens the modal instead of filtering the tracklist
-            if (tabKey === "prodmusic") {
-                if (window.scWidget) window.scWidget.pause();
-                openProdMusicModal();
-                return;
-            }
-
             tabs.forEach(t => t.classList.remove("active"));
             const tabEl = document.querySelector('.cdp-tab[data-tab="' + tabKey + '"]');
             if (tabEl) tabEl.classList.add("active");
@@ -1213,6 +1220,7 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             window.scHasPlayed = true; // first-play skip logic no longer needed
 
             if (player) player.classList.add('is-playing');
+            if (playBtn) playBtn.setAttribute('data-playing', 'true');
 
             const playIcon  = document.querySelector('.ap-icon-play');
             const pauseIcon = document.querySelector('.ap-icon-pause');
@@ -1280,6 +1288,7 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
         widget.bind(SC.Widget.Events.PAUSE, function () {
 
             if (player) player.classList.remove('is-playing');
+            if (playBtn) playBtn.removeAttribute('data-playing');
 
             if (titleEl) titleEl.classList.remove('is-scrolling');
 
@@ -1801,76 +1810,6 @@ revealObserver.observe(row);
     });
 })();
 
-
-/* ============================================================
-   PRODUCTION MUSIC MODAL
-   ============================================================ */
-
-function openProdMusicModal() {
-    var modal = document.getElementById('pm-modal');
-    if (!modal) return;
-
-    // Lazy-load YouTube iframe on first open
-    var iframe = document.getElementById('pm-youtube-iframe');
-    if (iframe && iframe.dataset.src && !iframe.dataset.loaded) {
-        iframe.src = iframe.dataset.src;
-        iframe.dataset.loaded = 'true';
-    }
-
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeProdMusicModal() {
-    var modal = document.getElementById('pm-modal');
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-
-    // Stop YouTube playback by briefly clearing the src
-    var iframe = document.getElementById('pm-youtube-iframe');
-    if (iframe && iframe.dataset.loaded) {
-        var savedSrc = iframe.src;
-        iframe.src = '';
-        setTimeout(function() { iframe.src = savedSrc; }, 100);
-        iframe.dataset.loaded = '';
-    }
-}
-
-(function() {
-    // All elements with data-open-prod-music (hero CTA, nav link)
-    document.querySelectorAll('[data-open-prod-music]').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            openProdMusicModal();
-            // Close nav overlay if open
-            var navOverlay = document.getElementById('nav-links');
-            if (navOverlay && navOverlay.classList.contains('active')) {
-                navOverlay.classList.remove('active');
-                var menuBtn = document.getElementById('mobile-menu-btn');
-                if (menuBtn) menuBtn.classList.remove('active');
-            }
-        });
-    });
-
-    // Close button
-    var closeBtn = document.getElementById('pm-modal-close');
-    if (closeBtn) closeBtn.addEventListener('click', closeProdMusicModal);
-
-    // Click outside the inner modal content to close
-    var overlay = document.getElementById('pm-modal');
-    if (overlay) {
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) closeProdMusicModal();
-        });
-    }
-
-    // Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeProdMusicModal();
-    });
 
 // ── Showreel Modal (v71) ────────────────────────────────────────
 (function () {
