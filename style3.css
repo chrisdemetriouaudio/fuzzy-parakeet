@@ -747,28 +747,6 @@ position:relative;
 }
 
 
-.hero-image::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-height:100%;
-width:100%;
-
-background-image:url("images/sharoncorr.jpg");
-background-size:320px;
-background-repeat:repeat;
-
-filter:
-contrast(1.25)
-saturate(1.8)
-hue-rotate(35deg);
-
-opacity:0.22;
-
-z-index:2;
-}
-
 /* Soft vignette — blends hero into caption, lifts text legibility */
 .hero-image::after {
     content: '';
