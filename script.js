@@ -195,24 +195,10 @@ if (menuBtn && navLinks) {
     });
 
     navLinks.querySelectorAll('a').forEach(link => {
-        // Wrap each character in a span for cyber text effect
-        const text = link.textContent;
-        link.innerHTML = text.split('').map((char, i) => {
-            return `<span style="display:inline-block;">${char}</span>`;
-        }).join('');
-
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             menuBtn.classList.remove('is-open');
             document.body.classList.remove('menu-open');
-        });
-
-        // Add hover effect for cyber text scramble
-        link.addEventListener('mouseenter', function() {
-            const spans = this.querySelectorAll('span');
-            spans.forEach((span, i) => {
-                span.style.animation = `cybertextScramble 0.6s ease-out ${i * 0.05}s`;
-            });
         });
     });
 
@@ -1220,7 +1206,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             window.scHasPlayed = true; // first-play skip logic no longer needed
 
             if (player) player.classList.add('is-playing');
-            if (playBtn) playBtn.setAttribute('data-playing', 'true');
 
             const playIcon  = document.querySelector('.ap-icon-play');
             const pauseIcon = document.querySelector('.ap-icon-pause');
@@ -1288,7 +1273,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
         widget.bind(SC.Widget.Events.PAUSE, function () {
 
             if (player) player.classList.remove('is-playing');
-            if (playBtn) playBtn.removeAttribute('data-playing');
 
             if (titleEl) titleEl.classList.remove('is-scrolling');
 
