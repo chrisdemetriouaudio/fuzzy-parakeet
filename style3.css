@@ -708,7 +708,7 @@ position:relative;
     aspect-ratio: 16 / 9;
     min-height: 520px;
     max-height: 100vh;
-    overflow: visible;
+    overflow: hidden;
     background: var(--bg-black);
 
     display: flex;
@@ -720,6 +720,7 @@ position:relative;
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
 }
 
 
