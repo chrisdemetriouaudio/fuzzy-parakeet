@@ -2524,8 +2524,15 @@ input[type="range"] {
     font-weight: 500;
 }
 
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+    margin-top: var(--space-lg);
+}
+
 .contact-content {
-    margin: var(--space-lg) 0;
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
@@ -2585,15 +2592,11 @@ input[type="range"] {
 }
 
 .contact-action {
-    margin-top: var(--space-lg);
     background: rgba(238, 255, 0, 0.08);
     border: 2px solid rgba(238, 255, 0, 0.25);
     border-radius: 12px;
     padding: 32px 24px;
     text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .contact-action-text {
@@ -2631,6 +2634,13 @@ input[type="range"] {
 .contact-buttons .btn-outline:hover {
     background: var(--text-white);
     color: #000;
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
 }
 
 /* Contact text — always white in dark box */
