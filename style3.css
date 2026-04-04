@@ -2528,11 +2528,11 @@ input[type="range"] {
     margin: var(--space-lg) 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-md);
 }
 
 .contact-section {
-    padding: var(--space-md) 0;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(238, 255, 0, 0.1);
 }
 
@@ -2541,33 +2541,34 @@ input[type="range"] {
 }
 
 .contact-intro {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .contact-roles {
-    font-size: 1.3rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     color: var(--text-white);
     margin: 0;
 }
 
 .contact-subheading {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--accent);
-    margin: 0 0 12px 0;
+    margin: 0 0 6px 0;
     text-shadow: 0 0 8px rgba(238, 255, 0, 0.2);
 }
 
 .contact-section p {
-    margin: 10px 0;
-    line-height: 1.7;
+    margin: 6px 0;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
 }
 
 .contact-cta {
