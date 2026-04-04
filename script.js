@@ -1855,70 +1855,101 @@ revealObserver.observe(row);
     });
 })();
 
-// ── Interactive Circular Word Cloud ──────────────────────────────────
+// ── Interactive Category Circles with Skills ──────────────────────────────────
 (function() {
-    const cloudData = [
-        // Categories
-        { word: 'Radio Production', type: 'category', size: 28 },
-        { word: 'Podcast Production', type: 'category', size: 26 },
-        { word: 'Sound Design', type: 'category', size: 24 },
-        { word: 'Audio Restoration', type: 'category', size: 22 },
-        { word: 'Mixing & Mastering', type: 'category', size: 24 },
-
-        // Skills
-        { word: 'Imaging', type: 'skill', size: 18 },
-        { word: 'Editing', type: 'skill', size: 18 },
-        { word: 'Production', type: 'skill', size: 16 },
-        { word: 'Dialogue', type: 'skill', size: 16 },
-        { word: 'Broadcast', type: 'skill', size: 15 },
-        { word: 'Audio Drama', type: 'skill', size: 14 },
-        { word: 'Documentaries', type: 'skill', size: 14 },
-        { word: 'Noise Reduction', type: 'skill', size: 13 },
-        { word: 'Repair', type: 'skill', size: 12 },
-        { word: 'Content Editing', type: 'skill', size: 13 }
+    const categories = [
+        {
+            name: 'Radio Production',
+            skills: ['Station Sound', 'Imaging', 'Features', 'Package Production', 'Content Editing']
+        },
+        {
+            name: 'Podcast Production',
+            skills: ['Dialogue Editing', 'Full Audio Production', 'Video Podcast', 'Production']
+        },
+        {
+            name: 'Narrative Sound Design',
+            skills: ['Sound Design', 'Audio Drama', 'Documentaries', 'Podcasts']
+        },
+        {
+            name: 'Audio Restoration',
+            skills: ['Noise Reduction', 'Repair', 'Dialogue Cleanup']
+        },
+        {
+            name: 'Mixing & Mastering',
+            skills: ['Broadcast Ready', 'Mixing', 'Mastering', 'Optimization']
+        }
     ];
 
-    function createWordCloud() {
+    function createCategoryCircles() {
         const svg = document.querySelector('.wordcloud-svg');
         if (!svg) return;
 
-        const centerX = 200, centerY = 200, radius = 120;
-        const angleSlice = (Math.PI * 2) / cloudData.length;
+        // Clear existing content
+        svg.innerHTML = '';
 
-        cloudData.forEach((data, index) => {
-            const angle = angleSlice * index;
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
+        // Layout: arrange 5 circles in a grid pattern
+        const circles = [
+            { x: 150, y: 150, radius: 100 },  // Top left
+            { x: 500, y: 150, radius: 100 },  // Top middle
+            { x: 850, y: 150, radius: 100 },  // Top right
+            { x: 325, y: 380, radius: 100 },  // Bottom left
+            { x: 675, y: 380, radius: 100 }   // Bottom right
+        ];
 
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', x);
-            text.setAttribute('y', y);
-            text.setAttribute('text-anchor', 'middle');
-            text.setAttribute('dominant-baseline', 'middle');
-            text.setAttribute('font-size', data.size);
-            text.setAttribute('class', `wordcloud-word ${data.type}`);
-            text.setAttribute('data-word', data.word);
-            text.textContent = data.word;
-
-            // Add delay to stagger animation
-            text.style.animationDelay = (index * 0.1) + 's';
-
-            text.addEventListener('mouseenter', function() {
-                text.classList.add('hovered');
-            });
-
-            text.addEventListener('mouseleave', function() {
-                text.classList.remove('hovered');
-            });
-
-            svg.appendChild(text);
+        categories.forEach((category, index) => {
+            const pos = circles[index];
+            createCircleGroup(svg, category, pos.x, pos.y, pos.radius);
         });
+    }
+
+    function createCircleGroup(svg, category, centerX, centerY, radius) {
+        // Create group for the category circle
+        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        group.setAttribute('class', 'category-circle');
+
+        // Create circle background
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', centerX);
+        circle.setAttribute('cy', centerY);
+        circle.setAttribute('r', radius);
+
+        group.appendChild(circle);
+
+        // Add category title at top of circle
+        const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        title.setAttribute('x', centerX);
+        title.setAttribute('y', centerY - radius + 30);
+        title.setAttribute('class', 'category-title');
+        title.textContent = category.name;
+
+        group.appendChild(title);
+
+        // Add skills arranged in a circle within the category circle
+        const skillRadius = radius * 0.6;
+        const angleSlice = (Math.PI * 2) / category.skills.length;
+
+        category.skills.forEach((skill, skillIndex) => {
+            const angle = angleSlice * skillIndex + (Math.random() * 0.5 - 0.25);
+            const x = centerX + skillRadius * Math.cos(angle);
+            const y = centerY + skillRadius * Math.sin(angle);
+
+            const skillText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            skillText.setAttribute('x', x);
+            skillText.setAttribute('y', y);
+            skillText.setAttribute('class', 'skill-text');
+            skillText.style.animationDelay = (skillIndex * 0.1) + 's';
+            skillText.textContent = skill;
+
+            group.appendChild(skillText);
+        });
+
+        svg.appendChild(group);
     }
 
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', createWordCloud);
+        document.addEventListener('DOMContentLoaded', createCategoryCircles);
     } else {
-        createWordCloud();
+        createCategoryCircles();
     }
 })();

@@ -1853,8 +1853,7 @@ input[type="range"] {
 /* Word Cloud Styles */
 .wordcloud-container {
     width: 100%;
-    aspect-ratio: 1;
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -1863,40 +1862,68 @@ input[type="range"] {
 
 .wordcloud-svg {
     width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 20px rgba(238, 255, 0, 0.1));
+    height: auto;
+    min-height: 400px;
+    filter: drop-shadow(0 0 20px rgba(238, 255, 0, 0.05));
 }
 
-.wordcloud-word {
+.category-circle {
     cursor: pointer;
     transition: all 0.3s ease;
-    transform-origin: center;
-    animation: wordcloudFloat 3s ease-in-out infinite;
 }
 
-.wordcloud-word.category {
+.category-circle circle {
+    fill: rgba(238, 255, 0, 0.08);
+    stroke: rgba(238, 255, 0, 0.3);
+    stroke-width: 2;
+    transition: all 0.3s ease;
+}
+
+.category-circle:hover circle {
+    fill: rgba(238, 255, 0, 0.15);
+    stroke: var(--accent);
+    stroke-width: 3;
+}
+
+.category-title {
+    font-family: var(--font-display);
     font-weight: 700;
+    font-size: 16px;
     fill: var(--accent);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    transition: font-size 0.3s ease;
 }
 
-.wordcloud-word.skill {
+.category-circle:hover .category-title {
+    font-size: 18px;
+    filter: drop-shadow(0 0 6px rgba(238, 255, 0, 0.8));
+}
+
+.skill-text {
+    font-family: var(--font-main);
     font-weight: 500;
+    font-size: 12px;
     fill: rgba(255, 255, 255, 0.7);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    animation: skillFloat 3s ease-in-out infinite;
 }
 
-.wordcloud-word:hover {
-    fill: var(--accent);
-    font-weight: 700;
-    filter: drop-shadow(0 0 8px rgba(238, 255, 0, 0.8));
-    transform: scale(1.15);
+.category-circle:hover .skill-text {
+    fill: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
 }
 
-@keyframes wordcloudFloat {
+@keyframes skillFloat {
     0%, 100% {
-        transform: translateY(0);
+        opacity: 0.7;
     }
     50% {
-        transform: translateY(-8px);
+        opacity: 0.95;
     }
 }
 
