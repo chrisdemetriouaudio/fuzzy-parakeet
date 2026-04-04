@@ -1862,6 +1862,7 @@ input[type="range"] {
         0 20px 60px rgba(0, 0, 0, 0.9),
         inset 0 1px 0 rgba(255, 255, 255, 0.05),
         0 0 30px rgba(238, 255, 0, 0.08);
+    animation: mixerGlow 6s ease-in-out infinite;
 }
 
 .mixer-header {
@@ -1960,6 +1961,7 @@ input[type="range"] {
     box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.95), inset 0 -2px 4px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.9), 0 0 20px rgba(238, 255, 0, 0.05);
     cursor: grab;
     overflow: hidden;
+    animation: faderPulse 3s ease-in-out infinite;
 }
 
 .fader-track:active {
@@ -2109,6 +2111,8 @@ input[type="range"] {
         inset 0 2px 4px rgba(255, 255, 255, 0.15),
         inset 0 -2px 4px rgba(0, 0, 0, 0.8),
         0 0 16px rgba(238, 255, 0, 0.15);
+    transform: scale(1.08);
+    transition: all 0.15s ease;
 }
 
 .knob-label {
@@ -2135,6 +2139,7 @@ input[type="range"] {
     margin-top: var(--space-md);
     border-top: 2px solid rgba(238, 255, 0, 0.15);
     padding-top: var(--space-md);
+    animation: routingPulse 4s ease-in-out infinite;
 }
 
 .routing-header {
@@ -2304,6 +2309,40 @@ input[type="range"] {
     }
     50% {
         opacity: 0.95;
+    }
+}
+
+@keyframes mixerGlow {
+    0%, 100% {
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.8),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.8),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+            0 0 20px rgba(238, 255, 0, 0.1);
+    }
+}
+
+@keyframes faderPulse {
+    0%, 100% {
+        box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.95), inset 0 -2px 4px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.9), 0 0 20px rgba(238, 255, 0, 0.05);
+    }
+    50% {
+        box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.95), inset 0 -2px 4px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.9), 0 0 24px rgba(238, 255, 0, 0.08);
+    }
+}
+
+@keyframes routingPulse {
+    0%, 100% {
+        border-color: rgba(238, 255, 0, 0.2);
+    }
+    50% {
+        border-color: rgba(238, 255, 0, 0.35);
     }
 }
 
