@@ -1956,7 +1956,8 @@ input[type="range"] {
 .fader-track {
     position: relative;
     width: 58px;
-    height: 340px;
+    height: 100%;
+    min-height: 300px;
     background:
         repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px),
         repeating-linear-gradient(180deg, transparent 0px, transparent 6px, rgba(0,0,0,0.2) 6px, rgba(0,0,0,0.2) 7px),
@@ -2270,12 +2271,17 @@ input[type="range"] {
 
     .mixer-channels {
         gap: 8px;
-        justify-content: space-around;
+        justify-content: center;
+    }
+
+    .channel-strip {
+        min-width: 280px;
+        max-width: 95vw;
     }
 
     .fader-track {
         width: 35px;
-        height: 180px;
+        min-height: 200px;
     }
 
     .fader-handle {
