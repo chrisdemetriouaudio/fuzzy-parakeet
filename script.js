@@ -195,24 +195,10 @@ if (menuBtn && navLinks) {
     });
 
     navLinks.querySelectorAll('a').forEach(link => {
-        // Wrap each character in a span for cyber text effect
-        const text = link.textContent;
-        link.innerHTML = text.split('').map((char, i) => {
-            return `<span style="display:inline-block;">${char}</span>`;
-        }).join('');
-
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             menuBtn.classList.remove('is-open');
             document.body.classList.remove('menu-open');
-        });
-
-        // Add hover effect for cyber text scramble
-        link.addEventListener('mouseenter', function() {
-            const spans = this.querySelectorAll('span');
-            spans.forEach((span, i) => {
-                span.style.animation = `cybertextScramble 0.6s ease-out ${i * 0.05}s`;
-            });
         });
     });
 
@@ -1220,7 +1206,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             window.scHasPlayed = true; // first-play skip logic no longer needed
 
             if (player) player.classList.add('is-playing');
-            if (playBtn) playBtn.setAttribute('data-playing', 'true');
 
             const playIcon  = document.querySelector('.ap-icon-play');
             const pauseIcon = document.querySelector('.ap-icon-pause');
@@ -1288,7 +1273,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
         widget.bind(SC.Widget.Events.PAUSE, function () {
 
             if (player) player.classList.remove('is-playing');
-            if (playBtn) playBtn.removeAttribute('data-playing');
 
             if (titleEl) titleEl.classList.remove('is-scrolling');
 
@@ -1870,4 +1854,205 @@ revealObserver.observe(row);
         if (e.key === 'Escape' && modal.classList.contains('reel-active')) closeReel();
     });
 })();
+
+// ── SSL Mixing Console Faders ──────────────────────────────────────────────────
+(function() {
+    const categories = [
+        {
+            name: 'Radio Production',
+            skills: ['Station Sound', 'Imaging', 'Features', 'Package Production', 'Content Editing']
+        },
+        {
+            name: 'Podcast Production',
+            skills: ['Dialogue Editing', 'Full Audio', 'Video Podcast', 'Production']
+        },
+        {
+            name: 'Narrative Sound Design',
+            skills: ['Sound Design', 'Audio Drama', 'Documentaries', 'Podcasts']
+        },
+        {
+            name: 'Audio Restoration',
+            skills: ['Noise Reduction', 'Repair', 'Dialogue Cleanup']
+        },
+        {
+            name: 'Mixing & Mastering',
+            skills: ['Broadcast Ready', 'Mixing', 'Mastering', 'Optimization']
+        }
+    ];
+
+    let soundEnabled = false;
+    const faderStates = {};
+
+    function createMixer() {
+        const mixerChannels = document.querySelector('.mixer-channels');
+        if (!mixerChannels) return;
+
+        // Clear existing content
+        mixerChannels.innerHTML = '';
+
+        categories.forEach((category, index) => {
+            // Initialize fader state
+            faderStates[index] = { percentage: 0 };
+
+            // Create channel strip container
+            const channelStrip = document.createElement('div');
+            channelStrip.className = 'channel-strip';
+            channelStrip.setAttribute('data-channel', index);
+
+            // Create fader track with handle and meter
+            const faderTrack = document.createElement('div');
+            faderTrack.className = 'fader-track';
+
+            const meterFill = document.createElement('div');
+            meterFill.className = 'fader-meter-fill';
+            meterFill.style.height = '0%';
+
+            const faderHandle = document.createElement('div');
+            faderHandle.className = 'fader-handle';
+            faderHandle.setAttribute('draggable', 'false');
+
+            faderTrack.appendChild(meterFill);
+            faderTrack.appendChild(faderHandle);
+
+            // Create category name
+            const categoryName = document.createElement('div');
+            categoryName.className = 'channel-name';
+            categoryName.textContent = category.name;
+
+            // Create skills container
+            const skillsContainer = document.createElement('div');
+            skillsContainer.className = 'skills-container';
+
+            category.skills.forEach(skill => {
+                const badge = document.createElement('div');
+                badge.className = 'skill-badge';
+                badge.textContent = skill;
+                skillsContainer.appendChild(badge);
+            });
+
+            // Assemble channel strip
+            channelStrip.appendChild(faderTrack);
+            channelStrip.appendChild(categoryName);
+            channelStrip.appendChild(skillsContainer);
+
+            // Add fader event listeners
+            addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
+
+            mixerChannels.appendChild(channelStrip);
+        });
+    }
+
+    function addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index) {
+        let isDragging = false;
+
+        function handleStart(e) {
+            isDragging = true;
+            faderHandle.style.cursor = 'grabbing';
+        }
+
+        function handleMove(e) {
+            if (!isDragging) return;
+
+            e.preventDefault();
+
+            // Get mouse/touch position
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            const rect = faderTrack.getBoundingClientRect();
+            const trackHeight = rect.height;
+
+            // Calculate fader position (inverted: bottom = 100%, top = 0%)
+            let newY = clientY - rect.top;
+            newY = Math.max(0, Math.min(newY, trackHeight));
+            const percentage = ((trackHeight - newY) / trackHeight) * 100;
+
+            updateFader(index, percentage, faderHandle, meterFill, channelStrip);
+
+            if (soundEnabled) {
+                playFaderSound(percentage);
+            }
+        }
+
+        function handleEnd(e) {
+            isDragging = false;
+            faderHandle.style.cursor = 'grab';
+        }
+
+        // Mouse events
+        faderHandle.addEventListener('mousedown', handleStart);
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+
+        // Touch events
+        faderHandle.addEventListener('touchstart', handleStart);
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
+    }
+
+    function updateFader(index, percentage, faderHandle, meterFill, channelStrip) {
+        faderStates[index].percentage = percentage;
+
+        // Update handle position (inverted)
+        const handlePosition = 100 - percentage;
+        faderHandle.style.bottom = handlePosition + '%';
+
+        // Update meter fill
+        meterFill.style.height = percentage + '%';
+
+        // Update skill badges brightness
+        const badges = channelStrip.querySelectorAll('.skill-badge');
+        badges.forEach(badge => {
+            if (percentage > 0) {
+                badge.classList.add('active');
+                // Set opacity based on percentage
+                badge.style.opacity = 0.4 + (percentage / 100) * 0.6;
+            } else {
+                badge.classList.remove('active');
+                badge.style.opacity = '0.4';
+            }
+        });
+    }
+
+    function playFaderSound(percentage) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+
+            // Map percentage to frequency (100-2000 Hz range)
+            const frequency = 100 + (percentage / 100) * 1900;
+            oscillator.frequency.value = frequency;
+
+            // Short beep envelope
+            gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.05);
+        } catch (e) {
+            // Audio API not supported, silently fail
+        }
+    }
+
+    function initMixer() {
+        createMixer();
+
+        // Sound toggle button
+        const soundToggle = document.querySelector('#sound-toggle');
+        if (soundToggle) {
+            soundToggle.addEventListener('click', function() {
+                soundEnabled = !soundEnabled;
+                this.classList.toggle('active', soundEnabled);
+            });
+        }
+    }
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMixer);
+    } else {
+        initMixer();
+    }
 })();
