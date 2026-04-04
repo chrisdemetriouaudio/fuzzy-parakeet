@@ -1855,7 +1855,7 @@ revealObserver.observe(row);
     });
 })();
 
-// ── Interactive Category Circles with Skills ──────────────────────────────────
+// ── SSL Mixing Console Faders ──────────────────────────────────────────────────
 (function() {
     const categories = [
         {
@@ -1864,7 +1864,7 @@ revealObserver.observe(row);
         },
         {
             name: 'Podcast Production',
-            skills: ['Dialogue Editing', 'Full Audio Production', 'Video Podcast', 'Production']
+            skills: ['Dialogue Editing', 'Full Audio', 'Video Podcast', 'Production']
         },
         {
             name: 'Narrative Sound Design',
@@ -1880,119 +1880,179 @@ revealObserver.observe(row);
         }
     ];
 
-    function createCategoryCircles() {
-        const svg = document.querySelector('.wordcloud-svg');
-        if (!svg) return;
+    let soundEnabled = false;
+    const faderStates = {};
+
+    function createMixer() {
+        const mixerChannels = document.querySelector('.mixer-channels');
+        if (!mixerChannels) return;
 
         // Clear existing content
-        svg.innerHTML = '';
-
-        // Determine viewport width and adjust layout accordingly
-        const svgWidth = svg.clientWidth || window.innerWidth;
-        const svgHeight = Math.max(500, svg.clientHeight || 500);
-
-        let circles;
-
-        if (svgWidth < 600) {
-            // Mobile: Single column, centered
-            circles = [
-                { x: svgWidth / 2, y: 120, radius: 80 },
-                { x: svgWidth / 2, y: 280, radius: 80 },
-                { x: svgWidth / 2, y: 440, radius: 80 },
-                { x: svgWidth / 2, y: 600, radius: 80 },
-                { x: svgWidth / 2, y: 760, radius: 80 }
-            ];
-        } else if (svgWidth < 1024) {
-            // Tablet: 2-3 columns
-            const spacing = svgWidth / 2.5;
-            circles = [
-                { x: spacing * 0.6, y: 140, radius: 90 },      // Top left
-                { x: spacing * 1.9, y: 140, radius: 90 },      // Top right
-                { x: spacing * 0.6, y: 360, radius: 90 },      // Middle left
-                { x: spacing * 1.9, y: 360, radius: 90 },      // Middle right
-                { x: spacing * 1.25, y: 550, radius: 90 }      // Bottom center
-            ];
-        } else {
-            // Desktop: 3-2 grid layout
-            circles = [
-                { x: svgWidth * 0.2, y: 150, radius: 100 },    // Top left
-                { x: svgWidth * 0.5, y: 150, radius: 100 },    // Top center
-                { x: svgWidth * 0.8, y: 150, radius: 100 },    // Top right
-                { x: svgWidth * 0.35, y: 380, radius: 100 },   // Bottom left
-                { x: svgWidth * 0.65, y: 380, radius: 100 }    // Bottom right
-            ];
-        }
-
-        // Update SVG viewBox to match content
-        if (svgWidth < 600) {
-            svg.setAttribute('viewBox', `0 0 ${svgWidth} 880`);
-        } else if (svgWidth < 1024) {
-            svg.setAttribute('viewBox', `0 0 ${svgWidth} 700`);
-        } else {
-            svg.setAttribute('viewBox', `0 0 ${svgWidth} 550`);
-        }
+        mixerChannels.innerHTML = '';
 
         categories.forEach((category, index) => {
-            const pos = circles[index];
-            createCircleGroup(svg, category, pos.x, pos.y, pos.radius);
+            // Initialize fader state
+            faderStates[index] = { percentage: 0 };
+
+            // Create channel strip container
+            const channelStrip = document.createElement('div');
+            channelStrip.className = 'channel-strip';
+            channelStrip.setAttribute('data-channel', index);
+
+            // Create fader track with handle and meter
+            const faderTrack = document.createElement('div');
+            faderTrack.className = 'fader-track';
+
+            const meterFill = document.createElement('div');
+            meterFill.className = 'fader-meter-fill';
+            meterFill.style.height = '0%';
+
+            const faderHandle = document.createElement('div');
+            faderHandle.className = 'fader-handle';
+            faderHandle.setAttribute('draggable', 'false');
+
+            faderTrack.appendChild(meterFill);
+            faderTrack.appendChild(faderHandle);
+
+            // Create category name
+            const categoryName = document.createElement('div');
+            categoryName.className = 'channel-name';
+            categoryName.textContent = category.name;
+
+            // Create skills container
+            const skillsContainer = document.createElement('div');
+            skillsContainer.className = 'skills-container';
+
+            category.skills.forEach(skill => {
+                const badge = document.createElement('div');
+                badge.className = 'skill-badge';
+                badge.textContent = skill;
+                skillsContainer.appendChild(badge);
+            });
+
+            // Assemble channel strip
+            channelStrip.appendChild(faderTrack);
+            channelStrip.appendChild(categoryName);
+            channelStrip.appendChild(skillsContainer);
+
+            // Add fader event listeners
+            addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
+
+            mixerChannels.appendChild(channelStrip);
         });
     }
 
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(createCategoryCircles, 250);
-    });
+    function addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index) {
+        let isDragging = false;
 
-    function createCircleGroup(svg, category, centerX, centerY, radius) {
-        // Create group for the category circle
-        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        group.setAttribute('class', 'category-circle');
+        function handleStart(e) {
+            isDragging = true;
+            faderHandle.style.cursor = 'grabbing';
+        }
 
-        // Create circle background
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', centerX);
-        circle.setAttribute('cy', centerY);
-        circle.setAttribute('r', radius);
+        function handleMove(e) {
+            if (!isDragging) return;
 
-        group.appendChild(circle);
+            e.preventDefault();
 
-        // Add category title at top of circle
-        const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        title.setAttribute('x', centerX);
-        title.setAttribute('y', centerY - radius + 30);
-        title.setAttribute('class', 'category-title');
-        title.textContent = category.name;
+            // Get mouse/touch position
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            const rect = faderTrack.getBoundingClientRect();
+            const trackHeight = rect.height;
 
-        group.appendChild(title);
+            // Calculate fader position (inverted: bottom = 100%, top = 0%)
+            let newY = clientY - rect.top;
+            newY = Math.max(0, Math.min(newY, trackHeight));
+            const percentage = ((trackHeight - newY) / trackHeight) * 100;
 
-        // Add skills arranged in a circle within the category circle
-        const skillRadius = radius * 0.6;
-        const angleSlice = (Math.PI * 2) / category.skills.length;
+            updateFader(index, percentage, faderHandle, meterFill, channelStrip);
 
-        category.skills.forEach((skill, skillIndex) => {
-            const angle = angleSlice * skillIndex + (Math.random() * 0.5 - 0.25);
-            const x = centerX + skillRadius * Math.cos(angle);
-            const y = centerY + skillRadius * Math.sin(angle);
+            if (soundEnabled) {
+                playFaderSound(percentage);
+            }
+        }
 
-            const skillText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            skillText.setAttribute('x', x);
-            skillText.setAttribute('y', y);
-            skillText.setAttribute('class', 'skill-text');
-            skillText.style.animationDelay = (skillIndex * 0.1) + 's';
-            skillText.textContent = skill;
+        function handleEnd(e) {
+            isDragging = false;
+            faderHandle.style.cursor = 'grab';
+        }
 
-            group.appendChild(skillText);
+        // Mouse events
+        faderHandle.addEventListener('mousedown', handleStart);
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+
+        // Touch events
+        faderHandle.addEventListener('touchstart', handleStart);
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
+    }
+
+    function updateFader(index, percentage, faderHandle, meterFill, channelStrip) {
+        faderStates[index].percentage = percentage;
+
+        // Update handle position (inverted)
+        const handlePosition = 100 - percentage;
+        faderHandle.style.bottom = handlePosition + '%';
+
+        // Update meter fill
+        meterFill.style.height = percentage + '%';
+
+        // Update skill badges brightness
+        const badges = channelStrip.querySelectorAll('.skill-badge');
+        badges.forEach(badge => {
+            if (percentage > 0) {
+                badge.classList.add('active');
+                // Set opacity based on percentage
+                badge.style.opacity = 0.4 + (percentage / 100) * 0.6;
+            } else {
+                badge.classList.remove('active');
+                badge.style.opacity = '0.4';
+            }
         });
+    }
 
-        svg.appendChild(group);
+    function playFaderSound(percentage) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+
+            // Map percentage to frequency (100-2000 Hz range)
+            const frequency = 100 + (percentage / 100) * 1900;
+            oscillator.frequency.value = frequency;
+
+            // Short beep envelope
+            gain.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.05);
+        } catch (e) {
+            // Audio API not supported, silently fail
+        }
+    }
+
+    function initMixer() {
+        createMixer();
+
+        // Sound toggle button
+        const soundToggle = document.querySelector('#sound-toggle');
+        if (soundToggle) {
+            soundToggle.addEventListener('click', function() {
+                soundEnabled = !soundEnabled;
+                this.classList.toggle('active', soundEnabled);
+            });
+        }
     }
 
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', createCategoryCircles);
+        document.addEventListener('DOMContentLoaded', initMixer);
     } else {
-        createCategoryCircles();
+        initMixer();
     }
 })();
