@@ -1887,20 +1887,63 @@ revealObserver.observe(row);
         // Clear existing content
         svg.innerHTML = '';
 
-        // Layout: arrange 5 circles in a grid pattern
-        const circles = [
-            { x: 150, y: 150, radius: 100 },  // Top left
-            { x: 500, y: 150, radius: 100 },  // Top middle
-            { x: 850, y: 150, radius: 100 },  // Top right
-            { x: 325, y: 380, radius: 100 },  // Bottom left
-            { x: 675, y: 380, radius: 100 }   // Bottom right
-        ];
+        // Determine viewport width and adjust layout accordingly
+        const svgWidth = svg.clientWidth || window.innerWidth;
+        const svgHeight = Math.max(500, svg.clientHeight || 500);
+
+        let circles;
+
+        if (svgWidth < 600) {
+            // Mobile: Single column, centered
+            circles = [
+                { x: svgWidth / 2, y: 120, radius: 80 },
+                { x: svgWidth / 2, y: 280, radius: 80 },
+                { x: svgWidth / 2, y: 440, radius: 80 },
+                { x: svgWidth / 2, y: 600, radius: 80 },
+                { x: svgWidth / 2, y: 760, radius: 80 }
+            ];
+        } else if (svgWidth < 1024) {
+            // Tablet: 2-3 columns
+            const spacing = svgWidth / 2.5;
+            circles = [
+                { x: spacing * 0.6, y: 140, radius: 90 },      // Top left
+                { x: spacing * 1.9, y: 140, radius: 90 },      // Top right
+                { x: spacing * 0.6, y: 360, radius: 90 },      // Middle left
+                { x: spacing * 1.9, y: 360, radius: 90 },      // Middle right
+                { x: spacing * 1.25, y: 550, radius: 90 }      // Bottom center
+            ];
+        } else {
+            // Desktop: 3-2 grid layout
+            circles = [
+                { x: svgWidth * 0.2, y: 150, radius: 100 },    // Top left
+                { x: svgWidth * 0.5, y: 150, radius: 100 },    // Top center
+                { x: svgWidth * 0.8, y: 150, radius: 100 },    // Top right
+                { x: svgWidth * 0.35, y: 380, radius: 100 },   // Bottom left
+                { x: svgWidth * 0.65, y: 380, radius: 100 }    // Bottom right
+            ];
+        }
+
+        // Update SVG viewBox to match content
+        if (svgWidth < 600) {
+            svg.setAttribute('viewBox', `0 0 ${svgWidth} 880`);
+        } else if (svgWidth < 1024) {
+            svg.setAttribute('viewBox', `0 0 ${svgWidth} 700`);
+        } else {
+            svg.setAttribute('viewBox', `0 0 ${svgWidth} 550`);
+        }
 
         categories.forEach((category, index) => {
             const pos = circles[index];
             createCircleGroup(svg, category, pos.x, pos.y, pos.radius);
         });
     }
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(createCategoryCircles, 250);
+    });
 
     function createCircleGroup(svg, category, centerX, centerY, radius) {
         // Create group for the category circle

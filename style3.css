@@ -1853,18 +1853,36 @@ input[type="range"] {
 /* Word Cloud Styles */
 .wordcloud-container {
     width: 100%;
-    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--space-lg) 0;
 }
 
 .wordcloud-svg {
     width: 100%;
     height: auto;
-    min-height: 400px;
+    min-height: 500px;
     filter: drop-shadow(0 0 20px rgba(238, 255, 0, 0.05));
+}
+
+@media (max-width: 1024px) {
+    .wordcloud-svg {
+        min-height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wordcloud-svg {
+        min-height: 700px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wordcloud-svg {
+        min-height: 800px;
+    }
 }
 
 .category-circle {
