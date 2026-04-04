@@ -1913,7 +1913,7 @@ input[type="range"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-md);
 }
 
 .channel-label {
@@ -1987,7 +1987,7 @@ input[type="range"] {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: var(--space-sm);
+    flex: 1;
 }
 
 .skill-badge {

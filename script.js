@@ -1930,10 +1930,20 @@ revealObserver.observe(row);
                 skillsContainer.appendChild(badge);
             });
 
-            // Assemble channel strip
-            channelStrip.appendChild(faderTrack);
+            // Assemble channel strip: category name on top, fader+skills side by side below
             channelStrip.appendChild(categoryName);
-            channelStrip.appendChild(skillsContainer);
+
+            // Create a wrapper for fader and skills to put them side by side
+            const faderSkillsWrapper = document.createElement('div');
+            faderSkillsWrapper.style.display = 'flex';
+            faderSkillsWrapper.style.gap = 'var(--space-md)';
+            faderSkillsWrapper.style.alignItems = 'flex-start';
+            faderSkillsWrapper.style.width = '100%';
+
+            faderSkillsWrapper.appendChild(faderTrack);
+            faderSkillsWrapper.appendChild(skillsContainer);
+
+            channelStrip.appendChild(faderSkillsWrapper);
 
             // Add fader event listeners
             addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
@@ -1991,9 +2001,8 @@ revealObserver.observe(row);
     function updateFader(index, percentage, faderHandle, meterFill, channelStrip) {
         faderStates[index].percentage = percentage;
 
-        // Update handle position (inverted)
-        const handlePosition = 100 - percentage;
-        faderHandle.style.bottom = handlePosition + '%';
+        // Update handle position (bottom to top as percentage increases)
+        faderHandle.style.bottom = percentage + '%';
 
         // Update meter fill
         meterFill.style.height = percentage + '%';
@@ -2003,7 +2012,7 @@ revealObserver.observe(row);
         badges.forEach(badge => {
             if (percentage > 0) {
                 badge.classList.add('active');
-                // Set opacity based on percentage
+                // Set opacity based on percentage (brighter as fader goes up)
                 badge.style.opacity = 0.4 + (percentage / 100) * 0.6;
             } else {
                 badge.classList.remove('active');
