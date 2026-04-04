@@ -2535,11 +2535,11 @@ input[type="range"] {
 .contact-content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
 }
 
 .contact-section {
-    padding: 12px 0;
+    padding: 0 0 var(--space-sm) 0;
     border-bottom: 1px solid rgba(238, 255, 0, 0.1);
 }
 
@@ -2548,16 +2548,19 @@ input[type="range"] {
 }
 
 .contact-intro {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 4px;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    display: inline;
+    line-height: 1.6;
 }
 
 .contact-roles {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--text-white);
     margin: 0;
+    display: inline;
 }
 
 .contact-subheading {
