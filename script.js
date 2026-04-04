@@ -2001,8 +2001,16 @@ revealObserver.observe(row);
     function updateFader(index, percentage, faderHandle, meterFill, channelStrip) {
         faderStates[index].percentage = percentage;
 
-        // Update handle position (bottom to top as percentage increases)
-        faderHandle.style.bottom = percentage + '%';
+        // Constrain percentage to 0-100
+        percentage = Math.max(0, Math.min(100, percentage));
+
+        // Update handle position - account for handle height to keep it within bounds
+        // Handle is 40px tall, track is 300px. Keep handle center within track bounds
+        const handleHeightPercent = (40 / 300) * 100; // ~13.3%
+        const maxBottomPercent = 100 - handleHeightPercent;
+        const constrainedPosition = Math.max(0, Math.min(percentage, maxBottomPercent));
+
+        faderHandle.style.bottom = constrainedPosition + '%';
 
         // Update meter fill
         meterFill.style.height = percentage + '%';
