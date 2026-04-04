@@ -1962,15 +1962,22 @@ input[type="range"] {
         repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 3px),
         repeating-linear-gradient(180deg, transparent 0px, transparent 6px, rgba(0,0,0,0.2) 6px, rgba(0,0,0,0.2) 7px),
         linear-gradient(90deg, #050505 0%, #151515 20%, #202020 50%, #151515 80%, #050505 100%);
-    border: 2px solid #666;
-    border-radius: 12px;
+    border: 2px solid #555;
+    border-left: 2px solid #777;
+    border-right: 2px solid #333;
+    border-radius: 14px;
     box-shadow:
-        inset 0 8px 20px rgba(0, 0, 0, 0.98),
-        inset 0 -3px 8px rgba(0, 0, 0, 0.9),
-        inset 2px 0 3px rgba(255,255,255,0.12),
-        inset -2px 0 3px rgba(0,0,0,0.8),
-        0 8px 20px rgba(0, 0, 0, 0.95),
-        0 0 28px rgba(238, 255, 0, 0.08);
+        /* Deep inner shadow for depth */
+        inset 0 10px 25px rgba(0, 0, 0, 0.95),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.9),
+        /* Left edge highlight */
+        inset 3px 0 6px rgba(255,255,255,0.15),
+        /* Right edge shadow */
+        inset -3px 0 6px rgba(0,0,0,0.8),
+        /* Outer shadow for depth */
+        0 10px 30px rgba(0, 0, 0, 0.95),
+        /* Subtle glow */
+        0 0 20px rgba(238, 255, 0, 0.1);
     cursor: grab;
     overflow: hidden;
     animation: faderPulse 3s ease-in-out infinite;
@@ -1984,20 +1991,43 @@ input[type="range"] {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 54px;
+    width: 52px;
+    height: 56px;
     background:
-        repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 3px),
-        linear-gradient(180deg, #444 0%, #222 30%, #0a0a0a 50%, #222 70%, #444 100%);
+        /* Knurled texture */
+        repeating-linear-gradient(90deg,
+            transparent 0px, transparent 1.5px,
+            rgba(255,255,255,0.1) 1.5px, rgba(255,255,255,0.1) 2px,
+            transparent 2px, transparent 3px,
+            rgba(0,0,0,0.4) 3px, rgba(0,0,0,0.4) 3.5px),
+        /* Premium metallic gradient */
+        linear-gradient(180deg,
+            #555 0%,
+            #3a3a3a 25%,
+            #1a1a1a 45%,
+            #0a0a0a 50%,
+            #1a1a1a 55%,
+            #3a3a3a 75%,
+            #555 100%);
     border: 2px solid #777;
-    border-radius: 10px;
+    border-left: 2px solid #999;
+    border-top: 2px solid #888;
+    border-right: 2px solid #444;
+    border-bottom: 2px solid #333;
+    border-radius: 12px;
     box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.98),
-        inset 0 3px 8px rgba(255, 255, 255, 0.3),
-        inset 0 -3px 8px rgba(0, 0, 0, 0.95),
-        inset 2px 0 3px rgba(255,255,255,0.15),
-        inset -2px 0 3px rgba(0,0,0,0.8),
-        0 0 14px rgba(238, 255, 0, 0.2);
+        /* Outer glow/depth */
+        0 12px 28px rgba(0, 0, 0, 0.98),
+        /* Top highlight */
+        inset 0 4px 10px rgba(255, 255, 255, 0.25),
+        /* Bottom shadow */
+        inset 0 -4px 10px rgba(0, 0, 0, 0.95),
+        /* Left highlight */
+        inset 2px 0 4px rgba(255,255,255,0.2),
+        /* Right shadow */
+        inset -2px 0 4px rgba(0,0,0,0.8),
+        /* Accent glow */
+        0 0 16px rgba(238, 255, 0, 0.12);
     cursor: grab;
     transition: box-shadow 0.15s ease, background 0.15s ease;
     pointer-events: auto;
