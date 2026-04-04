@@ -2586,15 +2586,23 @@ input[type="range"] {
 
 .contact-action {
     margin-top: var(--space-lg);
+    background: rgba(238, 255, 0, 0.08);
+    border: 2px solid rgba(238, 255, 0, 0.25);
+    border-radius: 12px;
+    padding: 32px 24px;
     text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-action-text {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
     color: var(--text-white);
-    margin-bottom: var(--space-md);
+    margin-bottom: 20px;
     line-height: 1.5;
+    margin-top: 0;
 }
 
 .contact-buttons {
