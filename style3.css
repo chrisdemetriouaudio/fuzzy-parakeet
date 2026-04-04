@@ -2061,6 +2061,14 @@ input[type="range"] {
     text-align: center;
     min-width: 100%;
     line-height: 1.2;
+    opacity: 1;
+}
+
+.skill-badge.active {
+    color: var(--accent);
+    background: rgba(238, 255, 0, 0.15);
+    border-color: rgba(238, 255, 0, 0.3);
+    box-shadow: 0 0 8px rgba(238, 255, 0, 0.4);
 }
 
 .skill-badge.active {

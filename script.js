@@ -1891,8 +1891,8 @@ revealObserver.observe(row);
         mixerChannels.innerHTML = '';
 
         categories.forEach((category, index) => {
-            // Initialize fader state
-            faderStates[index] = { percentage: 0 };
+            // Initialize fader state - START AT TOP (100%)
+            faderStates[index] = { percentage: 100 };
 
             // Create channel strip container
             const channelStrip = document.createElement('div');
@@ -1905,7 +1905,7 @@ revealObserver.observe(row);
 
             const meterFill = document.createElement('div');
             meterFill.className = 'fader-meter-fill';
-            meterFill.style.height = '0%';
+            meterFill.style.height = '100%';
 
             const faderHandle = document.createElement('div');
             faderHandle.className = 'fader-handle';
@@ -1987,6 +1987,9 @@ revealObserver.observe(row);
 
             // Add fader event listeners
             addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
+
+            // Initialize fader to UP position (100%) with skill badges illuminated
+            updateFader(index, 100, faderHandle, meterFill, channelStrip);
 
             mixerChannels.appendChild(channelStrip);
         });
