@@ -531,11 +531,13 @@ pointer-events: auto;
     letter-spacing: 0.05em;
     color: rgba(255,255,255,0.85);
     line-height: 1.2;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    transition: color 0.3s ease;
     text-decoration: none;
     position: relative;
     z-index: 1;
-    padding: 8px 0;
+    padding: 8px 0 8px 24px;
+    display: flex;
+    align-items: flex-start;
 }
 
 .nav-overlay .nav-item:hover {
@@ -543,26 +545,18 @@ pointer-events: auto;
     text-shadow: none;
 }
 
-/* Accent dot on active/hover */
+/* Bullet point default, accent dot on hover */
 .nav-overlay .nav-item::before {
-    content: '';
+    content: '•';
     display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
+    color: rgba(255,255,255,0.5);
     margin-right: 12px;
-    opacity: 0;
-    transform: scale(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    vertical-align: middle;
-    position: relative;
-    top: -2px;
+    transition: color 0.3s ease;
+    flex-shrink: 0;
 }
 
 .nav-overlay .nav-item:hover::before {
-    opacity: 1;
-    transform: scale(1);
+    color: var(--accent);
 }
 
 .nav-overlay .nav-item:focus {
