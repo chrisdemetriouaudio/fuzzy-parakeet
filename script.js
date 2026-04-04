@@ -1930,20 +1930,30 @@ revealObserver.observe(row);
                 skillsContainer.appendChild(badge);
             });
 
-            // Assemble channel strip: category name on top, fader+skills side by side below
+            // Assemble channel strip: TWO-COLUMN layout
+            // 1. Channel name spans full width at top
             channelStrip.appendChild(categoryName);
 
-            // Create a wrapper for fader and skills to put them side by side
-            const faderSkillsWrapper = document.createElement('div');
-            faderSkillsWrapper.style.display = 'flex';
-            faderSkillsWrapper.style.gap = 'var(--space-md)';
-            faderSkillsWrapper.style.alignItems = 'flex-start';
-            faderSkillsWrapper.style.width = '100%';
+            // 2. Create main content wrapper (two columns)
+            const contentWrapper = document.createElement('div');
+            contentWrapper.style.display = 'flex';
+            contentWrapper.style.gap = '12px';
+            contentWrapper.style.width = '100%';
+            contentWrapper.style.alignItems = 'flex-start';
 
-            faderSkillsWrapper.appendChild(faderTrack);
-            faderSkillsWrapper.appendChild(skillsContainer);
+            // LEFT: Fader
+            contentWrapper.appendChild(faderTrack);
 
-            channelStrip.appendChild(faderSkillsWrapper);
+            // RIGHT: Skills + Knobs + Routing
+            const rightColumn = document.createElement('div');
+            rightColumn.style.display = 'flex';
+            rightColumn.style.flexDirection = 'column';
+            rightColumn.style.gap = '8px';
+            rightColumn.style.flex = '1';
+            rightColumn.style.overflow = 'hidden';
+
+            // Skills
+            rightColumn.appendChild(skillsContainer);
 
             // Create knobs section
             const knobsSection = document.createElement('div');
@@ -1968,7 +1978,12 @@ revealObserver.observe(row);
             const routingMatrix = createRoutingMatrix(index);
             knobsSection.appendChild(routingMatrix);
 
-            channelStrip.appendChild(knobsSection);
+            // Add knobs section to right column
+            rightColumn.appendChild(knobsSection);
+
+            // Assemble
+            contentWrapper.appendChild(rightColumn);
+            channelStrip.appendChild(contentWrapper);
 
             // Add fader event listeners
             addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
