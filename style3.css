@@ -2219,6 +2219,22 @@ input[type="range"] {
         padding: 3px 6px;
         min-width: 90px;
     }
+
+    .knob {
+        width: 44px;
+        height: 44px;
+    }
+
+    .knob-label {
+        min-width: 44px;
+        font-size: 0.55rem;
+    }
+
+    .routing-button {
+        width: 24px;
+        height: 24px;
+        font-size: 0.55rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2249,6 +2265,46 @@ input[type="range"] {
     .skill-badge {
         font-size: 0.65rem;
         min-width: 80px;
+    }
+
+    .knob {
+        width: 40px;
+        height: 40px;
+    }
+
+    .knob::before {
+        width: 2px;
+        height: 12px;
+        top: 5px;
+    }
+
+    .knob-label {
+        min-width: 40px;
+        font-size: 0.5rem;
+    }
+
+    .knob-value {
+        font-size: 0.5rem;
+    }
+
+    .routing-header {
+        font-size: 0.65rem;
+    }
+
+    .routing-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+    }
+
+    .routing-button {
+        width: 22px;
+        height: 22px;
+        font-size: 0.5rem;
+    }
+
+    .knobs-section {
+        gap: 8px;
+        padding-top: 8px;
     }
 }
 
