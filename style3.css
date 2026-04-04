@@ -2584,11 +2584,24 @@ input[type="range"] {
     margin: 0;
 }
 
-.contact-buttons {
+.contact-action {
     margin-top: var(--space-lg);
+    text-align: center;
+}
+
+.contact-action-text {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+}
+
+.contact-buttons {
     display: flex;
     gap: var(--space-sm);
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .contact-buttons .btn-primary {
