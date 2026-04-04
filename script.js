@@ -1945,11 +1945,128 @@ revealObserver.observe(row);
 
             channelStrip.appendChild(faderSkillsWrapper);
 
+            // Create knobs section
+            const knobsSection = document.createElement('div');
+            knobsSection.className = 'knobs-section';
+
+            // Pan knob
+            const panKnobControl = createKnobControl('Pan', 'PAN', index, 'pan');
+            knobsSection.appendChild(panKnobControl);
+
+            // Gain and Aux knobs row
+            const knobsRow = document.createElement('div');
+            knobsRow.className = 'knobs-row';
+
+            const gainKnobControl = createKnobControl('Gain', 'GAIN', index, 'gain');
+            const auxKnobControl = createKnobControl('Aux', 'AUX', index, 'aux');
+
+            knobsRow.appendChild(gainKnobControl);
+            knobsRow.appendChild(auxKnobControl);
+            knobsSection.appendChild(knobsRow);
+
+            // Routing matrix
+            const routingMatrix = createRoutingMatrix(index);
+            knobsSection.appendChild(routingMatrix);
+
+            channelStrip.appendChild(knobsSection);
+
             // Add fader event listeners
             addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index);
 
             mixerChannels.appendChild(channelStrip);
         });
+    }
+
+    function createKnobControl(label, displayLabel, channelIndex, knobType) {
+        const control = document.createElement('div');
+        control.className = 'knob-control';
+        control.style.flex = '1';
+
+        const knob = document.createElement('div');
+        knob.className = 'knob';
+        knob.setAttribute('data-channel', channelIndex);
+        knob.setAttribute('data-knob-type', knobType);
+        knob.style.setProperty('--rotation', '0deg');
+
+        const value = document.createElement('div');
+        value.className = 'knob-value';
+        value.textContent = '50%';
+
+        const labelEl = document.createElement('div');
+        labelEl.className = 'knob-label';
+        labelEl.textContent = displayLabel;
+
+        // Knob interaction
+        let isDragging = false;
+        let startY = 0;
+        let currentRotation = 0;
+
+        function handleKnobStart(e) {
+            isDragging = true;
+            startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            knob.style.cursor = 'grabbing';
+        }
+
+        function handleKnobMove(e) {
+            if (!isDragging) return;
+            const currentY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            const delta = startY - currentY;
+            currentRotation = Math.max(-90, Math.min(90, currentRotation + delta * 0.5));
+            startY = currentY;
+
+            const percentage = Math.round((currentRotation + 90) / 180 * 100);
+            knob.style.transform = `rotate(${currentRotation}deg)`;
+            value.textContent = percentage + '%';
+        }
+
+        function handleKnobEnd() {
+            isDragging = false;
+            knob.style.cursor = 'pointer';
+        }
+
+        knob.addEventListener('mousedown', handleKnobStart);
+        knob.addEventListener('touchstart', handleKnobStart);
+        document.addEventListener('mousemove', handleKnobMove);
+        document.addEventListener('touchmove', handleKnobMove);
+        document.addEventListener('mouseup', handleKnobEnd);
+        document.addEventListener('touchend', handleKnobEnd);
+
+        control.appendChild(knob);
+        control.appendChild(value);
+        control.appendChild(labelEl);
+
+        return control;
+    }
+
+    function createRoutingMatrix(channelIndex) {
+        const container = document.createElement('div');
+        container.className = 'routing-matrix';
+
+        const header = document.createElement('div');
+        header.className = 'routing-header';
+        header.textContent = 'Routing';
+
+        const grid = document.createElement('div');
+        grid.className = 'routing-grid';
+
+        const busses = ['L', 'R', 'C', 'M'];
+        busses.forEach(bus => {
+            const button = document.createElement('button');
+            button.className = 'routing-button';
+            button.textContent = bus;
+            button.setAttribute('data-channel', channelIndex);
+            button.setAttribute('data-bus', bus);
+
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+
+            grid.appendChild(button);
+        });
+
+        container.appendChild(header);
+        container.appendChild(grid);
+        return container;
     }
 
     function addFaderListeners(faderTrack, faderHandle, meterFill, channelStrip, index) {

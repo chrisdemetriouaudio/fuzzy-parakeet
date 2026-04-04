@@ -2048,6 +2048,140 @@ input[type="range"] {
     box-shadow: 0 0 8px rgba(238, 255, 0, 0.3);
 }
 
+/* Rotary Knobs */
+.knobs-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    width: 100%;
+    margin-top: var(--space-md);
+    border-top: 2px solid rgba(238, 255, 0, 0.15);
+    padding-top: var(--space-md);
+}
+
+.knobs-row {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--space-sm);
+    width: 100%;
+}
+
+.knob-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.knob {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    border: 2px solid #444;
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.8),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.8),
+        0 0 12px rgba(238, 255, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.knob::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(180deg, #666 0%, #333 100%);
+    border-radius: 2px;
+    top: 8px;
+    transition: transform 0.1s linear;
+}
+
+.knob:hover {
+    box-shadow:
+        0 6px 14px rgba(0, 0, 0, 0.9),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.8),
+        0 0 16px rgba(238, 255, 0, 0.15);
+}
+
+.knob-label {
+    font-family: var(--font-main);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #aaa;
+    text-align: center;
+    min-width: 56px;
+}
+
+.knob-value {
+    font-family: var(--font-main);
+    font-size: 0.6rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Routing Matrix */
+.routing-matrix {
+    width: 100%;
+    margin-top: var(--space-md);
+    border-top: 2px solid rgba(238, 255, 0, 0.15);
+    padding-top: var(--space-md);
+}
+
+.routing-header {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #aaa;
+    margin-bottom: 6px;
+}
+
+.routing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+}
+
+.routing-button {
+    width: 32px;
+    height: 32px;
+    background: rgba(238, 255, 0, 0.08);
+    border: 1px solid rgba(238, 255, 0, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.65rem;
+    color: #888;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.routing-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 6px rgba(238, 255, 0, 0.2);
+}
+
+.routing-button.active {
+    background: rgba(238, 255, 0, 0.25);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 10px rgba(238, 255, 0, 0.4);
+}
+
 @media (max-width: 1024px) {
     .mixer-channels {
         gap: var(--space-sm);
