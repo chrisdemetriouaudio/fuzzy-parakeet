@@ -20,5 +20,6 @@ jobs:
       - name: Push to backup repo
         run: |
           git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
+          git fetch origin "+refs/heads/*:refs/remotes/origin/*"
           git push backup --all
           git push backup --tags
