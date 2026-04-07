@@ -22,86 +22,31 @@
 </head>
 <body>
 
-<button class="menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
-  <span></span><span></span><span></span>
-</button>
-
-<nav class="nav-overlay" id="nav-links">
-
-              <a href="#soundcloud-section" class="nav-item">Audio Showreel</a>
-              <a href="#credits" class="nav-item">Selected Credits</a>
-              <a href="#toolkit-section" class="nav-item">Production Toolkit & Libraries</a>
-              <a href="#why-audio-section" class="nav-item">Why Audio</a>
-              <a href="#career" class="nav-item">Current Work & Industry Activity</a>
-              <a href="#feedback-section" class="nav-item">Industry Feedback</a>
-              <a href="#about" class="nav-item">The Sonic Foundation</a>
-              <a href="#toolkit" class="nav-item">The Journey</a>
-              <a href="#spotify-section" class="nav-item">Selected Music Work</a>
-              <a href="#roles" class="nav-item">Production Focus</a>
-              <a href="#contact" class="nav-item">Get In Touch</a>
-
-</nav>
-
-<!-- Floating Showreel Tab -->
-<button class="reel-float-btn" id="reel-float-btn" aria-label="Watch the Showreel">
-  <span class="reel-float-icon">▶</span>
-  <span class="reel-float-label">Watch The Reel</span>
-</button>
-
-<!-- Showreel TV Modal -->
-<div class="reel-modal-overlay" id="reel-modal" role="dialog" aria-modal="true" aria-label="Showreel" aria-hidden="true">
-  <div class="reel-tv">
-    <div class="reel-tv-header">
-      <span class="reel-tv-brand">ChrisD — Showreel 2026</span>
-    </div>
-    <button class="reel-tv-close" id="reel-modal-close" aria-label="Close">✕</button>
-    <div class="reel-tv-bezel">
-      <div class="reel-tv-screen">
-        <video id="reel-video" src="video/chrisdemetriou_musicREEL_FINAL2026.mp4" controls playsinline preload="none" controlsList="nodownload"></video>
-        <button class="reel-play-btn" id="reel-play-btn" aria-label="Play video">
-          <div class="reel-play-content">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <span class="reel-play-text">WATCH CHRIS'S SHOWREEL</span>
-          </div>
-        </button>
-      </div>
-    </div>
-    <div class="reel-tv-footer">
-      <div class="reel-tv-grille">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <div class="reel-tv-knobs">
-        <div class="reel-tv-knob"></div>
-        <div class="reel-tv-knob"></div>
-      </div>
-    </div>
+<header class="main-nav" id="nav-brand">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo">
+      <span class="cdaudio-wordmark-text">CHRIS<span class="logo-d">D</span></span>
+      <span class="logo-mark" aria-hidden="true">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </span>
+      <span class="nav-logo-text">HEARD EVERYWHERE</span>
+    </a>
   </div>
-</div>
-
-<div class="nav-brand" id="nav-brand">
-
-<a href="#" class="hero-logo">
-<span class="cdaudio-wordmark-text">CHRIS<span class="logo-d">D</span></span>
-<span class="logo-mark" aria-hidden="true">
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
-</span>
-</a>
-
-<span class="nav-tagline">
-  <span class="tagline-phrase active">Heard everywhere</span>
-  <span class="tagline-phrase">Made here</span>
-</span>
-
-</div>
+  <nav class="nav-links" id="nav-links">
+    <a href="work.html" class="nav-item">Work</a>
+    <a href="about.html" class="nav-item">About</a>
+    <a href="index.html#contact" class="nav-item">Contact</a>
+  </nav>
+  <button class="menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
 <div class="scroll-bar" id="scroll-bar"></div>
 

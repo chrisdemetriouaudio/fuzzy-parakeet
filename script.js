@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', alignLogo);
 
     const menuBtn  = document.querySelector('.menu-btn');
-    const navLinks = document.querySelector('.nav-overlay');
+    const navLinks = document.getElementById('nav-links') || document.querySelector('.nav-overlay');
     const backToTop = document.getElementById('back-to-top');
 
     // ─── 1. Burger Menu ──────────────────────────────────────────
