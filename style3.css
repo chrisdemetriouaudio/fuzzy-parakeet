@@ -7810,3 +7810,29 @@ width:100%;
   }
   .bio-img { max-width: 100%; }
 }
+
+/* ============================================================
+   STEP 8 — New Element Rules
+   ============================================================ */
+.btn-full { width: 100%; }
+
+.contact-secondary {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  opacity: 0.5;
+  font-size: 0.85rem;
+}
+
+.about-photo {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+}
+
+#form-success p {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  letter-spacing: 0.05em;
+}
