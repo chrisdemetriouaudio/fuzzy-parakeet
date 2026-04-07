@@ -7616,3 +7616,118 @@ width:100%;
 @media (min-width: 769px) {
   .main-nav .menu-btn { display: none; }
 }
+
+/* ============================================================
+   STEP 3 — Homepage additions
+   ============================================================ */
+
+/* Hero — full-bleed single image with dark overlay */
+.hero-image--fullbleed {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hero-image--fullbleed .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.70);
+  pointer-events: none;
+}
+
+/* Showreel label above cdplayer */
+.showreel-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* Ticker "Heard on" heading */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Contact form */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.form-field label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.form-field .req { color: var(--accent); }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  color: var(--text-white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.form-field select option { background: #1a1a1a; }
+.form-field textarea { resize: vertical; }
+.btn-form-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+.contact-success {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(238,255,0,0.08);
+  border: 1px solid rgba(238,255,0,0.3);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+.contact-links {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+}
+.contact-links a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contact-links a:hover { color: var(--accent); }

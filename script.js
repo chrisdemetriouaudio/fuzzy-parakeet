@@ -1860,23 +1860,15 @@ revealObserver.observe(row);
     const categories = [
         {
             name: 'Radio Production',
-            skills: ['Station Sound', 'Imaging', 'Features', 'Package Production', 'Content Editing']
+            skills: ['Imaging', 'Features', 'Package Production', 'Content Editing']
         },
         {
             name: 'Podcast Production',
-            skills: ['Dialogue Editing', 'Full Audio', 'Video Podcast', 'Production']
+            skills: ['Dialogue Editing', 'Full Audio & Video Podcast', 'Production']
         },
         {
-            name: 'Narrative Sound Design',
-            skills: ['Sound Design', 'Audio Drama', 'Documentaries', 'Podcasts']
-        },
-        {
-            name: 'Audio Restoration',
-            skills: ['Noise Reduction', 'Repair', 'Dialogue Cleanup']
-        },
-        {
-            name: 'Mixing & Mastering',
-            skills: ['Broadcast Ready', 'Mixing', 'Mastering', 'Optimization']
+            name: 'Sound Design',
+            skills: ['Narrative', 'Audio Drama', 'Documentaries', 'Immersive Audio']
         }
     ];
 
