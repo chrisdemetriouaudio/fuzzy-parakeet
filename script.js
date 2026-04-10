@@ -1065,6 +1065,60 @@ setTimeout(function() {
     setupMainCanvas();
 }, 300);
 
+// ── Shared helper: populate both players with current track data ──
+// Retries up to 8 times if SC hasn't handed back the sound object yet
+function populateCurrentTrack(attempt, overrideSound) {
+    attempt = attempt || 0;
+    var doPopulate = function(sound) {
+        // Block any SC-sourced update until the user has actually started playback.
+        if (!sound) {
+            if (attempt < 8) setTimeout(function(){ populateCurrentTrack(attempt + 1); }, 700);
+            return;
+        }
+
+        if (titleEl) {
+            titleEl.textContent = sound.title || 'Untitled';
+            titleEl.classList.remove('is-scrolling');
+            titleEl.style.removeProperty('--ap-scroll');
+            requestAnimationFrame(() => {
+                const overflow = titleEl.scrollWidth - titleEl.offsetWidth;
+                if (overflow > 0) {
+                    titleEl.style.setProperty('--ap-scroll', `-${overflow}px`);
+                    titleEl.classList.add('is-scrolling');
+                }
+            });
+        }
+
+        if (mainTitleEl) mainTitleEl.textContent = sound.title || 'Untitled';
+        if (subEl && sound.user) subEl.textContent = sound.user.username || '';
+        if (extraEl) extraEl.textContent = '';
+
+        const img = document.getElementById('ap-artwork-img');
+        const mainImg = document.getElementById('cdp-artwork-img');
+        if (img || mainImg) {
+            let art = sound.artwork_url;
+            if (!art && sound.user && sound.user.avatar_url) art = sound.user.avatar_url;
+            if (art) {
+                const artSrc = art.replace('-large', '-t500x500');
+                if (img) img.src = artSrc;
+                if (mainImg) { mainImg.src = artSrc; mainImg.style.display = 'block'; }
+            }
+            if (mainTracklist && sound) {
+                mainTracklist.querySelectorAll('.cdp-track').forEach(t => t.classList.remove('is-active'));
+                const active = mainTracklist.querySelector('[data-sc-id="' + sound.id + '"]');
+                if (active) { active.classList.add('is-active'); active.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+            }
+        }
+    };
+    // Use overrideSound directly on init so we don't ask SC (which may not have
+    // moved yet) and then overwrite the manually-set default track title/art.
+    if (overrideSound) {
+        doPopulate(overrideSound);
+    } else {
+        widget.getCurrentSound(doPopulate);
+    }
+}
+
 // Retry getSounds until SC actually returns tracks (can take several seconds on live)
 let _soundsAttempt = 0;
 function tryLoadSounds() {
@@ -1458,6 +1512,12 @@ function tryLoadSounds() {
             });
         }, 200);
 
+        // Populate players on ready — pass the curated first track directly so the
+        // display shows "Wired Different" without waiting for SC to confirm its position.
+        setTimeout(function() {
+            populateCurrentTrack(0, first);
+        }, 800);
+
     }); // closes getSounds
 } // closes tryLoadSounds
 setTimeout(tryLoadSounds, 600); // first attempt after a short delay
@@ -1494,64 +1554,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             }
             if (playlistLoaded) document.removeEventListener('visibilitychange', onVisible);
         });
-
-        // ── Shared helper: populate both players with current track data ──
-        // Retries up to 8 times if SC hasn't handed back the sound object yet
-        function populateCurrentTrack(attempt, overrideSound) {
-            attempt = attempt || 0;
-            var doPopulate = function(sound) {
-                // Block any SC-sourced update until the user has actually started playback.
-                if (!sound) {
-                    if (attempt < 8) setTimeout(function(){ populateCurrentTrack(attempt + 1); }, 700);
-                    return;
-                }
-
-                if (titleEl) {
-                    titleEl.textContent = sound.title || 'Untitled';
-                    titleEl.classList.remove('is-scrolling');
-                    titleEl.style.removeProperty('--ap-scroll');
-                    requestAnimationFrame(() => {
-                        const overflow = titleEl.scrollWidth - titleEl.offsetWidth;
-                        if (overflow > 0) {
-                            titleEl.style.setProperty('--ap-scroll', `-${overflow}px`);
-                            titleEl.classList.add('is-scrolling');
-                        }
-                    });
-                }
-
-                if (mainTitleEl) mainTitleEl.textContent = sound.title || 'Untitled';
-                if (subEl && sound.user) subEl.textContent = sound.user.username || '';
-                if (extraEl) extraEl.textContent = '';
-
-                const img = document.getElementById('ap-artwork-img');
-                const mainImg = document.getElementById('cdp-artwork-img');
-                if (img || mainImg) {
-                    let art = sound.artwork_url;
-                    if (!art && sound.user && sound.user.avatar_url) art = sound.user.avatar_url;
-                    if (art) {
-                        const artSrc = art.replace('-large', '-t500x500');
-                        if (img) img.src = artSrc;
-                        if (mainImg) { mainImg.src = artSrc; mainImg.style.display = 'block'; }
-                    }
-                    if (mainTracklist && sound) {
-                        mainTracklist.querySelectorAll('.cdp-track').forEach(t => t.classList.remove('is-active'));
-                        const active = mainTracklist.querySelector('[data-sc-id="' + sound.id + '"]');
-                        if (active) { active.classList.add('is-active'); active.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
-                    }
-                }
-            };
-            // Use overrideSound directly on init so we don't ask SC (which may not have
-            // moved yet) and then overwrite the manually-set default track title/art.
-            if (overrideSound) {
-                doPopulate(overrideSound);
-            } else {
-                widget.getCurrentSound(doPopulate);
-            }
-        }
-
-        // Populate players on ready — pass the curated first track directly so the
-        // display shows "Wired Different" without waiting for SC to confirm its position.
-        setTimeout(function(){ populateCurrentTrack(0, first); }, 800);
 
         widget.bind(SC.Widget.Events.PLAY, function () {
 
