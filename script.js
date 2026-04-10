@@ -8,6 +8,9 @@
 
     const trackSectionDescriptions = {
 
+    "On Air":
+        "Broadcast output selected from current on-air production work.",
+
     "Drama":
         "Sound design and dialogue editing shaped to support narrative tension and character perspective.",
 
@@ -676,6 +679,37 @@ window.addEventListener('load', function () {
         const iframeOnAir = document.getElementById('sc-widget-onair');
         let onAirPlaylistLoaded = false;
         let onAirCurrentIndex = -1;
+        let _onAirSectionEl = null; // persistent ref so the section survives tracklist rebuilds
+
+        // Creates the On Air section header immediately — does NOT depend on getSounds()
+        function _ensureOnAirSection() {
+            if (_onAirSectionEl) return _onAirSectionEl;
+            const tracklistEl = document.getElementById('cdp-tracklist');
+            const section = document.createElement('div');
+            section.className = 'cdp-group';
+            section.dataset.group = 'on-air';
+            section.style.display = 'none';
+
+            const headerWrap = document.createElement('div');
+            headerWrap.className = 'cdp-track-section-header';
+            const header = document.createElement('div');
+            header.className = 'cdp-track-section-title';
+            header.textContent = 'On Air';
+            headerWrap.appendChild(header);
+
+            if (trackSectionDescriptions['On Air']) {
+                const desc = document.createElement('p');
+                desc.className = 'cdp-track-section-description';
+                desc.textContent = trackSectionDescriptions['On Air'];
+                headerWrap.appendChild(desc);
+            }
+
+            section.appendChild(headerWrap);
+            tracklistEl.appendChild(section);
+            _onAirSectionEl = section;
+            return section;
+        }
+
         if (iframeOnAir) {
             window.scWidgetOnAir = SC.Widget(iframeOnAir);
             const onAirWidget = window.scWidgetOnAir;
@@ -694,19 +728,7 @@ window.addEventListener('load', function () {
                     if (onAirPlaylistLoaded) return;
                     onAirPlaylistLoaded = true;
 
-                    const tracklistEl = document.getElementById('cdp-tracklist');
-                    const onAirSection = document.createElement('div');
-                    onAirSection.className = 'cdp-group';
-                    onAirSection.dataset.group = 'on-air';
-                    onAirSection.style.display = 'none';
-
-                    const headerWrap = document.createElement('div');
-                    headerWrap.className = 'cdp-track-section-header';
-                    const header = document.createElement('div');
-                    header.className = 'cdp-track-section-title';
-                    header.textContent = 'On Air';
-                    headerWrap.appendChild(header);
-                    onAirSection.appendChild(headerWrap);
+                    const onAirSection = _ensureOnAirSection();
 
                     function fmtOaDur(ms) {
                         if (!ms) return '';
@@ -785,8 +807,6 @@ window.addEventListener('load', function () {
                         onAirSection.appendChild(item);
                     });
 
-                    tracklistEl.appendChild(onAirSection);
-
                     // If On Air tab is already active when tracks arrive, show the section
                     if (window.onAirTabActive) onAirSection.style.display = '';
 
@@ -821,7 +841,11 @@ window.addEventListener('load', function () {
             window._tryLoadOnAirSounds = tryLoadOnAirSounds;
 
             onAirWidget.bind(SC.Widget.Events.READY, function() {
-                setTimeout(tryLoadOnAirSounds, 600);
+                // Render section header immediately — independent of getSounds()
+                setTimeout(function() {
+                    _ensureOnAirSection();
+                    tryLoadOnAirSounds();
+                }, 600);
 
                 // ── On Air event bindings ────────────────────────────────────────
                 onAirWidget.bind(SC.Widget.Events.PLAY, function() {
@@ -1068,7 +1092,10 @@ function tryLoadSounds() {
 
         // === Rendering Track Sections ===
         const tracklistEl = document.getElementById("cdp-tracklist");
+        // Preserve the on-air section if it was already rendered before this clear
+        const _savedOnAir = tracklistEl.querySelector('.cdp-group[data-group="on-air"]');
         tracklistEl.innerHTML = "";
+        if (_savedOnAir) tracklistEl.appendChild(_savedOnAir);
 
         /* ── Curated ALL showreel order (BBC-friendly listening sequence) ── */
 
