@@ -758,8 +758,10 @@ window.addEventListener('load', function () {
                 });
             }
 
-            // Fallback: fetch private playlist via SoundCloud OAuth Worker
+            // Fallback: fetch private playlist via SoundCloud HTTP API with proper Authorization header
             function tryLoadOnAirSoundsViaAPI() {
+                console.log("[On Air API] Attempting to fetch private playlist via HTTP API");
+                // This will trigger OAuth Worker redirect
                 const workerUrl = 'https://soundcloud-oauth.chris-0b6.workers.dev/?redirect_back=' +
                                   encodeURIComponent(window.location.href);
                 console.log("[On Air API] Redirecting to OAuth Worker:", workerUrl);
