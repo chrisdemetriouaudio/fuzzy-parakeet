@@ -735,6 +735,13 @@ window.addEventListener('load', function () {
             window.scWidgetOnAir = SC.Widget(iframeOnAir);
             const onAirWidget = window.scWidgetOnAir;
 
+            // Hardcoded On Air playlist tracks (fallback when getSounds fails)
+            const onAirHardcodedTracks = [
+                { title: 'To The Club - Episode 30: Jocelyn Brown - Gaydio Original Podcast [Clip]', duration: 0 },
+                { title: 'Trans Day of Visibility - Tiara Skye - Gaydio Breakfast with Dave Cooper', duration: 0 },
+                { title: 'Trans Day of Visibility - Olly Alexander - Gaydio Breakfast with Dave Cooper', duration: 0 }
+            ];
+
             let _onAirAttempt = 0;
             function tryLoadOnAirSounds() {
                 _onAirAttempt++;
@@ -748,8 +755,8 @@ window.addEventListener('load', function () {
                             console.log(`[On Air] Retrying in ${delay}ms...`);
                             setTimeout(tryLoadOnAirSounds, delay);
                         } else if (_onAirAttempt >= 20) {
-                            console.log("[On Air] getSounds failed after 20+ attempts; falling back to HTTP API");
-                            tryLoadOnAirSoundsViaAPI();
+                            console.log("[On Air] getSounds failed after 20+ attempts; using hardcoded tracklist");
+                            _renderOnAirTracks(onAirHardcodedTracks);
                         }
                         return;
                     }
