@@ -735,13 +735,6 @@ window.addEventListener('load', function () {
             window.scWidgetOnAir = SC.Widget(iframeOnAir);
             const onAirWidget = window.scWidgetOnAir;
 
-            // Hardcoded On Air playlist tracks (fallback when getSounds fails)
-            const onAirHardcodedTracks = [
-                { title: 'To The Club - Episode 30: Jocelyn Brown - Gaydio Original Podcast [Clip]', duration: 0 },
-                { title: 'Trans Day of Visibility - Tiara Skye - Gaydio Breakfast with Dave Cooper', duration: 0 },
-                { title: 'Trans Day of Visibility - Olly Alexander - Gaydio Breakfast with Dave Cooper', duration: 0 }
-            ];
-
             let _onAirAttempt = 0;
             function tryLoadOnAirSounds() {
                 _onAirAttempt++;
@@ -755,24 +748,13 @@ window.addEventListener('load', function () {
                             console.log(`[On Air] Retrying in ${delay}ms...`);
                             setTimeout(tryLoadOnAirSounds, delay);
                         } else if (_onAirAttempt >= 20) {
-                            console.log("[On Air] getSounds failed after 20+ attempts; using hardcoded tracklist");
-                            _renderOnAirTracks(onAirHardcodedTracks);
+                            console.log("[On Air] getSounds failed after 20+ attempts; public playlist may not be loading");
                         }
                         return;
                     }
                     console.log(`[On Air] getSounds succeeded with ${sounds.length} tracks`);
                     _renderOnAirTracks(sounds);
                 });
-            }
-
-            // Fallback: fetch private playlist via SoundCloud HTTP API with proper Authorization header
-            function tryLoadOnAirSoundsViaAPI() {
-                console.log("[On Air API] Attempting to fetch private playlist via HTTP API");
-                // This will trigger OAuth Worker redirect
-                const workerUrl = 'https://soundcloud-oauth.chris-0b6.workers.dev/?redirect_back=' +
-                                  encodeURIComponent(window.location.href);
-                console.log("[On Air API] Redirecting to OAuth Worker:", workerUrl);
-                window.location.href = workerUrl;
             }
 
             // Shared track rendering logic (used by both getSounds and HTTP API)
@@ -908,13 +890,7 @@ window.addEventListener('load', function () {
                 // Render section header immediately — independent of getSounds()
                 setTimeout(function() {
                     _ensureOnAirSection();
-                    // Check if OAuth Worker already provided playlist data
-                    if (window._onAirPlaylistFromOAuth) {
-                        console.log("[On Air] Using OAuth playlist data");
-                        _renderOnAirTracks(window._onAirPlaylistFromOAuth.tracks);
-                    } else {
-                        tryLoadOnAirSounds();
-                    }
+                    tryLoadOnAirSounds();
                 }, 600);
 
                 // ── On Air event bindings ────────────────────────────────────────
