@@ -848,6 +848,7 @@ window.addEventListener('load', function () {
                         item.appendChild(durCell);
 
                         item.addEventListener('click', function(e) {
+                            console.log(`[On Air Track] Clicked track ${i}: ${track.title}`);
                             const ripple = document.createElement('span');
                             ripple.className = 'cdp-ripple';
                             const rect = item.getBoundingClientRect();
@@ -857,8 +858,13 @@ window.addEventListener('load', function () {
                             setTimeout(function() { ripple.remove(); }, 600);
                             window.scUserInitiated = true;
                             onAirCurrentIndex = i;
+                            console.log(`[On Air Track] Calling skip(${i}) on onAirWidget`);
                             onAirWidget.skip(i);
-                            setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
+                            setTimeout(function() {
+                                console.log(`[On Air Track] Seeking to 0 and playing`);
+                                onAirWidget.seekTo(0);
+                                onAirWidget.play();
+                            }, 200);
                         });
 
                         onAirSection.appendChild(item);
