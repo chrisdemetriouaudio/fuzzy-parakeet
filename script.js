@@ -9,7 +9,7 @@
     const trackSectionDescriptions = {
 
     "On Air":
-        "Broadcast output selected from current on-air production work.",
+        "Audio production broadcast on national radio and online platforms.",
 
     "Drama":
         "Sound design and dialogue editing shaped to support narrative tension and character perspective.",
