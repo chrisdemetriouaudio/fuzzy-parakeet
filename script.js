@@ -683,7 +683,11 @@ window.addEventListener('load', function () {
 
         // Creates the On Air section header immediately — does NOT depend on getSounds()
         function _ensureOnAirSection() {
-            if (_onAirSectionEl) return _onAirSectionEl;
+            if (_onAirSectionEl) {
+                console.log("[On Air Section] Section already exists, returning cached element");
+                return _onAirSectionEl;
+            }
+            console.log("[On Air Section] Creating On Air section header for first time");
             const tracklistEl = document.getElementById('cdp-tracklist');
             const section = document.createElement('div');
             section.className = 'cdp-group';
@@ -707,6 +711,7 @@ window.addEventListener('load', function () {
             section.appendChild(headerWrap);
             tracklistEl.appendChild(section);
             _onAirSectionEl = section;
+            console.log("[On Air Section] Section created and appended to DOM");
             return section;
         }
 
@@ -717,18 +722,22 @@ window.addEventListener('load', function () {
             let _onAirAttempt = 0;
             function tryLoadOnAirSounds() {
                 _onAirAttempt++;
+                console.log(`[On Air] Attempt ${_onAirAttempt}: calling getSounds()`);
                 onAirWidget.getSounds(function(sounds) {
+                    console.log(`[On Air] getSounds() returned:`, sounds);
                     if (!sounds || !sounds.length) {
+                        console.log(`[On Air] getSounds returned empty (attempt ${_onAirAttempt})`);
                         if (_onAirAttempt < 20) {
                             const delay = _onAirAttempt < 6 ? 700 : 1200;
+                            console.log(`[On Air] Retrying in ${delay}ms...`);
                             setTimeout(tryLoadOnAirSounds, delay);
                         } else if (_onAirAttempt === 20) {
-                            // Fallback: getSounds failed; try HTTP API for private playlist
-                            console.log("getSounds returned empty after 20 attempts; trying HTTP API");
+                            console.log("[On Air] getSounds failed after 20 attempts; falling back to HTTP API");
                             tryLoadOnAirSoundsViaAPI();
                         }
                         return;
                     }
+                    console.log(`[On Air] getSounds succeeded with ${sounds.length} tracks`);
                     _renderOnAirTracks(sounds);
                 });
             }
@@ -739,25 +748,35 @@ window.addEventListener('load', function () {
                 const privatePlaylistUrl = "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-online-the-playlist/s-Ou4a5qsDEdL";
                 const apiUrl = "https://api.soundcloud.com/resolve?url=" + encodeURIComponent(privatePlaylistUrl) + "&client_id=" + SC_CLIENT_ID;
 
+                console.log("[On Air API] Fetching playlist from:", apiUrl);
                 fetch(apiUrl)
-                    .then(r => r.json())
+                    .then(r => {
+                        console.log("[On Air API] Response status:", r.status);
+                        return r.json();
+                    })
                     .then(data => {
+                        console.log("[On Air API] Full response:", data);
                         if (data && data.tracks && data.tracks.length) {
-                            console.log("HTTP API returned " + data.tracks.length + " tracks");
+                            console.log(`[On Air API] Success! Got ${data.tracks.length} tracks`);
                             _renderOnAirTracks(data.tracks);
                         } else {
-                            console.log("HTTP API returned no tracks", data);
+                            console.log("[On Air API] No tracks in response", data);
                         }
                     })
-                    .catch(err => console.error("HTTP API fetch failed:", err));
+                    .catch(err => console.error("[On Air API] Fetch failed:", err));
             }
 
             // Shared track rendering logic (used by both getSounds and HTTP API)
             function _renderOnAirTracks(sounds) {
-                if (onAirPlaylistLoaded) return;
+                console.log("[On Air Render] _renderOnAirTracks called with", sounds ? sounds.length : 0, "sounds");
+                if (onAirPlaylistLoaded) {
+                    console.log("[On Air Render] Already loaded, skipping");
+                    return;
+                }
                 onAirPlaylistLoaded = true;
 
                 const onAirSection = _ensureOnAirSection();
+                console.log("[On Air Render] Section element:", onAirSection);
 
                     function fmtOaDur(ms) {
                         if (!ms) return '';
@@ -865,6 +884,7 @@ window.addEventListener('load', function () {
                     }
                     window.scSkipOnAir = skipOnAir;
 
+                    console.log(`[On Air Render] Finished rendering ${sounds.length} tracks`);
             }
 
             window._tryLoadOnAirSounds = tryLoadOnAirSounds;
