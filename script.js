@@ -739,6 +739,19 @@ window.addEventListener('load', function () {
             function tryLoadOnAirSounds() {
                 _onAirAttempt++;
                 console.log(`[On Air] Attempt ${_onAirAttempt}: calling getSounds()`);
+
+                // Explicitly load the playlist to ensure getSounds() has data
+                if (_onAirAttempt === 1) {
+                    onAirWidget.load('https://soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content/s-Ou4a5qsDEdL', {
+                        color: '#eeff00',
+                        auto_play: false,
+                        hide_related: true,
+                        show_comments: false,
+                        show_user: false,
+                        show_reposts: false
+                    });
+                }
+
                 onAirWidget.getSounds(function(sounds) {
                     console.log(`[On Air] getSounds() returned:`, sounds);
                     if (!sounds || !sounds.length) {
