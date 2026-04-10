@@ -738,46 +738,25 @@ window.addEventListener('load', function () {
             let _onAirAttempt = 0;
             function tryLoadOnAirSounds() {
                 _onAirAttempt++;
-                console.log(`[On Air] Attempt ${_onAirAttempt}: calling getSounds()`);
-
-                // Explicitly load the playlist to ensure getSounds() has data
-                if (_onAirAttempt === 1) {
-                    onAirWidget.load('https://soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content/s-Ou4a5qsDEdL', {
-                        color: '#eeff00',
-                        auto_play: false,
-                        hide_related: true,
-                        show_comments: false,
-                        show_user: false,
-                        show_reposts: false
-                    });
-                }
-
                 onAirWidget.getSounds(function(sounds) {
-                    console.log(`[On Air] getSounds() returned:`, sounds);
                     if (!sounds || !sounds.length) {
-                        console.log(`[On Air] getSounds returned empty (attempt ${_onAirAttempt})`);
-                        if (_onAirAttempt < 20) {
-                            const delay = _onAirAttempt < 6 ? 700 : 1200;
-                            console.log(`[On Air] Retrying in ${delay}ms...`);
+                        // Retry with escalating delays, same as main widget (up to 30 attempts)
+                        if (_onAirAttempt < 30) {
+                            const delay = _onAirAttempt < 6 ? 700 : _onAirAttempt < 15 ? 1200 : 2000;
                             setTimeout(tryLoadOnAirSounds, delay);
-                        } else if (_onAirAttempt >= 20) {
-                            console.log("[On Air] getSounds failed after 20+ attempts; public playlist may not be loading");
                         }
                         return;
                     }
-                    console.log(`[On Air] getSounds succeeded with ${sounds.length} tracks`);
+
+                    // Got tracks - render them
+                    if (onAirPlaylistLoaded) return; // Guard against race conditions
+                    onAirPlaylistLoaded = true;
                     _renderOnAirTracks(sounds);
                 });
             }
 
-            // Shared track rendering logic (used by both getSounds and HTTP API)
+            // Shared track rendering logic
             function _renderOnAirTracks(sounds) {
-                console.log("[On Air Render] _renderOnAirTracks called with", sounds ? sounds.length : 0, "sounds");
-                if (onAirPlaylistLoaded) {
-                    console.log("[On Air Render] Already loaded, skipping");
-                    return;
-                }
-                onAirPlaylistLoaded = true;
 
                 const onAirSection = _ensureOnAirSection();
                 console.log("[On Air Render] Section element:", onAirSection);
