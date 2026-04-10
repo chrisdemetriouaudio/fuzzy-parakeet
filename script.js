@@ -722,13 +722,42 @@ window.addEventListener('load', function () {
                         if (_onAirAttempt < 20) {
                             const delay = _onAirAttempt < 6 ? 700 : 1200;
                             setTimeout(tryLoadOnAirSounds, delay);
+                        } else if (_onAirAttempt === 20) {
+                            // Fallback: getSounds failed; try HTTP API for private playlist
+                            console.log("getSounds returned empty after 20 attempts; trying HTTP API");
+                            tryLoadOnAirSoundsViaAPI();
                         }
                         return;
                     }
-                    if (onAirPlaylistLoaded) return;
-                    onAirPlaylistLoaded = true;
+                    _renderOnAirTracks(sounds);
+                });
+            }
 
-                    const onAirSection = _ensureOnAirSection();
+            // Fallback: fetch private playlist via SoundCloud HTTP API using secret token + client_id
+            function tryLoadOnAirSoundsViaAPI() {
+                const SC_CLIENT_ID = "iuspDvaXDbD3AnFwLWK56Fk69q56xsKu";
+                const privatePlaylistUrl = "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-online-the-playlist/s-Ou4a5qsDEdL";
+                const apiUrl = "https://api.soundcloud.com/resolve?url=" + encodeURIComponent(privatePlaylistUrl) + "&client_id=" + SC_CLIENT_ID;
+
+                fetch(apiUrl)
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data && data.tracks && data.tracks.length) {
+                            console.log("HTTP API returned " + data.tracks.length + " tracks");
+                            _renderOnAirTracks(data.tracks);
+                        } else {
+                            console.log("HTTP API returned no tracks", data);
+                        }
+                    })
+                    .catch(err => console.error("HTTP API fetch failed:", err));
+            }
+
+            // Shared track rendering logic (used by both getSounds and HTTP API)
+            function _renderOnAirTracks(sounds) {
+                if (onAirPlaylistLoaded) return;
+                onAirPlaylistLoaded = true;
+
+                const onAirSection = _ensureOnAirSection();
 
                     function fmtOaDur(ms) {
                         if (!ms) return '';
@@ -836,8 +865,8 @@ window.addEventListener('load', function () {
                     }
                     window.scSkipOnAir = skipOnAir;
 
-                }); // closes getSounds
-            } // closes tryLoadOnAirSounds
+            }
+
             window._tryLoadOnAirSounds = tryLoadOnAirSounds;
 
             onAirWidget.bind(SC.Widget.Events.READY, function() {
