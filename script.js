@@ -491,6 +491,22 @@ if (menuBtn && navLinks) {
 
 window.addEventListener('load', function () {
 
+    // Check if OAuth Worker returned playlist data in URL hash
+    const hash = window.location.hash;
+    if (hash.includes('sc_playlist=')) {
+        try {
+            const playlistJson = decodeURIComponent(hash.split('sc_playlist=')[1]);
+            const playlistData = JSON.parse(playlistJson);
+            console.log("[On Air OAuth] Received playlist data from Worker:", playlistData);
+            // Store globally so on-air widget can access it
+            window._onAirPlaylistFromOAuth = playlistData;
+            // Clean up URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (e) {
+            console.error("[On Air OAuth] Failed to parse playlist data:", e);
+        }
+    }
+
     const iframe   = document.getElementById('sc-widget');
     const player   = document.querySelector('.bottom-player');
     const fallback = document.getElementById('sc-fallback');
@@ -742,28 +758,12 @@ window.addEventListener('load', function () {
                 });
             }
 
-            // Fallback: fetch private playlist via SoundCloud HTTP API using secret token + client_id
+            // Fallback: fetch private playlist via SoundCloud OAuth Worker
             function tryLoadOnAirSoundsViaAPI() {
-                const SC_CLIENT_ID = "iuspDvaXDbD3AnFwLWK56Fk69q56xsKu";
-                const privatePlaylistUrl = "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-online-the-playlist/s-Ou4a5qsDEdL";
-                const apiUrl = "https://api.soundcloud.com/resolve?url=" + encodeURIComponent(privatePlaylistUrl) + "&client_id=" + SC_CLIENT_ID;
-
-                console.log("[On Air API] Fetching playlist from:", apiUrl);
-                fetch(apiUrl)
-                    .then(r => {
-                        console.log("[On Air API] Response status:", r.status);
-                        return r.json();
-                    })
-                    .then(data => {
-                        console.log("[On Air API] Full response:", data);
-                        if (data && data.tracks && data.tracks.length) {
-                            console.log(`[On Air API] Success! Got ${data.tracks.length} tracks`);
-                            _renderOnAirTracks(data.tracks);
-                        } else {
-                            console.log("[On Air API] No tracks in response", data);
-                        }
-                    })
-                    .catch(err => console.error("[On Air API] Fetch failed:", err));
+                const workerUrl = 'https://soundcloud-oauth.chris-0b6.workers.dev/?redirect_back=' +
+                                  encodeURIComponent(window.location.href);
+                console.log("[On Air API] Redirecting to OAuth Worker:", workerUrl);
+                window.location.href = workerUrl;
             }
 
             // Shared track rendering logic (used by both getSounds and HTTP API)
@@ -893,7 +893,13 @@ window.addEventListener('load', function () {
                 // Render section header immediately — independent of getSounds()
                 setTimeout(function() {
                     _ensureOnAirSection();
-                    tryLoadOnAirSounds();
+                    // Check if OAuth Worker already provided playlist data
+                    if (window._onAirPlaylistFromOAuth) {
+                        console.log("[On Air] Using OAuth playlist data");
+                        _renderOnAirTracks(window._onAirPlaylistFromOAuth.tracks);
+                    } else {
+                        tryLoadOnAirSounds();
+                    }
                 }, 600);
 
                 // ── On Air event bindings ────────────────────────────────────────
