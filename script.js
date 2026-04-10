@@ -747,8 +747,8 @@ window.addEventListener('load', function () {
                             const delay = _onAirAttempt < 6 ? 700 : 1200;
                             console.log(`[On Air] Retrying in ${delay}ms...`);
                             setTimeout(tryLoadOnAirSounds, delay);
-                        } else if (_onAirAttempt === 20) {
-                            console.log("[On Air] getSounds failed after 20 attempts; falling back to HTTP API");
+                        } else if (_onAirAttempt >= 20) {
+                            console.log("[On Air] getSounds failed after 20+ attempts; falling back to HTTP API");
                             tryLoadOnAirSoundsViaAPI();
                         }
                         return;
