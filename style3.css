@@ -38,8 +38,7 @@ box-sizing: border-box;
     --text-white:   #ffffff;
     --text-grey:    #a0a0a0;
     --accent:       #C8A96A;
-    --accent-light: #E8C852;
-    --accent-dark:  #B8941D;
+    --accent-rgb:   200, 169, 106;
     --border:       #333333;
     --font-hero:    'Bebas Neue', sans-serif;
     --font-display: 'Barlow Condensed', sans-serif;
@@ -2840,7 +2839,7 @@ font-size:0.92rem;
 
 .award-badge {
     display: inline-block;
-    background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--accent));
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.8), rgba(var(--accent-rgb), 1), rgba(var(--accent-rgb), 0.8));
     color: #1a1200;
     font-size: 0.68rem;
     font-weight: 800;
@@ -3460,7 +3459,7 @@ margin-left:6px;
     content: '';
     position: absolute;
     inset: 16px;
-    border: 1px solid rgba(200,169,106,0.25);
+    border: 1px solid rgba(var(--accent-rgb), 0.25);
     pointer-events: none;
     z-index: 1;
 }
@@ -3472,7 +3471,7 @@ margin-left:6px;
     line-height: 1;
     z-index: 3;
     pointer-events: none;
-    text-shadow: 0 0 8px rgba(200,169,106,0.55), 0 0 2px rgba(139,105,20,0.7);
+    text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.55), 0 0 2px rgba(var(--accent-rgb), 0.4);
 }
 .pm-corner--tl { top:  4px; left:  7px; }
 .pm-corner--tr { top:  4px; right: 7px; }
@@ -4478,7 +4477,7 @@ text-align: center;
 
 .gb-node:hover .gb-tag {
    color: var(--accent);
-   border-color: rgba(200,169,106,0.35);
+   border-color: rgba(var(--accent-rgb), 0.35);
 }
 
 /* ── CONNECTORS ── */
@@ -4617,9 +4616,9 @@ text-align: center;
    left: -70%;
    background: linear-gradient(90deg,
       transparent 0%,
-      rgba(200,169,106,0.15) 20%,
-      rgba(200,169,106,0.95) 50%,
-      rgba(200,169,106,0.15) 80%,
+      rgba(var(--accent-rgb), 0.15) 20%,
+      rgba(var(--accent-rgb), 0.95) 50%,
+      rgba(var(--accent-rgb), 0.15) 80%,
       transparent 100%);
 }
 
@@ -4637,9 +4636,9 @@ text-align: center;
    top: -70%;
    background: linear-gradient(180deg,
       transparent 0%,
-      rgba(200,169,106,0.15) 20%,
-      rgba(200,169,106,0.95) 50%,
-      rgba(200,169,106,0.15) 80%,
+      rgba(var(--accent-rgb), 0.15) 20%,
+      rgba(var(--accent-rgb), 0.95) 50%,
+      rgba(var(--accent-rgb), 0.15) 80%,
       transparent 100%);
 }
 
