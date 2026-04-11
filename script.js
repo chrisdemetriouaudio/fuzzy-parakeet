@@ -1393,7 +1393,7 @@ function tryLoadSounds() {
                     group.style.display = type === "on-air" ? "" : "none";
                 } else if (tabKey === "all") {
 
-                    if (type === "all") {
+                    if (type === "all" || type === "on-air") {
                         group.style.display = "";
                     } else {
                         group.style.display = "none";
