@@ -755,216 +755,57 @@ window.addEventListener('load', function () {
                 });
             }
 
-            // Shared track rendering logic
             function _renderOnAirTracks(sounds) {
+                sounds.forEach(function(track, i) { track._playlistIndex = i; });
 
-                // Store on-air sounds globally so they can be added to the All tab
-                window._onAirSounds = sounds;
-
-                const onAirSection = _ensureOnAirSection();
-                console.log("[On Air Render] Section element:", onAirSection);
-
-                    function fmtOaDur(ms) {
-                        if (!ms) return '';
-                        const m = Math.floor(ms / 60000);
-                        const s = Math.floor((ms % 60000) / 1000).toString().padStart(2, '0');
-                        return m + ':' + s;
+                // Use the same renderSection function as Drama/Podcast etc.
+                // If main widget hasn't loaded yet, wait for it to expose renderSection globally.
+                function doRender() {
+                    if (!window.renderSection) {
+                        setTimeout(doRender, 200);
+                        return;
                     }
+                    window.renderSection('On Air', sounds, 'on-air', onAirWidget);
 
-                    sounds.forEach(function(track, i) {
-                        track._playlistIndex = i;
+                    // Refresh the active tab so On Air appears in All or its own tab
+                    if (window.activateTab) {
+                        window.activateTab(window.currentTabKey || 'all');
+                    }
+                }
+                doRender();
 
-                        const item = document.createElement('div');
-                        item.className = 'cdp-track-item';
-                        item.dataset.index = i;
-                        item.dataset.widget = 'onair';
-                        item.style.setProperty('--stagger', (i * 0.045) + 's');
-
-                        const numCell = document.createElement('div');
-                        numCell.className = 'cdp-track-num';
-                        const numLabel = document.createElement('span');
-                        numLabel.className = 'num-label';
-                        numLabel.textContent = (i + 1).toString().padStart(2, '0');
-                        const playIconEl = document.createElement('span');
-                        playIconEl.className = 'play-icon';
-                        playIconEl.innerHTML = `
-                            <svg class="mini-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <svg class="mini-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
-                        `;
-                        playIconEl.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            window.scUserInitiated = true;
-                            onAirWidget.getCurrentSoundIndex(function(cur) {
-                                if (cur === i) {
-                                    onAirWidget.isPaused(function(paused) {
-                                        if (paused) onAirWidget.play(); else onAirWidget.pause();
-                                    });
-                                } else {
-                                    onAirCurrentIndex = i;
-                                    onAirWidget.skip(i);
-                                    setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 150);
-                                }
-                            });
-                        });
-                        numCell.appendChild(numLabel);
-                        numCell.appendChild(playIconEl);
-
-                        const nameCell = document.createElement('div');
-                        nameCell.className = 'cdp-track-name';
-                        const rawTitle = track.title || '(Untitled)';
-                        const pipeIdx = rawTitle.indexOf('|');
-                        nameCell.textContent = pipeIdx !== -1 ? rawTitle.slice(pipeIdx + 1).trim() : rawTitle;
-                        nameCell.title = rawTitle;
-
-                        const durCell = document.createElement('div');
-                        durCell.className = 'cdp-track-dur';
-                        durCell.textContent = fmtOaDur(track.duration);
-
-                        item.appendChild(numCell);
-                        item.appendChild(nameCell);
-                        item.appendChild(durCell);
-
-                        item.addEventListener('click', function(e) {
-                            console.log(`[On Air Track] Clicked track ${i}: ${track.title}`);
-                            const ripple = document.createElement('span');
-                            ripple.className = 'cdp-ripple';
-                            const rect = item.getBoundingClientRect();
-                            ripple.style.left = (e.clientX - rect.left) + 'px';
-                            ripple.style.top  = (e.clientY - rect.top)  + 'px';
-                            item.appendChild(ripple);
-                            setTimeout(function() { ripple.remove(); }, 600);
-                            window.scUserInitiated = true;
-                            onAirCurrentIndex = i;
-                            console.log(`[On Air Track] Calling skip(${i}) on onAirWidget`);
-                            onAirWidget.skip(i);
-                            setTimeout(function() {
-                                console.log(`[On Air Track] Seeking to 0 and playing`);
-                                onAirWidget.seekTo(0);
-                                onAirWidget.play();
-                            }, 200);
-                        });
-
-                        onAirSection.appendChild(item);
-                    });
-
-                    // If On Air tab is already active when tracks arrive, show the section
-                    if (window.onAirTabActive) onAirSection.style.display = '';
-
-                    function skipOnAir(direction, onEnd) {
-                        function doSkip(cur) {
-                            const items = Array.from(document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item'));
-                            const indices = items.map(function(el) { return parseInt(el.dataset.index, 10); });
-                            const pos = indices.indexOf(cur);
-                            if (direction === 'next') {
-                                if (pos >= 0 && pos < indices.length - 1) {
-                                    const nxt = indices[pos + 1];
-                                    onAirCurrentIndex = nxt;
-                                    onAirWidget.skip(nxt);
-                                    setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
-                                } else if (typeof onEnd === 'function') { onEnd(); }
-                            } else {
-                                if (pos > 0) {
-                                    const prv = indices[pos - 1];
-                                    onAirCurrentIndex = prv;
-                                    onAirWidget.skip(prv);
-                                    setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
-                                }
+                // Skip logic for next/prev buttons when On Air is active
+                function skipOnAir(direction, onEnd) {
+                    function doSkip(cur) {
+                        const items = Array.from(document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item'));
+                        const indices = items.map(function(el) { return parseInt(el.dataset.index, 10); });
+                        const pos = indices.indexOf(cur);
+                        if (direction === 'next') {
+                            if (pos >= 0 && pos < indices.length - 1) {
+                                const nxt = indices[pos + 1];
+                                onAirCurrentIndex = nxt;
+                                onAirWidget.skip(nxt);
+                                setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
+                            } else if (typeof onEnd === 'function') { onEnd(); }
+                        } else {
+                            if (pos > 0) {
+                                const prv = indices[pos - 1];
+                                onAirCurrentIndex = prv;
+                                onAirWidget.skip(prv);
+                                setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
                             }
                         }
-                        if (onAirCurrentIndex >= 0) { doSkip(onAirCurrentIndex); }
-                        else { onAirWidget.getCurrentSoundIndex(doSkip); }
                     }
-                    window.scSkipOnAir = skipOnAir;
-
-                    console.log(`[On Air Render] Finished rendering ${sounds.length} tracks`);
-
-                    // Update the All tab to include On Air tracks
-                    const allSection = document.querySelector('.cdp-group[data-group="all"]');
-                    if (allSection && sounds.length) {
-                        sounds.forEach(function(track, i) {
-                            // Create track item for All section
-                            const item = document.createElement('div');
-                            item.className = 'cdp-track-item';
-                            item.dataset.index = i;
-                            item.dataset.widget = 'onair';
-                            item.style.setProperty('--stagger', (i * 0.045) + 's');
-
-                            const numCell = document.createElement('div');
-                            numCell.className = 'cdp-track-num';
-                            const numLabel = document.createElement('span');
-                            numLabel.className = 'num-label';
-                            numLabel.textContent = (i + 1).toString().padStart(2, '0');
-                            const playIconEl = document.createElement('span');
-                            playIconEl.className = 'play-icon';
-                            playIconEl.innerHTML = `
-                                <svg class="mini-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                <svg class="mini-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
-                            `;
-                            playIconEl.addEventListener('click', function(e) {
-                                e.stopPropagation();
-                                window.scUserInitiated = true;
-                                onAirWidget.getCurrentSoundIndex(function(cur) {
-                                    if (cur === i) {
-                                        onAirWidget.isPaused(function(paused) {
-                                            if (paused) onAirWidget.play(); else onAirWidget.pause();
-                                        });
-                                    } else {
-                                        onAirCurrentIndex = i;
-                                        onAirWidget.skip(i);
-                                        setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 150);
-                                    }
-                                });
-                            });
-                            numCell.appendChild(numLabel);
-                            numCell.appendChild(playIconEl);
-
-                            const nameCell = document.createElement('div');
-                            nameCell.className = 'cdp-track-name';
-                            const rawTitle = track.title || '(Untitled)';
-                            const pipeIdx = rawTitle.indexOf('|');
-                            nameCell.textContent = pipeIdx !== -1 ? rawTitle.slice(pipeIdx + 1).trim() : rawTitle;
-                            nameCell.title = rawTitle;
-
-                            const durCell = document.createElement('div');
-                            durCell.className = 'cdp-track-dur';
-                            durCell.textContent = fmtOaDur(track.duration);
-
-                            item.appendChild(numCell);
-                            item.appendChild(nameCell);
-                            item.appendChild(durCell);
-
-                            item.addEventListener('click', function(e) {
-                                console.log(`[All Tab - On Air Track] Clicked track ${i}: ${track.title}`);
-                                const ripple = document.createElement('span');
-                                ripple.className = 'cdp-ripple';
-                                const rect = item.getBoundingClientRect();
-                                ripple.style.left = (e.clientX - rect.left) + 'px';
-                                ripple.style.top  = (e.clientY - rect.top)  + 'px';
-                                item.appendChild(ripple);
-                                setTimeout(function() { ripple.remove(); }, 600);
-                                window.scUserInitiated = true;
-                                onAirCurrentIndex = i;
-                                console.log(`[All Tab - On Air Track] Calling skip(${i}) on onAirWidget`);
-                                onAirWidget.skip(i);
-                                setTimeout(function() {
-                                    console.log(`[All Tab - On Air Track] Seeking to 0 and playing`);
-                                    onAirWidget.seekTo(0);
-                                    onAirWidget.play();
-                                }, 200);
-                            });
-
-                            allSection.appendChild(item);
-                        });
-                        console.log(`[On Air] Added ${sounds.length} tracks to All section`);
-                    }
+                    if (onAirCurrentIndex >= 0) { doSkip(onAirCurrentIndex); }
+                    else { onAirWidget.getCurrentSoundIndex(doSkip); }
+                }
+                window.scSkipOnAir = skipOnAir;
             }
 
             window._tryLoadOnAirSounds = tryLoadOnAirSounds;
 
             onAirWidget.bind(SC.Widget.Events.READY, function() {
-                // Render section header immediately — independent of getSounds()
                 setTimeout(function() {
-                    _ensureOnAirSection();
                     tryLoadOnAirSounds();
                 }, 600);
 
@@ -1292,7 +1133,8 @@ function tryLoadSounds() {
             return m + ":" + s;
         }
 
-        function renderSection(title, tracks, key) {
+        function renderSection(title, tracks, key, playbackWidget) {
+            if (!playbackWidget) playbackWidget = widget;
 
             if (!tracks.length) return;
 
@@ -1353,26 +1195,26 @@ function tryLoadSounds() {
                     e.stopPropagation();
                     window.scUserInitiated = true;
 
-                    widget.getCurrentSoundIndex(function(currentIndex){
+                    playbackWidget.getCurrentSoundIndex(function(currentIndex){
 
                         if(currentIndex === track._playlistIndex){
 
-                            widget.isPaused(function(paused){
+                            playbackWidget.isPaused(function(paused){
 
                                 if(paused){
-                                    widget.play();
+                                    playbackWidget.play();
                                 } else {
-                                    widget.pause();
+                                    playbackWidget.pause();
                                 }
 
                             });
 
                         } else {
 
-                            widget.skip(track._playlistIndex);
+                            playbackWidget.skip(track._playlistIndex);
                             setTimeout(function(){
-                                widget.seekTo(0);
-                                widget.play();
+                                playbackWidget.seekTo(0);
+                                playbackWidget.play();
                             },150);
 
                         }
@@ -1434,10 +1276,10 @@ function tryLoadSounds() {
 
                     window.scUserInitiated = true;
                     currentPlayingIndex = track._playlistIndex;
-                    widget.skip(track._playlistIndex);
+                    playbackWidget.skip(track._playlistIndex);
                     setTimeout(function() {
-                        widget.seekTo(0);
-                        widget.play();
+                        playbackWidget.seekTo(0);
+                        playbackWidget.play();
                     }, 200);
                 });
 
@@ -1448,6 +1290,9 @@ function tryLoadSounds() {
             tracklistEl.appendChild(section);
 
         }
+
+        // Expose renderSection globally so On Air widget can use the same function
+        window.renderSection = renderSection;
 
         // Render all groups
         renderSection("Drama", groupedTracks.drama, "drama");
@@ -1507,8 +1352,13 @@ function tryLoadSounds() {
             }
         }
 
+        // Expose activateTab globally so On Air can refresh visibility after late load
+        window.activateTab = activateTab;
+        window.currentTabKey = currentTabKey;
+
         tabs.forEach(function(tab){
             tab.addEventListener("click", function(){
+                window.currentTabKey = this.dataset.tab;
                 activateTab(this.dataset.tab);
             });
         });
