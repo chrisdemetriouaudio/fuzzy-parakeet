@@ -1166,55 +1166,30 @@ function tryLoadSounds() {
 
             if (!tracks.length) return;
 
-            // Special handling for On Air section — append to existing persistent section instead of creating new one
-            let section;
-            if (key === 'on-air') {
-                section = document.querySelector('.cdp-group[data-group="on-air"]');
-                if (!section) {
-                    section = document.createElement("div");
-                    section.className = "cdp-group";
-                    section.dataset.group = key;
-                    document.getElementById("cdp-tracklist").appendChild(section);
-                }
-                // Clear any existing tracks from the section (but keep the header)
-                const tracksContainer = section.querySelector('.cdp-tracks-container');
-                if (tracksContainer) {
-                    tracksContainer.innerHTML = '';
-                } else {
-                    // Create container for tracks if it doesn't exist
-                    const container = document.createElement("div");
-                    container.className = "cdp-tracks-container";
-                    section.appendChild(container);
-                }
-            } else {
-                section = document.createElement("div");
-                section.className = "cdp-group";
-                section.dataset.group = key;
+            const section = document.createElement("div");
+            section.className = "cdp-group";
+            section.dataset.group = key;
+
+            const headerWrap = document.createElement("div");
+            headerWrap.className = "cdp-track-section-header";
+
+            const header = document.createElement("div");
+            header.className = "cdp-track-section-title";
+            header.textContent = title;
+
+            headerWrap.appendChild(header);
+
+            if (trackSectionDescriptions[title]) {
+
+                const desc = document.createElement("p");
+                desc.className = "cdp-track-section-description";
+                desc.textContent = trackSectionDescriptions[title];
+
+                headerWrap.appendChild(desc);
+
             }
 
-            // Only add header for non-On Air sections (On Air header already exists)
-            if (key !== 'on-air') {
-                const headerWrap = document.createElement("div");
-                headerWrap.className = "cdp-track-section-header";
-
-                const header = document.createElement("div");
-                header.className = "cdp-track-section-title";
-                header.textContent = title;
-
-                headerWrap.appendChild(header);
-
-                if (trackSectionDescriptions[title]) {
-
-                    const desc = document.createElement("p");
-                    desc.className = "cdp-track-section-description";
-                    desc.textContent = trackSectionDescriptions[title];
-
-                    headerWrap.appendChild(desc);
-
-                }
-
-                section.appendChild(headerWrap);
-            }
+            section.appendChild(headerWrap);
 
             tracks.forEach(function(track, i) {
 
@@ -1336,29 +1311,11 @@ function tryLoadSounds() {
                     }, 200);
                 });
 
-                // For On Air, append to the tracks container; for others, append to section
-                if (key === 'on-air') {
-                    const container = section.querySelector('.cdp-tracks-container');
-                    if (container) {
-                        container.appendChild(item);
-                    } else {
-                        section.appendChild(item);
-                    }
-                } else {
-                    section.appendChild(item);
-                }
+                section.appendChild(item);
 
             });
 
-            // Only append section for non-On Air sections (On Air section already exists)
-            if (key !== 'on-air') {
-                tracklistEl.appendChild(section);
-            } else {
-                // Make On Air section visible if tracks were added
-                if (tracks.length > 0) {
-                    section.style.display = 'block';
-                }
-            }
+            tracklistEl.appendChild(section);
 
         }
 
