@@ -732,8 +732,16 @@ window.addEventListener('load', function () {
         }
 
         if (iframeOnAir) {
-            window.scWidgetOnAir = SC.Widget(iframeOnAir);
-            const onAirWidget = window.scWidgetOnAir;
+            // Wait for SC to be available before creating widget
+            function initOnAirWidget() {
+                if (typeof SC === 'undefined' || !SC.Widget) {
+                    setTimeout(initOnAirWidget, 100);
+                    return;
+                }
+                window.scWidgetOnAir = SC.Widget(iframeOnAir);
+            }
+            initOnAirWidget();
+            const onAirWidget = window.scWidgetOnAir || {};
 
             let _onAirAttempt = 0;
             function tryLoadOnAirSounds() {
@@ -818,10 +826,16 @@ window.addEventListener('load', function () {
 
             window._tryLoadOnAirSounds = tryLoadOnAirSounds;
 
-            onAirWidget.bind(SC.Widget.Events.READY, function() {
-                setTimeout(function() {
-                    tryLoadOnAirSounds();
-                }, 600);
+            // Wait for widget to be initialized before binding events
+            function bindOnAirEvents() {
+                if (!window.scWidgetOnAir || typeof window.scWidgetOnAir.bind !== 'function') {
+                    setTimeout(bindOnAirEvents, 100);
+                    return;
+                }
+                window.scWidgetOnAir.bind(SC.Widget.Events.READY, function() {
+                    setTimeout(function() {
+                        tryLoadOnAirSounds();
+                    }, 600);
 
                 // ── On Air event bindings ────────────────────────────────────────
                 onAirWidget.bind(SC.Widget.Events.PLAY, function() {
@@ -923,9 +937,10 @@ window.addEventListener('load', function () {
 
                     const bPlayer = document.getElementById('bottom-player');
                     if (bPlayer) bPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
+                    });
                 });
-
-            }); // closes onAirWidget.bind(READY, ...)
+            }
+            bindOnAirEvents();
 
             // Fallback: if READY already fired before we bound to it, retry directly
             [2000, 4000, 8000].forEach(function(ms) {
