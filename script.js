@@ -2611,3 +2611,19 @@ revealObserver.observe(row);
         document.body.style.webkitUserSelect = '';
     });
 })();
+
+// Footer location dissolve
+(function () {
+    const words = ['on-site', 'hybrid', 'remote'];
+    let idx = 0;
+    const el = document.getElementById('footer-location');
+    if (!el) return;
+    setInterval(function () {
+        el.style.opacity = '0';
+        setTimeout(function () {
+            idx = (idx + 1) % words.length;
+            el.textContent = words[idx];
+            el.style.opacity = '1';
+        }, 500);
+    }, 2800);
+})();

@@ -4033,28 +4033,9 @@ opacity:.7;
     margin: 0;
 }
 
-.footer-location-wrap {
-    display: inline-grid;
-    vertical-align: baseline;
-}
-
-.footer-loc {
-    grid-area: 1 / 1;
-    opacity: 0;
-    animation: loc-dissolve 9s ease-in-out infinite;
-    white-space: nowrap;
-}
-
-.loc-1 { animation-delay: 0s;  }
-.loc-2 { animation-delay: 3s;  }
-.loc-3 { animation-delay: 6s;  }
-
-@keyframes loc-dissolve {
-    0%          { opacity: 0; }
-    6%          { opacity: 1; }
-    27%         { opacity: 1; }
-    33%         { opacity: 0; }
-    100%        { opacity: 0; }
+#footer-location {
+    display: inline;
+    transition: opacity 0.5s ease;
 }
 
 /* ── Social icons ──────────────────────────────────── */
