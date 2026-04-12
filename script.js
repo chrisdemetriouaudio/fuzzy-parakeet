@@ -767,6 +767,20 @@ window.addEventListener('load', function () {
                     }
                     window.renderSection('On Air', sounds, 'on-air', onAirWidget);
 
+                    // Add On Air tracks to global sounds array for ALL tab
+                    if (window._allSounds) {
+                        sounds.forEach(function(track) {
+                            if (!window._allSounds.find(function(t) { return t.id === track.id; })) {
+                                window._allSounds.push(track);
+                            }
+                        });
+                    }
+
+                    // Re-render ALL section to include On Air tracks
+                    if (window._rerenderAllTab) {
+                        window._rerenderAllTab();
+                    }
+
                     // Refresh the active tab so On Air appears in All or its own tab
                     if (window.activateTab) {
                         window.activateTab(window.currentTabKey || 'all');
@@ -1115,15 +1129,29 @@ function tryLoadSounds() {
 
         /* ── Curated ALL showreel order (BBC-friendly listening sequence) ── */
 
-        const allTracksOrdered = showreelOrder
-        .map(title => sounds.find(s =>
-            (s.title || "").toLowerCase().includes(title.toLowerCase())
-        ))
-        .filter(Boolean);
+        // Store sounds globally so On Air can add tracks later
+        window._allSounds = sounds;
 
-        if (allTracksOrdered.length) {
-            renderSection("All", allTracksOrdered, "all");
+        function buildAndRenderAllTab() {
+            const allTracksOrdered = showreelOrder
+            .map(title => window._allSounds.find(s =>
+                (s.title || "").toLowerCase().includes(title.toLowerCase())
+            ))
+            .filter(Boolean);
+
+            if (allTracksOrdered.length) {
+                // Remove old ALL section if it exists
+                const oldAllSection = document.querySelector('.cdp-group[data-group="all"]');
+                if (oldAllSection) oldAllSection.remove();
+
+                renderSection("All", allTracksOrdered, "all");
+            }
         }
+
+        // Expose for On Air to call after loading
+        window._rerenderAllTab = buildAndRenderAllTab;
+
+        buildAndRenderAllTab();
 
         // Format ms duration → m:ss
         function fmtDur(ms) {
