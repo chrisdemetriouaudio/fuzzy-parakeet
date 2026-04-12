@@ -1737,6 +1737,13 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
                 bottomPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
             }
 
+            // Drive the progress ring around the main play button
+            const ringFill = document.getElementById('cdp-ring-fill');
+            if (ringFill) {
+                const circumference = 163.36;
+                ringFill.style.strokeDashoffset = (circumference * (1 - percent)).toFixed(2);
+            }
+
         });
 
         if (canvas && ctx) {
@@ -1825,7 +1832,22 @@ function playerPlayToggle() {
             if (!window.onAirTabActive && !window.scHasPlayed && typeof window.scDefaultTrackIndex === 'number') {
                 if (window.scSetCurrentIndex) window.scSetCurrentIndex(window.scDefaultTrackIndex);
                 window.scWidget.skip(window.scDefaultTrackIndex);
-                setTimeout(function() { window.scWidget.seekTo(0); window.scWidget.play(); }, 200);
+                setTimeout(function() {
+                    window.scWidget.seekTo(0); window.scWidget.play();
+                    setTimeout(function() {
+                        window.scWidget.getCurrentSoundIndex(function(idx) {
+                            document.querySelectorAll('.cdp-track-item .play-icon').forEach(function(ic) {
+                                ic.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                            });
+                            document.querySelectorAll('.cdp-track-item').forEach(function(el) { el.classList.remove('active'); });
+                            document.querySelectorAll('.cdp-track-item[data-index="' + idx + '"]').forEach(function(el) {
+                                el.classList.add('active');
+                                var ic = el.querySelector('.play-icon');
+                                if (ic) ic.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
+                            });
+                        });
+                    }, 400);
+                }, 200);
             } else {
                 aw.play();
             }
@@ -2145,6 +2167,13 @@ revealObserver.observe(row);
         modal.classList.add('reel-active');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        // Seek to 1s so a real frame shows behind the play button
+        if (video && video.readyState >= 1) {
+            video.currentTime = 1;
+        } else if (video) {
+            video.addEventListener('loadedmetadata', function() { video.currentTime = 1; }, { once: true });
+            video.load();
+        }
     }
 
     function closeReel() {
@@ -2539,4 +2568,46 @@ revealObserver.observe(row);
     } else {
         initMixer();
     }
+})();
+
+/* ── Budget slider display (contact form) ── */
+(function() {
+    var slider = document.getElementById('cf-budget');
+    var display = document.getElementById('cf-budget-display');
+    var labels = ['£££', '££££', '£££££', '££££££'];
+    function updateBudget() {
+        if (!slider || !display) return;
+        var v = parseInt(slider.value, 10);
+        display.textContent = labels[v] || labels[0];
+        var pct = (v / 3) * 100;
+        slider.style.background = 'linear-gradient(to right, var(--accent) ' + pct + '%, rgba(255,255,255,0.15) ' + pct + '%)';
+    }
+    if (slider) {
+        slider.addEventListener('input', updateBudget);
+        updateBudget();
+    }
+})();
+
+/* ── Prevent text selection during knob drag (item 17) ── */
+(function() {
+    document.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.knob')) {
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none';
+        }
+    });
+    document.addEventListener('mouseup', function() {
+        document.body.style.userSelect = '';
+        document.body.style.webkitUserSelect = '';
+    });
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.closest('.knob')) {
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none';
+        }
+    }, { passive: true });
+    document.addEventListener('touchend', function() {
+        document.body.style.userSelect = '';
+        document.body.style.webkitUserSelect = '';
+    });
 })();
