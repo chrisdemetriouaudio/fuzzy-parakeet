@@ -4089,7 +4089,7 @@ opacity:.7;
     align-items: center;
     justify-content: center;
     gap: clamp(16px, 3vw, 40px);
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
     flex-wrap: nowrap;
 }
 
