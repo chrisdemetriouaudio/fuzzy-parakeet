@@ -4037,6 +4037,8 @@ opacity:.7;
     position: relative;
     display: inline-block;
     width: 4.6em; /* wide enough for "on-site" */
+    height: 1.2em;
+    vertical-align: middle;
 }
 
 .footer-loc {
