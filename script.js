@@ -1166,38 +1166,12 @@ sounds.forEach(function(track) {
     }
 });
 
-        function buildAndRenderAllTab() {
-            console.log("[ALL TAB] buildAndRenderAllTab called");
-            console.log("[ALL TAB] window._allSounds length:", window._allSounds ? window._allSounds.length : "undefined");
-            console.log("[ALL TAB] window._allSounds titles:", window._allSounds ? window._allSounds.map(s => s.title) : []);
-
-            const allTracksOrdered = showreelOrder
-            .map(title => window._allSounds.find(s =>
-                (s.title || "").toLowerCase().includes(title.toLowerCase())
-            ))
-            .filter(Boolean);
-
-            console.log("[ALL TAB] showreelOrder length:", showreelOrder.length);
-            console.log("[ALL TAB] allTracksOrdered length:", allTracksOrdered.length);
-            console.log("[ALL TAB] allTracksOrdered titles:", allTracksOrdered.map(s => s.title));
-
-            if (allTracksOrdered.length) {
-                // Remove old ALL section if it exists
-                const oldAllSection = document.querySelector('.cdp-group[data-group="all"]');
-                if (oldAllSection) oldAllSection.remove();
-
-                renderSection("All", allTracksOrdered, "all");
-                console.log("[ALL TAB] renderSection called with", allTracksOrdered.length, "tracks");
-            } else {
-                console.warn("[ALL TAB] No tracks matched showreelOrder — ALL section not rendered");
-            }
-        }
-
-        // Expose for On Air to call after loading
+        // ALL tab now shows all category sections directly via activateTab — no separate group needed
         window._rerenderAllTab = function() {
-            console.log("[ALL TAB] _rerenderAllTab called, _allSounds:", window._allSounds ? window._allSounds.length : "undefined");
-            if (!window._allSounds || !window._allSounds.length) return;
-            buildAndRenderAllTab();
+            // Re-run tab filtering so the ALL tab picks up any sections that loaded late (e.g. on-air)
+            if (window.activateTab && window.currentTabKey) {
+                window.activateTab(window.currentTabKey);
+            }
         };
 
         // Format ms duration → m:ss
@@ -1395,12 +1369,8 @@ sounds.forEach(function(track) {
                 if (tabKey === "on-air") {
                     group.style.display = type === "on-air" ? "" : "none";
                 } else if (tabKey === "all") {
-
-                    if (type === "all" || type === "on-air") {
-                        group.style.display = "";
-                    } else {
-                        group.style.display = "none";
-                    }
+                    // Show all category sections (production + on-air), hide only "other" and the defunct "all" group
+                    group.style.display = (type === "other" || type === "all") ? "none" : "";
 
                 } else if(type === tabKey && type !== "other") {
                     group.style.display = "";
