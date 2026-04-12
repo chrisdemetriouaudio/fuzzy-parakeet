@@ -75,10 +75,6 @@ html {
     scroll-behavior: smooth;
 }
 
-main {
-    padding-bottom: 160px;
-
-}
 
 body {
     background: var(--bg-black);
