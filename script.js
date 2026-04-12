@@ -738,7 +738,17 @@ window.addEventListener('load', function () {
                     setTimeout(initOnAirWidget, 100);
                     return;
                 }
-                window.scWidgetOnAir = SC.Widget(iframeOnAir);
+               window.scWidgetOnAir = SC.Widget(iframeOnAir);
+
+window.scWidgetOnAir.load(
+  "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content",
+  {
+    auto_play: false,
+    callback: function () {
+      console.log("[On Air] Playlist loaded via load()");
+    }
+  }
+);
             }
             initOnAirWidget();
             const onAirWidget = window.scWidgetOnAir || {};
