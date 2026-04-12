@@ -959,53 +959,6 @@ window.scWidgetOnAir.load(
         }
         // ── End On Air widget ────────────────────────────────────────────────────
 
-        // ── Commercial playlist (production-demos2) — tracks-only, for ALL tab ─
-        const iframeCommercial = document.getElementById('sc-widget-commercial');
-        if (iframeCommercial) {
-            let commercialPlaylistLoaded = false;
-            function initCommercialWidget() {
-                if (typeof SC === 'undefined' || !SC.Widget) {
-                    setTimeout(initCommercialWidget, 100);
-                    return;
-                }
-                window.scWidgetCommercial = SC.Widget(iframeCommercial);
-                window.scWidgetCommercial.bind(SC.Widget.Events.READY, function() {
-                    setTimeout(tryLoadCommercialSounds, 600);
-                    [2000, 4000, 8000].forEach(function(ms) {
-                        setTimeout(function() { if (!commercialPlaylistLoaded) tryLoadCommercialSounds(); }, ms);
-                    });
-                });
-            }
-            initCommercialWidget();
-
-            let _commercialAttempt = 0;
-            function tryLoadCommercialSounds() {
-                _commercialAttempt++;
-                window.scWidgetCommercial.getSounds(function(sounds) {
-                    if (!sounds || !sounds.length) {
-                        if (_commercialAttempt < 30) {
-                            const delay = _commercialAttempt < 6 ? 700 : _commercialAttempt < 15 ? 1200 : 2000;
-                            setTimeout(tryLoadCommercialSounds, delay);
-                        }
-                        return;
-                    }
-                    if (commercialPlaylistLoaded) return;
-                    commercialPlaylistLoaded = true;
-
-                    // Merge into global sounds pool for ALL tab
-                    if (!window._allSounds) window._allSounds = [];
-                    sounds.forEach(function(track) {
-                        if (!window._allSounds.find(function(t) { return t.id === track.id; })) {
-                            window._allSounds.push(track);
-                        }
-                    });
-
-                    // Re-render ALL tab to include commercial tracks
-                    if (window._rerenderAllTab) window._rerenderAllTab();
-                });
-            }
-        }
-        // ── End Commercial widget ─────────────────────────────────────────────────
 
        widget.bind(SC.Widget.Events.READY, function () {
 
