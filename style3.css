@@ -2869,7 +2869,7 @@ font-size:0.92rem;
     margin-left: 8px;
     text-transform: uppercase;
     vertical-align: middle;
-    box-shadow: 0 1px 4px rgba(255,215,0,0.35);
+    box-shadow: 0 1px 4px rgba(var(--accent-rgb), 0.35);
 }
 
 .legend{
@@ -3454,24 +3454,24 @@ margin-left:6px;
 .pm-frame {
     position: relative;
     padding: 20px;
-    /* Metallic gold gradient — light hits top-left, shadow bottom-right */
+    /* Premium gold gradient using accent color variable */
     background: linear-gradient(
         135deg,
-        #2c1e00 0%,
-        #c8960c 10%,
-        #ffd700 22%,
-        #daa520 35%,
-        #7a5500 50%,
-        #daa520 65%,
-        #ffd700 78%,
-        #c8960c 90%,
-        #2c1e00 100%
+        #1a1200 0%,
+        #9d7d2c 10%,
+        #D4AF37 22%,
+        #C99d28 35%,
+        #6b5d1e 50%,
+        #C99d28 65%,
+        #D4AF37 78%,
+        #9d7d2c 90%,
+        #1a1200 100%
     );
     border-radius: 3px;
     box-shadow:
         0 0 0 1px #1a1000,
         0 0 0 4px #4a3200,
-        0 0 50px rgba(200, 148, 10, 0.3),
+        0 0 50px rgba(var(--accent-rgb), 0.3),
         0 28px 70px rgba(0, 0, 0, 0.85);
 }
 /* Subtle inner bevel line */
@@ -4335,7 +4335,7 @@ margin-left:6px;
    position: relative;
    overflow: hidden;
    background: #0a0a0a;
-   border: 1px solid rgba(238,255,0,0.1);
+   border: 1px solid rgba(var(--accent-rgb), 0.1);
    padding: clamp(1.1rem, 2.5vw, 1.6rem);
    display: flex;
    flex-direction: column;
@@ -4345,9 +4345,9 @@ margin-left:6px;
 }
 
 .gb-node:hover {
-   border-color: rgba(238,255,0,0.4);
+   border-color: rgba(var(--accent-rgb), 0.4);
    background: #0d0d09;
-   box-shadow: 0 0 24px rgba(238,255,0,0.05), inset 0 0 20px rgba(238,255,0,0.02);
+   box-shadow: 0 0 24px rgba(var(--accent-rgb), 0.05), inset 0 0 20px rgba(var(--accent-rgb), 0.02);
    z-index: 3;
 }
 
