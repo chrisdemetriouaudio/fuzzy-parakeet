@@ -1185,7 +1185,7 @@ sounds.forEach(function(track) {
         window._rerenderAllTab = function() {
     if (!window._allSounds || !window._allSounds.length) return;
 
-    buildAndRenderAllTab();
+   
 };
 
         // Format ms duration → m:ss
@@ -1425,7 +1425,7 @@ sounds.forEach(function(track) {
                 activateTab(this.dataset.tab);
             });
         });
-
+window._rerenderAllTab();
         // Mark as loaded so the 4s fallback timeout does NOT hide the player
         playlistLoaded = true;
         clearTimeout(timeout);
