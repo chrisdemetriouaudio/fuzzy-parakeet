@@ -1183,10 +1183,9 @@ sounds.forEach(function(track) {
 
         // Expose for On Air to call after loading
         window._rerenderAllTab = function() {
-    if (!window._allSounds || !window._allSounds.length) return;
-
-   
-};
+            if (!window._allSounds || !window._allSounds.length) return;
+            buildAndRenderAllTab();
+        };
 
         // Format ms duration → m:ss
         function fmtDur(ms) {
@@ -1436,7 +1435,7 @@ window._rerenderAllTab();
 
         // === First track info ===
         // Default to first track in curated showreel order, not SC playlist order
-        const first = allTracksOrdered[0] || sounds[0];
+        const first = showreelOrder.map(t => (window._allSounds || sounds).find(s => (s.title || "").toLowerCase().includes(t.toLowerCase()))).filter(Boolean)[0] || sounds[0];
 
         if(titleEl) titleEl.textContent = first.title || "(Untitled)";
         if(mainTitleEl) mainTitleEl.textContent = first.title || "(Untitled)";
