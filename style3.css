@@ -3978,25 +3978,15 @@ opacity:.7;
    17. FOOTER & STATUS MODULE
    ============================================================ */
 
-/* ── Pre-footer industry bar ───────────────────────── */
+/* ── Industry strip (inside main) ─────────────────── */
 
-.pre-footer {
-    background: var(--bg-dark);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid rgba(var(--accent-rgb), 0.15);
+.industry-strip {
     padding: var(--space-md) var(--space-md);
+    border-top: 1px solid var(--border);
 }
 
-.pre-footer .footer-industry {
+.industry-strip .footer-industry {
     margin: 0;
-}
-
-.pre-footer .footer-logo {
-    filter: grayscale(100%) opacity(55%);
-}
-
-.pre-footer .footer-industry a:hover .footer-logo {
-    filter: grayscale(0%) opacity(100%);
 }
 .footer {
     border-top: 1px solid rgba(var(--accent-rgb), 0.15);
