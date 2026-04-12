@@ -4314,7 +4314,7 @@ margin-left:6px;
 .gb-node {
    position: relative;
    overflow: hidden;
-   background: #0a0a0a;
+   background: rgba(var(--accent-rgb), 0.08);
    border: 1px solid rgba(var(--accent-rgb), 0.1);
    padding: clamp(1.1rem, 2.5vw, 1.6rem);
    display: flex;
