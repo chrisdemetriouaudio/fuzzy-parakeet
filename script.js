@@ -1145,7 +1145,15 @@ function tryLoadSounds() {
         /* ── Curated ALL showreel order (BBC-friendly listening sequence) ── */
 
         // Store sounds globally so On Air can add tracks later
-        window._allSounds = sounds;
+        if (!window._allSounds) {
+    window._allSounds = [];
+}
+
+sounds.forEach(function(track) {
+    if (!window._allSounds.find(function(t) { return t.id === track.id; })) {
+        window._allSounds.push(track);
+    }
+});
 
         function buildAndRenderAllTab() {
             const allTracksOrdered = showreelOrder
