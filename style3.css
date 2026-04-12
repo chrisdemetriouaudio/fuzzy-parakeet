@@ -4034,17 +4034,12 @@ opacity:.7;
 }
 
 .footer-location-wrap {
-    position: relative;
-    display: inline-block;
-    width: 4.6em; /* wide enough for "on-site" */
-    height: 1.2em;
-    vertical-align: middle;
+    display: inline-grid;
+    vertical-align: baseline;
 }
 
 .footer-loc {
-    position: absolute;
-    left: 0;
-    top: 0;
+    grid-area: 1 / 1;
     opacity: 0;
     animation: loc-dissolve 9s ease-in-out infinite;
     white-space: nowrap;
