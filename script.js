@@ -801,7 +801,7 @@ window.scWidgetOnAir.load(
 
                     // Refresh the active tab so On Air appears in All or its own tab
                     if (window.activateTab) {
-                        window.activateTab(window.currentTabKey || 'all');
+                        window.activateTab(window.currentTabKey || 'demos');
                     }
                 }
                 doRender();
@@ -1353,7 +1353,7 @@ sounds.forEach(function(track) {
 
         // === Tab Filtering ===
         const tabs = document.querySelectorAll(".cdp-tab");
-        let currentTabKey = 'all'; // tracks which tab is active for prev/next nav
+        let currentTabKey = 'demos'; // tracks which tab is active for prev/next nav
 
         function activateTab(tabKey) {
             tabs.forEach(t => t.classList.remove("active"));
@@ -1368,15 +1368,9 @@ sounds.forEach(function(track) {
 
                 if (tabKey === "on-air") {
                     group.style.display = type === "on-air" ? "" : "none";
-                } else if (tabKey === "all") {
-                    // Show all category sections (production + on-air), hide only "other" and the defunct "all" group
-                    group.style.display = (type === "other" || type === "all") ? "none" : "";
-
-                } else if(type === tabKey && type !== "other") {
-                    group.style.display = "";
-                    if(title) title.style.display = "";
-                    } else {
-                    group.style.display = "none";
+                } else {
+                    // "demos" tab — show all production sections, hide on-air and defunct groups
+                    group.style.display = (type === "on-air" || type === "all") ? "none" : "";
                 }
 
             });
