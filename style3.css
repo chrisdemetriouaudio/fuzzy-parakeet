@@ -36,18 +36,13 @@ box-sizing: border-box;
     --bg-black:     #050505;
     --bg-dark:      #0f0f0f;
     --text-white:   #ffffff;
-    --text-secondary: #e8e8e8;
-    --text-tertiary: #b8b8b8;
-    --text-muted:   #808080;
     --text-grey:    #a0a0a0;
-    --accent:       #D4AF37;
-    --accent-rgb:   212, 175, 55;
-    --accent-light: #E8C852;
-    --accent-dark:  #B8941D;
+    --accent:       #C8A96A;
+    --accent-rgb:   200, 169, 106;
     --border:       #333333;
-    --font-hero:    'Lora', serif;
-    --font-display: 'DM Sans', sans-serif;
-    --font-main:    'Inter', sans-serif;
+    --font-hero:    'Bebas Neue', sans-serif;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-main:    'Barlow', sans-serif;
     --font-mono:    'DM Mono', monospace;
 
     --nav-height:    80px;
@@ -87,12 +82,11 @@ main {
 
 body {
     background: var(--bg-black);
-    color: var(--text-secondary);
+    color: var(--text-white);
     font-family: var(--font-main);
 
-    font-size: 16px;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
+    font-size: 18px;
+    line-height: 1.65;
 
     padding-bottom: 260px;
 
@@ -181,30 +175,24 @@ ul, ol {
    3. TYPOGRAPHY
    ============================================================ */
 
-/* Hero title — Lora serif for editorial sophistication */
+/* Hero title — Bebas Neue */
 .hero h1,
 .hero-title {
     font-family: var(--font-hero);
-    font-size: clamp(4rem, 8vw, 11rem);
-    line-height: 0.95;
-    letter-spacing: -0.015em;
-    font-weight: 700;
+    letter-spacing: 0.1em;
 }
 
 
-/* Section titles and subheadings — Lora serif for editorial feel */
+/* Section titles and subheadings — Barlow Condensed */
 h2, h3, h4,
 .section-title,
 .nav-logo,
 .card h3,
 .contact-box h3,
 .step h4 {
-    font-family: 'Lora', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.1;
-    color: var(--text-white);
+    letter-spacing: 0.05em;
 }
 
 /* Technical elements — DM Mono */
@@ -230,28 +218,18 @@ color:var(--accent) !important;
 .eyebrow {
     display: block;
     color: var(--accent);
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.35em;
+    letter-spacing: 0.3em;
     margin-bottom: 0.5rem;
-    opacity: 0.9;
-}
-
-p {
-    color: var(--text-secondary);
-}
-
-p strong {
-    color: var(--text-white);
-    font-weight: 600;
 }
 
 .lead-text {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: var(--text-grey);
     margin-bottom: var(--space-md);
 }
 
@@ -261,14 +239,15 @@ p strong {
     color: var(--text-white);
 }
 
-/* Pull-quote — editorial serif for credibility */
+/* Pull-quote — mid-scale credential statement */
 .pull-quote {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.5rem, 3vw, 2.4rem);
-    font-weight: 500;
-    line-height: 1.4;
-    color: rgba(232, 232, 232, 0.75);
-    letter-spacing: 0.01em;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     margin: var(--space-md) 0;
     padding-left: var(--space-md);
     border-left: 2px solid var(--accent);
@@ -409,32 +388,33 @@ p strong {
 .btn {
     display: inline-block;
     padding: var(--space-sm) var(--space-md);
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     cursor: pointer;
     border-radius: 0;
-    transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+    transition: all 0.3s ease;
     font-family: var(--font-mono);
 }
 
 .btn-primary {
     background-color: var(--accent);
-    color: #0a0a0a;
+    color: #000;
     border: 2px solid var(--accent);
-    transition: all 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-dark);
-    border-color: var(--accent-dark);
-    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
+    background-color: var(--accent);
+    color: #000;
+    transform: scale(1.03);
+    box-shadow: 0 0 22px rgba(238,255,0,0.35);
 }
 
 .btn-primary:active {
     transform: scale(0.98);
-    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 10px rgba(238,255,0,0.2);
 }
 
 .btn-outline {
@@ -545,12 +525,12 @@ pointer-events: auto;
 }
 
 .nav-overlay .nav-item {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1.1rem, 3.5vw, 2rem);
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: rgba(232, 232, 232, 0.9);
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.85);
     line-height: 1.2;
     transition: color 0.3s ease;
     text-decoration: none;
@@ -940,7 +920,7 @@ text-shadow:
 
     margin-top: 8px;
 
-    color: rgba(232,232,232,0.85);
+    color: rgba(255,255,255,0.78);
 
     letter-spacing: 0.02em;
 
