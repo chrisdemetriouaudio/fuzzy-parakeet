@@ -1182,9 +1182,11 @@ sounds.forEach(function(track) {
         }
 
         // Expose for On Air to call after loading
-        window._rerenderAllTab = buildAndRenderAllTab;
+        window._rerenderAllTab = function() {
+    if (!window._allSounds || !window._allSounds.length) return;
 
-        buildAndRenderAllTab();
+    buildAndRenderAllTab();
+};
 
         // Format ms duration → m:ss
         function fmtDur(ms) {
