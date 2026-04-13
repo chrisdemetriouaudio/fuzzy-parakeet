@@ -2627,3 +2627,50 @@ revealObserver.observe(row);
         }, 500);
     }, 2800);
 })();
+
+// Contact form — Formspree submission
+(function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Mirror email into _replyto hidden field
+        var emailInput = document.getElementById('cf-email');
+        var replyTo = document.getElementById('cf-replyto');
+        if (emailInput && replyTo) replyTo.value = emailInput.value;
+
+        var submitBtn = document.getElementById('cf-submit');
+        var successEl = document.getElementById('cf-success');
+        var errorEl   = document.getElementById('cf-error');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        successEl.hidden = true;
+        errorEl.hidden   = true;
+
+        var data = new FormData(form);
+
+        fetch('https://formspree.io/f/mrerzdnq', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+            if (res.ok) {
+                successEl.hidden = false;
+                form.reset();
+            } else {
+                errorEl.hidden = false;
+            }
+        })
+        .catch(function () {
+            errorEl.hidden = false;
+        })
+        .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send';
+        });
+    });
+})();

@@ -7760,6 +7760,27 @@ width:100%;
     display: flex;
     gap: 12px;
 }
+.cf-success, .cf-error {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+}
+
+.cf-success {
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.06);
+}
+
+.cf-error {
+    border: 1px solid rgba(255, 80, 80, 0.4);
+    color: #ff6b6b;
+    background: rgba(255, 80, 80, 0.06);
+}
+
 .cf-recaptcha {
     font-size: 0.65rem;
     color: rgba(255,255,255,0.35);

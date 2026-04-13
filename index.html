@@ -1456,6 +1456,9 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                   <div class="contact-form-col">
                      <form class="contact-form" id="contact-form" novalidate>
 
+                        <input type="hidden" name="_subject" value="New enquiry from chrisdemetriou.com">
+                        <input type="hidden" name="_replyto" id="cf-replyto">
+
                         <div class="cf-row cf-row--2">
                            <div class="cf-group">
                               <label for="cf-name">Name <span class="cf-req">*</span></label>
@@ -1510,11 +1513,17 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                         </div>
 
                         <div class="cf-actions">
-                           <button type="submit" class="btn btn-primary">Submit</button>
+                           <button type="submit" class="btn btn-primary" id="cf-submit">Send</button>
                            <button type="reset" class="btn btn-outline">Clear</button>
                         </div>
 
-                        <p class="cf-recaptcha">Protected by reCAPTCHA · <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> · <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a></p>
+                        <div class="cf-success" id="cf-success" hidden>
+                           <p>Message sent — I'll be in touch soon.</p>
+                        </div>
+
+                        <div class="cf-error" id="cf-error" hidden>
+                           <p>Something went wrong. Please try again or email directly.</p>
+                        </div>
 
                      </form>
                   </div>
@@ -1679,7 +1688,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
 </div>
 
-<script src="script.js?v=78" defer></script>
+<script src="script.js?v=79" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {
