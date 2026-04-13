@@ -7690,6 +7690,14 @@ width:100%;
 }
 .cf-req { color: var(--accent); }
 .cf-hint { font-weight: 400; text-transform: none; letter-spacing: 0; opacity: 0.6; }
+.cf-field-error {
+    font-size: 0.68rem;
+    color: #ff6b6b;
+    letter-spacing: 0.03em;
+}
+.cf-input-error {
+    border-color: #ff6b6b !important;
+}
 .cf-group input,
 .cf-group select,
 .cf-group textarea {

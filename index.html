@@ -1458,6 +1458,8 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
                         <input type="hidden" name="_subject" value="New enquiry from chrisdemetriou.com">
                         <input type="hidden" name="_replyto" id="cf-replyto">
+                        <!-- Honeypot: bots fill this in, humans don't -->
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
                         <div class="cf-row cf-row--2">
                            <div class="cf-group">
@@ -1467,6 +1469,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
                            <div class="cf-group">
                               <label for="cf-email">Email <span class="cf-req">*</span></label>
                               <input type="email" id="cf-email" name="email" required placeholder="your@email.com">
+                              <span class="cf-field-error" id="cf-email-error" hidden>Please enter a valid email address.</span>
                            </div>
                         </div>
 
@@ -1688,7 +1691,7 @@ The focus throughout is storytelling through sound, shaping atmosphere, characte
 
 </div>
 
-<script src="script.js?v=83" defer></script>
+<script src="script.js?v=84" defer></script>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
 (function() {

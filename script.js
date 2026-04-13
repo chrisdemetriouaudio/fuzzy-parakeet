@@ -2633,11 +2633,37 @@ revealObserver.observe(row);
     var form = document.getElementById('contact-form');
     if (!form) return;
 
+    var emailInput  = document.getElementById('cf-email');
+    var emailErrEl  = document.getElementById('cf-email-error');
+
+    // Live validation — clear error once email looks valid
+    if (emailInput) {
+        emailInput.addEventListener('input', function () {
+            if (emailErrEl && isValidEmail(emailInput.value)) {
+                emailErrEl.hidden = true;
+                emailInput.classList.remove('cf-input-error');
+            }
+        });
+    }
+
+    function isValidEmail(val) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
+    }
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Mirror email into _replyto and _cc hidden fields
-        var emailInput = document.getElementById('cf-email');
+        // Email validation
+        if (emailInput && !isValidEmail(emailInput.value)) {
+            if (emailErrEl) emailErrEl.hidden = false;
+            emailInput.classList.add('cf-input-error');
+            emailInput.focus();
+            return;
+        }
+        if (emailErrEl) emailErrEl.hidden = true;
+        if (emailInput) emailInput.classList.remove('cf-input-error');
+
+        // Mirror email into _replyto hidden field
         var replyTo = document.getElementById('cf-replyto');
         if (emailInput && replyTo) replyTo.value = emailInput.value;
 
