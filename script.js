@@ -2636,7 +2636,7 @@ revealObserver.observe(row);
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Mirror email into _replyto hidden field
+        // Mirror email into _replyto and _cc hidden fields
         var emailInput = document.getElementById('cf-email');
         var replyTo = document.getElementById('cf-replyto');
         if (emailInput && replyTo) replyTo.value = emailInput.value;
@@ -2651,6 +2651,11 @@ revealObserver.observe(row);
         errorEl.hidden   = true;
 
         var data = new FormData(form);
+
+        // CC sender so they receive a copy
+        if (emailInput && emailInput.value) {
+            data.set('_cc', emailInput.value);
+        }
 
         // Convert budget number to £ symbols
         var budgetLabels = ['£££', '££££', '£££££', '££££££'];
