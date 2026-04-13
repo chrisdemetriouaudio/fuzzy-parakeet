@@ -2635,33 +2635,65 @@ revealObserver.observe(row);
 
     var emailInput  = document.getElementById('cf-email');
     var emailErrEl  = document.getElementById('cf-email-error');
-
-    // Live validation — clear error once email looks valid
-    if (emailInput) {
-        emailInput.addEventListener('input', function () {
-            if (emailErrEl && isValidEmail(emailInput.value)) {
-                emailErrEl.hidden = true;
-                emailInput.classList.remove('cf-input-error');
-            }
-        });
-    }
+    var linkInput   = document.getElementById('cf-link');
+    var linkErrEl   = document.getElementById('cf-link-error');
 
     function isValidEmail(val) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
     }
 
+    function isValidUrl(val) {
+        try { return /^https?:\/\/.+\..+/.test(val.trim()) && !!new URL(val.trim()); }
+        catch (e) { return false; }
+    }
+
+    // Live validation — clear errors as user corrects input
+    if (emailInput) {
+        emailInput.addEventListener('input', function () {
+            if (isValidEmail(emailInput.value)) {
+                if (emailErrEl) emailErrEl.hidden = true;
+                emailInput.classList.remove('cf-input-error');
+            }
+        });
+    }
+
+    if (linkInput) {
+        linkInput.addEventListener('input', function () {
+            if (!linkInput.value.trim() || isValidUrl(linkInput.value)) {
+                if (linkErrEl) linkErrEl.hidden = true;
+                linkInput.classList.remove('cf-input-error');
+            }
+        });
+    }
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        var valid = true;
 
         // Email validation
         if (emailInput && !isValidEmail(emailInput.value)) {
             if (emailErrEl) emailErrEl.hidden = false;
             emailInput.classList.add('cf-input-error');
-            emailInput.focus();
-            return;
+            if (valid) emailInput.focus();
+            valid = false;
+        } else {
+            if (emailErrEl) emailErrEl.hidden = true;
+            if (emailInput) emailInput.classList.remove('cf-input-error');
         }
-        if (emailErrEl) emailErrEl.hidden = true;
-        if (emailInput) emailInput.classList.remove('cf-input-error');
+
+        // URL validation (only if a value was entered)
+        if (linkInput && linkInput.value.trim() && !isValidUrl(linkInput.value)) {
+            if (linkErrEl) linkErrEl.hidden = false;
+            linkInput.classList.add('cf-input-error');
+            if (valid) linkInput.focus();
+            valid = false;
+        } else {
+            if (linkErrEl) linkErrEl.hidden = true;
+            if (linkInput) linkInput.classList.remove('cf-input-error');
+        }
+
+        if (!valid) return;
 
         // Mirror email into _replyto hidden field
         var replyTo = document.getElementById('cf-replyto');
