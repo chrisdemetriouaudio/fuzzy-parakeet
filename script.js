@@ -2652,6 +2652,13 @@ revealObserver.observe(row);
 
         var data = new FormData(form);
 
+        // Convert budget number to £ symbols
+        var budgetLabels = ['£££', '££££', '£££££', '££££££'];
+        var budgetRange = document.getElementById('cf-budget');
+        if (budgetRange) {
+            data.set('budget', budgetLabels[parseInt(budgetRange.value)] || '£££');
+        }
+
         fetch('https://formspree.io/f/mrerzdnq', {
             method: 'POST',
             body: data,
