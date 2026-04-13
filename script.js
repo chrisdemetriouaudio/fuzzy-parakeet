@@ -2652,11 +2652,6 @@ revealObserver.observe(row);
 
         var data = new FormData(form);
 
-        // CC sender so they receive a copy
-        if (emailInput && emailInput.value) {
-            data.set('_cc', emailInput.value);
-        }
-
         // Convert budget number to £ symbols
         var budgetLabels = ['£££', '££££', '£££££', '££££££'];
         var budgetRange = document.getElementById('cf-budget');
