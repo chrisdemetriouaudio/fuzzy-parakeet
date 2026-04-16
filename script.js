@@ -78,6 +78,9 @@ const trackDescriptions = {
 "Beautiful 2.0 – Gaydio Style Power Intro Demo - David Hernandez":
 "Radio imaging power intro demo · energetic Gaydio-style station ID featuring David Hernandez",
 
+"Feature Power Intro Demo in the style of BBC Radio 1 Xtra":
+"Fee-Fi-Fo-Fum: A Radio 1 Xtra-inspired quick-fire mystery voice game demo in an Afrobeats style.",
+
 "Chris Radio Breakfast":
 "Breakfast show imaging · high energy stings shaping programme pace and tone",
 
