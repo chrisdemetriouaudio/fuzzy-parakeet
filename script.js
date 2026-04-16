@@ -75,6 +75,9 @@ const trackDescriptions = {
 "Chradio Christmas Artist Drop":
 "Radio imaging artist drop · rhythmic branding for seasonal broadcast identity",
 
+"Beautiful 2.0 – Gaydio Style Power Intro Demo - David Hernandez":
+"Radio imaging power intro demo · energetic Gaydio-style station ID featuring David Hernandez",
+
 "Chris Radio Breakfast":
 "Breakfast show imaging · high energy stings shaping programme pace and tone",
 
