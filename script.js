@@ -81,6 +81,9 @@ const trackDescriptions = {
 "Feature Power Intro Demo in the style of BBC Radio 1 Xtra":
 "Fee-Fi-Fo-Fum: A Radio 1 Xtra-inspired quick-fire mystery voice game demo in an Afrobeats style.",
 
+"Power Intro Demo in the style of Heart Saturday Breakfast":
+"A high-energy, feel-good radio imaging power intro demo in the signature style of Heart Saturday Breakfast.",
+
 "Chris Radio Breakfast":
 "Breakfast show imaging · high energy stings shaping programme pace and tone",
 
