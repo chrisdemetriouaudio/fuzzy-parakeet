@@ -871,16 +871,16 @@ window.scWidgetOnAir.load(
 
                     onAirWidget.getCurrentSoundIndex(function(index) {
                         onAirCurrentIndex = index;
-                        document.querySelectorAll('.cdp-track-item[data-widget="onair"] .play-icon').forEach(function(ic) {
+                        document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item .play-icon').forEach(function(ic) {
                             ic.innerHTML = `
                                 <svg class="mini-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <svg class="mini-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
                             `;
                         });
-                        document.querySelectorAll('.cdp-track-item[data-widget="onair"]').forEach(function(el) {
+                        document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item').forEach(function(el) {
                             el.classList.remove('active');
                         });
-                        document.querySelectorAll('.cdp-track-item[data-widget="onair"][data-index="' + index + '"]').forEach(function(el) {
+                        document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item[data-index="' + index + '"]').forEach(function(el) {
                             el.classList.add('active');
                             const ic = el.querySelector('.play-icon');
                             if (ic) ic.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>`;
@@ -895,6 +895,7 @@ window.scWidgetOnAir.load(
                         if (!sound) return;
                         if (titleEl)     titleEl.textContent = sound.title || 'Untitled';
                         if (mainTitleEl) mainTitleEl.textContent = sound.title || 'Untitled';
+                        if (subEl && sound.user) subEl.textContent = sound.user.username || '';
                         const art = sound.artwork_url || (sound.user && sound.user.avatar_url) || '';
                         if (art) {
                             const artSrc = art.replace('-large', '-t500x500');
@@ -935,8 +936,26 @@ window.scWidgetOnAir.load(
                 onAirWidget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e) {
                     if (!window.onAirTabActive) return;
                     if (!e || typeof e.currentPosition === 'undefined') return;
-                    if (!duration) return;
 
+                    // Use relativePosition (0-1) for visual indicators so they update
+                    // immediately without waiting for the async getDuration cache to fill.
+                    const percent = (typeof e.relativePosition === 'number')
+                        ? e.relativePosition
+                        : (duration ? e.currentPosition / duration : 0);
+
+                    drawWave(percent);
+
+                    const bPlayer = document.getElementById('bottom-player');
+                    if (bPlayer) bPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
+
+                    const ringFill = document.getElementById('cdp-ring-fill');
+                    if (ringFill) {
+                        const circumference = 163.36;
+                        ringFill.style.strokeDashoffset = (circumference * (1 - percent)).toFixed(2);
+                    }
+
+                    // Time display requires a cached duration value
+                    if (!duration) return;
                     const current       = e.currentPosition;
                     const totalDuration = duration;
                     const mins  = Math.floor(current / 60000);
@@ -947,12 +966,6 @@ window.scWidgetOnAir.load(
                     if (timeEl)       timeEl.textContent = mins + ':' + secs + ' / ' + tMins + ':' + tSecs;
                     if (mainCurrent)  mainCurrent.textContent  = mins + ':' + secs;
                     if (mainDuration) mainDuration.textContent = tMins + ':' + tSecs;
-
-                    const percent = current / totalDuration;
-                    drawWave(percent);
-
-                    const bPlayer = document.getElementById('bottom-player');
-                    if (bPlayer) bPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
                     });
                 });
             }
@@ -1330,7 +1343,8 @@ sounds.forEach(function(track) {
                     setTimeout(function() { ripple.remove(); }, 600);
 
                     window.scUserInitiated = true;
-                    currentPlayingIndex = track._playlistIndex;
+                    // Only update the demo widget's navigation index for demo tracks
+                    if (playbackWidget === widget) currentPlayingIndex = track._playlistIndex;
                     playbackWidget.skip(track._playlistIndex);
                     setTimeout(function() {
                         playbackWidget.seekTo(0);
