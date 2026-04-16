@@ -1344,10 +1344,10 @@ sounds.forEach(function(track) {
         window.renderSection = renderSection;
 
         // Render all groups
+        renderSection("Radio Imaging", groupedTracks.imaging, "imaging");
         renderSection("Drama", groupedTracks.drama, "drama");
         renderSection("Podcast", groupedTracks.podcast, "podcast");
         renderSection("Commercial", groupedTracks.commercial, "commercial");
-        renderSection("Radio Imaging", groupedTracks.imaging, "imaging");
         renderSection("Voice & Links", groupedTracks.voice, "voice");
         renderSection("Other", groupedTracks.other, "other");
 
