@@ -1398,19 +1398,12 @@ sounds.forEach(function(track) {
 
             });
 
-            // Widget switching: pause the inactive widget when changing tabs
+            // Update the active-widget flag so event handlers route to the right widget,
+            // but do NOT pause either widget — playback should continue across tab switches.
             if (tabKey === "on-air") {
                 window.onAirTabActive = true;
-                if (window.scWidget) {
-                    window.scWidget.isPaused(function(p) { if (!p) window.scWidget.pause(); });
-                }
             } else {
-                if (window.onAirTabActive) {
-                    window.onAirTabActive = false;
-                    if (window.scWidgetOnAir) {
-                        window.scWidgetOnAir.isPaused(function(p) { if (!p) window.scWidgetOnAir.pause(); });
-                    }
-                }
+                window.onAirTabActive = false;
             }
         }
 
