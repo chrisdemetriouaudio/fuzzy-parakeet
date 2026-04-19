@@ -748,16 +748,6 @@ window.addEventListener('load', function () {
                     return;
                 }
                window.scWidgetOnAir = SC.Widget(iframeOnAir);
-
-window.scWidgetOnAir.load(
-  "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content",
-  {
-    auto_play: false,
-    callback: function () {
-      console.log("[On Air] Playlist loaded via load()");
-    }
-  }
-);
             }
             initOnAirWidget();
             const onAirWidget = window.scWidgetOnAir || {};
@@ -810,7 +800,7 @@ window.scWidgetOnAir.load(
 
                     // Refresh the active tab so On Air appears in All or its own tab
                     if (window.activateTab) {
-                        window.activateTab(window.currentTabKey || 'demos');
+                        window.activateTab(window.currentTabKey || 'on-air');
                     }
                 }
                 doRender();
@@ -1376,7 +1366,7 @@ sounds.forEach(function(track) {
 
         // === Tab Filtering ===
         const tabs = document.querySelectorAll(".cdp-tab");
-        let currentTabKey = 'demos'; // tracks which tab is active for prev/next nav
+        let currentTabKey = 'on-air'; // tracks which tab is active for prev/next nav
 
         function activateTab(tabKey) {
             tabs.forEach(t => t.classList.remove("active"));
