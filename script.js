@@ -961,6 +961,12 @@ window.addEventListener('load', function () {
                     if (mainDuration) mainDuration.textContent = tMins + ':' + tSecs;
                     });
                 });
+                // Trigger a fresh load AFTER READY is bound — the READY handler
+                // then calls tryLoadOnAirSounds() so getSounds() has tracks ready.
+                window.scWidgetOnAir.load(
+                    "https://soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content",
+                    { auto_play: false }
+                );
             }
             bindOnAirEvents();
 
