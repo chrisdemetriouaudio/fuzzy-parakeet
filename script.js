@@ -1494,10 +1494,12 @@ window._rerenderAllTab();
             });
         }, 200);
 
-        // Populate players on ready — pass the curated first track directly so the
-        // display shows "Wired Different" without waiting for SC to confirm its position.
+        // Only populate with the demos default track if Demos is the active tab.
+        // When ON AIR is the default, the On Air doRender() call handles this instead.
         setTimeout(function() {
-            populateCurrentTrack(0, first);
+            if (!window.onAirTabActive && !window.scHasPlayed) {
+                populateCurrentTrack(0, first);
+            }
         }, 800);
 
     }); // closes getSounds
