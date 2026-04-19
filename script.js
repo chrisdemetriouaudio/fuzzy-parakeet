@@ -803,10 +803,16 @@ window.addEventListener('load', function () {
                         window.activateTab(window.currentTabKey || 'on-air');
                     }
 
-                    // If ON AIR is the active tab and the user hasn't played anything yet,
-                    // update the mini/main player display to show the first On Air track.
-                    if (window.onAirTabActive && !window.scHasPlayed && sounds[0]) {
-                        populateCurrentTrack(0, sounds[0]);
+                    // Update mini/main player to show the first On Air track on load.
+                    // populateCurrentTrack lives in the demos READY scope, so we call
+                    // it via the window global. If demos hasn't loaded yet, store the
+                    // track so the demos widget picks it up when it becomes ready.
+                    if (!window.scHasPlayed && sounds[0]) {
+                        if (window.populateCurrentTrack) {
+                            window.populateCurrentTrack(0, sounds[0]);
+                        } else {
+                            window._pendingOnAirDefaultTrack = sounds[0];
+                        }
                     }
                 }
                 doRender();
@@ -1412,6 +1418,14 @@ sounds.forEach(function(track) {
         // Expose activateTab globally so On Air can refresh visibility after late load
         window.activateTab = activateTab;
         window.currentTabKey = currentTabKey;
+        // Expose so On Air's doRender() can call it across the scope boundary
+        window.populateCurrentTrack = populateCurrentTrack;
+
+        // If On Air tracks loaded before the demos widget was ready, apply now
+        if (window._pendingOnAirDefaultTrack && !window.scHasPlayed) {
+            populateCurrentTrack(0, window._pendingOnAirDefaultTrack);
+            window._pendingOnAirDefaultTrack = null;
+        }
 
         tabs.forEach(function(tab){
             tab.addEventListener("click", function(){
