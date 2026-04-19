@@ -802,6 +802,12 @@ window.addEventListener('load', function () {
                     if (window.activateTab) {
                         window.activateTab(window.currentTabKey || 'on-air');
                     }
+
+                    // If ON AIR is the active tab and the user hasn't played anything yet,
+                    // update the mini/main player display to show the first On Air track.
+                    if (window.onAirTabActive && !window.scHasPlayed && sounds[0]) {
+                        populateCurrentTrack(0, sounds[0]);
+                    }
                 }
                 doRender();
 
