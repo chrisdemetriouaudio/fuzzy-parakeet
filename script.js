@@ -20,9 +20,6 @@
     "Commercial":
         "Audio crafted to establish tone, clarity and impact within tight creative constraints.",
 
-    "Radio Imaging":
-        "Short-form audio designed to establish station identity instantly.",
-
     "Voice & Links":
         "Delivery focused on tone, pacing and connection with the listener."
 
@@ -1134,7 +1131,6 @@ function tryLoadSounds() {
             drama: [],
             podcast: [],
             commercial: [],
-            imaging: [],
             voice: [],
             other: []
         };
@@ -1161,7 +1157,7 @@ function tryLoadSounds() {
             } else if (prefix.includes("podcast")) {
                 category = "podcast";
             } else if (prefix.includes("radio imaging") || prefix.includes("radio jingle")) {
-                category = "imaging";
+                return;
             } else if (prefix.includes("presenter link") || prefix.includes("link")) {
                 category = "voice";
             } else if (prefix.includes("commercial")) {
@@ -1375,7 +1371,6 @@ sounds.forEach(function(track) {
         window.renderSection = renderSection;
 
         // Render all groups
-        renderSection("Radio Imaging", groupedTracks.imaging, "imaging");
         renderSection("Drama", groupedTracks.drama, "drama");
         renderSection("Podcast", groupedTracks.podcast, "podcast");
         renderSection("Commercial", groupedTracks.commercial, "commercial");
