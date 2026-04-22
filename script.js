@@ -1150,6 +1150,8 @@ function tryLoadSounds() {
             const prefix = rawTitle.split("|")[0].trim().toLowerCase();
             const title = rawTitle;
 
+            if (prefix.includes("radio imaging") || prefix.includes("radio jingle")) return;
+
             let category = "other";
 
             if (prefix.includes("audio drama") || prefix.includes("narrative") || prefix.includes("audio trailer")) {
