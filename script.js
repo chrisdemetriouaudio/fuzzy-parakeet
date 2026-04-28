@@ -584,6 +584,7 @@ window.addEventListener('load', function () {
             const dpr = window.devicePixelRatio || 1;
             const w   = c.width  / dpr;
             const h   = c.height / dpr;
+            x.globalAlpha = 1; // reset before clear so nothing leaks between frames
             x.clearRect(0, 0, w, h);
             const progressX = w * progress;
             const accent = getComputedStyle(document.documentElement)
@@ -595,6 +596,7 @@ window.addEventListener('load', function () {
                 x.globalAlpha = px < progressX ? 1 : 0.25;
                 x.fillRect(px, py, barWidth, barH);
             });
+            x.globalAlpha = 1; // restore after drawing
         }
 
         // Draw on both players — each uses its own bar array
@@ -854,9 +856,13 @@ window.addEventListener('load', function () {
                     setTimeout(function() {
                         tryLoadOnAirSounds();
                     }, 600);
+                });
 
-                // ── On Air event bindings ────────────────────────────────────────
-                onAirWidget.bind(SC.Widget.Events.PLAY, function() {
+                // ── On Air event bindings (registered directly, not inside READY) ──────
+                // Binding directly to window.scWidgetOnAir (not the onAirWidget closure)
+                // ensures handlers are registered even if READY fires before bindOnAirEvents
+                // runs, or if the .load() call below doesn't re-trigger READY reliably.
+                window.scWidgetOnAir.bind(SC.Widget.Events.PLAY, function() {
                     if (!window.scUserInitiated) return;
                     if (!window.onAirTabActive) return;
                     window.scHasPlayed = true;
@@ -871,7 +877,7 @@ window.addEventListener('load', function () {
                     if (cdpPlay)  cdpPlay.style.display  = 'none';
                     if (cdpPause) cdpPause.style.display = 'inline';
 
-                    onAirWidget.getCurrentSoundIndex(function(index) {
+                    window.scWidgetOnAir.getCurrentSoundIndex(function(index) {
                         onAirCurrentIndex = index;
                         document.querySelectorAll('.cdp-group[data-group="on-air"] .cdp-track-item .play-icon').forEach(function(ic) {
                             ic.innerHTML = `
@@ -893,7 +899,7 @@ window.addEventListener('load', function () {
                         });
                     });
 
-                    onAirWidget.getCurrentSound(function(sound) {
+                    window.scWidgetOnAir.getCurrentSound(function(sound) {
                         if (!sound) return;
                         if (titleEl)     titleEl.textContent = sound.title || 'Untitled';
                         if (mainTitleEl) mainTitleEl.textContent = sound.title || 'Untitled';
@@ -908,10 +914,10 @@ window.addEventListener('load', function () {
                         }
                     });
 
-                    onAirWidget.getDuration(function(d) { if (d) duration = d; });
+                    window.scWidgetOnAir.getDuration(function(d) { if (d) duration = d; });
                 });
 
-                onAirWidget.bind(SC.Widget.Events.PAUSE, function() {
+                window.scWidgetOnAir.bind(SC.Widget.Events.PAUSE, function() {
                     if (!window.onAirTabActive) return;
                     if (player) player.classList.remove('is-playing');
                     const apPlay  = document.querySelector('.ap-icon-play');
@@ -924,7 +930,7 @@ window.addEventListener('load', function () {
                     if (cdpPause) cdpPause.style.display = 'none';
                 });
 
-                onAirWidget.bind(SC.Widget.Events.FINISH, function() {
+                window.scWidgetOnAir.bind(SC.Widget.Events.FINISH, function() {
                     if (!window.onAirTabActive) return;
                     window.scSkipOnAir('next', function() {
                         if (player) player.classList.remove('is-playing');
@@ -935,7 +941,7 @@ window.addEventListener('load', function () {
                     });
                 });
 
-                onAirWidget.bind(SC.Widget.Events.PLAY_PROGRESS, function(e) {
+                window.scWidgetOnAir.bind(SC.Widget.Events.PLAY_PROGRESS, function(e) {
                     if (!window.onAirTabActive) return;
                     if (!e || typeof e.currentPosition === 'undefined') return;
 
@@ -968,7 +974,6 @@ window.addEventListener('load', function () {
                     if (timeEl)       timeEl.textContent = mins + ':' + secs + ' / ' + tMins + ':' + tSecs;
                     if (mainCurrent)  mainCurrent.textContent  = mins + ':' + secs;
                     if (mainDuration) mainDuration.textContent = tMins + ':' + tSecs;
-                    });
                 });
                 // Trigger a fresh load AFTER READY is bound — the READY handler
                 // then calls tryLoadOnAirSounds() so getSounds() has tracks ready.
@@ -1717,9 +1722,34 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
             if (window.onAirTabActive) return;
             if (!e || typeof e.currentPosition === 'undefined') return;
-            if (!duration) return; // duration cached on PLAY — skip until ready
 
             const current = e.currentPosition;
+
+            // Prefer relativePosition so waveform works immediately without waiting
+            // for the async getDuration cache (avoids blank waveform on first play).
+            const percent = (typeof e.relativePosition === 'number' && e.relativePosition >= 0)
+                ? e.relativePosition
+                : (duration ? current / duration : 0);
+
+            if (ctx && canvas) {
+                drawWave(percent);
+            }
+
+            // Drive the mini mobile player progress bar via CSS custom property
+            const bottomPlayer = document.getElementById('bottom-player');
+            if (bottomPlayer) {
+                bottomPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
+            }
+
+            // Drive the progress ring around the main play button
+            const ringFill = document.getElementById('cdp-ring-fill');
+            if (ringFill) {
+                const circumference = 163.36;
+                ringFill.style.strokeDashoffset = (circumference * (1 - percent)).toFixed(2);
+            }
+
+            // Time display requires cached duration — skip until getDuration callback fires
+            if (!duration) return;
 
             // Use cached duration — never call getDuration() inside PLAY_PROGRESS
             // (repeated async postMessage calls create a callback backlog that glitches audio)
@@ -1746,33 +1776,6 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
 
             if (mainDuration) {
                 mainDuration.textContent = totalMins + ':' + totalSecs;
-            }
-
-            const percent = current / totalDuration;
-
-            if (mainProgressFill) {
-                mainProgressFill.style.width = (percent * 100) + "%";
-            }
-
-            if (mainProgressThumb) {
-                mainProgressThumb.style.left = (percent * 100) + "%";
-            }
-
-            if (ctx && canvas) {
-                drawWave(percent);
-            }
-
-            // Drive the mini mobile player progress bar via CSS custom property
-            const bottomPlayer = document.getElementById('bottom-player');
-            if (bottomPlayer) {
-                bottomPlayer.style.setProperty('--ap-progress', (percent * 100).toFixed(2) + '%');
-            }
-
-            // Drive the progress ring around the main play button
-            const ringFill = document.getElementById('cdp-ring-fill');
-            if (ringFill) {
-                const circumference = 163.36;
-                ringFill.style.strokeDashoffset = (circumference * (1 - percent)).toFixed(2);
             }
 
         });
