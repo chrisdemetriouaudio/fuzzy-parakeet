@@ -1378,9 +1378,9 @@ sounds.forEach(function(track) {
         window.renderSection = renderSection;
 
         // Render all groups
-        renderSection("Drama", groupedTracks.drama, "drama");
-        renderSection("Podcast", groupedTracks.podcast, "podcast");
         renderSection("Commercial", groupedTracks.commercial, "commercial");
+        renderSection("Podcast", groupedTracks.podcast, "podcast");
+        renderSection("Drama", groupedTracks.drama, "drama");
         renderSection("Voice & Links", groupedTracks.voice, "voice");
         renderSection("Other", groupedTracks.other, "other");
 
