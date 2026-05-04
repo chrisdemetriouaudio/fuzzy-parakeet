@@ -2597,6 +2597,13 @@ input[type="range"] {
     font-weight: 500;
 }
 
+.contact-section p.contact-intro {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0em;
+}
+
 .contact-cta {
     background: rgba(var(--accent-rgb), 0.05);
     border: 1px solid rgba(var(--accent-rgb), 0.15);
