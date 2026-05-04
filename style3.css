@@ -7839,3 +7839,56 @@ width:100%;
 @media (max-width: 860px) {
     .what-i-do-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   23. Ads & Campaign Audio Section
+   ============================================================ */
+
+.section-intro {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 2.5rem 0;
+    max-width: 640px;
+}
+
+.campaign-process {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.campaign-step {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.75rem;
+}
+
+.campaign-step-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent, #fff);
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-step-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.6rem 0;
+}
+
+.campaign-step-body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+@media (max-width: 860px) {
+    .campaign-process { grid-template-columns: 1fr; }
+}
