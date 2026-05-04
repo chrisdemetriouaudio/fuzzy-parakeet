@@ -1159,7 +1159,7 @@ function tryLoadSounds() {
 
             let category = "other";
 
-            if (prefix.includes("audio drama") || prefix.includes("narrative") || prefix.includes("audio trailer")) {
+            if (prefix.includes("audio drama") || prefix.includes("narrative") || prefix.includes("audio trailer") || rawTitle.toLowerCase().includes("theatre of the mind")) {
                 category = "drama";
             } else if (prefix.includes("podcast")) {
                 category = "podcast";
@@ -1382,7 +1382,6 @@ sounds.forEach(function(track) {
         renderSection("Podcast", groupedTracks.podcast, "podcast");
         renderSection("Drama", groupedTracks.drama, "drama");
         renderSection("Voice & Links", groupedTracks.voice, "voice");
-        renderSection("Other", groupedTracks.other, "other");
 
         // === Tab Filtering ===
         const tabs = document.querySelectorAll(".cdp-tab");
