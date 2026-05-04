@@ -735,8 +735,9 @@ height:100%;
 width:100%;
 
 background-image:url("images/chrisdemetriouhero.png");
-background-size:600px;
-background-repeat:repeat;
+background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
 
 filter:
 contrast(1.25)
