@@ -8052,3 +8052,42 @@ width:100%;
         padding: 0.3rem 0.6rem;
     }
 }
+
+/* ============================================================
+   28. Case Study — Project Wrapper
+   ============================================================ */
+
+.case-study-project {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.case-study-project:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.case-study-project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.case-study-demo-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(var(--accent-rgb), 0.7);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    vertical-align: middle;
+}
