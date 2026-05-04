@@ -6990,10 +6990,6 @@ width:100%;
     top: 88px;
     bottom: auto;
   }
-  .hero-image::before {
-    background-size: 100vw;
-    opacity: 0.22;
-  }
   .hero-img {
     filter: contrast(1.1) brightness(1.4);
   }
