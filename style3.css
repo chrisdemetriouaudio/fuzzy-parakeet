@@ -8009,3 +8009,46 @@ width:100%;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-top: 0.75rem;
 }
+
+/* ============================================================
+   27. Skills Strip
+   ============================================================ */
+
+.skills-strip-section {
+    background: rgba(var(--accent-rgb), 0.06);
+    border-top: 1px solid rgba(var(--accent-rgb), 0.15);
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.15);
+    padding: 1.25rem 0;
+}
+
+.skills-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    justify-content: center;
+}
+
+.skills-strip-item {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(var(--accent-rgb), 0.9);
+}
+
+.skills-strip-divider {
+    color: rgba(var(--accent-rgb), 0.3);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+    .skills-strip-divider { display: none; }
+    .skills-strip { gap: 0.5rem; }
+    .skills-strip-item {
+        background: rgba(var(--accent-rgb), 0.08);
+        border: 1px solid rgba(var(--accent-rgb), 0.2);
+        border-radius: 4px;
+        padding: 0.3rem 0.6rem;
+    }
+}
