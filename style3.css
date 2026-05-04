@@ -7892,3 +7892,39 @@ width:100%;
 @media (max-width: 860px) {
     .campaign-process { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   24. About Tools
+   ============================================================ */
+
+.about-tools {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-tools-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 0 0.75rem 0;
+}
+
+.about-tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.about-tool {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    border-radius: 4px;
+    color: rgba(var(--accent-rgb), 0.9);
+    background: rgba(var(--accent-rgb), 0.06);
+    letter-spacing: 0.02em;
+}
