@@ -2776,11 +2776,10 @@ revealObserver.observe(row);
 
 /* ── Case Study Carousel ── */
 (function () {
-    const tabs = document.querySelectorAll('.cs-tab');
     const slides = document.querySelectorAll('.cs-slide');
     const prev = document.querySelector('.cs-arrow--prev');
     const next = document.querySelector('.cs-arrow--next');
-    if (!tabs.length) return;
+    if (!slides.length) return;
 
     let current = 0;
     const total = slides.length;
@@ -2788,15 +2787,10 @@ revealObserver.observe(row);
     function goTo(n) {
         current = (n + total) % total;
         slides.forEach((s, i) => s.classList.toggle('active', i === current));
-        tabs.forEach((t, i) => {
-            t.classList.toggle('active', i === current);
-            t.setAttribute('aria-selected', i === current);
-        });
         if (prev) prev.disabled = current === 0;
         if (next) next.disabled = current === total - 1;
     }
 
-    tabs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
     if (prev) prev.addEventListener('click', () => goTo(current - 1));
     if (next) next.addEventListener('click', () => goTo(current + 1));
 
