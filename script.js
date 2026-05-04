@@ -20,8 +20,11 @@
     "Commercial":
         "Audio crafted to establish tone, clarity and impact within tight creative constraints.",
 
+    "Comedy":
+        "Scripted character audio — performance, timing and narration.",
+
     "Voice & Links":
-        "Delivery focused on tone, pacing and connection with the listener."
+        "Presenter link production — voice, music and imaging integrated into broadcast flow."
 
 };
 
@@ -1136,6 +1139,7 @@ function tryLoadSounds() {
             drama: [],
             podcast: [],
             commercial: [],
+            comedy: [],
             voice: [],
             other: []
         };
@@ -1165,14 +1169,14 @@ function tryLoadSounds() {
                 category = "podcast";
             } else if (prefix.includes("radio imaging") || prefix.includes("radio jingle")) {
                 return;
+            } else if (prefix.includes("comedy") || prefix.includes("sketch") || rawTitle.toLowerCase().includes("dignity for chips")) {
+                category = "comedy";
             } else if (prefix.includes("presenter link") || prefix.includes("link")) {
                 category = "voice";
             } else if (prefix.includes("commercial")) {
                 category = "commercial";
             } else if (prefix.includes("spot") || prefix.includes("advert")) {
                 category = "commercial";
-            } else if (prefix.includes("sketch")) {
-                category = "voice";
             }
 
             groupedTracks[category].push(sound);
@@ -1381,6 +1385,7 @@ sounds.forEach(function(track) {
         renderSection("Commercial", groupedTracks.commercial, "commercial");
         renderSection("Podcast", groupedTracks.podcast, "podcast");
         renderSection("Drama", groupedTracks.drama, "drama");
+        renderSection("Comedy", groupedTracks.comedy, "comedy");
         renderSection("Voice & Links", groupedTracks.voice, "voice");
 
         // === Tab Filtering ===
