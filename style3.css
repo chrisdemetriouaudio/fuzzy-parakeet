@@ -8091,3 +8091,80 @@ width:100%;
     padding: 0.2rem 0.5rem;
     vertical-align: middle;
 }
+
+/* ============================================================
+   29. Case Study Carousel
+   ============================================================ */
+
+.cs-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cs-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cs-tab.active,
+.cs-tab:hover {
+    border-color: rgba(var(--accent-rgb), 0.6);
+    color: rgba(var(--accent-rgb), 0.95);
+    background: rgba(var(--accent-rgb), 0.06);
+}
+
+.cs-track-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cs-arrow {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    height: 2.5rem;
+    transition: all 0.2s;
+    width: 2.5rem;
+}
+
+.cs-arrow:hover {
+    border-color: rgba(var(--accent-rgb), 0.5);
+    color: rgba(var(--accent-rgb), 0.9);
+    background: rgba(var(--accent-rgb), 0.06);
+}
+
+.cs-arrow:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.cs-track {
+    flex: 1;
+    min-width: 0;
+}
+
+.cs-slide {
+    display: none;
+}
+
+.cs-slide.active {
+    display: block;
+}
