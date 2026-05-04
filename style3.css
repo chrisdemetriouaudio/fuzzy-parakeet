@@ -7801,3 +7801,41 @@ width:100%;
     .contact-wrapper { grid-template-columns: 1fr; }
     .cf-row--2 { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   22. What I Do Section
+   ============================================================ */
+
+.what-i-do-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.what-i-do-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.75rem;
+}
+
+.what-i-do-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent, #fff);
+    margin: 0 0 0.75rem 0;
+}
+
+.what-i-do-body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+@media (max-width: 860px) {
+    .what-i-do-grid { grid-template-columns: 1fr; }
+}
