@@ -5429,21 +5429,32 @@ text-align: center;
     border-bottom: 3px solid var(--accent);
 }
 
-/* Tablet: tighter padding so all 6 labels breathe */
+/* Tablet: tighter padding so all labels breathe */
 @media (max-width: 900px) {
     .cdp-tabs { padding: 0 2px; }
     .cdp-tabs .cdp-tab {
-        padding: 10px 4px;
-        font-size: clamp(0.52rem, 1.5vw, 0.7rem);
+        padding: 10px 6px;
+        font-size: clamp(0.55rem, 1.4vw, 0.72rem);
     }
 }
 
-/* Mobile: same equal-flex, even smaller font */
-@media (max-width: 680px) {
-    .cdp-tabs { overflow: visible; padding: 0; }
+/* Mobile: wrap tabs onto multiple rows rather than shrink or scroll */
+@media (max-width: 767px) {
+    .cdp-tabs {
+        flex-wrap: wrap;
+        padding: 4px 4px 0;
+        gap: 4px;
+        border-bottom: none;
+    }
     .cdp-tabs .cdp-tab {
-        padding: 8px 2px;
-        font-size: clamp(0.46rem, 2vw, 0.6rem);
+        flex: 0 0 auto;
+        padding: 8px 12px;
+        font-size: clamp(0.62rem, 3vw, 0.74rem);
+        margin: 0 0 4px;
+        border-bottom: 3px solid transparent;
+    }
+    .cdp-tabs .cdp-tab.active {
+        border-bottom: 3px solid var(--accent);
     }
 }
 
