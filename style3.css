@@ -8241,23 +8241,8 @@ width:100%;
     white-space: normal;
   }
 
-  /* Column header labels injected above each field */
   .career-table td::before {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 4px;
-  }
-
-  .career-table td:first-child::before {
-    content: "Client / Organisation";
-  }
-
-  .career-table td:last-child::before {
-    content: "Output Type \00B7 Production Context";
+    display: none;
   }
 
   /* Org name: slightly heavier, separated from activity by a rule */
