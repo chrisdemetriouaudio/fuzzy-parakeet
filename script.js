@@ -113,9 +113,10 @@ Object.keys(trackDescriptions).forEach(function(key){
 
 const showreelOrder = [
 
+"Proud Paws",
+"Lumen Coffee House",
 "Wired Different: From Chaos to Clarity",
 "The Quiet Path",
-"Lumen Coffee House",
 "Yorkshire Fibre",
 "Mentalwealth",
 "Tech Influence Unpacked",
@@ -777,6 +778,15 @@ window.addEventListener('load', function () {
             function _renderOnAirTracks(sounds) {
                 sounds.forEach(function(track, i) { track._playlistIndex = i; });
 
+                // Sort display order: long podcast clip (To The Club) goes last
+                var displaySounds = sounds.slice().sort(function(a, b) {
+                    var aIsLong = (a.title || '').toLowerCase().includes('to the club') || (a.title || '').toLowerCase().includes('jocelyn brown');
+                    var bIsLong = (b.title || '').toLowerCase().includes('to the club') || (b.title || '').toLowerCase().includes('jocelyn brown');
+                    if (aIsLong && !bIsLong) return 1;
+                    if (!aIsLong && bIsLong) return -1;
+                    return 0;
+                });
+
                 // Use the same renderSection function as Drama/Podcast etc.
                 // If main widget hasn't loaded yet, wait for it to expose renderSection globally.
                 function doRender() {
@@ -784,7 +794,7 @@ window.addEventListener('load', function () {
                         setTimeout(doRender, 200);
                         return;
                     }
-                    window.renderSection('On Air', sounds, 'on-air', onAirWidget);
+                    window.renderSection('On Air', displaySounds, 'on-air', onAirWidget);
 
                     // Add On Air tracks to global sounds array for ALL tab
                     if (window._allSounds) {
@@ -809,7 +819,7 @@ window.addEventListener('load', function () {
                     // populateCurrentTrack lives in the demos READY scope, so we call
                     // it via the window global. If demos hasn't loaded yet, store the
                     // track so the demos widget picks it up when it becomes ready.
-                    if (!window.scHasPlayed && sounds[0]) {
+                    if (!window.scHasPlayed && sounds[0] && window.currentTabKey === 'on-air') {
                         if (window.populateCurrentTrack) {
                             window.populateCurrentTrack(0, sounds[0]);
                         } else {
@@ -1390,7 +1400,7 @@ sounds.forEach(function(track) {
 
         // === Tab Filtering ===
         const tabs = document.querySelectorAll(".cdp-tab");
-        let currentTabKey = 'on-air'; // tracks which tab is active for prev/next nav
+        let currentTabKey = 'commercial'; // tracks which tab is active for prev/next nav
 
         function activateTab(tabKey) {
             tabs.forEach(t => t.classList.remove("active"));
@@ -1399,26 +1409,18 @@ sounds.forEach(function(track) {
             currentTabKey = tabKey;
 
             document.querySelectorAll(".cdp-group").forEach(function(group){
-
                 const type = group.dataset.group;
-                const title = group.querySelector(".cdp-track-section-title");
-
                 if (tabKey === "on-air") {
                     group.style.display = type === "on-air" ? "" : "none";
                 } else {
-                    // "demos" tab — show all production sections, hide on-air and defunct groups
-                    group.style.display = (type === "on-air" || type === "all") ? "none" : "";
+                    // Individual category tab — show only the matching group
+                    group.style.display = type === tabKey ? "" : "none";
                 }
-
             });
 
             // Update the active-widget flag so event handlers route to the right widget,
             // but do NOT pause either widget — playback should continue across tab switches.
-            if (tabKey === "on-air") {
-                window.onAirTabActive = true;
-            } else {
-                window.onAirTabActive = false;
-            }
+            window.onAirTabActive = (tabKey === "on-air");
         }
 
         // Expose activateTab globally so On Air can refresh visibility after late load
