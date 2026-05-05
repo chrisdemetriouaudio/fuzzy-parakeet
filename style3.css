@@ -5442,6 +5442,7 @@ text-align: center;
 @media (max-width: 767px) {
     .cdp-tabs {
         flex-wrap: wrap;
+        justify-content: center;
         padding: 4px 4px 0;
         gap: 4px;
         border-bottom: none;
