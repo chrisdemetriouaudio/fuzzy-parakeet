@@ -9,7 +9,7 @@ on:
 
 jobs:
   backup:
-    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'
+    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'  # 👈 THIS IS THE GUARD
     runs-on: ubuntu-latest
 
     steps:
