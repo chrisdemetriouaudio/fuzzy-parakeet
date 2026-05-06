@@ -9,6 +9,7 @@ on:
 
 jobs:
   backup:
+    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +22,4 @@ jobs:
       - name: Push mirror to backup repo
         run: |
           git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
-          
-          # Mirror everything (branches, tags, deletes, refs)
           git push --mirror backup
