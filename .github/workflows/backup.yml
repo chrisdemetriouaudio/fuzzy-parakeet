@@ -2,8 +2,7 @@ name: Backup to Private Repo
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
@@ -11,25 +10,17 @@ on:
 jobs:
   backup:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout full repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Test backup auth
-        run: |
-          git ls-remote https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
-
-      - name: Push to backup repo
+      - name: Push mirror to backup repo
         run: |
           git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
           
-          git fetch origin "+refs/heads/*:refs/remotes/origin/*"
-          
-          for branch in $(git branch -r | grep -v HEAD); do
-            name=${branch#origin/}
-            git push backup "$branch:refs/heads/$name" --force
-          done
-
-          git push backup --tags --force
+          # Mirror everything (branches, tags, deletes, refs)
+          git push --mirror backup
