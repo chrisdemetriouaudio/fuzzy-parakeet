@@ -839,20 +839,20 @@ window.addEventListener('load', function () {
                             if (pos >= 0 && pos < indices.length - 1) {
                                 const nxt = indices[pos + 1];
                                 onAirCurrentIndex = nxt;
-                                onAirWidget.skip(nxt);
-                                setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
+                                window.scWidgetOnAir.skip(nxt);
+                                setTimeout(function() { window.scWidgetOnAir.seekTo(0); window.scWidgetOnAir.play(); }, 150);
                             } else if (typeof onEnd === 'function') { onEnd(); }
                         } else {
                             if (pos > 0) {
                                 const prv = indices[pos - 1];
                                 onAirCurrentIndex = prv;
-                                onAirWidget.skip(prv);
-                                setTimeout(function() { onAirWidget.seekTo(0); onAirWidget.play(); }, 200);
+                                window.scWidgetOnAir.skip(prv);
+                                setTimeout(function() { window.scWidgetOnAir.seekTo(0); window.scWidgetOnAir.play(); }, 150);
                             }
                         }
                     }
                     if (onAirCurrentIndex >= 0) { doSkip(onAirCurrentIndex); }
-                    else { onAirWidget.getCurrentSoundIndex(doSkip); }
+                    else { window.scWidgetOnAir.getCurrentSoundIndex(doSkip); }
                 }
                 window.scSkipOnAir = skipOnAir;
             }
@@ -879,6 +879,14 @@ window.addEventListener('load', function () {
                     if (!window.scUserInitiated) return;
                     if (!window.onAirTabActive) return;
                     window.scHasPlayed = true;
+
+                    // Reset progress state so new track starts clean
+                    duration = 0;
+                    drawWave(0);
+                    const _bpReset = document.getElementById('bottom-player');
+                    if (_bpReset) _bpReset.style.setProperty('--ap-progress', '0%');
+                    const _ringReset = document.getElementById('cdp-ring-fill');
+                    if (_ringReset) _ringReset.style.strokeDashoffset = '163.36';
 
                     if (player) player.classList.add('is-playing');
                     const apPlay  = document.querySelector('.ap-icon-play');
@@ -1569,6 +1577,14 @@ setTimeout(tryLoadSounds, 600); // first attempt after a short delay
             if (!window.scUserInitiated) return;
             if (window.onAirTabActive) return; // On Air widget handles its own UI updates
             window.scHasPlayed = true; // first-play skip logic no longer needed
+
+            // Reset progress state so new track starts clean
+            duration = 0;
+            drawWave(0);
+            const _bpReset = document.getElementById('bottom-player');
+            if (_bpReset) _bpReset.style.setProperty('--ap-progress', '0%');
+            const _ringReset = document.getElementById('cdp-ring-fill');
+            if (_ringReset) _ringReset.style.strokeDashoffset = '163.36';
 
             if (player) player.classList.add('is-playing');
 
