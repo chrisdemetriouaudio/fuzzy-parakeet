@@ -17,6 +17,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Test backup auth
+        run: |
+          git ls-remote https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
+
       - name: Push to backup repo
         run: |
           git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
