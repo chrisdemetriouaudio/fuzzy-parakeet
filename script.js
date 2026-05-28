@@ -699,6 +699,10 @@ window.addEventListener('load', function () {
             }
         }, 12000); // 12s — generous enough for slow connections; tryLoadSounds retries cancel this early
 
+        // Draw placeholder waveform bars immediately on page load — bars are random
+        // and need no SC data, so there's no reason to wait for READY or getSounds.
+        setTimeout(function() { setupCanvas(); setupMainCanvas(); }, 50);
+
         // ── On Air widget ───────────────────────────────────────────────────────
         // Initialised HERE (before the main widget's READY binding) so that both
         // READY handlers are registered before either iframe fires — both iframes
@@ -2684,116 +2688,14 @@ revealObserver.observe(row);
     }, 2800);
 })();
 
-// Contact form — Formspree submission
+// Contact reach — assemble email address from parts so the raw address never
+// appears in the HTML source, which stops the vast majority of harvesting bots.
 (function () {
-    var form = document.getElementById('contact-form');
-    if (!form) return;
-
-    var emailInput  = document.getElementById('cf-email');
-    var emailErrEl  = document.getElementById('cf-email-error');
-    var linkInput   = document.getElementById('cf-link');
-    var linkErrEl   = document.getElementById('cf-link-error');
-
-    function isValidEmail(val) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
-    }
-
-    function isValidUrl(val) {
-        try { return /^https?:\/\/.+\..+/.test(val.trim()) && !!new URL(val.trim()); }
-        catch (e) { return false; }
-    }
-
-    // Live validation — clear errors as user corrects input
-    if (emailInput) {
-        emailInput.addEventListener('input', function () {
-            if (isValidEmail(emailInput.value)) {
-                if (emailErrEl) emailErrEl.hidden = true;
-                emailInput.classList.remove('cf-input-error');
-            }
-        });
-    }
-
-    if (linkInput) {
-        linkInput.addEventListener('input', function () {
-            if (!linkInput.value.trim() || isValidUrl(linkInput.value)) {
-                if (linkErrEl) linkErrEl.hidden = true;
-                linkInput.classList.remove('cf-input-error');
-            }
-        });
-    }
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        var valid = true;
-
-        // Email validation
-        if (emailInput && !isValidEmail(emailInput.value)) {
-            if (emailErrEl) emailErrEl.hidden = false;
-            emailInput.classList.add('cf-input-error');
-            if (valid) emailInput.focus();
-            valid = false;
-        } else {
-            if (emailErrEl) emailErrEl.hidden = true;
-            if (emailInput) emailInput.classList.remove('cf-input-error');
-        }
-
-        // URL validation (only if a value was entered)
-        if (linkInput && linkInput.value.trim() && !isValidUrl(linkInput.value)) {
-            if (linkErrEl) linkErrEl.hidden = false;
-            linkInput.classList.add('cf-input-error');
-            if (valid) linkInput.focus();
-            valid = false;
-        } else {
-            if (linkErrEl) linkErrEl.hidden = true;
-            if (linkInput) linkInput.classList.remove('cf-input-error');
-        }
-
-        if (!valid) return;
-
-        // Mirror email into _replyto hidden field
-        var replyTo = document.getElementById('cf-replyto');
-        if (emailInput && replyTo) replyTo.value = emailInput.value;
-
-        var submitBtn = document.getElementById('cf-submit');
-        var successEl = document.getElementById('cf-success');
-        var errorEl   = document.getElementById('cf-error');
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
-        successEl.hidden = true;
-        errorEl.hidden   = true;
-
-        var data = new FormData(form);
-
-        // Convert budget number to £ symbols
-        var budgetLabels = ['£££', '££££', '£££££', '££££££'];
-        var budgetRange = document.getElementById('cf-budget');
-        if (budgetRange) {
-            data.set('budget', budgetLabels[parseInt(budgetRange.value)] || '£££');
-        }
-
-        fetch('https://formspree.io/f/mrerzdnq', {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        })
-        .then(function (res) {
-            if (res.ok) {
-                successEl.hidden = false;
-                form.reset();
-            } else {
-                errorEl.hidden = false;
-            }
-        })
-        .catch(function () {
-            errorEl.hidden = false;
-        })
-        .finally(function () {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send';
-        });
-    });
+    var link = document.getElementById('creach-email');
+    if (!link) return;
+    var email = link.dataset.u + '@' + link.dataset.d;
+    link.href = 'mailto:' + email;
+    link.textContent = email;
 })();
 
 /* ── Case Study Carousel ── */
