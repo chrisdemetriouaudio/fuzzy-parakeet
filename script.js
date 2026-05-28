@@ -2688,14 +2688,18 @@ revealObserver.observe(row);
     }, 2800);
 })();
 
-// Contact reach — assemble email address from parts so the raw address never
-// appears in the HTML source, which stops the vast majority of harvesting bots.
+// Email links — assemble address from data attributes so the raw address never
+// appears in the HTML source, blocking the vast majority of harvesting bots.
 (function () {
-    var link = document.getElementById('creach-email');
-    if (!link) return;
-    var email = link.dataset.u + '@' + link.dataset.d;
-    link.href = 'mailto:' + email;
-    link.textContent = email;
+    var parts = [['creach-email'], ['footer-email-link']];
+    var u = 'chris', d = 'chrisdemetriou.com';
+    var mailto = 'mailto:' + u + '@' + d;
+    parts.forEach(function(ids) {
+        var el = document.getElementById(ids[0]);
+        if (!el) return;
+        el.href = mailto;
+        if (el.id === 'creach-email') el.textContent = u + '@' + d;
+    });
 })();
 
 /* ── Case Study Carousel ── */

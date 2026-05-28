@@ -7799,7 +7799,7 @@ width:100%;
 .contact-reach {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 22px;
 }
 
 .contact-reach-item {
