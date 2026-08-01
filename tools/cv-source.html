@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<title>Chris Demetriou — Curriculum Vitae</title>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+
+  * { box-sizing: border-box; }
+
+  body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 9.2pt;
+      line-height: 1.5;
+      color: var(--ink-2);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+  }
+
+  h1, h2, h3 { margin: 0; color: var(--ink); font-weight: 600; letter-spacing: -.02em; }
+
+  a { color: var(--blue); text-decoration: none; }
+
+  .name { font-size: 23pt; line-height: 1.05; letter-spacing: -.035em; }
+
+  .role {
+      font-family: var(--font-mono);
+      font-size: 7.4pt;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-top: 5pt;
+  }
+
+  .contact {
+      margin-top: 7pt;
+      padding-top: 7pt;
+      border-top: .6pt solid var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4pt 14pt;
+      font-size: 8.4pt;
+  }
+  .contact span { white-space: nowrap; }
+
+  section { margin-top: 13pt; }
+
+  .section-label {
+      font-family: var(--font-mono);
+      font-size: 6.9pt;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      padding-bottom: 3pt;
+      border-bottom: .6pt solid var(--rule);
+      margin-bottom: 7pt;
+  }
+
+  .profile p { margin: 0 0 5pt; }
+  .profile p:last-child { margin-bottom: 0; }
+
+  .caps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5pt 12pt;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 8.5pt;
+  }
+  .caps li { display: flex; gap: 5pt; }
+  .caps li::before { content: "·"; color: var(--blue); }
+
+  .employer { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .employer h2 { font-size: 11.5pt; }
+  .employer .dates { font-family: var(--font-mono); font-size: 8pt; color: var(--ink-3); white-space: nowrap; }
+  .employer-note { margin: 4pt 0 0; }
+
+  .engagement { margin-top: 9pt; page-break-inside: avoid; break-inside: avoid; }
+  .engagement h3 { font-size: 9.6pt; }
+  .engagement .meta {
+      font-family: var(--font-mono);
+      font-size: 7.2pt;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 2pt;
+  }
+  .engagement .objective { margin: 4pt 0 3pt; }
+  .engagement ul { margin: 0; padding-left: 11pt; }
+  .engagement li { margin-bottom: 1.5pt; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .block h3 { font-size: 9.6pt; }
+  .block p { margin: 3pt 0 0; }
+
+  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5pt 14pt; margin: 0; padding: 0; list-style: none; font-size: 8.5pt; }
+  .edu li { display: flex; gap: 5pt; }
+  .edu li::before { content: "·"; color: var(--blue); }
+
+  .foot {
+      margin-top: 14pt;
+      padding-top: 6pt;
+      border-top: .6pt solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 7pt;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      display: flex;
+      justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="name">Chris Demetriou</h1>
+  <p class="role">Enterprise Technical Delivery &middot; Technical Operations &middot; Cloud Transformation &middot; Service Transition</p>
+  <div class="contact">
+    <span>Marple, Stockport, Greater Manchester</span>
+    <span>07375 304141</span>
+    <span>techdelivery@chrisdemetriou.com</span>
+    <span>chrisdemetriou.com</span>
+    <span>linkedin.com/in/chrisademetriou</span>
+  </div>
+</header>
+
+<section class="profile">
+  <div class="section-label">Professional profile</div>
+  <p>
+    An Enterprise Technical Delivery professional who bridges Solution Architecture and specialist
+    engineering teams, ensuring technical work is understood, coordinated, validated and production ready.
+  </p>
+  <p>
+    With more than 20 years&rsquo; experience across enterprise SaaS environments, I specialise in technical
+    delivery rather than project governance or hands-on engineering. My role is to understand complex
+    technology landscapes, identify technical dependencies, facilitate engineering collaboration and help
+    multidisciplinary teams deliver complex enterprise change successfully.
+  </p>
+  <p>
+    Known for quickly understanding unfamiliar technologies, asking the right technical questions and
+    bringing together the right engineering disciplines to reduce delivery risk, validate operational
+    readiness and achieve successful production outcomes.
+  </p>
+</section>
+
+<section>
+  <div class="section-label">Core capabilities</div>
+  <ul class="caps">
+    <li>Enterprise Technical Delivery</li>
+    <li>Technical Operations</li>
+    <li>Cloud Transformation</li>
+    <li>Service Transition</li>
+    <li>Technical Implementation</li>
+    <li>Operational Readiness</li>
+    <li>Technical Readiness Validation</li>
+    <li>Production Cutovers &amp; Go-Lives</li>
+    <li>Cross-functional Collaboration</li>
+    <li>Technical Dependency Management</li>
+    <li>Technical Risk Assessment</li>
+    <li>Enterprise Change</li>
+    <li>Production Operations</li>
+    <li>Major Incident Coordination</li>
+    <li>Systems Thinking</li>
+  </ul>
+</section>
+
+<section>
+  <div class="section-label">Professional experience</div>
+
+  <div class="employer">
+    <h2>Senior Applications Specialist &mdash; Enterprise Technical Delivery</h2>
+    <span class="dates">2008 &ndash; 2024</span>
+  </div>
+  <p class="employer-note">
+    E2open (formerly BluJay Solutions / Kewill). Contributed to the technical delivery and operational
+    readiness of enterprise SaaS platforms used by more than 3,000 global organisations, helping specialist
+    engineering teams deliver cloud transformation, enterprise migrations, customer onboarding, security
+    modernisation and complex production change.
+  </p>
+
+  <div class="engagement">
+    <h3>Enterprise Cloud Transformation &amp; Cost Reduction</h3>
+    <p class="objective">
+      <b>Objective:</b> Migrate more than 80 enterprise applications from an Equinix colocation facility to
+      Oracle Cloud Infrastructure while reducing operational costs.
+    </p>
+    <ul>
+      <li>Worked alongside Solution Architects and specialist engineering teams across infrastructure, networking, databases, DevOps and applications.</li>
+      <li>Facilitated technical collaboration across engineering disciplines throughout planning and production migration activities.</li>
+      <li>Validated technical readiness, identified cross-functional dependencies and challenged assumptions before production cutover.</li>
+      <li>Helped ensure the successful migration of 80+ enterprise applications, contributing to approximately &pound;500,000 annual operating cost savings.</li>
+    </ul>
+  </div>
+
+  <div class="engagement">
+    <h3>Enterprise SAP Migration &amp; Business Continuity</h3>
+    <p class="meta">Customer: Sysco UK &nbsp;&middot;&nbsp; Delivery partner: Capgemini</p>
+    <p class="objective">
+      <b>Objective:</b> Deliver a business-critical SAP ERP transition while maintaining operational continuity.
+    </p>
+    <ul>
+      <li>Worked alongside customer technical specialists, Solution Architects and multidisciplinary engineering teams.</li>
+      <li>Coordinated technical readiness across networking, infrastructure, database and application teams.</li>
+      <li>Validated VPN readiness, firewall changes, monitoring and end-to-end integration testing before production switchover.</li>
+      <li>Facilitated technical workshops across multiple organisations to reduce implementation risk and improve operational readiness.</li>
+    </ul>
+  </div>
+
+  <div class="engagement">
+    <h3>Customer Connectivity &amp; Operational Readiness</h3>
+    <p class="meta">Customer: Heineken UK</p>
+    <p class="objective">
+      <b>Objective:</b> Establish secure production connectivity between Heineken UK&rsquo;s head office and a
+      new cloud-hosted enterprise platform.
+    </p>
+    <ul>
+      <li>Facilitated collaboration between customer infrastructure teams and internal networking specialists.</li>
+      <li>Coordinated VPN implementation, production connectivity validation and operational readiness activities.</li>
+      <li>Worked alongside application specialists to verify successful end-to-end data exchange before production go-live.</li>
+      <li>Ensured monitoring and operational acceptance activities had been completed before service transition.</li>
+    </ul>
+  </div>
+
+  <div class="engagement">
+    <h3>Security Modernisation &amp; Technical Debt Reduction</h3>
+    <p class="objective">
+      <b>Objective:</b> Modernise more than 3,000 enterprise customer integrations by replacing legacy HTTP
+      and FTP with secure HTTPS SOAP, HTTPS REST and SFTP communications.
+    </p>
+    <ul>
+      <li>Worked alongside networking, application and customer engineering teams to coordinate secure production implementation.</li>
+      <li>Validated firewall readiness, customer source IP configuration and production connectivity.</li>
+      <li>Coordinated end-to-end validation before retiring legacy services.</li>
+      <li>Helped reduce enterprise technical debt while improving production security with minimal customer disruption.</li>
+    </ul>
+  </div>
+
+  <div class="engagement">
+    <h3>Major Incident Coordination</h3>
+    <p class="objective">
+      <b>Objective:</b> Coordinate multidisciplinary engineering teams during Priority 1 production incidents
+      affecting Tier 1 enterprise customers.
+    </p>
+    <ul>
+      <li>Formed part of a 24/7 Priority 1 major incident rota for approximately seven years.</li>
+      <li>Rapidly assembled engineering specialists across infrastructure, networking, databases, applications and development.</li>
+      <li>Facilitated technical investigation, validated engineering assumptions and accelerated root cause identification.</li>
+      <li>Communicated technically informed delivery updates while engineering teams focused on service restoration.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Personal technology projects</div>
+  <div class="two-col">
+    <div class="block">
+      <h3>GraceCast &mdash; AI Production Console</h3>
+      <p>
+        Designed and prototyped an AI-assisted production console helping churches produce
+        broadcast-quality live streams using a single wide-angle camera. Identified the operational
+        challenge, evaluated multiple technical approaches and designed intuitive operator workflows that
+        reduce volunteer workload while improving production quality. Prototyped using AI-assisted
+        development tools, Python, HTML, CSS, JavaScript and GitHub.
+      </p>
+    </div>
+    <div class="block">
+      <h3>Genesis &mdash; Band Management Platform</h3>
+      <p>
+        Designed and developed a secure cloud-based platform to simplify rehearsal planning, scheduling and
+        communication for a worship band. Designed collaborative workflows with a strong emphasis on
+        usability and accessibility, developing secure authentication, scheduling and communications
+        capabilities through iterative user feedback.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Professional development &mdash; 2024 to present</div>
+  <p>
+    Following a career break for health reasons, I have continued to develop professionally through
+    AI-assisted software development, cloud technologies, personal technology projects and community
+    volunteering. This period has reinforced my focus on enterprise technical delivery and strengthened my
+    understanding of modern development workflows and AI-assisted productivity.
+  </p>
+</section>
+
+<section>
+  <div class="section-label">Additional professional experience</div>
+  <p>
+    <b>Broadcast, audio engineering &amp; live production.</b> Alongside my full-time career in enterprise
+    technology, I have continued to work in broadcast, audio engineering and live production, strengthening
+    my collaboration, troubleshooting and delivery skills in high-pressure environments. Assistant Producer
+    and Podcast Editor at Gaydio (national radio station); professional session musician and audio engineer
+    for commercial recordings, film soundtracks and live productions; live sound engineer supporting
+    community and church events.
+  </p>
+</section>
+
+<section>
+  <div class="section-label">Education &amp; professional development</div>
+  <ul class="edu">
+    <li>PRINCE2 Foundation</li>
+    <li>CCNA &amp; CompTIA A+, Just IT</li>
+    <li>Responsive Web Design, freeCodeCamp</li>
+    <li>BMus (Hons), Royal Northern College of Music</li>
+    <li>Cyber Security Training, TryHackMe</li>
+    <li>Certificate in Audio Engineering, Alchemea</li>
+  </ul>
+</section>
+
+<div class="foot">
+  <span>Chris Demetriou &mdash; Curriculum Vitae</span>
+  <span>chrisdemetriou.com/enterprise</span>
+</div>
+
+</body>
+</html>

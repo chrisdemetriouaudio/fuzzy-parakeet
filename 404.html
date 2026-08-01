@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Chris Demetriou</title>
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+
+<style>
+  .notfound {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+  }
+  .notfound__inner { max-width: 40rem; padding-block: var(--space-8); }
+  .notfound h1 {
+      font-size: var(--step-4);
+      letter-spacing: -.03em;
+      margin-block: var(--space-3) var(--space-4);
+  }
+  .notfound p { color: var(--ink-2); }
+  .notfound__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-block-start: var(--space-6);
+  }
+</style>
+</head>
+
+<body>
+<div class="notfound">
+  <div class="container notfound__inner">
+    <p class="eyebrow">404</p>
+    <h1>That page has moved, or never existed.</h1>
+    <p>
+      This site was reorganised into two sections. If you followed an older link, one of these is
+      almost certainly what you were after.
+    </p>
+    <div class="notfound__actions">
+      <a class="btn btn--primary" href="/enterprise/">Enterprise Technology &rarr;</a>
+      <a class="btn btn--quiet" href="/media/">Audio, Broadcast &amp; Media &rarr;</a>
+      <a class="btn btn--quiet" href="/">Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* The media site occupied the apex before the restructure, so its old paths
+   and anchors are forwarded here rather than dead-ending on this page. */
+(function () {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  var legacy = ['/index.html', '/style3.css', '/script.js'];
+  if (legacy.indexOf(path) !== -1) {
+    window.location.replace('/media' + path + window.location.hash);
+    return;
+  }
+
+  var MEDIA_ANCHORS = [
+    'soundcloud-section', 'what-i-do', 'skills-strip', 'case-study', 'career',
+    'credits', 'feedback-section', 'about', 'about-heading', 'contact'
+  ];
+  var hash = window.location.hash.replace('#', '');
+  if (hash && MEDIA_ANCHORS.indexOf(hash) !== -1) {
+    window.location.replace('/media/#' + hash);
+  }
+})();
+</script>
+</body>
+</html>

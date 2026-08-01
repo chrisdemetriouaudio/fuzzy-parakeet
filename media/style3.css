@@ -4147,6 +4147,35 @@ opacity:.7;
     text-align: center;
 }
 
+/* Cross-link to the enterprise section — the only structural addition made
+   when this site moved to /media/. Without it, visitors who arrive here can
+   never discover the other half of the brand. */
+.footer-crosslink {
+    margin: 10px 0 0;
+    text-align: center;
+}
+
+.footer-crosslink a {
+    font-family: var(--font-display);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.35);
+    padding-bottom: 2px;
+    opacity: 0.75;
+    transition: color 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
+}
+
+.footer-crosslink a:hover,
+.footer-crosslink a:focus-visible {
+    color: var(--text-white);
+    border-bottom-color: var(--accent);
+    opacity: 1;
+}
+
 /* Footer status indicator */
 .status-indicator {
     display: flex;
