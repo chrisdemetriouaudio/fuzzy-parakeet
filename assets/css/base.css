@@ -1,5 +1,5 @@
 /* ==========================================================================
-   base.css — reset, elements and the handful of primitives both new pages use
+   base.css — reset, elements, and the panel primitive both new pages use
    ========================================================================== */
 
 *,
@@ -9,44 +9,46 @@
 html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    background: var(--bg-black);
 }
 
 body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--font-sans);
+    background: var(--bg-black);
+    color: var(--text-body);
+    font-family: var(--font-main);
     font-size: var(--step-0);
-    line-height: 1.65;
+    line-height: var(--leading-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4 {
     margin: 0;
+    color: var(--text-white);
+    font-family: var(--font-display);
     font-weight: 600;
     line-height: 1.15;
-    letter-spacing: -.022em;
+    letter-spacing: .01em;
     text-wrap: balance;
 }
 
-p { margin: 0; }
+p { margin: 0; max-width: var(--measure); }
 
 ul { margin: 0; padding: 0; list-style: none; }
 
-a { color: var(--blue); text-decoration: none; }
-a:hover { color: var(--blue-deep); }
+a { color: var(--accent); text-decoration: none; }
 
 img, svg { max-width: 100%; height: auto; display: block; }
 
+::selection { background: rgba(var(--accent-rgb), .3); color: var(--text-white); }
+
 :where(a, button, summary, [tabindex]):focus-visible {
-    outline: 2px solid var(--blue);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
 }
 
-/* Visible only to assistive technology, and to keyboard users on focus. */
 .visually-hidden {
     position: absolute;
     width: 1px; height: 1px;
@@ -60,84 +62,130 @@ img, svg { max-width: 100%; height: auto; display: block; }
 .skip-link {
     position: absolute;
     left: var(--space-4);
-    top: -4rem;
+    top: -5rem;
     z-index: 100;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--accent);
+    color: var(--bg-black);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
+    font-family: var(--font-display);
     font-size: var(--step--1);
     font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
     transition: top var(--dur-fast) var(--ease);
 }
-.skip-link:focus { top: var(--space-4); color: var(--paper); }
+.skip-link:focus { top: var(--space-4); }
 
-/* ── Primitives ─────────────────────────────────────────────────────────── */
+/* ── Layout ─────────────────────────────────────────────────────────────── */
 
 .container {
     width: 100%;
     max-width: var(--container);
     margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
+
+/* ── Panel ──────────────────────────────────────────────────────────────
+   The core primitive. Nothing on these pages sits on open background —
+   every block of text lives inside one of these, so each section has a
+   visible edge and a fill that separates it from the page behind it.
+─────────────────────────────────────────────────────────────────────────── */
+.panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.panel--quiet { background: var(--bg-dark); border-color: var(--border-soft); }
+
+/* Gold top edge. Used sparingly — it marks the one panel in a group that
+   carries the most weight, and nothing else. */
+.panel--marked { border-top: 2px solid var(--accent); }
+
+/* ── Type helpers ───────────────────────────────────────────────────────── */
 
 .eyebrow {
     font-family: var(--font-mono);
-    font-size: .6875rem;
-    letter-spacing: .15em;
+    font-size: .75rem;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    color: var(--ink-3);
+    color: var(--accent);
 }
 
+.eyebrow--grey { color: var(--text-grey); }
+
 .wordmark {
-    font-size: .875rem;
-    font-weight: 600;
-    letter-spacing: .16em;
-    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--text-white);
 }
-a.wordmark:hover { color: var(--ink); }
+.wordmark b { color: var(--accent); font-weight: 700; }
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
 
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    font-family: inherit;
-    font-size: var(--step--1);
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: -.005em;
-    padding: .6875rem 1.125rem;
-    border-radius: 7px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .875rem 1.5rem;
     border: 1px solid transparent;
+    border-radius: var(--radius);
     cursor: pointer;
     transition: background var(--dur-fast) var(--ease),
                 border-color var(--dur-fast) var(--ease),
-                color var(--dur-fast) var(--ease);
+                color var(--dur-fast) var(--ease),
+                transform var(--dur-fast) var(--ease);
 }
 
-.btn--primary { background: var(--blue); color: var(--paper); }
-.btn--primary:hover { background: var(--blue-deep); color: var(--paper); }
+.btn--primary { background: var(--accent); color: var(--bg-black); }
+.btn--primary:hover { background: #d9bd80; color: var(--bg-black); transform: translateY(-2px); }
 
-.btn--quiet {
-    background: var(--paper);
-    color: var(--ink-2);
-    border-color: var(--rule);
+.btn--line {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent-edge);
 }
-.btn--quiet:hover { color: var(--ink); border-color: var(--ink-3); }
+.btn--line:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+
+.btn--ghost {
+    background: transparent;
+    color: var(--text-grey);
+    border-color: var(--border);
+}
+.btn--ghost:hover { color: var(--text-white); border-color: var(--text-grey); }
+
+/* ── Scroll progress — the same micro-behaviour the media site uses ─────── */
+.scroll-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    z-index: 200;
+    transition: width .1s linear;
+}
 
 /* ── Motion ─────────────────────────────────────────────────────────────
-   The hiding rule is scoped to a class that only script can set, and the
-   script only sets it once it has confirmed it can reveal again. With
-   JavaScript disabled, blocked or broken, nothing is ever hidden.
+   The hiding rule is scoped to a class only script can set, and script only
+   sets it once it has confirmed it can reveal again. With JavaScript off,
+   blocked or broken, nothing is ever hidden.
 ─────────────────────────────────────────────────────────────────────────── */
 html.js-reveal [data-reveal] {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-html.js-reveal [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
-}
+html.js-reveal [data-reveal].is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -150,4 +198,5 @@ html.js-reveal [data-reveal].is-visible {
     }
 
     html.js-reveal [data-reveal] { opacity: 1; transform: none; }
+    .btn:hover { transform: none; }
 }

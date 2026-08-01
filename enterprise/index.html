@@ -17,7 +17,8 @@
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 
-<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/enterprise.css">
@@ -80,10 +81,11 @@
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-bar" id="scroll-bar" aria-hidden="true"></div>
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="wordmark" href="/">CHRIS DEMETRIOU</a>
+    <a class="wordmark" href="/">CHRIS<b>D</b></a>
     <nav class="site-nav" aria-label="Sections">
       <a href="#what-i-do">What I Do</a>
       <a href="#experience">Experience</a>
@@ -100,7 +102,7 @@
   <!-- ── Hero ──────────────────────────────────────────────────────────── -->
   <section class="hero">
     <div class="container hero__grid">
-      <div data-reveal>
+      <div class="panel panel--marked hero__panel" data-reveal>
         <p class="eyebrow">Enterprise Technology Delivery</p>
         <h1 class="hero__title">Helping engineering teams deliver complex enterprise technology</h1>
         <p class="hero__lead">
@@ -108,12 +110,12 @@
           Solution Architecture and the specialist teams who build and run the platform.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#how-i-work">See how I work &rarr;</a>
-          <a class="btn btn--quiet" href="/enterprise/chris-demetriou-cv.pdf">Download CV</a>
+          <a class="btn btn--line" href="#how-i-work">See how I work &rarr;</a>
+          <a class="btn btn--ghost" href="/enterprise/chris-demetriou-cv.pdf">Download CV</a>
         </div>
       </div>
 
-      <div class="diagram" data-reveal>
+      <div class="panel diagram" data-reveal>
         <p class="diagram__caption eyebrow">Where the work sits</p>
         <p class="diagram__tier">Solution Architecture</p>
         <div class="diagram__link" aria-hidden="true"></div>
@@ -135,17 +137,12 @@
   <!-- ── What I do ─────────────────────────────────────────────────────── -->
   <section class="section section--tint" id="what-i-do">
     <div class="container">
-      <p class="eyebrow">What I do</p>
-      <div class="capability">
-        <div data-reveal>
-          <h2 class="section__title">Between architecture and engineering</h2>
-          <p class="section__lead">
-            Solution Architecture defines the target. Specialist teams build it. The work in between &mdash;
-            where dependencies surface and assumptions go unchallenged &mdash; is where delivery succeeds or stalls.
-          </p>
-        </div>
-
-        <ul data-reveal>
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">What I do</p>
+        <h2 class="section__title">Between architecture and engineering</h2>
+        <p class="section__lead">Solution Architecture defines the target. Specialist teams build it. The work in between is where delivery succeeds or stalls.</p>
+      </div>
+      <ul class="capability" data-reveal>
           <li class="capability__item">
             <span class="capability__num">01</span>
             <h3>Understanding technical landscapes</h3>
@@ -177,15 +174,16 @@
             <p>Staying with the work through cutover, go-live and operational acceptance.</p>
           </li>
         </ul>
-      </div>
     </div>
   </section>
 
   <!-- ── Enterprise experience ─────────────────────────────────────────── -->
   <section class="section" id="experience">
     <div class="container">
-      <p class="eyebrow">Enterprise experience</p>
-      <h2 class="section__title" data-reveal>Complex change, delivered into production</h2>
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">Enterprise experience</p>
+        <h2 class="section__title">Complex change, delivered into production</h2>
+      </div>
 
       <div class="cases">
 
@@ -400,8 +398,10 @@
   <!-- ── How I work ────────────────────────────────────────────────────── -->
   <section class="section section--tint" id="how-i-work">
     <div class="container">
-      <p class="eyebrow">How I work</p>
-      <h2 class="section__title" data-reveal>Principles, not process</h2>
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">How I work</p>
+        <h2 class="section__title">Principles, not process</h2>
+      </div>
 
       <ul class="principles" data-reveal>
         <li>
@@ -439,11 +439,13 @@
   <!-- ── Personal technology projects ──────────────────────────────────── -->
   <section class="section" id="projects">
     <div class="container">
-      <p class="eyebrow">Personal technology projects</p>
-      <h2 class="section__title" data-reveal>Problems worth solving properly</h2>
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">Personal technology projects</p>
+        <h2 class="section__title">Problems worth solving properly</h2>
+      </div>
 
       <div class="projects">
-        <article class="project" data-reveal>
+        <article class="panel project" data-reveal>
           <h3 class="project__title">GraceCast</h3>
           <p class="project__intro">
             An AI-assisted production console helping churches produce broadcast-quality live streams from a
@@ -463,7 +465,7 @@
           </div>
         </article>
 
-        <article class="project" data-reveal>
+        <article class="panel project" data-reveal>
           <h3 class="project__title">Genesis</h3>
           <p class="project__intro">
             A secure cloud-based platform simplifying rehearsal planning, scheduling and communication for a
@@ -489,11 +491,14 @@
   <!-- ── Contact ───────────────────────────────────────────────────────── -->
   <section class="section section--tint" id="contact">
     <div class="container">
-      <p class="eyebrow">Contact</p>
+      <div class="section__head" data-reveal>
+        <p class="eyebrow">Contact</p>
+        <h2 class="section__title">Open to enterprise delivery roles and contract work</h2>
+        <p class="section__lead">Greater Manchester. Available on-site, hybrid and remote across the UK.</p>
+      </div>
       <div class="contact">
-        <div data-reveal>
-          <h2 class="section__title">Open to enterprise delivery roles and contract work</h2>
-          <p class="section__lead">Greater Manchester. Available on-site, hybrid and remote across the UK.</p>
+        <div class="panel panel--quiet" data-reveal>
+          <p>Every enquiry reaches me directly. The quickest route is email; the CV covers the full history.</p>
         </div>
 
         <div class="contact__rows" data-reveal>

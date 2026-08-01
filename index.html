@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Demetriou — Enterprise Technology Delivery &amp; Creative Media</title>
+<title>Chris Demetriou — Enterprise Technology &amp; Creative Media</title>
 
-<meta name="description" content="Chris Demetriou. More than twenty years helping organisations deliver complex enterprise technology, alongside a parallel career in radio, podcasting, audio engineering and live production.">
+<meta name="description" content="Chris Demetriou. Enterprise technology delivery and creative media, from one systems-thinking mindset.">
 <link rel="canonical" href="https://chrisdemetriou.com/">
 
-<meta property="og:title" content="Chris Demetriou — Enterprise Technology Delivery &amp; Creative Media">
-<meta property="og:description" content="More than twenty years helping organisations deliver complex enterprise technology, alongside a parallel career in radio, podcasting, audio engineering and live production.">
+<meta property="og:title" content="Chris Demetriou — Enterprise Technology &amp; Creative Media">
+<meta property="og:description" content="Enterprise technology delivery and creative media, from one systems-thinking mindset.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisdemetriou.com/">
 <meta property="og:image" content="https://chrisdemetriou.com/images/share-image.png">
@@ -17,7 +17,8 @@
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 
-<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/landing.css">
@@ -37,7 +38,6 @@
     "Cloud Transformation",
     "Service Transition",
     "Operational Readiness",
-    "Major Incident Coordination",
     "Broadcast Audio Production",
     "Podcast Production"
   ],
@@ -57,81 +57,42 @@
   <div class="container landing__inner">
 
     <header class="landing__top">
-      <span class="wordmark">CHRIS DEMETRIOU</span>
+      <span class="wordmark">CHRIS<b>D</b></span>
+      <span class="eyebrow eyebrow--grey">Greater Manchester</span>
     </header>
 
     <main class="landing__hero">
-      <p class="landing__name">Chris Demetriou</p>
-
       <h1 class="landing__statement">
         <span>Enterprise Technology.</span>
         <span>Creative Media.</span>
-        <span>One systems-thinking mindset.</span>
+        <span class="accent">One mindset.</span>
       </h1>
-
-      <p class="landing__sub">
-        I&rsquo;ve spent more than twenty years helping organisations deliver complex enterprise technology
-        while continuing a parallel career in radio, podcasting, audio engineering and live production.
-      </p>
-
-      <p class="landing__instruction">Choose the area most relevant to you.</p>
     </main>
 
     <section class="landing__choice" id="choose" aria-label="Choose a section">
 
-      <a class="choice choice--primary" href="/enterprise/">
-        <span class="choice__mark">
-          <span class="choice__dot" aria-hidden="true"></span>
-          <span class="eyebrow">Enterprise</span>
+      <a class="door door--primary" href="/enterprise/">
+        <span class="eyebrow">01 — Enterprise</span>
+        <span class="door__title">Enterprise Technology Delivery</span>
+        <span class="door__line">
+          Helping engineering teams deliver complex enterprise change.
         </span>
-
-        <h2 class="choice__title">Enterprise Technology Delivery</h2>
-
-        <ul class="choice__topics">
-          <li>Technical Delivery</li>
-          <li>Engineering Collaboration</li>
-          <li>Technical Operations</li>
-          <li>Operational Readiness</li>
-          <li>Cloud Transformation</li>
-          <li>Service Transition</li>
-        </ul>
-
-        <p class="choice__body">
-          Explore more than twenty years of enterprise technology experience helping engineering teams
-          successfully deliver complex enterprise change.
-        </p>
-
-        <span class="btn btn--primary">Explore Enterprise Technology &rarr;</span>
+        <span class="door__cta"><span class="btn btn--primary">Enter &rarr;</span></span>
       </a>
 
-      <a class="choice choice--secondary" href="/media/">
-        <span class="choice__mark">
-          <span class="choice__dot" aria-hidden="true"></span>
-          <span class="eyebrow">Media</span>
+      <a class="door door--secondary" href="/media/">
+        <span class="eyebrow eyebrow--grey">02 — Media</span>
+        <span class="door__title">Audio, Broadcast &amp; Media</span>
+        <span class="door__line">
+          Radio imaging, sonic branding and podcast production.
         </span>
-
-        <h2 class="choice__title">Audio, Broadcast &amp; Media</h2>
-
-        <ul class="choice__topics">
-          <li>Radio</li>
-          <li>Audio Engineering</li>
-          <li>Podcasts</li>
-          <li>Broadcast</li>
-          <li>Music</li>
-          <li>Live Production</li>
-        </ul>
-
-        <p class="choice__body">
-          Explore work across broadcasting, podcast production, music, live production and creative media.
-        </p>
-
-        <span class="btn btn--media">Explore Audio, Broadcast &amp; Media &rarr;</span>
+        <span class="door__cta"><span class="btn btn--line">Enter &rarr;</span></span>
       </a>
 
     </section>
 
     <footer class="landing__foot">
-      <span>Greater Manchester, UK</span>
+      <span>Chris Demetriou</span>
       <span class="landing__contact">
         <a href="https://linkedin.com/in/chrisademetriou" rel="noopener">LinkedIn</a>
         <a id="landing-email" href="#" data-u="techdelivery" data-d="chrisdemetriou.com">Email</a>
@@ -142,7 +103,7 @@
 </div>
 
 <script>
-/* Legacy deep links. The media site lived at the apex until this restructure,
+/* Legacy deep links. The media site lived at the apex before this restructure,
    so anchors already in the wild are forwarded rather than silently dropped.
    GitHub Pages has no server-side redirects, which is why this runs here. */
 (function () {
@@ -156,14 +117,12 @@
   }
 })();
 
-/* The address is assembled at runtime so it never appears in the page source,
-   which blocks the great majority of harvesting bots. Same approach the media
-   site already uses. */
+/* Address assembled at runtime so it never appears in the page source. Same
+   approach the media site uses. */
 (function () {
   var el = document.getElementById('landing-email');
   if (!el) return;
-  var address = el.getAttribute('data-u') + '@' + el.getAttribute('data-d');
-  el.setAttribute('href', 'mailto:' + address);
+  el.setAttribute('href', 'mailto:' + el.getAttribute('data-u') + '@' + el.getAttribute('data-d'));
 })();
 </script>
 
