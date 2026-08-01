@@ -1,0 +1,110 @@
+/* ==========================================================================
+   enterprise.js — progressive enhancement only.
+   --------------------------------------------------------------------------
+   The page is complete without this file: case studies expand through native
+   <details>, every section is readable, and all links work. This adds the
+   scroll reveal and assembles the email address at runtime.
+   ========================================================================== */
+
+(function () {
+    'use strict';
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── Reveal on scroll ───────────────────────────────────────────────
+       The hiding rule is armed by a small inline script in the document head
+       (html.js-reveal). If anything here fails, dropping that class restores
+       every section immediately — content is never left invisible.
+    ─────────────────────────────────────────────────────────────────────── */
+    function showEverything() {
+        document.documentElement.classList.remove('js-reveal');
+    }
+
+    function initReveal() {
+        var targets = document.querySelectorAll('[data-reveal]');
+
+        if (!targets.length || prefersReducedMotion || !('IntersectionObserver' in window)) {
+            showEverything();
+            return;
+        }
+
+        try {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+
+            targets.forEach(function (el) { observer.observe(el); });
+
+            /* Tells the head script's failsafe to stand down. */
+            document.documentElement.setAttribute('data-reveal-ready', '');
+        } catch (err) {
+            showEverything();
+        }
+    }
+
+    /* ── Email assembly ─────────────────────────────────────────────────
+       Keeps the address out of the page source, matching the approach the
+       media site already uses.
+    ─────────────────────────────────────────────────────────────────────── */
+    function initEmail() {
+        var link = document.getElementById('enterprise-email');
+        if (!link) return;
+
+        var address = link.getAttribute('data-u') + '@' + link.getAttribute('data-d');
+        var slot = link.querySelector('.contact__address');
+
+        link.setAttribute('href', 'mailto:' + address);
+        if (slot) slot.textContent = address;
+    }
+
+    /* ── Case studies ───────────────────────────────────────────────────
+       One case opens by default so the section demonstrates its own depth.
+       On a narrow screen that same open card buries the four beneath it, so
+       it starts collapsed there instead. Only ever closed before the visitor
+       has touched anything — never reopened underneath them.
+    ─────────────────────────────────────────────────────────────────────── */
+    function initCases() {
+        var featured = document.querySelector('.case[data-desktop-open]');
+        if (!featured) return;
+
+        var narrow = window.matchMedia('(max-width: 1023px)');
+        var touched = false;
+
+        /* Listening for real interaction rather than the toggle event, which
+           also fires for the programmatic change below and would immediately
+           mark the card as touched. */
+        var summary = featured.querySelector('summary');
+        if (summary) {
+            summary.addEventListener('click', function () { touched = true; });
+            summary.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') touched = true;
+            });
+        }
+
+        function apply() {
+            if (!touched && narrow.matches) featured.open = false;
+        }
+
+        apply();
+
+        if (typeof narrow.addEventListener === 'function') {
+            narrow.addEventListener('change', apply);
+        }
+    }
+
+    function init() {
+        initReveal();
+        initCases();
+        initEmail();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
