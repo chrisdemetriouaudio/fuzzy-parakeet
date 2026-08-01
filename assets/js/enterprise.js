@@ -96,9 +96,44 @@
         }
     }
 
+    /* ── Scroll progress ────────────────────────────────────────────────
+       The same micro-behaviour the media site runs, so moving between the
+       two sections feels like one site. Read-only decoration — hidden from
+       assistive technology and skipped entirely under reduced motion.
+    ─────────────────────────────────────────────────────────────────────── */
+    function initScrollBar() {
+        var bar = document.getElementById('scroll-bar');
+        if (!bar) return;
+
+        if (prefersReducedMotion) {
+            bar.style.display = 'none';
+            return;
+        }
+
+        var ticking = false;
+
+        function update() {
+            var doc = document.documentElement;
+            var scrollable = doc.scrollHeight - window.innerHeight;
+            var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+            bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(update);
+        }, { passive: true });
+
+        window.addEventListener('resize', update, { passive: true });
+        update();
+    }
+
     function init() {
         initReveal();
         initCases();
+        initScrollBar();
         initEmail();
     }
 

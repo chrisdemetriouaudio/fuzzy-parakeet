@@ -1,9 +1,10 @@
 /* ==========================================================================
    landing.css — the front door at /
    --------------------------------------------------------------------------
-   One screen at desktop. Below 1024px the cards stack and the media card is
-   allowed to break the fold, which is deliberate: it promises more without
-   competing for the first decision.
+   Deliberately sparse. The whole page is a name, a three-line statement and
+   two doors. Every earlier version carried topic lists and supporting
+   paragraphs; they were removed because the page's only job is to make one
+   choice easy, and text that isn't doing that is text in the way.
    ========================================================================== */
 
 .landing {
@@ -18,12 +19,12 @@
     flex-direction: column;
 }
 
-/* ── Brand strip ────────────────────────────────────────────────────────── */
+/* ── Brand ──────────────────────────────────────────────────────────────── */
 .landing__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: var(--space-5);
+    padding-block: var(--space-6);
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
@@ -32,138 +33,78 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--space-3);
-    max-width: 49rem;
-    padding-block: var(--space-5);
+    gap: var(--space-5);
+    padding-block: var(--space-6);
 }
 
-.landing__name {
-    font-size: var(--step-0);
-    font-weight: 500;
-    letter-spacing: .04em;
-    color: var(--ink-2);
-}
-
-/* The statement is the largest thing on the page — the idea outranks the name.
-   Sized against viewport height as well as width, because this page has to
-   hold one screen: on a short laptop the type gives way before the layout does. */
 .landing__statement {
-    font-size: min(clamp(1.875rem, 1.2rem + 2.1vw, 2.875rem), 5.6vh);
-    line-height: 1.08;
-    letter-spacing: -.032em;
+    font-family: var(--font-hero);
+    font-size: var(--step-5);
+    font-weight: 400;
+    line-height: .96;
+    letter-spacing: .01em;
+    color: var(--text-white);
+    max-width: 20ch;
 }
 .landing__statement span { display: block; }
-
-.landing__sub {
-    font-size: var(--step-1);
-    color: var(--ink-2);
-    max-width: var(--measure);
-}
-
-.landing__instruction {
-    font-size: var(--step--1);
-    font-weight: 600;
-    color: var(--ink);
-}
+.landing__statement .accent { color: var(--accent); }
 
 /* ── The choice ─────────────────────────────────────────────────────────── */
 .landing__choice {
     display: grid;
-    grid-template-columns: 1.55fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: var(--space-5);
-    padding-block-end: var(--space-6);
-    align-items: start;
+    padding-block-end: var(--space-7);
+    align-items: stretch;
 }
 
-.choice {
-    display: block;
+.door {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
     color: inherit;
-    border: 1px solid var(--rule);
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    background: var(--paper);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
     transition: transform var(--dur-fast) var(--ease),
-                box-shadow var(--dur-fast) var(--ease),
                 border-color var(--dur-fast) var(--ease),
                 background-color var(--dur-fast) var(--ease);
 }
-.choice:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); color: inherit; }
-
-.choice__mark {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-block-end: var(--space-3);
-}
-.choice__dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    flex: none;
+.door:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-edge);
+    background: var(--bg-panel-2);
+    color: inherit;
 }
 
-.choice__topics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-1) var(--space-5);
-    margin-block-end: var(--space-4);
+.door__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--text-white);
 }
-.choice__topics li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
+
+.door__line {
+    color: var(--text-body);
     font-size: var(--step--1);
-    color: var(--ink-2);
-}
-.choice__topics li::before {
-    content: "";
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: var(--ink-3);
-    flex: none;
+    max-width: 34ch;
+    line-height: 1.65;
 }
 
-.choice__body {
-    font-size: var(--step--1);
-    color: var(--ink-2);
-    margin-block-end: var(--space-5);
-}
+.door__cta { margin-block-start: auto; }
 
-/* Primary — enterprise. Larger, denser, filled call to action. */
-.choice--primary { padding: var(--space-6) var(--space-6) var(--space-5); }
-.choice--primary:hover { border-color: var(--blue-edge); }
-.choice--primary .choice__dot { background: var(--blue); }
-.choice--primary .eyebrow { color: var(--blue); }
-.choice--primary .choice__title {
-    font-size: var(--step-3);
-    letter-spacing: -.024em;
-    margin-block-end: var(--space-3);
-}
-.choice--primary:hover .btn--primary { background: var(--blue-deep); }
+/* Primary — enterprise. Larger type, gold top edge, filled action. */
+.door--primary { border-top: 2px solid var(--accent); }
+.door--primary .door__title { font-size: var(--step-3); }
 
-/* Secondary — media. Quieter ground, gold identity, outlined call to action. */
-.choice--secondary {
-    padding: var(--space-5);
-    background: var(--paper-2);
-}
-.choice--secondary:hover { border-color: var(--gold-edge); background: var(--gold-wash); }
-.choice--secondary .choice__dot { background: var(--gold); }
-.choice--secondary .eyebrow { color: var(--gold-deep); }
-.choice--secondary .choice__title {
-    font-size: var(--step-2);
-    letter-spacing: -.018em;
-    margin-block-end: var(--space-3);
-}
-.choice--secondary .choice__topics { gap: var(--space-1) var(--space-4); }
-.choice--secondary .choice__topics li { font-size: .8125rem; }
-.choice--secondary .choice__body { font-size: .8125rem; margin-block-end: var(--space-4); }
-
-.btn--media {
-    background: var(--paper);
-    color: var(--gold-deep);
-    border-color: var(--gold-edge);
-    font-size: .8125rem;
-    padding: .5rem .875rem;
-}
-.btn--media:hover { color: var(--gold-deep); border-color: var(--gold-deep); }
+/* Secondary — media. Same shape, quieter fill and an outlined action, so the
+   hierarchy is carried by weight rather than by making it look worse. */
+.door--secondary { background: var(--bg-dark); }
+.door--secondary .door__title { font-size: var(--step-2); color: var(--text-body); }
+.door--secondary:hover .door__title { color: var(--text-white); }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
 .landing__foot {
@@ -172,87 +113,46 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
-    border-top: 1px solid var(--rule);
-    padding-block: var(--space-4) var(--space-5);
-    font-size: .8125rem;
-    color: var(--ink-3);
+    border-top: 1px solid var(--border-soft);
+    padding-block: var(--space-4) var(--space-6);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-grey);
 }
-.landing__foot a { color: var(--ink-2); }
-.landing__foot a:hover { color: var(--ink); }
-.landing__contact { display: flex; gap: var(--space-4); }
+.landing__contact { display: flex; gap: var(--space-5); }
+.landing__contact a { color: var(--text-grey); }
+.landing__contact a:hover { color: var(--accent); }
 
-/* ── Reflow ─────────────────────────────────────────────────────────────
-   The one-screen constraint is a desktop constraint. Once the cards stack,
-   relative width can no longer carry hierarchy, so it transfers to padding,
-   type size, topic count and call-to-action weight.
-─────────────────────────────────────────────────────────────────────────── */
+/* ── Reflow ─────────────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
     .landing { min-height: 0; }
-
-    .landing__hero {
-        padding-block: var(--space-6) var(--space-5);
-        gap: var(--space-3);
-    }
 
     .landing__choice {
         grid-template-columns: 1fr;
         gap: var(--space-4);
     }
+
+    .landing__hero { padding-block: var(--space-7) var(--space-6); }
+    .landing__statement { max-width: 14ch; }
 }
 
 @media (max-width: 640px) {
-    .landing__statement { letter-spacing: -.028em; }
-
-    /* Topic lists trim to the four that matter most on a phone. */
-    .choice__topics li:nth-child(n + 5) { display: none; }
-
-    .choice--secondary .choice__body { display: none; }
-
-    .landing__foot {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-2);
-    }
+    .landing__top { padding-block: var(--space-5); }
+    .landing__foot { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+    .landing__contact { gap: var(--space-4); }
 }
 
-/* ── Height tiers ───────────────────────────────────────────────────────
-   The one-screen promise has to survive a 1366×768 laptop, not just a large
-   desktop. Rather than shrinking the type further, the spacing gives way
-   first — the reading experience degrades far more slowly that way.
-─────────────────────────────────────────────────────────────────────────── */
-@media (min-width: 1024px) and (max-height: 880px) {
-    .landing__top { padding-block: var(--space-4); }
-
-    .landing__hero {
-        padding-block: var(--space-3);
-        gap: var(--space-2);
-    }
-
+/* Short desktop windows: spacing gives way before type does. */
+@media (min-width: 1024px) and (max-height: 860px) {
+    .landing__top  { padding-block: var(--space-4); }
+    .landing__hero { padding-block: var(--space-4); gap: var(--space-4); }
+    .door { padding: var(--space-5); }
     .landing__choice { padding-block-end: var(--space-5); }
-
-    .choice--primary { padding: var(--space-5) var(--space-5) var(--space-4); }
-    .choice--secondary { padding: var(--space-4); }
-
-    .choice__topics { margin-block-end: var(--space-3); }
-    .choice__body { margin-block-end: var(--space-4); }
-
     .landing__foot { padding-block: var(--space-3) var(--space-4); }
 }
 
-@media (min-width: 1024px) and (max-height: 780px) {
-    .landing__hero { padding-block: var(--space-2); }
-    .landing__sub { font-size: var(--step-0); }
-
-    .choice--primary { padding: var(--space-4); }
-    .choice__body { margin-block-end: var(--space-3); }
-    .choice--primary .choice__title { margin-block-end: var(--space-2); }
-
-    .landing__foot { padding-block: var(--space-3); }
-}
-
-/* Below roughly 700px of usable height the page scrolls rather than crushing
-   the type. A window that short is a scrolling device; pretending otherwise
-   produces something cramped and worse to read. */
 @media (min-width: 1024px) and (max-height: 700px) {
     .landing { min-height: 0; }
 }
