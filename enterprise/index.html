@@ -127,14 +127,28 @@
 
         <div class="diagram__flow diagram__flow--up">
           <span class="diagram__arrow" aria-hidden="true">&uarr;</span>
-          <span class="diagram__label">Translate &mdash; dependency, risk, date</span>
+          <span class="diagram__label">Translate</span>
+          <span class="diagram__stream" aria-hidden="true">
+            <span>ready Tuesday</span>
+            <span>blocks go-live</span>
+            <span>two days at risk</span>
+            <span>needs sign-off</span>
+          </span>
+          <span class="visually-hidden">Upward: technical detail becomes dependency, risk and date.</span>
         </div>
 
         <p class="diagram__core">Technical Delivery</p>
 
         <div class="diagram__flow diagram__flow--down">
           <span class="diagram__arrow" aria-hidden="true">&darr;</span>
-          <span class="diagram__label">Challenge &mdash; assumptions, readiness</span>
+          <span class="diagram__label">Challenge</span>
+          <span class="diagram__stream" aria-hidden="true">
+            <span>firewall rule</span>
+            <span>source IP</span>
+            <span>VPN tunnel</span>
+            <span>SFTP endpoint</span>
+          </span>
+          <span class="visually-hidden">Downward: assumptions and readiness get challenged in technical detail.</span>
         </div>
 
         <p class="diagram__tier">Specialist engineering</p>
