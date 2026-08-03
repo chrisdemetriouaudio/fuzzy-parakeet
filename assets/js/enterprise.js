@@ -130,9 +130,34 @@
         update();
     }
 
+    /* ── Diagram flow ───────────────────────────────────────────────────
+       Runs only while the diagram is on screen. Animation that continues
+       out of view is pure distraction — it costs attention and shows
+       nobody anything.
+    ─────────────────────────────────────────────────────────────────────── */
+    function initFlow() {
+        var diagram = document.querySelector('.diagram');
+        if (!diagram) return;
+        if (prefersReducedMotion) return;
+
+        if (!('IntersectionObserver' in window)) {
+            diagram.classList.add('is-flowing');
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                diagram.classList.toggle('is-flowing', entry.isIntersecting);
+            });
+        }, { threshold: 0.25 });
+
+        observer.observe(diagram);
+    }
+
     function init() {
         initReveal();
         initCases();
+        initFlow();
         initScrollBar();
         initEmail();
     }

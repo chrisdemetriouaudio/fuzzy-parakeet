@@ -177,6 +177,7 @@
 .door--primary { border-top: 2px solid var(--accent); }
 .door--primary .door__title { font-size: var(--step-3); }
 
+
 .door--secondary { background: var(--bg-dark); }
 .door--secondary .door__title { font-size: var(--step-2); }
 
@@ -187,12 +188,21 @@
    instead of directing it.
 ─────────────────────────────────────────────────────────────────────────── */
 @keyframes door-breathe {
-      0%, 100% { border-color: var(--accent); box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
-    50%        { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .07); }
+    0%, 100% {
+        border-color: var(--border);
+        box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+    }
+    50% {
+        border-color: var(--accent);
+        box-shadow: 0 0 26px 2px rgba(var(--accent-rgb), .20);
+    }
 }
 
+/* The top edge stays gold throughout — only the surrounding border and glow
+   breathe, so the card never loses its marker mid-cycle. */
 .door--primary.is-breathing {
     animation: door-breathe 4s var(--ease) 3;
+    border-top-color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {

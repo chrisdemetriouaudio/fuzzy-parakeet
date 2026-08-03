@@ -180,12 +180,79 @@
     font-size: .6875rem;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--text-grey);
+    color: var(--text-white);
     line-height: 1.5;
+    flex: none;
 }
 
 .diagram__flow--up   { border-left: 1px dashed var(--accent-edge); }
 .diagram__flow--down { border-left: 1px dashed var(--border); }
+
+/* ── The flow itself ────────────────────────────────────────────────────
+   The same conversation in two languages: jargon travelling down toward
+   engineering, delivery terms coming back up. It demonstrates the
+   translation rather than describing it.
+
+   Motion only runs while the diagram is actually on screen (script toggles
+   .is-flowing), and never under reduced-motion. One token at a time, six
+   seconds each — slow enough to read once and ignore thereafter.
+─────────────────────────────────────────────────────────────────────────── */
+.diagram__stream {
+    position: relative;
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 1.35em;
+    overflow: hidden;
+}
+
+.diagram__stream > span {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+}
+
+.diagram.is-flowing .diagram__stream > span {
+    animation: token-cycle 24s linear infinite;
+}
+
+.diagram.is-flowing .diagram__stream > span:nth-child(2) { animation-delay:  6s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(3) { animation-delay: 12s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(4) { animation-delay: 18s; }
+
+/* Tokens travel in the direction of their arrow. */
+.diagram__flow--down .diagram__stream > span { color: var(--text-grey); }
+.diagram__flow--up   .diagram__stream > span { color: var(--accent); }
+
+@keyframes token-cycle {
+    0%              { opacity: 0; transform: translateY(-.5em); }
+    3%, 21%         { opacity: 1; transform: translateY(0); }
+    25%, 100%       { opacity: 0; transform: translateY(.5em); }
+}
+
+.diagram__flow--up .diagram__stream > span {
+    animation-name: token-cycle-up;
+}
+
+@keyframes token-cycle-up {
+    0%              { opacity: 0; transform: translateY(.5em); }
+    3%, 21%         { opacity: 1; transform: translateY(0); }
+    25%, 100%       { opacity: 0; transform: translateY(-.5em); }
+}
+
+/* With motion off, the first token of each direction simply sits there —
+   the diagram still shows what travels each way. */
+@media (prefers-reduced-motion: reduce) {
+    .diagram .diagram__stream > span { animation: none !important; opacity: 0; }
+    .diagram .diagram__stream > span:first-child { opacity: 1; }
+}
 
 .diagram__disciplines {
     display: grid;
