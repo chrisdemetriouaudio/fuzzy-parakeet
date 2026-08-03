@@ -120,11 +120,17 @@
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
-/* ── Flow diagram ───────────────────────────────────────────────────────
-   Not a hierarchy — a two-way flow. Delivery above, engineering below, and
-   the role in the middle doing a different job in each direction. The two
-   labelled arrows are the whole argument: challenge downward, translate
-   upward. Marked up as a <figure> so it reads as a diagram, not decoration.
+/* ── Diagram: hub and three parties ─────────────────────────────────────
+   Deliberately not a vertical sandwich. A stack with delivery above and
+   engineering below implies sitting over the engineers and gatekeeping them;
+   this is a hub with three counterparties around it, which is what the work
+   actually looks like — engineering, the delivery side, and the customer or
+   partner IT team on the other end of the integration.
+
+   Each party carries the vocabulary spoken with it. The three streams are
+   staggered so exactly one token is visible across the whole diagram at any
+   moment: it reads as turning to each party in turn, not as three things
+   flashing at once.
 ─────────────────────────────────────────────────────────────────────────── */
 .diagram {
     display: flex;
@@ -134,144 +140,135 @@
     margin: 0;
 }
 
-.diagram__caption { text-align: center; margin-block-end: var(--space-4); }
+.diagram__caption { text-align: center; margin-block-end: var(--space-5); }
 
-.diagram__tier,
-.diagram__core {
-    border-radius: var(--radius);
-    padding: var(--space-3);
-    text-align: center;
-    font-family: var(--font-display);
-    font-size: 1.0625rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
-
-.diagram__tier { border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-white); }
-
-.diagram__core {
+.diagram__hub {
     border: 1px solid var(--accent);
     background: var(--accent-soft);
     color: var(--accent);
-    padding-block: var(--space-4);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    max-width: none;
 }
 
-/* Each direction states what actually travels along it. */
-.diagram__flow {
+/* Rail and three risers, joining the hub to the parties below it. */
+.diagram__spokes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    margin-block-start: var(--space-4);
+    border-block-start: 1px solid var(--accent-edge);
+    position: relative;
+}
+.diagram__spokes::before {
+    content: "";
+    position: absolute;
+    top: -18px; left: 50%;
+    width: 1px; height: 18px;
+    background: var(--accent-edge);
+}
+.diagram__riser {
+    width: 1px;
+    height: 16px;
+    justify-self: center;
+    background: linear-gradient(to bottom, var(--accent-edge), var(--border));
+}
+
+.diagram__parties {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+}
+
+.party {
     display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding-inline: var(--space-2);
-    padding-block: var(--space-2);
-}
-
-.diagram__arrow {
-    font-size: 1.125rem;
-    line-height: 1;
-    color: var(--accent);
-    flex: none;
-    width: 1.25rem;
+    flex-direction: column;
+    gap: var(--space-2);
+    border: 1px solid var(--border);
+    background: var(--bg-dark);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-2);
     text-align: center;
 }
 
-.diagram__label {
-    font-family: var(--font-mono);
-    font-size: .6875rem;
-    letter-spacing: .1em;
+.party__name {
+    font-family: var(--font-display);
+    font-size: .875rem;
+    font-weight: 600;
+    letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--text-white);
-    line-height: 1.5;
-    flex: none;
+    line-height: 1.25;
 }
 
-.diagram__flow--up   { border-left: 1px dashed var(--accent-edge); }
-.diagram__flow--down { border-left: 1px dashed var(--border); }
-
-/* ── The flow itself ────────────────────────────────────────────────────
-   The same conversation in two languages: jargon travelling down toward
-   engineering, delivery terms coming back up. It demonstrates the
-   translation rather than describing it.
-
-   Motion only runs while the diagram is actually on screen (script toggles
-   .is-flowing), and never under reduced-motion. One token at a time, six
-   seconds each — slow enough to read once and ignore thereafter.
-─────────────────────────────────────────────────────────────────────────── */
-.diagram__stream {
+.party__stream {
     position: relative;
     display: block;
-    flex: 1 1 auto;
-    min-width: 0;
-    height: 1.35em;
-    overflow: hidden;
+    height: 1.3em;
 }
 
-.diagram__stream > span {
+.party__stream > span {
     position: absolute;
     inset-inline: 0;
     top: 0;
     font-family: var(--font-mono);
-    font-size: .6875rem;
-    letter-spacing: .08em;
+    font-size: .625rem;
+    letter-spacing: .04em;
+    color: var(--accent);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     opacity: 0;
 }
 
-.diagram.is-flowing .diagram__stream > span {
-    animation: token-cycle 24s linear infinite;
+/* Nine tokens, one 27s cycle, three seconds each — so only one speaks at a
+   time and the diagram is never busy. */
+.diagram.is-flowing .party__stream > span {
+    animation: party-token 27s linear infinite;
 }
 
-.diagram.is-flowing .diagram__stream > span:nth-child(2) { animation-delay:  6s; }
-.diagram.is-flowing .diagram__stream > span:nth-child(3) { animation-delay: 12s; }
-.diagram.is-flowing .diagram__stream > span:nth-child(4) { animation-delay: 18s; }
+.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(1) { animation-delay:  0s; }
+.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(1) { animation-delay:  3s; }
+.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(1) { animation-delay:  6s; }
+.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(2) { animation-delay:  9s; }
+.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(2) { animation-delay: 12s; }
+.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(2) { animation-delay: 15s; }
+.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(3) { animation-delay: 18s; }
+.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(3) { animation-delay: 21s; }
+.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(3) { animation-delay: 24s; }
 
-/* Tokens travel in the direction of their arrow. */
-.diagram__flow--down .diagram__stream > span { color: var(--text-grey); }
-.diagram__flow--up   .diagram__stream > span { color: var(--accent); }
-
-@keyframes token-cycle {
-    0%              { opacity: 0; transform: translateY(-.5em); }
-    3%, 21%         { opacity: 1; transform: translateY(0); }
-    25%, 100%       { opacity: 0; transform: translateY(.5em); }
+@keyframes party-token {
+    0%          { opacity: 0; transform: translateY(4px); }
+    1.5%, 9.5%  { opacity: 1; transform: none; }
+    11%, 100%   { opacity: 0; transform: translateY(-4px); }
 }
 
-.diagram__flow--up .diagram__stream > span {
-    animation-name: token-cycle-up;
-}
-
-@keyframes token-cycle-up {
-    0%              { opacity: 0; transform: translateY(.5em); }
-    3%, 21%         { opacity: 1; transform: translateY(0); }
-    25%, 100%       { opacity: 0; transform: translateY(-.5em); }
-}
-
-/* With motion off, the first token of each direction simply sits there —
-   the diagram still shows what travels each way. */
+/* With motion off, each party simply shows its first term — the point of the
+   diagram survives without anything moving. */
 @media (prefers-reduced-motion: reduce) {
-    .diagram .diagram__stream > span { animation: none !important; opacity: 0; }
-    .diagram .diagram__stream > span:first-child { opacity: 1; }
+    .party__stream > span { animation: none !important; opacity: 0; }
+    .party__stream > span:first-child { opacity: 1; }
 }
 
-.diagram__disciplines {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-2);
-    margin-block-start: var(--space-3);
-}
-
-.diagram__disciplines li {
-    border: 1px solid var(--border-soft);
-    background: var(--bg-dark);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-1);
-    text-align: center;
+/* The org chart varies; the gap is constant. Saying so turns a limitation of
+   the diagram into evidence of having worked across several shapes of org. */
+.diagram__note {
+    margin-block-start: var(--space-4);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--border-soft);
     font-family: var(--font-mono);
     font-size: .6875rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+    line-height: 1.7;
+    letter-spacing: .06em;
     color: var(--text-grey);
+    text-align: center;
+    max-width: none;
 }
 
 /* ── What I do ──────────────────────────────────────────────────────────
@@ -548,7 +545,9 @@
 
 @media (max-width: 640px) {
     .section, .hero { padding-block: var(--space-8); }
-    .diagram__disciplines { grid-template-columns: repeat(2, 1fr); }
+    .diagram__parties,
+    .diagram__spokes { grid-template-columns: 1fr; }
+    .diagram__spokes { display: none; }
     .case > summary { padding: var(--space-4); }
     .case__detail { padding: 0 var(--space-4) var(--space-4); }
     .case__foot { flex-wrap: wrap; gap: var(--space-3); }

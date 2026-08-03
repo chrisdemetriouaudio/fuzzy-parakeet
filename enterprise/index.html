@@ -106,11 +106,11 @@
         <p class="eyebrow">Enterprise Technology Delivery</p>
         <h1 class="hero__title">The conduit between delivery and engineering</h1>
         <p class="hero__lead">
-          Put an engineer and a delivery manager in the same room and both will leave confident they
-          agreed. They usually haven&rsquo;t. One was describing a system; the other heard a date.
+          Put an engineer and whoever owns the date in the same room and both will leave confident
+          they agreed. They usually haven&rsquo;t. One was describing a system; the other heard a date.
         </p>
         <p class="hero__lead">
-          I work in that gap &mdash; asking the technical questions a delivery manager can&rsquo;t, then
+          I work in that gap &mdash; asking the technical questions the delivery side can&rsquo;t, then
           translating the answers into dependency, risk and date.
         </p>
         <p class="hero__pull">So nobody finds out at the cutover window that &ldquo;fine&rdquo; meant &ldquo;untested&rdquo;.</p>
@@ -121,46 +121,47 @@
       </div>
 
       <figure class="panel diagram" data-reveal>
-        <figcaption class="diagram__caption eyebrow">How the work flows</figcaption>
+        <figcaption class="diagram__caption eyebrow">Who I work with</figcaption>
 
-        <p class="diagram__tier">Delivery &amp; project management</p>
+        <p class="diagram__hub">Technical Delivery</p>
 
-        <div class="diagram__flow diagram__flow--up">
-          <span class="diagram__arrow" aria-hidden="true">&uarr;</span>
-          <span class="diagram__label">Translate</span>
-          <span class="diagram__stream" aria-hidden="true">
-            <span>ready Tuesday</span>
-            <span>blocks go-live</span>
-            <span>two days at risk</span>
-            <span>needs sign-off</span>
-          </span>
-          <span class="visually-hidden">Upward: technical detail becomes dependency, risk and date.</span>
+        <div class="diagram__spokes">
+          <span class="diagram__riser" aria-hidden="true"></span>
+          <span class="diagram__riser" aria-hidden="true"></span>
+          <span class="diagram__riser" aria-hidden="true"></span>
         </div>
 
-        <p class="diagram__core">Technical Delivery</p>
-
-        <div class="diagram__flow diagram__flow--down">
-          <span class="diagram__arrow" aria-hidden="true">&darr;</span>
-          <span class="diagram__label">Challenge</span>
-          <span class="diagram__stream" aria-hidden="true">
-            <span>firewall rule</span>
-            <span>source IP</span>
-            <span>VPN tunnel</span>
-            <span>SFTP endpoint</span>
-          </span>
-          <span class="visually-hidden">Downward: assumptions and readiness get challenged in technical detail.</span>
-        </div>
-
-        <p class="diagram__tier">Specialist engineering</p>
-
-        <ul class="diagram__disciplines">
-          <li>Infra</li>
-          <li>Network</li>
-          <li>Database</li>
-          <li>DevOps</li>
-          <li>Apps</li>
-          <li>Security</li>
+        <ul class="diagram__parties">
+          <li class="party">
+            <span class="party__name">Specialist engineering</span>
+            <span class="party__stream" aria-hidden="true">
+              <span>firewall rule</span>
+              <span>source IP</span>
+              <span>VPN tunnel</span>
+            </span>
+          </li>
+          <li class="party">
+            <span class="party__name">Delivery &amp; programme</span>
+            <span class="party__stream" aria-hidden="true">
+              <span>blocks go-live</span>
+              <span>two days at risk</span>
+              <span>ready Tuesday</span>
+            </span>
+          </li>
+          <li class="party">
+            <span class="party__name">Customer IT &amp; partners</span>
+            <span class="party__stream" aria-hidden="true">
+              <span>change window</span>
+              <span>their firewall</span>
+              <span>sign-off needed</span>
+            </span>
+          </li>
         </ul>
+
+        <p class="diagram__note">
+          Three parties, three vocabularies, one conversation.
+          The names change by organisation &mdash; the gap doesn&rsquo;t.
+        </p>
       </figure>
     </div>
   </section>
