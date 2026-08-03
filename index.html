@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Demetriou — Enterprise Technology &amp; Creative Media</title>
+<title>Chris Demetriou — One Mindset. Enterprise Tech &amp; Creative Media.</title>
 
-<meta name="description" content="Chris Demetriou. Enterprise technology delivery and creative media, from one systems-thinking mindset.">
+<meta name="description" content="Chris Demetriou. Understanding complex systems, connecting the specialists, delivering it safely live — across enterprise technology and creative media.">
 <link rel="canonical" href="https://chrisdemetriou.com/">
 
-<meta property="og:title" content="Chris Demetriou — Enterprise Technology &amp; Creative Media">
-<meta property="og:description" content="Enterprise technology delivery and creative media, from one systems-thinking mindset.">
+<meta property="og:title" content="Chris Demetriou — One Mindset. Enterprise Tech &amp; Creative Media.">
+<meta property="og:description" content="Understanding complex systems, connecting the specialists, delivering it safely live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chrisdemetriou.com/">
 <meta property="og:image" content="https://chrisdemetriou.com/images/share-image.png">
@@ -29,7 +29,7 @@
   "@type": "Person",
   "name": "Chris Demetriou",
   "jobTitle": "Enterprise Technical Delivery",
-  "description": "Enterprise Technical Delivery professional with more than twenty years' experience across enterprise SaaS environments, alongside a parallel career in broadcast, audio engineering and live production.",
+  "description": "Works between delivery management and specialist engineering teams — challenging technical detail and translating it into dependency, risk and date. More than twenty years across enterprise SaaS, alongside a parallel career in broadcast, audio engineering and live production.",
   "url": "https://chrisdemetriou.com",
   "sameAs": ["https://linkedin.com/in/chrisademetriou"],
   "knowsAbout": [
@@ -62,27 +62,42 @@
     </header>
 
     <main class="landing__hero">
-      <h1 class="landing__statement">
-        <span>Enterprise Technology.</span>
-        <span>Creative Media.</span>
-        <span class="accent">One mindset.</span>
-      </h1>
+      <!-- The thesis leads. The two domains below are evidence of it, not a
+           pair of competing identities the visitor has to reconcile. -->
+      <h1 class="landing__statement">One mindset.</h1>
+
+      <ul class="landing__creed">
+        <li>Understanding complex systems.</li>
+        <li>Connecting the specialists.</li>
+        <li>Delivering it safely live.</li>
+      </ul>
     </main>
+
+    <!-- One root, two limbs. Draws the connection rather than asking the
+         visitor to infer it. Decorative — the relationship is already carried
+         by the heading structure. -->
+    <div class="spine" aria-hidden="true">
+      <span class="spine__stem"></span>
+      <div class="spine__branch">
+        <span class="spine__drop"></span>
+        <span class="spine__drop"></span>
+      </div>
+    </div>
 
     <section class="landing__choice" id="choose" aria-label="Choose a section">
 
-      <a class="door door--primary" href="/enterprise/">
-        <span class="eyebrow">01 — Enterprise</span>
-        <span class="door__title">Enterprise Technology Delivery</span>
+      <a class="door door--primary" href="/enterprise/" id="door-enterprise">
+        <span class="eyebrow">01 — Where it applies</span>
+        <span class="door__title">Enterprise Tech</span>
         <span class="door__line">
-          Helping engineering teams deliver complex enterprise change.
+          Between the delivery plan and the engineers building against it.
         </span>
         <span class="door__cta"><span class="btn btn--primary">Enter &rarr;</span></span>
       </a>
 
       <a class="door door--secondary" href="/media/">
-        <span class="eyebrow eyebrow--grey">02 — Media</span>
-        <span class="door__title">Audio, Broadcast &amp; Media</span>
+        <span class="eyebrow eyebrow--grey">02 — Where it started</span>
+        <span class="door__title">Creative Media</span>
         <span class="door__line">
           Radio imaging, sonic branding and podcast production.
         </span>
@@ -92,7 +107,7 @@
     </section>
 
     <footer class="landing__foot">
-      <span>Chris Demetriou</span>
+      <span class="landing__foot-name">Chris Demetriou</span>
       <span class="landing__contact">
         <a href="https://linkedin.com/in/chrisademetriou" rel="noopener">LinkedIn</a>
         <a id="landing-email" href="#" data-u="techdelivery" data-d="chrisdemetriou.com">Email</a>
@@ -103,7 +118,7 @@
 </div>
 
 <script>
-/* Legacy deep links. The media site lived at the apex before this restructure,
+/* Legacy deep links. The media site lived at the apex before the restructure,
    so anchors already in the wild are forwarded rather than silently dropped.
    GitHub Pages has no server-side redirects, which is why this runs here. */
 (function () {
@@ -117,12 +132,35 @@
   }
 })();
 
-/* Address assembled at runtime so it never appears in the page source. Same
-   approach the media site uses. */
+/* Address assembled at runtime so it never appears in the page source. */
 (function () {
   var el = document.getElementById('landing-email');
   if (!el) return;
   el.setAttribute('href', 'mailto:' + el.getAttribute('data-u') + '@' + el.getAttribute('data-d'));
+})();
+
+/* The primary door breathes three times, then stops for good.
+   Repeating motion holds attention rather than directing it, so this points
+   once and gets out of the way. Any interaction cancels it early, and it is
+   never armed at all under reduced-motion. */
+(function () {
+  var door = document.getElementById('door-enterprise');
+  if (!door) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  door.classList.add('is-breathing');
+
+  function settle() {
+    door.classList.remove('is-breathing');
+    window.removeEventListener('scroll', settle);
+    door.removeEventListener('pointerenter', settle);
+    door.removeEventListener('focus', settle);
+  }
+
+  door.addEventListener('animationend', settle);
+  window.addEventListener('scroll', settle, { passive: true, once: true });
+  door.addEventListener('pointerenter', settle, { once: true });
+  door.addEventListener('focus', settle, { once: true });
 })();
 </script>
 
