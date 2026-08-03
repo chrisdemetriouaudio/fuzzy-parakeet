@@ -107,10 +107,32 @@
 
 .hero__lead { color: var(--text-body); font-size: var(--step-1); }
 
+.hero__pull {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: .02em;
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-4);
+}
+
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
-/* ── Position diagram ───────────────────────────────────────────────────── */
-.diagram { display: flex; flex-direction: column; justify-content: center; gap: var(--space-2); }
+/* ── Flow diagram ───────────────────────────────────────────────────────
+   Not a hierarchy — a two-way flow. Delivery above, engineering below, and
+   the role in the middle doing a different job in each direction. The two
+   labelled arrows are the whole argument: challenge downward, translate
+   upward. Marked up as a <figure> so it reads as a diagram, not decoration.
+─────────────────────────────────────────────────────────────────────────── */
+.diagram {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-2);
+    margin: 0;
+}
 
 .diagram__caption { text-align: center; margin-block-end: var(--space-4); }
 
@@ -126,7 +148,7 @@
     text-transform: uppercase;
 }
 
-.diagram__tier { border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-grey); }
+.diagram__tier { border: 1px solid var(--border); background: var(--bg-dark); color: var(--text-white); }
 
 .diagram__core {
     border: 1px solid var(--accent);
@@ -135,16 +157,44 @@
     padding-block: var(--space-4);
 }
 
-.diagram__link { width: 1px; height: 18px; background: var(--border); margin-inline: auto; }
-.diagram__link--active { background: var(--accent-edge); }
+/* Each direction states what actually travels along it. */
+.diagram__flow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-inline: var(--space-2);
+    padding-block: var(--space-2);
+}
 
-.diagram__spread { border-block-start: 1px solid var(--border); margin-block-start: var(--space-4); }
+.diagram__arrow {
+    font-size: 1.125rem;
+    line-height: 1;
+    color: var(--accent);
+    flex: none;
+    width: 1.25rem;
+    text-align: center;
+}
 
-.diagram__disciplines { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.diagram__label {
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    line-height: 1.5;
+}
+
+.diagram__flow--up   { border-left: 1px dashed var(--accent-edge); }
+.diagram__flow--down { border-left: 1px dashed var(--border); }
+
+.diagram__disciplines {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    margin-block-start: var(--space-3);
+}
 
 .diagram__disciplines li {
-    position: relative;
-    margin-block-start: 14px;
     border: 1px solid var(--border-soft);
     background: var(--bg-dark);
     border-radius: var(--radius-sm);
@@ -155,13 +205,6 @@
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--text-grey);
-}
-.diagram__disciplines li::before {
-    content: "";
-    position: absolute;
-    top: -14px; left: 50%;
-    width: 1px; height: 14px;
-    background: var(--border);
 }
 
 /* ── What I do ──────────────────────────────────────────────────────────
@@ -188,9 +231,11 @@
 
 .capability__num {
     font-family: var(--font-mono);
-    font-size: .75rem;
-    letter-spacing: .18em;
+    font-size: .6875rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
     color: var(--accent);
+    line-height: 1.5;
 }
 
 .capability__item h3 {
@@ -399,9 +444,9 @@
     letter-spacing: .12em;
     text-transform: uppercase;
 }
-.contact__row span { font-family: var(--font-mono); font-size: .8125rem; color: var(--text-grey); }
+.contact__row span { font-family: var(--font-mono); font-size: .8125rem; color: var(--text-body); }
 .contact__row--primary { border-color: var(--accent-edge); background: var(--accent-soft); }
-.contact__row--primary b { color: var(--accent); }
+.contact__row--primary b { color: var(--text-white); }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
 .site-footer {
@@ -421,7 +466,7 @@
     gap: var(--space-4);
 }
 .site-footer nav { display: flex; align-items: center; gap: var(--space-5); }
-.site-footer a { color: var(--text-grey); }
+.site-footer a { color: var(--text-white); }
 .site-footer a:hover { color: var(--accent); }
 
 /* ── Reflow ─────────────────────────────────────────────────────────────── */
