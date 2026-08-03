@@ -120,19 +120,16 @@
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
-/* ── Diagram: three parties in, one outcome out ─────────────────────────
+/* ── Diagram: six specialisms in, one outcome out ───────────────────────
    The job of this diagram is to show where the role sits AND what changes
-   because it is there. An earlier version showed only who gets talked to,
-   which reads as "has contacts" rather than "adds something".
+   because it is there. Earlier versions showed who gets talked to, which
+   reads as "has contacts" rather than "adds something".
 
-   So it runs top to bottom as a process: three counterparties feed in, they
-   converge on the role, and something specific comes out the bottom. The
-   outcome box is the whole argument — everything above it is just how.
-
-   It is deliberately not a vertical sandwich with delivery above and
-   engineering below: that implies sitting over the engineers, and it assumes
-   one shape of organisation. Sometimes the counterparty is a customer's own
-   IT team, or a delivery partner, and sometimes there is no PM at all.
+   It is deliberately not a stack with delivery above and engineering below.
+   That implied translating technical detail into business terms for a project
+   manager, which is not the work. The work is across the engineering
+   specialisms themselves: six teams, six vocabularies, and failures that live
+   in the gaps between them rather than inside any one of them.
 ─────────────────────────────────────────────────────────────────────────── */
 .diagram {
     display: flex;
@@ -143,7 +140,7 @@
 
 .diagram__caption { text-align: center; margin-block-end: var(--space-5); }
 
-/* ── Inputs ─────────────────────────────────────────────────────────────── */
+/* ── The specialisms ────────────────────────────────────────────────────── */
 .diagram__parties {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -151,17 +148,11 @@
 }
 
 .party {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
     border: 1px solid var(--border);
     background: var(--bg-dark);
     border-radius: var(--radius-sm);
     padding: var(--space-3) var(--space-2);
     text-align: center;
-}
-
-.party__name {
     font-family: var(--font-display);
     font-size: .8125rem;
     font-weight: 600;
@@ -169,42 +160,6 @@
     text-transform: uppercase;
     color: var(--text-white);
     line-height: 1.3;
-}
-
-.party__stream { position: relative; display: block; height: 1.3em; }
-
-.party__stream > span {
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    font-family: var(--font-mono);
-    font-size: .625rem;
-    letter-spacing: .04em;
-    color: var(--accent);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0;
-}
-
-/* Nine tokens, one 27s cycle, three seconds each — so only one party speaks
-   at a time and the diagram is never busy. */
-.diagram.is-flowing .party__stream > span { animation: party-token 27s linear infinite; }
-
-.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(1) { animation-delay:  0s; }
-.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(1) { animation-delay:  3s; }
-.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(1) { animation-delay:  6s; }
-.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(2) { animation-delay:  9s; }
-.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(2) { animation-delay: 12s; }
-.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(2) { animation-delay: 15s; }
-.diagram.is-flowing .party:nth-child(1) .party__stream > span:nth-child(3) { animation-delay: 18s; }
-.diagram.is-flowing .party:nth-child(2) .party__stream > span:nth-child(3) { animation-delay: 21s; }
-.diagram.is-flowing .party:nth-child(3) .party__stream > span:nth-child(3) { animation-delay: 24s; }
-
-@keyframes party-token {
-    0%          { opacity: 0; transform: translateY(4px); }
-    1.5%, 9.5%  { opacity: 1; transform: none; }
-    11%, 100%   { opacity: 0; transform: translateY(-4px); }
 }
 
 /* ── Converge ───────────────────────────────────────────────────────────── */
@@ -220,7 +175,6 @@
     justify-self: center;
     background: var(--border);
 }
-/* Rail collecting the three drops, then a short stem into the hub. */
 .diagram__converge::before {
     content: "";
     position: absolute;
@@ -252,11 +206,67 @@
     max-width: none;
 }
 
-/* ── Out ────────────────────────────────────────────────────────────────── */
-.diagram__out {
-    position: relative;
-    height: 26px;
+/* One vocabulary at a time, cycling through all six specialisms. The point
+   is not the words — it is that they come from different teams and one
+   person is fluent in all of them. */
+.diagram__speaks {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-3);
+    max-width: none;
+    margin-block-start: var(--space-3);
 }
+
+.diagram__speaks-label {
+    font-family: var(--font-mono);
+    font-size: .625rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    flex: none;
+}
+
+.diagram__stream {
+    position: relative;
+    display: block;
+    width: 11rem;
+    height: 1.3em;
+}
+
+.diagram__stream > span {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: .6875rem;
+    letter-spacing: .04em;
+    color: var(--accent);
+    white-space: nowrap;
+    text-align: left;
+    opacity: 0;
+}
+
+.diagram.is-flowing .diagram__stream > span { animation: party-token 24s linear infinite; }
+.diagram.is-flowing .diagram__stream > span:nth-child(2) { animation-delay:  4s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(3) { animation-delay:  8s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(4) { animation-delay: 12s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(5) { animation-delay: 16s; }
+.diagram.is-flowing .diagram__stream > span:nth-child(6) { animation-delay: 20s; }
+
+@keyframes party-token {
+    0%          { opacity: 0; transform: translateY(4px); }
+    2%, 14.6%   { opacity: 1; transform: none; }
+    16.6%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .diagram__stream > span { animation: none !important; opacity: 0; }
+    .diagram__stream > span:first-child { opacity: 1; }
+}
+
+/* ── Out ────────────────────────────────────────────────────────────────── */
+.diagram__out { position: relative; height: 26px; margin-block-start: var(--space-3); }
 .diagram__out::before {
     content: "";
     position: absolute;
@@ -302,12 +312,6 @@
     color: var(--text-body);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .party__stream > span { animation: none !important; opacity: 0; }
-    .party__stream > span:first-child { opacity: 1; }
-}
-
-/* The org chart varies; the gap is constant. */
 .diagram__note {
     margin-block-start: var(--space-4);
     padding-block-start: var(--space-4);
@@ -595,9 +599,8 @@
 
 @media (max-width: 640px) {
     .section, .hero { padding-block: var(--space-8); }
-    .diagram__parties { grid-template-columns: 1fr; }
-    .diagram__converge { display: none; }
-    .diagram__hub { margin-block-start: var(--space-3); }
+    .diagram__parties { grid-template-columns: repeat(2, 1fr); }
+    .diagram__speaks { flex-direction: column; align-items: center; gap: var(--space-1); }
     .case > summary { padding: var(--space-4); }
     .case__detail { padding: 0 var(--space-4) var(--space-4); }
     .case__foot { flex-wrap: wrap; gap: var(--space-3); }
