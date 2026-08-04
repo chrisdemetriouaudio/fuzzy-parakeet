@@ -188,11 +188,30 @@ Broadcast & branded audio · Podcast production · Sonic identity · Music produ
 - The dependency map gives the positioning a visual explanation without claiming unverified project results.
 - The creative tab earns curiosity and adds dimensionality after the core case is made.
 
-## 7. Visual direction
+## 7. Visual direction — Microsoft-calibre enterprise product
 
-Use a calm, editorial enterprise aesthetic: near-black or warm off-white foundation; a single electric blue or acid-lime signal colour; modern grotesk typography; generous negative space; hairline system diagrams; restrained depth and subtle grain. Avoid stock photographs, generic corporate people imagery, and literal network-globe visuals.
+The experience should feel at home beside a premium Microsoft technology product: confident rather than flashy; clear rather than minimal for its own sake; warm and human without becoming informal. It must not copy Microsoft marks, typography, imagery, components or product UI.
 
-The hero visual should be an abstract dependency field: named nodes (Engineering, Network, Applications, Vendor, Operations) connected by fine paths. On interaction, one route becomes visible to demonstrate a dependency—not to decorate. Creative Media can introduce a small waveform-like rhythm in the same visual language, rather than switching to a separate brand.
+### Design principles
+
+- **Clarity earns trust.** Use a bright, cloud-white canvas, deep ink text and generous whitespace. The reader should immediately know what Chris does, where to look next, and why it matters.
+- **Precision signals capability.** Build on a quiet spacing grid, crisp rules, highly legible type, aligned cards and intentional responsive behaviour. Nothing should feel decorative or improvised.
+- **Humanity keeps it credible.** Use a restrained portrait or an abstract “people and systems” visual—not generic boardroom stock imagery. Write in direct, plain language.
+- **Depth is functional.** Use very soft shadows, layered pale-blue surfaces and a single Microsoft-adjacent azure signal colour only to indicate interaction, key terms and system paths.
+- **Technology is understandable.** Translate enterprise complexity into an elegant dependency graph, readable labels and short explanations—not a sci-fi network illustration.
+
+### Palette and typography
+
+- Foundation: cloud white (`#F7F8FA`) with white surfaces; deep charcoal (`#1B1B1B`) for text.
+- Signal: an azure-blue in the `#0078D4` family, used sparingly; a pale-blue tint for information surfaces; one subtle teal or violet accent only if hierarchy needs it.
+- Type: a contemporary humanist sans-serif with strong numerals and excellent screen rendering. Use a single family with a restrained display scale; do not use condensed, techno or retro type.
+- Shapes: modest 8–12 px radii, fine neutral borders, no glassmorphism, no heavy gradients, no neon, no grain, and no visual effects that obscure content.
+
+### Composition
+
+The hero should pair the proposition with a calm dependency field: labelled nodes for Engineering, Network, Applications, Vendor and Operations, connected by precise thin paths. One path can become blue on hover or keyboard focus to demonstrate a dependency. The page should move from broad strategic statement to clear operating model to contact, with broad horizontal bands and editorial breathing room.
+
+Creative Media uses the same system—white space, ink, azure and clean cards—with a small waveform rhythm as a secondary motif. It should feel like another capability area of the same professional, not an entirely separate brand.
 
 ## 8. CTA strategy
 
