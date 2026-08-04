@@ -55,7 +55,7 @@ button { font: inherit; }
 .menu-toggle { display: none; width: 2.75rem; height: 2.75rem; padding: .6rem; }
 .menu-toggle span:not(.sr-only) { display: block; width: 100%; height: 1px; margin: .38rem 0; background: currentColor; }
 
-.hero { min-height: min(48rem, calc(100vh - 5rem)); display: grid; align-items: center; padding-block: var(--space-5); }
+.hero { min-height: min(42rem, calc(100svh - 5rem)); display: grid; align-items: center; padding-block: clamp(4rem, 7vw, 7rem); }
 .hero-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem); gap: var(--space-4); align-items: end; }
 .eyebrow, .context-label { margin: 0 0 var(--space-2); color: var(--accent); font: 500 .7rem/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
 h1, h2, p { margin-top: 0; }
@@ -68,10 +68,18 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .hero-context { padding: var(--space-2) 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
 .hero-context p:last-child { margin-bottom: 0; }
 
-.foundation-section { padding-block: var(--space-5); border-top: 1px solid var(--line); }
+.foundation-section { padding-block: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--line); }
 .foundation-section-muted { background: var(--surface); }
 .section-layout { display: grid; grid-template-columns: minmax(11rem, .5fr) minmax(0, 1fr); gap: var(--space-3); }
 .section-layout > div > p { max-width: var(--reading); margin-bottom: 0; color: var(--muted); }
+.recruiter-brief { padding-block: var(--space-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.recruiter-brief-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr); gap: var(--space-4); align-items: end; }
+.recruiter-brief h2 { max-width: 19ch; margin-bottom: var(--space-2); font-size: clamp(2rem, 3.4vw, 3.5rem); }
+.recruiter-brief-copy > p:last-child { max-width: var(--reading); margin-bottom: 0; color: var(--muted); }
+.recruiter-facts { display: grid; gap: 0; margin: 0; border-top: 1px solid var(--line); }
+.recruiter-facts > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--space-1); padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.recruiter-facts dt { color: var(--accent); font: 500 .65rem/1.45 var(--font-mono); letter-spacing: .09em; text-transform: uppercase; }
+.recruiter-facts dd { margin: 0; color: var(--muted); font-size: .82rem; }
 .introduction-layout { display: grid; grid-template-columns: minmax(16rem, .8fr) minmax(0, 1fr); gap: var(--space-4); align-items: center; }
 .portrait-placeholder { position: relative; display: grid; min-height: clamp(22rem, 40vw, 34rem); overflow: hidden; place-items: center; border: 1px solid var(--line); background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 35%), linear-gradient(145deg, var(--surface), var(--page)); }
 .portrait-placeholder::before, .portrait-placeholder::after { position: absolute; content: ""; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 50%; }
@@ -124,6 +132,8 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .case-study-grid p:last-child { color: var(--muted); font-size: .88rem; }
 .case-study-reflection { padding: var(--space-2) var(--space-3) var(--space-3); border-top: 1px solid var(--line); }
 .case-study-reflection p:last-child { max-width: var(--reading); font: 500 clamp(1.15rem, 2vw, 1.45rem)/1.4 var(--font-editorial); }
+.case-study-compact { margin-top: var(--space-2); }
+.case-study-compact .case-study-header { padding-bottom: var(--space-2); }
 .site-footer { padding-block: var(--space-3); border-top: 1px solid var(--line); color: var(--muted); font: .7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .site-footer .shell { display: flex; justify-content: space-between; gap: var(--space-2); }
 
@@ -135,7 +145,7 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
   .primary-nav { display: none; position: absolute; top: 100%; right: var(--space-3); left: var(--space-3); z-index: 2; flex-direction: column; gap: 0; padding: .5rem; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1rem 2rem rgb(0 0 0 / .12); }
   .primary-nav[data-open="true"] { display: flex; }
   .primary-nav a { padding: .8rem; }
-  .hero-layout, .section-layout, .introduction-layout { grid-template-columns: 1fr; }
+  .hero-layout, .section-layout, .introduction-layout, .recruiter-brief-layout { grid-template-columns: 1fr; }
   .hero-context { max-width: var(--reading); }
   .scenario-picker { align-items: flex-start; flex-direction: column; }
   .flow-diagram { grid-template-columns: 1fr; }
