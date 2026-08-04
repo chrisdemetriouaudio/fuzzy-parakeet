@@ -30,7 +30,6 @@
         <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-navigation>
           <a href="#enterprise">Enterprise Technology</a>
           <a href="#creative-media">Creative Media</a>
-          <a href="#resources">Resources</a>
         </nav>
 
         <div class="utility-controls" aria-label="Display preferences">
@@ -270,34 +269,37 @@
         </div>
       </section>
 
+      <span id="creative-media" aria-hidden="true"></span>
+
       <section id="contact" class="contact-cta" aria-labelledby="contact-title">
         <div class="shell contact-cta-layout">
-          <div>
+          <div class="contact-introduction">
             <p class="eyebrow">The next conversation</p>
             <h2 id="contact-title">Building complex enterprise technology?</h2>
             <p>If you value someone who sees dependencies, operational readiness and cross-functional technology alignment early, I’d be glad to talk.</p>
+            <p class="contact-availability">Available for permanent and contract opportunities.</p>
+            <div class="contact-links" aria-label="Contact options">
+              <a href="mailto:techdelivery@chrisdemetriou.com">techdelivery@chrisdemetriou.com <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/chrisdemetriou" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
-          <a class="contact-link" href="mailto:techdelivery@chrisdemetriou.com">Start a conversation <span aria-hidden="true">↗</span></a>
-        </div>
-      </section>
 
-      <section id="creative-media" class="foundation-section foundation-section-muted" aria-labelledby="creative-title">
-        <div class="shell section-layout">
-          <p class="eyebrow">Creative Media</p>
-          <div>
-            <h2 id="creative-title">A second professional discipline.</h2>
-            <p>Creative Media will be presented as evidence of communication, craftsmanship and technical care—always in support of the primary Enterprise Technology story.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="resources" class="foundation-section" aria-labelledby="resources-title">
-        <div class="shell section-layout">
-          <p class="eyebrow">Resources</p>
-          <div>
-            <h2 id="resources-title">Useful thinking, shared clearly.</h2>
-            <p>Articles, diagrams and practical perspectives on enterprise technology operations will live here.</p>
-          </div>
+          <form class="contact-form" data-contact-form>
+            <div class="form-field">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-message">How can I help?</label>
+              <textarea id="contact-message" name="message" rows="5" required></textarea>
+            </div>
+            <button class="contact-submit" type="submit">Start a conversation <span aria-hidden="true">↗</span></button>
+            <p class="form-note">Submitting opens your email client with the message prepared.</p>
+          </form>
         </div>
       </section>
     </main>

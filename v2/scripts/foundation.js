@@ -84,3 +84,15 @@ if (flowControls) {
     if (button) selectScenario(button.dataset.flowScenario);
   });
 }
+
+const contactForm = document.querySelector('[data-contact-form]');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    const subject = `Website enquiry from ${formData.get('name')}`;
+    const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
+    window.location.href = `mailto:techdelivery@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
