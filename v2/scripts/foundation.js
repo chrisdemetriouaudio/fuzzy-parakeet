@@ -138,9 +138,12 @@ if (contactForm) {
 
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!contactForm.checkValidity()) {
+    const emailValue = contactEmail.value.trim();
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+    if (!contactForm.checkValidity() || !emailIsValid) {
       contactFields.forEach((field) => field.setAttribute('aria-invalid', String(!field.validity.valid)));
-      setContactStatus('Please complete the highlighted fields.', 'error');
+      contactEmail.setAttribute('aria-invalid', String(!emailIsValid));
+      setContactStatus('Please complete the highlighted fields with a valid email address.', 'error');
       contactForm.reportValidity();
       return;
     }
@@ -174,9 +177,7 @@ if (contactForm) {
       contactSubmit.disabled = false;
     }
 
-    const subject = `Website enquiry from ${formData.get('name')}`;
-    const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
-    window.location.href = `mailto:techopsmgmt@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setContactStatus('Your details are verified. Direct delivery is being connected; please use the email link below in the meantime.', 'ready');
   });
 }
 
@@ -194,6 +195,11 @@ if (cookieBanner) {
   cookieBanner.querySelector('[data-cookie-essential]').addEventListener('click', () => setCookiePreference('essential'));
   cookieBanner.querySelector('[data-cookie-accept]').addEventListener('click', () => setCookiePreference('accepted'));
 }
+
+document.querySelector('[data-cookie-settings]')?.addEventListener('click', () => {
+  localStorage.removeItem('cd-cookie-preference');
+  if (cookieBanner) cookieBanner.hidden = false;
+});
 
 const ribbonMessage = document.querySelector('[data-ribbon-message]');
 
