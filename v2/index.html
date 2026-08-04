@@ -79,13 +79,22 @@
             </div>
           </div>
 
-          <figure class="flow-diagram" aria-describedby="flow-caption">
+          <div class="scenario-picker" role="group" aria-label="Enterprise change scenarios" data-flow-controls>
+            <p class="flow-label">Explore a scenario</p>
+            <div class="scenario-actions">
+              <button type="button" class="scenario-button" aria-pressed="true" data-flow-scenario="api">API change</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="access">User access</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="release">Release change</button>
+            </div>
+          </div>
+
+          <figure class="flow-diagram" id="flow-panel" aria-describedby="flow-caption" aria-live="polite">
             <div class="flow-stage flow-stage-inputs">
               <p class="flow-label">Technical input</p>
-              <ul class="flow-list" aria-label="Examples of technical information">
+              <ul class="flow-list" aria-label="Technical information for this scenario" data-flow-inputs>
                 <li><span class="flow-marker" aria-hidden="true"></span>API dependency</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Identity mapping</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Firewall rule</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Authentication method</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Error handling</li>
                 <li><span class="flow-marker" aria-hidden="true"></span>Rollback strategy</li>
               </ul>
             </div>
@@ -94,25 +103,25 @@
               <p class="flow-label">Context and judgement</p>
               <div class="context-core">
                 <span class="context-initials" aria-hidden="true">CD</span>
-                <h3>Chris evaluates the change.</h3>
-                <ul>
-                  <li>What else depends on this?</li>
-                  <li>Which assumption needs testing?</li>
-                  <li>Who needs to be involved now?</li>
+                <h3 data-flow-title>Chris evaluates the change.</h3>
+                <ul data-flow-questions>
+                  <li>Which systems consume this API?</li>
+                  <li>Is the authentication path understood?</li>
+                  <li>What happens if the integration fails?</li>
                 </ul>
               </div>
             </article>
 
             <div class="flow-stage flow-stage-outcomes">
               <p class="flow-label">Relevant outcome</p>
-              <ul class="flow-list" aria-label="Examples of contextual outcomes">
+              <ul class="flow-list" aria-label="Contextual outcomes for this scenario" data-flow-outcomes>
                 <li><span class="flow-marker" aria-hidden="true"></span>Integration dependency identified</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>User access impact confirmed</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Network preparation required</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Security review required</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Consumer teams engaged</li>
                 <li><span class="flow-marker" aria-hidden="true"></span>Recovery plan agreed</li>
               </ul>
             </div>
-            <figcaption id="flow-caption">Technical teams provide the detail. Chris identifies the implications and prompts the relevant technical, governance and operational conversations.</figcaption>
+            <figcaption id="flow-caption" data-flow-summary>For an API change, technical teams provide the detail. Chris identifies integration, security and recovery implications before the change proceeds.</figcaption>
           </figure>
         </div>
       </section>

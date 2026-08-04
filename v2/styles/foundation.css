@@ -73,6 +73,11 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .section-layout { display: grid; grid-template-columns: minmax(11rem, .5fr) minmax(0, 1fr); gap: var(--space-3); }
 .section-layout > div > p { max-width: var(--reading); margin-bottom: 0; color: var(--muted); }
 .flow-introduction { margin-bottom: var(--space-4); }
+.scenario-picker { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); margin-bottom: var(--space-2); }
+.scenario-picker .flow-label { margin: 0; }
+.scenario-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.scenario-button { padding: .55rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: .72rem; font-weight: 700; }
+.scenario-button:hover, .scenario-button[aria-pressed="true"] { border-color: var(--accent); color: var(--text); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .flow-diagram { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 1.05fr) minmax(0, 1fr); gap: var(--space-2); margin: 0; }
 .flow-stage { min-width: 0; padding: var(--space-2); border: 1px solid var(--line); }
 .flow-stage-inputs, .flow-stage-outcomes { align-self: center; background: var(--surface); }
@@ -103,6 +108,7 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
   .primary-nav a { padding: .8rem; }
   .hero-layout, .section-layout { grid-template-columns: 1fr; }
   .hero-context { max-width: var(--reading); }
+  .scenario-picker { align-items: flex-start; flex-direction: column; }
   .flow-diagram { grid-template-columns: 1fr; }
   .flow-stage-context::before, .flow-stage-context::after { top: auto; right: auto; left: 50%; width: 1px; height: var(--space-2); }
   .flow-stage-context::before { bottom: 100%; }
