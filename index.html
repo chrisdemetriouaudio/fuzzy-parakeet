@@ -3,172 +3,412 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Demetriou — Technical Operations Manager | Enterprise Tech &amp; Creative Media</title>
+<title>Chris Demetriou — Technical Delivery Manager | Enterprise Technology Operations</title>
 
-<meta name="description" content="Chris Demetriou — Technical Operations Manager. Technical enough to work with every engineering specialism, and to spot where their answers stop fitting together.">
+<meta name="description" content="Enterprise technology rarely fails because of the technology. Chris Demetriou — Technical Delivery Manager, sixteen years spotting dependencies early, challenging assumptions and getting complex enterprise change into production with fewer surprises.">
 <link rel="canonical" href="https://chrisdemetriou.com/">
 
-<meta property="og:title" content="Chris Demetriou — Technical Operations Manager | Enterprise Tech &amp; Creative Media">
-<meta property="og:description" content="Understanding complex systems, connecting the specialists, delivering it safely.">
-<meta property="og:type" content="website">
+<meta property="og:title" content="Chris Demetriou — Technical Delivery Manager">
+<meta property="og:description" content="Enterprise technology rarely fails because of the technology. It fails when dependencies are missed, assumptions go unchallenged, and the right conversations happen too late.">
+<meta property="og:type" content="profile">
 <meta property="og:url" content="https://chrisdemetriou.com/">
 <meta property="og:image" content="https://chrisdemetriou.com/images/share-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 
-<link rel="preload" href="/assets/fonts/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/landing.css">
+<link rel="stylesheet" href="/assets/css/home.css">
+
+<script>
+/* Arms the scroll reveal before first paint, so there is no flash of visible
+   content. Deliberately conditional: with scripting off this never runs, the
+   class is never set, and every section renders normally. */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  var root = document.documentElement;
+  root.classList.add('js-reveal');
+  /* Failsafe: if home.js never arrives, un-hide everything rather than
+     leaving a blank page behind. */
+  window.setTimeout(function () {
+    if (!root.hasAttribute('data-reveal-ready')) root.classList.remove('js-reveal');
+  }, 2500);
+})();
+</script>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Chris Demetriou",
-  "jobTitle": [
-    "Technical Operations Manager",
-    "Technical Delivery Manager",
-    "Technical Operations Lead",
-    "Infrastructure Delivery Manager",
-    "Technical Implementation Manager"
-  ],
-  "description": "Technical Operations Manager working across infrastructure, networking, databases, DevOps, applications and security — technical enough to question each specialism directly, and to catch where their answers stop fitting together. More than twenty years across enterprise SaaS, alongside a parallel career in broadcast, audio engineering and live production.",
-  "url": "https://chrisdemetriou.com",
-  "sameAs": ["https://linkedin.com/in/chrisademetriou"],
-  "knowsAbout": [
-    "Enterprise Technical Delivery",
-    "Technical Operations",
-    "Cloud Transformation",
-    "Service Transition",
-    "Operational Readiness",
-    "Broadcast Audio Production",
-    "Podcast Production"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Greater Manchester",
-    "addressCountry": "UK"
+  "@type": "ProfilePage",
+  "url": "https://chrisdemetriou.com/",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Chris Demetriou",
+    "jobTitle": [
+      "Technical Delivery Manager",
+      "IT Operations Manager",
+      "Technical Operations Manager",
+      "Infrastructure Delivery Manager",
+      "Technical Implementation Manager"
+    ],
+    "description": "Technical Delivery Manager with sixteen years in enterprise technology operations — spotting dependencies early, challenging assumptions, and getting complex enterprise change into production with fewer surprises.",
+    "url": "https://chrisdemetriou.com/",
+    "sameAs": ["https://linkedin.com/in/chrisademetriou"],
+    "knowsAbout": [
+      "Enterprise Technology Operations",
+      "Technical Delivery",
+      "Cloud Transformation",
+      "Oracle Cloud Infrastructure",
+      "Change Management",
+      "Release Management",
+      "Operational Readiness",
+      "Production Cutovers",
+      "Major Incident Management",
+      "SAP ERP Migration",
+      "Enterprise Integration Security",
+      "Vendor Management"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Greater Manchester",
+      "addressCountry": "UK"
+    }
   }
 }
 </script>
 </head>
 
 <body>
-<a class="skip-link" href="#choose">Skip to the two sections</a>
+<a class="skip-link" href="#scenario">Skip to the worked example</a>
 
-<div class="landing">
-  <div class="container landing__inner">
+<header class="hd" id="hd">
+  <div class="wrap hd__in">
+    <a class="mark" href="/">CHRIS<b>D</b></a>
+    <nav aria-label="Sections">
+      <a href="#method">Method</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#work">Work</a>
+      <a href="/media/" class="js-keep">Creative Media</a>
+      <a class="btn btn--solid js-keep" href="#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
 
-    <header class="landing__top">
-      <span class="wordmark">CHRIS<b>D</b></span>
-      <span class="eyebrow eyebrow--grey">Greater Manchester</span>
-    </header>
+<main>
 
-    <main class="landing__hero">
-      <!-- The thesis leads. The two domains below are evidence of it, not a
-           pair of competing identities the visitor has to reconcile. -->
-      <h1 class="landing__statement">One mindset.</h1>
+  <!-- ══ 01 · Recognition ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Enterprise Technology Operations</p>
 
-      <ul class="landing__creed">
-        <li>Understanding complex systems.</li>
-        <li>Connecting the specialists.</li>
-        <li>Delivering it safely.</li>
-      </ul>
-    </main>
+      <h1 data-reveal>Enterprise technology rarely fails because of the technology.</h1>
 
-    <!-- One root, two limbs. Draws the connection rather than asking the
-         visitor to infer it. Decorative — the relationship is already carried
-         by the heading structure. -->
-    <div class="spine" aria-hidden="true">
-      <span class="spine__stem"></span>
-      <div class="spine__branch">
-        <span class="spine__drop"></span>
-        <span class="spine__drop"></span>
+      <p class="hero__sub" data-reveal>
+        It fails when dependencies are missed, assumptions go unchallenged, and the right
+        conversations happen too late.
+      </p>
+
+      <p class="hero__body" data-reveal>
+        I&rsquo;ve spent sixteen years inside that gap &mdash; finding the dependency nobody logged,
+        asking the question nobody wanted to ask, and getting the right people in the room while
+        it&rsquo;s still cheap to change course.
+      </p>
+
+      <div class="byline" data-reveal>
+        <b>Chris Demetriou</b>
+        <span>Technical Delivery Manager &middot; Enterprise Technology Operations</span>
+      </div>
+
+      <p class="avail" data-reveal>
+        <i aria-hidden="true"></i>
+        Available now &middot; Greater Manchester, or remote across the UK
+      </p>
+
+      <div class="hero__cta" data-reveal>
+        <a class="btn btn--solid" href="#scenario">See how I think &nbsp;&darr;</a>
       </div>
     </div>
+  </section>
 
-    <section class="landing__choice" id="choose" aria-label="Choose a section">
+  <!-- ══ 02 · Demonstration ════════════════════════════════════════════ -->
+  <section id="scenario" class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">02 &mdash; <b>A worked example</b></p>
+        <h2 class="s-title">An acquisition lands on your desk.</h2>
+        <p>The board calls it an application upgrade. Here is what it actually is.</p>
+      </div>
 
-      <a class="door door--primary" href="/enterprise/" id="door-enterprise">
-        <span class="eyebrow">01 — Enterprise Tech</span>
-        <span class="door__title">Technical Operations</span>
-        <span class="door__line">
-          Working across every engineering specialism, where the gaps between them live.
-        </span>
-        <span class="door__cta"><span class="btn btn--primary">Enter &rarr;</span></span>
-      </a>
+      <div class="cascade">
+        <div class="row" data-reveal><span class="row__disc">Enterprise apps</span><span class="row__q">Does their data model fit ours, or is this a migration wearing an upgrade&rsquo;s clothes?</span><span class="row__lt">~6 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Infrastructure</span><span class="row__q">Is there capacity, and is it in a region we&rsquo;re allowed to use?</span><span class="row__lt">~4 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Networking</span><span class="row__q">Site-to-site links, firewall rules, source IPs. None of it is same-day.</span><span class="row__lt">~3 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Security</span><span class="row__q">New integrations, new attack surface, new approvals &mdash; and a review board that meets fortnightly.</span><span class="row__lt">~4 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Change</span><span class="row__q">Which CAB, and have we already missed the cut-off for this quarter?</span><span class="row__lt">~2 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Release</span><span class="row__q">Which window &mdash; and what else is already booked into it?</span><span class="row__lt">fixed</span></div>
+        <div class="row" data-reveal><span class="row__disc">Vendors</span><span class="row__q">Licence counts, contract terms, professional services lead time.</span><span class="row__lt">~8 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Operational readiness</span><span class="row__q">Who supports this on day one, and has anyone trained them?</span><span class="row__lt">~3 wks</span></div>
+        <div class="row" data-reveal><span class="row__disc">Downstream</span><span class="row__q">What breaks in the three systems nobody mentioned in the kick-off?</span><span class="row__lt">unknown</span></div>
+      </div>
 
-      <a class="door door--secondary" href="/media/">
-        <span class="eyebrow eyebrow--grey">02 — Where it started</span>
-        <span class="door__title">Creative Media</span>
-        <span class="door__line">
-          Radio imaging, sonic branding and podcast production.
-        </span>
-        <span class="door__cta"><span class="btn btn--line">Enter &rarr;</span></span>
-      </a>
+      <p class="cascade__foot" data-reveal>
+        Typical lead times. Yours will differ &mdash; which is rather the point of asking early.
+      </p>
 
-    </section>
+      <p class="pull" data-reveal>
+        Nine questions. Every one of them has a lead time.
+        <em>Asked in month one, this is planning. Asked in month four, it&rsquo;s a slipped go-live
+        and a board conversation.</em>
+      </p>
+    </div>
+  </section>
 
-    <footer class="landing__foot">
-      <span class="landing__foot-name">Chris Demetriou</span>
-      <span class="landing__contact">
-        <a href="https://linkedin.com/in/chrisademetriou" rel="noopener">LinkedIn</a>
-        <a id="landing-email" href="#" data-u="techdelivery" data-d="chrisdemetriou.com">Email</a>
-      </span>
-    </footer>
+  <!-- ══ 03 · Method ═══════════════════════════════════════════════════ -->
+  <section id="method" class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">03 &mdash; <b>Method</b></p>
+        <h2 class="s-title">Four things sixteen years teaches you</h2>
+      </div>
 
+      <div class="grid2">
+        <article class="card" data-reveal>
+          <span class="card__n">01</span>
+          <h3>Dependencies have lead times</h3>
+          <p>A firewall change isn&rsquo;t a task. It&rsquo;s three weeks, a change record, and somebody else&rsquo;s backlog. Treating it as a task is how go-live dates slip.</p>
+        </article>
+        <article class="card" data-reveal>
+          <span class="card__n">02</span>
+          <h3>&ldquo;Fine&rdquo; is not a status</h3>
+          <p>Ready means demonstrated. A tested tunnel. A verified rule. Data that has actually moved between two systems, once, successfully.</p>
+        </article>
+        <article class="card" data-reveal>
+          <span class="card__n">03</span>
+          <h3>The failure is in the gap</h3>
+          <p>Six specialisms, six partial pictures, all of them accurate. What breaks is rarely inside one of them &mdash; it&rsquo;s where two meet and nobody owns the join.</p>
+        </article>
+        <article class="card" data-reveal>
+          <span class="card__n">04</span>
+          <h3>The cheapest question is the early one</h3>
+          <p>The same question costs an hour in a planning workshop or a weekend at cutover. It&rsquo;s the same question. Only the invoice changes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 · Proof ════════════════════════════════════════════════════ -->
+  <section id="evidence" class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">04 &mdash; <b>Track record</b></p>
+        <h2 class="s-title">Delivered, at enterprise scale</h2>
+      </div>
+
+      <div class="stats" data-reveal>
+        <div class="stat">
+          <div class="stat__n" data-count="80" data-suffix="+">80+</div>
+          <div class="stat__l">Applications</div>
+          <p class="stat__d">Migrated from an Equinix colocation facility to Oracle Cloud Infrastructure.</p>
+        </div>
+        <div class="stat">
+          <div class="stat__n" data-count="500" data-prefix="~&pound;" data-suffix="k">~&pound;500k</div>
+          <div class="stat__l">Annual saving</div>
+          <p class="stat__d">Operating cost reduction delivered by that programme.</p>
+        </div>
+        <div class="stat">
+          <div class="stat__n" data-count="3000" data-suffix="+">3,000+</div>
+          <div class="stat__l">Integrations</div>
+          <p class="stat__d">Moved off legacy HTTP and FTP onto HTTPS and SFTP, with minimal disruption.</p>
+        </div>
+        <div class="stat">
+          <div class="stat__n" data-count="7" data-suffix=" yrs">7 yrs</div>
+          <div class="stat__l">24/7 P1 rota</div>
+          <p class="stat__d">Assembling specialists mid-incident and getting to root cause faster.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 05 · The work ═════════════════════════════════════════════════ -->
+  <section id="work" class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">05 &mdash; <b>The work</b></p>
+        <h2 class="s-title">Five programmes, and what each one turned on</h2>
+      </div>
+
+      <div class="cases">
+
+        <details class="case" data-reveal>
+          <summary>
+            <span class="case__top">
+              <span class="case__client">E2open</span>
+              <h3>Enterprise Cloud Transformation</h3>
+              <span class="case__more">Detail</span>
+            </span>
+            <span class="case__sum">More than 80 enterprise applications out of an Equinix colocation facility and into Oracle Cloud Infrastructure.</span>
+          </summary>
+          <div class="case__detail">
+            <div class="case__part"><h4>Context</h4><p>A SaaS estate serving more than 3,000 global organisations, running in a colocation facility with the operating cost that implies.</p></div>
+            <div class="case__part"><h4>What made it hard</h4><p>Eighty-plus applications, each with its own infrastructure, networking, database and integration dependencies &mdash; and no tolerance for extended downtime on any of them.</p></div>
+            <div class="case__part"><h4>What I did</h4><p>Worked across infrastructure, networking, databases, DevOps and applications through planning and migration. Validated readiness, surfaced cross-team dependencies, and challenged assumptions before each cutover rather than during it.</p></div>
+            <div class="case__part"><h4>Outcome</h4><p>All applications migrated successfully, contributing approximately &pound;500,000 in annual operating cost savings.</p></div>
+          </div>
+        </details>
+
+        <details class="case" data-reveal>
+          <summary>
+            <span class="case__top">
+              <span class="case__client">Sysco UK &middot; Capgemini</span>
+              <h3>SAP ERP Transition</h3>
+              <span class="case__more">Detail</span>
+            </span>
+            <span class="case__sum">A business-critical ERP transition across three organisations, with operational continuity maintained throughout.</span>
+          </summary>
+          <div class="case__detail">
+            <div class="case__part"><h4>Context</h4><p>An ERP transition delivered with Capgemini as delivery partner, spanning three organisations&rsquo; technical teams.</p></div>
+            <div class="case__part"><h4>What made it hard</h4><p>Three sets of change processes, three release calendars, and no single team holding the whole dependency picture.</p></div>
+            <div class="case__part"><h4>What I did</h4><p>Coordinated technical readiness across networking, infrastructure, database and application teams, and ran workshops spanning customer, delivery partner and internal specialists.</p></div>
+            <div class="case__part"><h4>Outcome</h4><p>VPN readiness, firewall changes, monitoring and end-to-end integration testing all validated before production switchover.</p></div>
+          </div>
+        </details>
+
+        <details class="case" data-reveal>
+          <summary>
+            <span class="case__top">
+              <span class="case__client">E2open</span>
+              <h3>Security Modernisation</h3>
+              <span class="case__more">Detail</span>
+            </span>
+            <span class="case__sum">More than 3,000 customer integrations moved off legacy HTTP and FTP onto HTTPS and SFTP.</span>
+          </summary>
+          <div class="case__detail">
+            <div class="case__part"><h4>Context</h4><p>Thousands of enterprise integrations still exchanging production data over unencrypted legacy protocols.</p></div>
+            <div class="case__part"><h4>What made it hard</h4><p>Every one of them belonged to a customer with their own firewall, their own change process and their own idea of an acceptable window.</p></div>
+            <div class="case__part"><h4>What I did</h4><p>Worked with networking, application and customer engineering teams to validate firewall readiness, source IP configuration and production connectivity ahead of retiring each legacy service.</p></div>
+            <div class="case__part"><h4>Outcome</h4><p>Enterprise technical debt reduced and production security improved, with minimal customer disruption.</p></div>
+          </div>
+        </details>
+
+        <details class="case" data-reveal>
+          <summary>
+            <span class="case__top">
+              <span class="case__client">Heineken UK</span>
+              <h3>Production Connectivity &amp; Operational Readiness</h3>
+              <span class="case__more">Detail</span>
+            </span>
+            <span class="case__sum">Secure production connectivity established between head office and a new cloud-hosted enterprise platform.</span>
+          </summary>
+          <div class="case__detail">
+            <div class="case__part"><h4>Context</h4><p>A new cloud-hosted platform requiring verified, secure connectivity into an established corporate network.</p></div>
+            <div class="case__part"><h4>What I did</h4><p>Worked between customer infrastructure teams and internal networking specialists, coordinating VPN implementation and connectivity validation.</p></div>
+            <div class="case__part"><h4>Outcome</h4><p>End-to-end data exchange verified with application specialists, and monitoring and operational acceptance completed before service transition.</p></div>
+          </div>
+        </details>
+
+        <details class="case" data-reveal>
+          <summary>
+            <span class="case__top">
+              <span class="case__client">E2open</span>
+              <h3>Major Incident Management</h3>
+              <span class="case__more">Detail</span>
+            </span>
+            <span class="case__sum">Seven years on a 24/7 Priority 1 rota for Tier 1 enterprise customers.</span>
+          </summary>
+          <div class="case__detail">
+            <div class="case__part"><h4>Context</h4><p>A standing 24/7 Priority 1 rota covering enterprise platforms in active production use worldwide.</p></div>
+            <div class="case__part"><h4>What I did</h4><p>Assembled specialists across infrastructure, networking, databases, applications and development mid-incident; drove the technical investigation and tested the assumptions being made under pressure.</p></div>
+            <div class="case__part"><h4>Outcome</h4><p>Faster root cause identification, and technically informed updates issued throughout so engineering could stay on restoration.</p></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 06 · Consequence ══════════════════════════════════════════════ -->
+  <section class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">06 &mdash; <b>In practice</b></p>
+        <h2 class="s-title">What this looks like on your side of the table</h2>
+      </div>
+
+      <ul class="changes" data-reveal>
+        <li>Fewer emergency changes.</li>
+        <li>Fewer windows that slip in the final week.</li>
+        <li>Fewer surprises that turn into P1s after go-live.</li>
+        <li>Fewer moments where someone says &ldquo;nobody told us we were part of this&rdquo;.</li>
+        <li>Not because the work got easier. Because the questions got asked earlier.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 07 · Current ══════════════════════════════════════════════════ -->
+  <section class="rule">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <p class="eyebrow">07 &mdash; <b>Currently building</b></p>
+        <h2 class="s-title">Two things I&rsquo;m working on</h2>
+      </div>
+
+      <div class="projects">
+        <article class="card project" data-reveal>
+          <h3>GraceCast</h3>
+          <p>An AI-assisted production console that lets volunteers produce broadcast-quality live streams from a single wide-angle camera. Evaluated several approaches before prototyping, then designed operator workflows that reduce the load on the person running it.</p>
+          <p class="project__pending">Technical decisions &middot; outcome &middot; lessons &mdash; to follow</p>
+        </article>
+        <article class="card project" data-reveal>
+          <h3>Genesis</h3>
+          <p>A secure cloud platform for rehearsal planning, scheduling and communication, built to replace a sprawl of messages and spreadsheets with a single source of truth. Developed through iterative feedback from the people using it.</p>
+          <p class="project__pending">Technical decisions &middot; outcome &middot; lessons &mdash; to follow</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 08 · Dimension ════════════════════════════════════════════════ -->
+  <section id="media" class="media">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>08 &mdash; <b>The other career</b></p>
+      <h2 data-reveal>Sixteen years in enterprise technology. Twenty in live production.</h2>
+      <p data-reveal>
+        The second explains the first. Broadcast has no undo &mdash; when it&rsquo;s live, it&rsquo;s
+        live, and the only defence is everything you checked beforehand. That is the same instinct
+        that makes a cutover window survivable.
+      </p>
+      <div data-reveal><a class="btn btn--text" href="/media/">Explore Creative Media &nbsp;&rarr;</a></div>
+    </div>
+  </section>
+
+  <!-- ══ 09 · Action ═══════════════════════════════════════════════════ -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>09 &mdash; <b>Get in touch</b></p>
+      <h2 data-reveal style="margin-top:18px;">If this sounds like a problem you currently have, I&rsquo;d like to hear about it.</h2>
+      <p class="contact__meta" data-reveal>
+        Available now. Greater Manchester, or remote across the UK.
+      </p>
+      <div class="contact__cta" data-reveal>
+        <a class="btn btn--solid btn--lg" id="mail" href="#" data-u="techdelivery" data-d="chrisdemetriou.com">Email</a>
+        <a class="btn btn--line" href="https://linkedin.com/in/chrisademetriou" rel="noopener">LinkedIn</a>
+        <a class="btn btn--line" href="/chris-demetriou-cv.pdf">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <span>&copy; Chris Demetriou</span>
+    <span>Enterprise Technology Operations &middot; Greater Manchester</span>
   </div>
-</div>
+</footer>
 
-<script>
-/* Legacy deep links. The media site lived at the apex before the restructure,
-   so anchors already in the wild are forwarded rather than silently dropped.
-   GitHub Pages has no server-side redirects, which is why this runs here. */
-(function () {
-  var MEDIA_ANCHORS = [
-    'soundcloud-section', 'what-i-do', 'skills-strip', 'case-study', 'career',
-    'credits', 'feedback-section', 'about', 'about-heading', 'contact'
-  ];
-  var hash = window.location.hash.replace('#', '');
-  if (hash && MEDIA_ANCHORS.indexOf(hash) !== -1) {
-    window.location.replace('/media/#' + hash);
-  }
-})();
-
-/* Address assembled at runtime so it never appears in the page source. */
-(function () {
-  var el = document.getElementById('landing-email');
-  if (!el) return;
-  el.setAttribute('href', 'mailto:' + el.getAttribute('data-u') + '@' + el.getAttribute('data-d'));
-})();
-
-/* The primary door breathes three times, then stops for good.
-   Repeating motion holds attention rather than directing it, so this points
-   once and gets out of the way. Any interaction cancels it early, and it is
-   never armed at all under reduced-motion. */
-(function () {
-  var door = document.getElementById('door-enterprise');
-  if (!door) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  door.classList.add('is-breathing');
-
-  function settle() {
-    door.classList.remove('is-breathing');
-    window.removeEventListener('scroll', settle);
-    door.removeEventListener('pointerenter', settle);
-    door.removeEventListener('focus', settle);
-  }
-
-  door.addEventListener('animationend', settle);
-  window.addEventListener('scroll', settle, { passive: true, once: true });
-  door.addEventListener('pointerenter', settle, { once: true });
-  door.addEventListener('focus', settle, { once: true });
-})();
-</script>
-
+<script src="/assets/js/home.js" defer></script>
 </body>
 </html>
