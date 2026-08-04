@@ -64,7 +64,7 @@ const scenarios = {
     inputs: ['24/7 Priority 1 rota', 'Tier 1 enterprise customers', 'Cross-functional specialists', 'Time-critical customer communication'],
     questions: ['Which expertise will test the leading assumption?', 'What evidence changes the next decision?', 'What does the customer need to know now?'],
     outcomes: ['Technical bridge assembled and coordinated', 'Specialists directed through the investigation', 'Customers and senior leadership kept informed throughout', 'Root cause and recovery driven faster'],
-    summary: 'Across seven years on E2open’s Priority 1 rota, the work was to turn urgent technical signals into a coordinated response and clear customer communication.'
+    summary: 'Across seven years leading E2open’s Priority 1 technical response, the work was to assemble the right specialists, coordinate the bridge and accelerate resolution.'
   }
 };
 
@@ -119,6 +119,21 @@ if (contactForm) {
         setContactStatus('Details ready to send.', 'ready');
       }
     });
+  });
+
+  const contactEmail = contactForm.querySelector('#contact-email');
+  let emailFeedbackTimer;
+  contactEmail.addEventListener('input', () => {
+    window.clearTimeout(emailFeedbackTimer);
+    if (!contactEmail.value) return;
+    if (!contactEmail.validity.valid) {
+      setContactStatus('Please complete a valid email address.', 'error');
+      return;
+    }
+    setContactStatus('Thank you — email address looks good.', 'ready');
+    emailFeedbackTimer = window.setTimeout(() => {
+      if (contactEmail.validity.valid) setContactStatus('', '');
+    }, 1800);
   });
 
   contactForm.addEventListener('submit', async (event) => {
@@ -178,4 +193,23 @@ if (cookieBanner) {
 
   cookieBanner.querySelector('[data-cookie-essential]').addEventListener('click', () => setCookiePreference('essential'));
   cookieBanner.querySelector('[data-cookie-accept]').addEventListener('click', () => setCookiePreference('accepted'));
+}
+
+const ribbonMessage = document.querySelector('[data-ribbon-message]');
+
+if (ribbonMessage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const ribbonMessages = [
+    'Enterprise technology operations management for business-critical change.',
+    'Experience across E2open, SYSCO, Heineken, Aviva and more.',
+    'Operational readiness, dependency clarity and delivery confidence.'
+  ];
+  let ribbonIndex = 0;
+  window.setInterval(() => {
+    ribbonMessage.classList.add('is-changing');
+    window.setTimeout(() => {
+      ribbonIndex = (ribbonIndex + 1) % ribbonMessages.length;
+      ribbonMessage.textContent = ribbonMessages[ribbonIndex];
+      ribbonMessage.classList.remove('is-changing');
+    }, 360);
+  }, 4600);
 }
