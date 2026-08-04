@@ -84,3 +84,18 @@ if (flowControls) {
     if (button) selectScenario(button.dataset.flowScenario);
   });
 }
+
+const revealElements = document.querySelectorAll('[data-reveal]');
+
+if (revealElements.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  root.classList.add('has-js');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  revealElements.forEach((element) => revealObserver.observe(element));
+}
