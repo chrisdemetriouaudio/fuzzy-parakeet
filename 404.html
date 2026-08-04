@@ -11,49 +11,45 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 
 <style>
-  .notfound {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-  }
-  .notfound__inner { max-width: 40rem; padding-block: var(--space-8); }
+  .notfound { min-height: 100svh; display: flex; align-items: center; }
+  .notfound__inner { max-width: 44rem; padding-block: clamp(3rem, 8vh, 5rem); }
   .notfound h1 {
-      font-size: var(--step-4);
-      letter-spacing: -.03em;
-      margin-block: var(--space-3) var(--space-4);
+      font-size: clamp(30px, 4.4vw, 48px);
+      margin-block: 18px 22px;
+      max-width: 20ch;
   }
-  .notfound p { color: var(--ink-2); }
-  .notfound__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-3);
-      margin-block-start: var(--space-6);
-  }
+  .notfound__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-block-start: 36px; }
 </style>
 </head>
 
 <body>
 <div class="notfound">
-  <div class="container notfound__inner">
+  <div class="wrap notfound__inner">
     <p class="eyebrow">404</p>
     <h1>That page has moved, or never existed.</h1>
     <p>
-      This site was reorganised into two sections. If you followed an older link, one of these is
-      almost certainly what you were after.
+      The site is now one page for enterprise technology, and a separate section for
+      creative media. If you followed an older link, one of these is what you were after.
     </p>
     <div class="notfound__actions">
-      <a class="btn btn--solid" href="/">Enterprise Technology &rarr;</a>
-      <a class="btn btn--line" href="/media/">Creative Media &rarr;</a>
-      
+      <a class="btn btn--solid btn--lg" href="/">Enterprise Technology &nbsp;&rarr;</a>
+      <a class="btn btn--line" href="/media/">Creative Media</a>
     </div>
   </div>
 </div>
 
 <script>
-/* The media site occupied the apex before the restructure, so its old paths
-   and anchors are forwarded here rather than dead-ending on this page. */
+/* Two generations of URLs to forward. The media site occupied the apex before
+   the restructure, so its anchors are sent to /media/. The enterprise case
+   briefly lived at /enterprise/ before becoming the root, so those go home. */
 (function () {
   var path = window.location.pathname.replace(/\/+$/, '');
+
+  if (path === '/enterprise' || path.indexOf('/enterprise/') === 0) {
+    window.location.replace('/');
+    return;
+  }
+
   var legacy = ['/index.html', '/style3.css', '/script.js'];
   if (legacy.indexOf(path) !== -1) {
     window.location.replace('/media' + path + window.location.hash);
