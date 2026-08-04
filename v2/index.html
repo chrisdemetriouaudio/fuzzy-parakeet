@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/foundation.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="scripts/foundation.js" defer></script>
   </head>
   <body>
@@ -284,21 +285,23 @@
             </div>
           </div>
 
-          <form class="contact-form" data-contact-form>
+          <form class="contact-form" data-contact-form novalidate>
             <div class="form-field">
               <label for="contact-name">Name</label>
-              <input id="contact-name" name="name" autocomplete="name" required>
+              <input id="contact-name" name="name" autocomplete="name" required aria-describedby="contact-status">
             </div>
             <div class="form-field">
               <label for="contact-email">Email</label>
-              <input id="contact-email" name="email" type="email" autocomplete="email" required>
+              <input id="contact-email" name="email" type="email" autocomplete="email" required aria-describedby="contact-status">
             </div>
             <div class="form-field">
               <label for="contact-message">How can I help?</label>
-              <textarea id="contact-message" name="message" rows="5" required></textarea>
+              <textarea id="contact-message" name="message" rows="5" required aria-describedby="contact-status"></textarea>
             </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEGNlR_vCGl4yDDs" data-action="turnstile-spin-v1"></div>
             <button class="contact-submit" type="submit">Start a conversation <span aria-hidden="true">↗</span></button>
-            <p class="form-note">Submitting opens your email client with the message prepared.</p>
+            <p id="contact-status" class="form-status" role="status" aria-live="polite">Complete the form to start a conversation.</p>
+            <p class="form-note">Your details are protected before the message is prepared.</p>
           </form>
         </div>
       </section>

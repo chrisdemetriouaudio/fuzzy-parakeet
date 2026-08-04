@@ -88,9 +88,62 @@ if (flowControls) {
 const contactForm = document.querySelector('[data-contact-form]');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
+  const contactStatus = document.querySelector('#contact-status');
+  const contactSubmit = contactForm.querySelector('.contact-submit');
+  const contactFields = contactForm.querySelectorAll('input:not([type="hidden"]), textarea');
+
+  function setContactStatus(message, state = '') {
+    contactStatus.textContent = message;
+    contactStatus.dataset.state = state;
+  }
+
+  contactFields.forEach((field) => {
+    field.addEventListener('input', () => {
+      field.setAttribute('aria-invalid', String(!field.validity.valid));
+      if ([...contactFields].every((item) => item.validity.valid)) {
+        setContactStatus('Details ready to send.', 'ready');
+      }
+    });
+  });
+
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactFields.forEach((field) => field.setAttribute('aria-invalid', String(!field.validity.valid)));
+      setContactStatus('Please complete the highlighted fields.', 'error');
+      contactForm.reportValidity();
+      return;
+    }
+
     const formData = new FormData(contactForm);
+    const token = formData.get('cf-turnstile-response');
+    if (!token) {
+      setContactStatus('Please complete the security check before continuing.', 'error');
+      return;
+    }
+
+    contactSubmit.disabled = true;
+    setContactStatus('Checking your details…');
+    try {
+      const response = await fetch('https://turnstile-siteverify-chrisdemetriou.christian4collective.workers.dev/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const verification = await response.json();
+      if (!response.ok || verification.success !== true) {
+        setContactStatus('The security check did not complete. Please try again.', 'error');
+        return;
+      }
+
+      setContactStatus('Verified. Opening your email client…', 'ready');
+    } catch {
+      setContactStatus('We could not verify the form. Please try again.', 'error');
+      return;
+    } finally {
+      contactSubmit.disabled = false;
+    }
+
     const subject = `Website enquiry from ${formData.get('name')}`;
     const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
     window.location.href = `mailto:techdelivery@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
