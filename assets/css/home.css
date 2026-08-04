@@ -1,0 +1,377 @@
+/* ==========================================================================
+   home.css — the one enterprise page at /
+   --------------------------------------------------------------------------
+   This is the whole enterprise site: insight, the acquisition cascade,
+   method, evidence, five case studies, projects, contact. It is one scroll
+   because every click loses people, and a recruiter should never have to
+   navigate to reach evidence. The case studies collapse, so depth is
+   available without the page ever looking long.
+   ========================================================================== */
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.hd {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid transparent;
+    transition: background .3s, border-color .3s, backdrop-filter .3s;
+}
+.hd.is-stuck {
+    background: rgba(10, 12, 16, .82);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line-soft);
+}
+
+.hd__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 18px;
+}
+
+.mark {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+.mark b { color: var(--signal); }
+a.mark:hover { color: var(--ink); }
+
+.hd nav { display: flex; align-items: center; gap: 26px; }
+.hd nav a:not(.btn) { font-size: 14px; color: var(--mute); }
+.hd nav a:not(.btn):hover { color: var(--ink); }
+
+/* ── 01 Hero ────────────────────────────────────────────────────────────── */
+.hero { padding-block: clamp(5rem, 16vh, 10rem) clamp(4rem, 10vh, 7rem); }
+
+.hero h1 {
+    font-size: clamp(38px, 6.2vw, 72px);
+    max-width: 19ch;
+    margin-block: 22px 30px;
+}
+
+.hero__sub {
+    font-size: clamp(19px, 2vw, 23px);
+    color: var(--body);
+    max-width: 56ch;
+}
+
+.hero__body {
+    margin-block-start: 26px;
+    font-size: 18px;
+    color: var(--mute);
+    max-width: 58ch;
+}
+
+.byline {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-block-start: 44px;
+    padding-block-start: 26px;
+    border-top: 1px solid var(--line-soft);
+}
+.byline b { color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.byline span {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--mute);
+}
+
+/* Present tense. Before this line the page was entirely retrospective — a
+   reader could finish it impressed and still not know he was looking.
+   A static dot: this is a state, not an alarm. */
+.avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-start: 26px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--body);
+    max-width: none;
+}
+.avail i {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, .16);
+    flex: none;
+}
+
+.hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-block-start: 34px; }
+
+/* ── 02 The cascade — the signature section ─────────────────────────────
+   One trigger, nine consequences. It demonstrates systems thinking rather
+   than claiming it, which is why it sits second and why nothing above it
+   offers a way out of the page.
+─────────────────────────────────────────────────────────────────────────── */
+.cascade {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 190px 1fr 92px;
+    align-items: baseline;
+    gap: 24px;
+    padding: 20px 26px;
+    border-top: 1px solid var(--line-soft);
+}
+.row:first-child { border-top: 0; }
+
+.row__disc {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--signal);
+}
+.row__q { font-size: 17px; color: var(--body); max-width: none; }
+.row__lt {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--mute);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.cascade__foot {
+    margin-block-start: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--mute);
+    max-width: none;
+}
+
+.pull {
+    margin-block-start: 34px;
+    padding-inline-start: 22px;
+    border-left: 2px solid var(--signal);
+    font-size: clamp(20px, 2.4vw, 27px);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    max-width: 34ch;
+}
+.pull em {
+    display: block;
+    font-style: normal;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--mute);
+    margin-block-start: 14px;
+    max-width: 52ch;
+}
+
+/* ── 03 Method ──────────────────────────────────────────────────────────── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    padding: 30px;
+    transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+}
+.card:hover { border-color: #333A45; background: var(--panel-2); }
+.card__n { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--signal); }
+.card h3 { font-size: 21px; letter-spacing: -.02em; }
+.card p  { font-size: 16.5px; color: var(--mute); }
+
+/* ── 04 Evidence ────────────────────────────────────────────────────────── */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+}
+.stat { padding: 32px 26px; border-left: 1px solid var(--line-soft); }
+.stat:first-child { border-left: 0; }
+.stat__n {
+    font-size: clamp(30px, 3.4vw, 40px);
+    font-weight: 600;
+    letter-spacing: -.035em;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+.stat__l {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-block-start: 12px;
+}
+.stat__d { font-size: 15px; line-height: 1.6; color: var(--mute); margin-block-start: 14px; }
+
+/* ── 05 Case studies ────────────────────────────────────────────────────
+   Built on <details>: expansion survives without JavaScript, is keyboard
+   operable for free, and stays findable by in-page search. Collapsed by
+   default so the page reads short and gets deep only on request.
+─────────────────────────────────────────────────────────────────────────── */
+.cases { display: flex; flex-direction: column; gap: 14px; }
+
+.case {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+    transition: border-color var(--fast) var(--ease);
+}
+.case:hover, .case[open] { border-color: #333A45; }
+
+.case > summary { list-style: none; cursor: pointer; display: block; padding: 26px; }
+.case > summary::-webkit-details-marker { display: none; }
+
+.case__top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 16px; }
+.case__client {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--signal);
+}
+.case h3 { font-size: 23px; letter-spacing: -.025em; flex: 1 1 auto; }
+.case__more {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mute);
+    flex: none;
+}
+.case__more::after { content: " +"; }
+.case[open] .case__more::after { content: " \2212"; }
+
+.case__sum { font-size: 17px; color: var(--mute); margin-block-start: 12px; max-width: 68ch; }
+
+.case__detail {
+    padding: 0 26px 26px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+}
+.case__part {
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    background: var(--ground);
+    padding: 20px;
+}
+.case__part h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-block-end: 10px;
+}
+.case__part p { font-size: 15.5px; line-height: 1.7; color: var(--mute); }
+
+/* ── 06 Consequence ─────────────────────────────────────────────────────── */
+.changes { display: flex; flex-direction: column; gap: 2px; }
+.changes li {
+    font-size: clamp(21px, 2.6vw, 30px);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.45;
+    color: var(--ink);
+}
+.changes li:last-child {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.7;
+    color: var(--mute);
+    margin-block-start: 22px;
+    max-width: 52ch;
+}
+
+/* ── 07 Projects ────────────────────────────────────────────────────────── */
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.project h3 { font-size: 21px; letter-spacing: -.02em; margin-block-end: 10px; }
+.project p  { font-size: 16.5px; color: var(--mute); }
+.project__pending {
+    margin-block-start: 16px;
+    padding: 14px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    color: var(--mute);
+    max-width: none;
+}
+
+/* ── 08 Creative Media — 30% of the weight, deliberately quieter ────────── */
+.media { background: var(--panel); border-block: 1px solid var(--line-soft); }
+.media h2 { font-size: clamp(24px, 2.8vw, 34px); max-width: 24ch; margin-block-start: 18px; }
+.media p  { margin-block-start: 20px; font-size: 17px; color: var(--mute); }
+.media .btn { margin-block-start: 26px; }
+
+/* ── 09 Contact ─────────────────────────────────────────────────────────── */
+.contact h2 { font-size: clamp(26px, 3.4vw, 42px); max-width: 22ch; }
+.contact__meta { margin-block-start: 22px; font-size: 17px; color: var(--mute); }
+.contact__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-block-start: 38px; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.ft { border-top: 1px solid var(--line-soft); padding-block: 30px; }
+.ft .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mute);
+}
+.ft a { color: var(--body); }
+.ft a:hover { color: var(--signal); }
+
+/* ── Reflow ─────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .grid2, .projects { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { border-left: 0; border-top: 1px solid var(--line-soft); }
+    .stat:nth-child(-n + 2) { border-top: 0; }
+    .stat:nth-child(even) { border-left: 1px solid var(--line-soft); }
+    .hd nav a:not(.btn):not(.js-keep) { display: none; }
+}
+
+@media (max-width: 640px) {
+    body { font-size: 18px; }
+    .row { grid-template-columns: 1fr; gap: 8px; padding: 18px; }
+    .row__lt { text-align: left; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-left: 0 !important; border-top: 1px solid var(--line-soft); }
+    .stat:first-child { border-top: 0; }
+    .case > summary { padding: 20px; }
+    .case__detail { padding: 0 20px 20px; }
+    .ft .wrap { flex-direction: column; }
+}

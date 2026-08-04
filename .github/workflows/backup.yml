@@ -2,30 +2,24 @@ name: Backup to Private Repo
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
   backup:
+    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'  # 👈 THIS IS THE GUARD
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout full repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Push to backup repo
+      - name: Push mirror to backup repo
         run: |
           git remote add backup https://x-access-token:${{ secrets.BACKUP_TOKEN }}@github.com/chrisdemetriouaudio/fuzzy-parakeet-backup.git
-          
-          git fetch origin "+refs/heads/*:refs/remotes/origin/*"
-          
-          for branch in $(git branch -r | grep -v HEAD); do
-            name=${branch#origin/}
-            git push backup "$branch:refs/heads/$name" --force
-          done
-
-          git push backup --tags --force
+          git push --mirror backup

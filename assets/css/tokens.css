@@ -1,0 +1,68 @@
+/* ==========================================================================
+   tokens.css — the enterprise site at /
+   --------------------------------------------------------------------------
+   The media site at /media/ keeps its own system entirely (dark, gold, Bebas
+   Neue, loaded from Google Fonts) and does not consume this file. The two
+   halves of the site are deliberately different: they speak to different
+   people, and forcing one typeface across both served neither.
+   ========================================================================== */
+
+@font-face {
+    font-family: "Geist";
+    src: url("/assets/fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Geist Mono";
+    src: url("/assets/fonts/GeistMono-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* ── Ground ───────────────────────────────────────────────────────────
+       Cool blacks read technical; warm blacks read editorial. The previous
+       #050505 was borrowed from the media brand and carried its warmth.
+    ───────────────────────────────────────────────────────────────────── */
+    --ground:     #0A0C10;
+    --panel:      #12151A;
+    --panel-2:    #171B21;
+    --line:       #232830;
+    --line-soft:  #1A1E25;
+
+    --ink:        #F2F4F7;
+    --body:       #C3C9D2;
+    --mute:       #8B95A3;
+
+    /* ── Signal ───────────────────────────────────────────────────────────
+       Amber, not gold. Gold reads hospitality; amber is the state that
+       exists before red, which is precisely the job — early warning. Used
+       only on the one thing that matters in any given section.
+    ───────────────────────────────────────────────────────────────────── */
+    --signal:      #E3A23C;
+    --signal-hi:   #F0B152;
+    --signal-wash: rgba(227, 162, 60, .09);
+    --signal-edge: rgba(227, 162, 60, .32);
+
+    /* Availability is a state, not an accent — it gets its own colour so it
+       is never confused with the signal. */
+    --live:        #4ADE80;
+
+    /* ── Type ─────────────────────────────────────────────────────────── */
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    /* ── Measure and rhythm ───────────────────────────────────────────── */
+    --measure:   60ch;
+    --container: 1120px;
+    --leading:   1.75;
+
+    /* ── Motion ───────────────────────────────────────────────────────── */
+    --ease:     cubic-bezier(.16, 1, .3, 1);
+    --fast:     .18s;
+    --slow:     .55s;
+}
