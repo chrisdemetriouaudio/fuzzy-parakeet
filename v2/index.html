@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/foundation-brand-assets.css">
+    <link rel="stylesheet" href="styles/foundation-contact-brand.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="scripts/foundation-fixes.js" defer></script>
+    <script src="scripts/foundation-accessible-controls.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -21,7 +21,10 @@
       <div class="shell header-content">
         <a class="wordmark" href="#top" aria-label="Chris Demetriou home">
           <img class="wordmark-portrait" src="images/chrisdemetriou-enterprisetechnicaloperationsmanager-head.jpeg" alt="">
-          <span class="wordmark-name">Chris Demetriou</span>
+          <span class="wordmark-lockup">
+            <span class="wordmark-name">Chris Demetriou</span>
+            <span class="wordmark-role">Enterprise technology operations</span>
+          </span>
         </a>
 
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
@@ -42,8 +45,8 @@
         </nav>
 
         <div class="utility-controls" aria-label="Display preferences">
-          <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
-            <span aria-hidden="true">◐</span><span>Theme</span>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to light mode" data-theme-toggle>
+            <span class="theme-toggle-icon" aria-hidden="true">◐</span><span data-theme-label>Light mode</span>
           </button>
         </div>
       </div>
@@ -407,7 +410,7 @@
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEGNlR_vCGl4yDDs" data-action="turnstile-spin-v1" data-appearance="always"></div>
             <button class="contact-submit" type="submit">Start a conversation <span aria-hidden="true">↗</span></button>
             <p id="contact-status" class="form-status" role="status" aria-live="polite">Complete the form to start a conversation.</p>
-            <p class="form-note">Your details are protected before the message is prepared.</p>
+            <p class="form-note">Complete the security check before sending.</p>
           </form>
         </div>
       </section>
