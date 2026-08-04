@@ -30,26 +30,40 @@ navigation.addEventListener('click', () => {
 });
 
 const scenarios = {
-  api: {
-    title: 'Chris evaluates the API change.',
-    inputs: ['API dependency', 'Authentication method', 'Error handling', 'Rollback strategy'],
-    questions: ['Which systems consume this API?', 'Is the authentication path understood?', 'What happens if the integration fails?'],
-    outcomes: ['Integration dependency identified', 'Security review required', 'Consumer teams engaged', 'Recovery plan agreed'],
-    summary: 'For an API change, technical teams provide the detail. Chris identifies integration, security and recovery implications before the change proceeds.'
+  cloud: {
+    title: 'Chris connects the migration picture.',
+    inputs: ['80+ enterprise applications', 'Global SaaS estate', 'Colocation to Oracle Cloud', 'No extended downtime'],
+    questions: ['Which dependencies would make a move unsafe?', 'Which teams need to validate readiness together?', 'What must be true before each cutover?'],
+    outcomes: ['Dependencies made visible', 'Readiness validated early', 'Assumptions challenged', 'Cutover risk reduced'],
+    summary: 'At E2open, the cloud transformation required more than a migration plan: it needed a shared view of application, infrastructure, network and database readiness before each cutover.'
   },
-  access: {
-    title: 'Chris evaluates the access change.',
-    inputs: ['New user group', 'Role mapping', 'Provisioning method', 'Audit requirement'],
-    questions: ['Which users and systems are affected?', 'Does the role preserve least-privilege access?', 'How will access be removed or recovered?'],
-    outcomes: ['User access impact confirmed', 'Identity team engaged', 'Audit evidence agreed', 'Support guidance prepared'],
-    summary: 'For a user-access change, the requirement becomes a clear identity, governance and support plan before users are affected.'
+  sap: {
+    title: 'Chris protects business continuity.',
+    inputs: ['Business-critical SAP ERP', 'Three organisations', 'VPN and firewall changes', 'End-to-end integration testing'],
+    questions: ['Where do ownership and release cycles diverge?', 'Is the production connectivity proven?', 'What would continuity look like at switchover?'],
+    outcomes: ['Technical workshops aligned teams', 'Connectivity validated', 'Monitoring confirmed', 'Implementation risk reduced'],
+    summary: 'For SYSCO UK and Capgemini, the SAP transition worked because technical readiness and operational continuity were treated as the same conversation.'
   },
-  release: {
-    title: 'Chris evaluates the release change.',
-    inputs: ['Deployment window', 'Infrastructure requirement', 'Monitoring plan', 'Rollback threshold'],
-    questions: ['Is every environment ready for the release?', 'Which teams need to approve the change?', 'What signals would trigger a rollback?'],
-    outcomes: ['Network preparation required', 'Change approval scheduled', 'Monitoring owners confirmed', 'Recovery plan agreed'],
-    summary: 'For a release change, technical details become a joined-up readiness plan across engineering, operations and governance.'
+  security: {
+    title: 'Chris makes secure change workable.',
+    inputs: ['3,000+ customer integrations', 'Legacy HTTP and FTP', 'Customer firewall rules', 'Change windows across customers'],
+    questions: ['Which connection paths need proving?', 'Which customers need action before retirement?', 'How can security improve without avoidable disruption?'],
+    outcomes: ['Migration paths validated', 'Customer teams engaged', 'Legacy services retired', 'Production security improved'],
+    summary: 'At E2open, modernising thousands of integrations relied on bringing network, application and customer engineering into one dependable migration process.'
+  },
+  connectivity: {
+    title: 'Chris turns connectivity into readiness.',
+    inputs: ['New cloud-hosted platform', 'Heineken UK head office', 'VPN implementation', 'Production data exchange'],
+    questions: ['Is every link in the production path confirmed?', 'Who owns each validation step?', 'Is monitoring ready for handover?'],
+    outcomes: ['VPN and connectivity verified', 'End-to-end exchange proven', 'Monitoring completed', 'Operational acceptance achieved'],
+    summary: 'For Heineken UK, the goal was not merely a working connection, but secure production connectivity that was monitored, accepted and ready to operate.'
+  },
+  incident: {
+    title: 'Chris brings the right response together.',
+    inputs: ['24/7 Priority 1 rota', 'Tier 1 enterprise customers', 'Cross-functional specialists', 'Time-critical customer communication'],
+    questions: ['Which expertise will test the leading assumption?', 'What evidence changes the next decision?', 'What does the customer need to know now?'],
+    outcomes: ['Specialists mobilised quickly', 'Assumptions tested', 'Root cause found faster', 'Clear technical updates provided'],
+    summary: 'Across seven years on E2open’s Priority 1 rota, the work was to turn urgent technical signals into a coordinated response and clear customer communication.'
   }
 };
 

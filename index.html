@@ -139,54 +139,56 @@
           <div class="section-layout flow-introduction">
             <p class="eyebrow">How I think</p>
             <div>
-              <h2 id="flow-title">The technology does not change. The understanding does.</h2>
-              <p>Technical information only becomes useful when its implications are understood early enough for the right people to act.</p>
+              <h2 id="flow-title">Five programmes. One way of working.</h2>
+              <p>Each example began with a different technical challenge. The work was to make the broader operational picture clear early enough for the right people to act.</p>
             </div>
           </div>
 
-          <div class="scenario-picker" role="group" aria-label="Enterprise change scenarios" data-flow-controls>
-            <p class="flow-label">Explore a scenario</p>
+          <div class="scenario-picker" role="group" aria-label="Enterprise experience examples" data-flow-controls>
+            <p class="flow-label">Explore the work</p>
             <div class="scenario-actions">
-              <button type="button" class="scenario-button" aria-pressed="true" data-flow-scenario="api">API change</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="access">User access</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="release">Release change</button>
+              <button type="button" class="scenario-button" aria-pressed="true" data-flow-scenario="cloud">Cloud transformation</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="sap">SAP transition</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="security">Security modernisation</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="connectivity">Customer connectivity</button>
+              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="incident">Major incidents</button>
             </div>
           </div>
 
           <figure class="flow-diagram" id="flow-panel" aria-describedby="flow-caption" aria-live="polite">
             <div class="flow-stage flow-stage-inputs">
-              <p class="flow-label">Technical input</p>
-              <ul class="flow-list" aria-label="Technical information for this scenario" data-flow-inputs>
-                <li><span class="flow-marker" aria-hidden="true"></span>API dependency</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Authentication method</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Error handling</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Rollback strategy</li>
+              <p class="flow-label">Operating context</p>
+              <ul class="flow-list" aria-label="Operating context for this example" data-flow-inputs>
+                <li><span class="flow-marker" aria-hidden="true"></span>80+ enterprise applications</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Global SaaS estate</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Colocation to Oracle Cloud</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>No extended downtime</li>
               </ul>
             </div>
 
-            <article class="flow-stage flow-stage-context" aria-label="Chris evaluates the context">
+            <article class="flow-stage flow-stage-context" aria-label="Chris connects the wider picture">
               <p class="flow-label">Context and judgement</p>
               <div class="context-core">
                 <span class="context-initials" aria-hidden="true">CD</span>
-                <h3 data-flow-title>Chris evaluates the change.</h3>
+                <h3 data-flow-title>Chris connects the migration picture.</h3>
                 <ul data-flow-questions>
-                  <li>Which systems consume this API?</li>
-                  <li>Is the authentication path understood?</li>
-                  <li>What happens if the integration fails?</li>
+                  <li>Which dependencies would make a move unsafe?</li>
+                  <li>Which teams need to validate readiness together?</li>
+                  <li>What must be true before each cutover?</li>
                 </ul>
               </div>
             </article>
 
             <div class="flow-stage flow-stage-outcomes">
-              <p class="flow-label">Relevant outcome</p>
-              <ul class="flow-list" aria-label="Contextual outcomes for this scenario" data-flow-outcomes>
-                <li><span class="flow-marker" aria-hidden="true"></span>Integration dependency identified</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Security review required</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Consumer teams engaged</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Recovery plan agreed</li>
+              <p class="flow-label">Delivered readiness</p>
+              <ul class="flow-list" aria-label="Delivered readiness for this example" data-flow-outcomes>
+                <li><span class="flow-marker" aria-hidden="true"></span>Dependencies made visible</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Readiness validated early</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Assumptions challenged</li>
+                <li><span class="flow-marker" aria-hidden="true"></span>Cutover risk reduced</li>
               </ul>
             </div>
-            <figcaption id="flow-caption" data-flow-summary>For an API change, technical teams provide the detail. Chris identifies integration, security and recovery implications before the change proceeds.</figcaption>
+            <figcaption id="flow-caption" data-flow-summary>At E2open, the cloud transformation required more than a migration plan: it needed a shared view of application, infrastructure, network and database readiness before each cutover.</figcaption>
           </figure>
         </div>
       </section>
