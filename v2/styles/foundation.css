@@ -13,8 +13,8 @@
   --text: #eeefe9;
   --muted: #a9ada6;
   --line: #343833;
-  --accent: #b8dc9b;
-  --focus: #d9f9be;
+  --accent: #899467;
+  --focus: #c7d39b;
   --measure: 72rem;
   --reading: 42rem;
 }
@@ -26,8 +26,8 @@
   --text: #1a1d19;
   --muted: #5b6259;
   --line: #cdd1c7;
-  --accent: #3e6b35;
-  --focus: #255d20;
+  --accent: #596345;
+  --focus: #3f492f;
 }
 
 * { box-sizing: border-box; }
