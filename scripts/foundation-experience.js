@@ -1,0 +1,165 @@
+const root = document.documentElement;
+const themeToggle = document.querySelector('[data-theme-toggle]');
+const menuToggle = document.querySelector('[data-menu-toggle]');
+const navigation = document.querySelector('[data-navigation]');
+
+const storedTheme = localStorage.getItem('cd-v2-theme');
+const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+function setTheme(theme) {
+  root.dataset.theme = theme;
+  themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
+  localStorage.setItem('cd-v2-theme', theme);
+}
+
+setTheme(storedTheme || (systemPrefersLight ? 'light' : 'dark'));
+
+themeToggle.addEventListener('click', () => {
+  setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  navigation.dataset.open = String(!isOpen);
+});
+
+navigation.addEventListener('click', () => {
+  menuToggle.setAttribute('aria-expanded', 'false');
+  navigation.dataset.open = 'false';
+});
+
+const scenarios = {
+  cloud: {
+    title: 'Chris connects the migration picture.',
+    inputs: ['80+ enterprise applications', 'Global SaaS estate', 'Colocation to Oracle Cloud', 'No extended downtime'],
+    questions: ['Which dependencies would make a move unsafe?', 'Which teams need to validate readiness together?', 'What must be true before each cutover?'],
+    outcomes: ['Dependencies made visible', 'Readiness validated early', 'Assumptions challenged', 'Cutover risk reduced'],
+    summary: 'At E2open, the cloud transformation required more than a migration plan: it needed a shared view of application, infrastructure, network and database readiness before each cutover.'
+  },
+  sap: {
+    title: 'Chris protects business continuity.',
+    inputs: ['Business-critical SAP ERP', 'Three organisations', 'VPN and firewall changes', 'End-to-end integration testing'],
+    questions: ['Where do ownership and release cycles diverge?', 'Is the production connectivity proven?', 'What would continuity look like at switchover?'],
+    outcomes: ['Technical workshops aligned teams', 'Connectivity validated', 'Monitoring confirmed', 'Implementation risk reduced'],
+    summary: 'For SYSCO UK and Capgemini, the SAP transition worked because technical readiness and operational continuity were treated as the same conversation.'
+  },
+  security: {
+    title: 'Chris makes secure change workable.',
+    inputs: ['3,000+ customer integrations', 'Legacy HTTP and FTP', 'Customer firewall rules', 'Change windows across customers'],
+    questions: ['Which connection paths need proving?', 'Which customers need action before retirement?', 'How can security improve without avoidable disruption?'],
+    outcomes: ['Migration paths validated', 'Customer teams engaged', 'Legacy services retired', 'Production security improved'],
+    summary: 'At E2open, modernising thousands of integrations relied on bringing network, application and customer engineering into one dependable migration process.'
+  },
+  connectivity: {
+    title: 'Chris turns connectivity into readiness.',
+    inputs: ['New cloud-hosted platform', 'Heineken UK head office', 'VPN implementation', 'Production data exchange'],
+    questions: ['Is every link in the production path confirmed?', 'Who owns each validation step?', 'Is monitoring ready for handover?'],
+    outcomes: ['VPN and connectivity verified', 'End-to-end exchange proven', 'Monitoring completed', 'Operational acceptance achieved'],
+    summary: 'For Heineken UK, the goal was not merely a working connection, but secure production connectivity that was monitored, accepted and ready to operate.'
+  },
+  incident: {
+    title: 'Chris brings the right response together.',
+    inputs: ['24/7 Priority 1 rota', 'Tier 1 enterprise customers', 'Cross-functional specialists', 'Time-critical customer communication'],
+    questions: ['Which expertise will test the leading assumption?', 'What evidence changes the next decision?', 'What does the customer need to know now?'],
+    outcomes: ['Specialists mobilised quickly', 'Assumptions tested', 'Root cause found faster', 'Clear technical updates provided'],
+    summary: 'Across seven years on E2open’s Priority 1 rota, the work was to turn urgent technical signals into a coordinated response and clear customer communication.'
+  }
+};
+
+const flowControls = document.querySelector('[data-flow-controls]');
+
+function updateFlowList(element, items) {
+  element.replaceChildren(...items.map((item) => {
+    const listItem = document.createElement('li');
+    const marker = document.createElement('span');
+    marker.className = 'flow-marker';
+    marker.setAttribute('aria-hidden', 'true');
+    listItem.append(marker, document.createTextNode(item));
+    return listItem;
+  }));
+}
+
+function selectScenario(scenarioName) {
+  const scenario = scenarios[scenarioName];
+  document.querySelectorAll('[data-flow-scenario]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.flowScenario === scenarioName));
+  });
+  document.querySelector('[data-flow-title]').textContent = scenario.title;
+  updateFlowList(document.querySelector('[data-flow-inputs]'), scenario.inputs);
+  updateFlowList(document.querySelector('[data-flow-questions]'), scenario.questions);
+  updateFlowList(document.querySelector('[data-flow-outcomes]'), scenario.outcomes);
+  document.querySelector('[data-flow-summary]').textContent = scenario.summary;
+}
+
+if (flowControls) {
+  flowControls.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-flow-scenario]');
+    if (button) selectScenario(button.dataset.flowScenario);
+  });
+}
+
+const contactForm = document.querySelector('[data-contact-form]');
+
+if (contactForm) {
+  const contactStatus = document.querySelector('#contact-status');
+  const contactSubmit = contactForm.querySelector('.contact-submit');
+  const contactFields = contactForm.querySelectorAll('input:not([type="hidden"]), textarea');
+
+  function setContactStatus(message, state = '') {
+    contactStatus.textContent = message;
+    contactStatus.dataset.state = state;
+  }
+
+  contactFields.forEach((field) => {
+    field.addEventListener('input', () => {
+      field.setAttribute('aria-invalid', String(!field.validity.valid));
+      if ([...contactFields].every((item) => item.validity.valid)) {
+        setContactStatus('Details ready to send.', 'ready');
+      }
+    });
+  });
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactFields.forEach((field) => field.setAttribute('aria-invalid', String(!field.validity.valid)));
+      setContactStatus('Please complete the highlighted fields.', 'error');
+      contactForm.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(contactForm);
+    const token = formData.get('cf-turnstile-response');
+    if (!token) {
+      setContactStatus('Please complete the security check before continuing.', 'error');
+      return;
+    }
+
+    contactSubmit.disabled = true;
+    setContactStatus('Checking your details…');
+    try {
+      const response = await fetch('https://turnstile-siteverify-chrisdemetriou.christian4collective.workers.dev/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const verification = await response.json();
+      if (!response.ok || verification.success !== true) {
+        setContactStatus('The security check did not complete. Please try again.', 'error');
+        return;
+      }
+
+      setContactStatus('Verified. Opening your email client…', 'ready');
+    } catch {
+      setContactStatus('We could not verify the form. Please try again.', 'error');
+      return;
+    } finally {
+      contactSubmit.disabled = false;
+    }
+
+    const subject = `Website enquiry from ${formData.get('name')}`;
+    const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
+    window.location.href = `mailto:techdelivery@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
