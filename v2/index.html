@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/foundation-recruiter.css">
+    <link rel="stylesheet" href="styles/foundation-clientproof.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="scripts/foundation-programmes.js" defer></script>
+    <script src="scripts/foundation-clientproof.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -32,8 +32,13 @@
         <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-navigation>
           <a href="#experience">Experience</a>
           <a href="#contact">Availability</a>
-          <a href="docs/chris-demetriou-cv.pdf" target="_blank" rel="noopener">View CV</a>
-          <a href="docs/chris-demetriou-cv.pdf" download>Download CV</a>
+          <details class="nav-cv">
+            <summary>Chris’s CV <span aria-hidden="true">↓</span></summary>
+            <div class="nav-cv-menu">
+              <a href="docs/chris-demetriou-cv.pdf" target="_blank" rel="noopener">View CV <span aria-hidden="true">↗</span></a>
+              <a href="docs/chris-demetriou-cv.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
+            </div>
+          </details>
         </nav>
 
         <div class="utility-controls" aria-label="Display preferences">
@@ -46,7 +51,7 @@
 
     <aside class="availability-ribbon" aria-label="Current availability">
       <div class="shell availability-ribbon-content">
-        <p><strong>Got a complex project and need a safe pair of hands?</strong> Let’s talk — available for permanent and contract opportunities.</p>
+        <p><strong>Experience across E2open, SYSCO, Heineken, Aviva and more.</strong> Available for permanent and contract opportunities.</p>
       </div>
     </aside>
 
@@ -199,6 +204,18 @@
         </div>
       </section>
 
+      <section class="organisation-strip" aria-labelledby="organisation-title">
+        <div class="shell">
+          <div class="organisation-heading">
+            <p class="eyebrow">Organisations supported</p>
+            <h2 id="organisation-title">Experience across enterprise platforms, retail, logistics and consultancy.</h2>
+          </div>
+          <ul class="organisation-grid" aria-label="Organisations Chris has worked with">
+            <li>E2open</li><li>SYSCO</li><li>Aviva</li><li>Legal &amp; General</li><li>Heineken UK</li><li>Dunelm</li><li>ASDA</li><li>Accenture</li><li>Capgemini</li><li>PZ Cussons</li><li>TNT</li><li>Nisa</li>
+          </ul>
+        </div>
+      </section>
+
       <section id="experience" class="foundation-section enterprise-experience" aria-labelledby="experience-title">
         <div class="shell">
           <div class="section-layout experience-introduction">
@@ -217,7 +234,6 @@
                 <p class="case-study-scan">Migrating more than 80 enterprise applications from colocation into Oracle Cloud Infrastructure.</p>
               </div>
               <div class="case-study-aside">
-                <p class="case-study-role">Senior Applications Specialist<br>Enterprise Technical Delivery</p>
                 <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
               </div>
             </summary>
@@ -246,7 +262,6 @@
                 <p class="case-study-scan">A business-critical SAP transition with operational continuity in view from the start.</p>
               </div>
               <div class="case-study-aside">
-                <p class="case-study-role">Senior Applications Specialist<br>Enterprise Technical Delivery</p>
                 <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
               </div>
             </summary>
@@ -287,7 +302,6 @@
                 <p class="case-study-scan">Modernising more than 3,000 customer integrations from legacy HTTP and FTP to HTTPS and SFTP.</p>
               </div>
               <div class="case-study-aside">
-                <p class="case-study-role">Senior Applications Specialist<br>Enterprise Technical Delivery</p>
                 <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
               </div>
             </summary>
@@ -316,7 +330,6 @@
                 <p class="case-study-scan">Secure connectivity and production readiness for a new cloud-hosted enterprise platform.</p>
               </div>
               <div class="case-study-aside">
-                <p class="case-study-role">Senior Applications Specialist<br>Enterprise Technical Delivery</p>
                 <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
               </div>
             </summary>
@@ -345,7 +358,6 @@
                 <p class="case-study-scan">Seven years on a 24/7 Priority 1 rota supporting Tier 1 enterprise customers worldwide.</p>
               </div>
               <div class="case-study-aside">
-                <p class="case-study-role">Senior Applications Specialist<br>Enterprise Technical Delivery</p>
                 <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
               </div>
             </summary>
@@ -378,15 +390,8 @@
             <p>If you value someone who sees dependencies, operational readiness and cross-functional technology alignment early, I’d be glad to talk.</p>
             <p class="contact-availability"><span class="availability-dot" aria-hidden="true"></span>Available for permanent and contract opportunities.</p>
             <div class="contact-links" aria-label="Contact options">
-              <a href="mailto:techdelivery@chrisdemetriou.com">techdelivery@chrisdemetriou.com <span aria-hidden="true">↗</span></a>
+              <a href="mailto:techopsmgmt@chrisdemetriou.com">techopsmgmt@chrisdemetriou.com <span aria-hidden="true">↗</span></a>
               <a href="https://www.linkedin.com/in/chrisademetriou" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
-              <details class="contact-cv">
-                <summary>Chris’s CV <span aria-hidden="true">↓</span></summary>
-                <div class="contact-cv-menu">
-                  <a href="docs/chris-demetriou-cv.pdf" target="_blank" rel="noopener">View CV <span aria-hidden="true">↗</span></a>
-                  <a href="docs/chris-demetriou-cv.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
-                </div>
-              </details>
             </div>
           </div>
 
@@ -415,5 +420,13 @@
     <footer class="site-footer">
       <div class="shell"><span>Chris Demetriou</span><span>V2 foundation</span></div>
     </footer>
+
+    <aside class="cookie-banner" data-cookie-banner aria-label="Cookie preferences" hidden>
+      <p>This site uses essential browser storage for theme preference and form security. No analytics or advertising cookies are used.</p>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-essential" data-cookie-essential>Essential only</button>
+        <button type="button" class="cookie-accept" data-cookie-accept>Accept</button>
+      </div>
+    </aside>
   </body>
 </html>

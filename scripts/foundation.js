@@ -24,7 +24,8 @@ menuToggle.addEventListener('click', () => {
   navigation.dataset.open = String(!isOpen);
 });
 
-navigation.addEventListener('click', () => {
+navigation.addEventListener('click', (event) => {
+  if (event.target.closest('.nav-cv')) return;
   menuToggle.setAttribute('aria-expanded', 'false');
   navigation.dataset.open = 'false';
 });
@@ -160,6 +161,21 @@ if (contactForm) {
 
     const subject = `Website enquiry from ${formData.get('name')}`;
     const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
-    window.location.href = `mailto:techdelivery@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:techopsmgmt@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
+}
+
+const cookieBanner = document.querySelector('[data-cookie-banner]');
+
+if (cookieBanner) {
+  const cookiePreference = localStorage.getItem('cd-cookie-preference');
+  if (!cookiePreference) cookieBanner.hidden = false;
+
+  function setCookiePreference(preference) {
+    localStorage.setItem('cd-cookie-preference', preference);
+    cookieBanner.hidden = true;
+  }
+
+  cookieBanner.querySelector('[data-cookie-essential]').addEventListener('click', () => setCookiePreference('essential'));
+  cookieBanner.querySelector('[data-cookie-accept]').addEventListener('click', () => setCookiePreference('accepted'));
 }

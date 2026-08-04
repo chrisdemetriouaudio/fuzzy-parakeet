@@ -24,7 +24,8 @@ menuToggle.addEventListener('click', () => {
   navigation.dataset.open = String(!isOpen);
 });
 
-navigation.addEventListener('click', () => {
+navigation.addEventListener('click', (event) => {
+  if (event.target.closest('.nav-cv')) return;
   menuToggle.setAttribute('aria-expanded', 'false');
   navigation.dataset.open = 'false';
 });
@@ -32,8 +33,8 @@ navigation.addEventListener('click', () => {
 const scenarios = {
   cloud: {
     title: 'Chris connects the migration picture.',
-    inputs: ['80+ enterprise applications', 'Global SaaS estate', 'Colocation to Oracle Cloud', 'No extended downtime'],
-    questions: ['Which dependencies would make a move unsafe?', 'Which teams need to validate readiness together?', 'What must be true before each cutover?'],
+    inputs: ['80+ enterprise applications', 'Global SaaS estate', 'On-prem to OCI (Oracle Cloud)', 'No extended downtime'],
+    questions: ['Which dependencies would make a move unsafe?', 'Which teams need to validate readiness together?', 'What must be true before each cutover?', 'How do we make the cutover seamless for a large customer base?'],
     outcomes: ['Dependencies made visible', 'Readiness validated early', 'Assumptions challenged', 'Cutover risk reduced'],
     summary: 'At E2open, the cloud transformation required more than a migration plan: it needed a shared view of application, infrastructure, network and database readiness before each cutover.'
   },
@@ -42,27 +43,27 @@ const scenarios = {
     inputs: ['Business-critical SAP ERP', 'Three organisations', 'VPN and firewall changes', 'End-to-end integration testing'],
     questions: ['Where do ownership and release cycles diverge?', 'Is the production connectivity proven?', 'What would continuity look like at switchover?'],
     outcomes: ['Technical workshops aligned teams', 'Connectivity validated', 'Monitoring confirmed', 'Implementation risk reduced'],
-    summary: 'For SYSCO UK and Capgemini, the SAP transition worked because technical readiness and operational continuity were treated as the same conversation.'
+    summary: 'For SYSCO UK (Brakes) and Capgemini, the SAP transition worked because technical readiness and operational continuity were treated as the same conversation.'
   },
   security: {
     title: 'Chris makes secure change workable.',
     inputs: ['3,000+ customer integrations', 'Legacy HTTP and FTP', 'Customer firewall rules', 'Change windows across customers'],
     questions: ['Which connection paths need proving?', 'Which customers need action before retirement?', 'How can security improve without avoidable disruption?'],
-    outcomes: ['Migration paths validated', 'Customer teams engaged', 'Legacy services retired', 'Production security improved'],
+    outcomes: ['Migration paths validated', 'Customer teams engaged', 'Legacy services retired', 'Production security improved', 'Middleware DR site built and tested'],
     summary: 'At E2open, modernising thousands of integrations relied on bringing network, application and customer engineering into one dependable migration process.'
   },
   connectivity: {
     title: 'Chris turns connectivity into readiness.',
-    inputs: ['New cloud-hosted platform', 'Heineken UK head office', 'VPN implementation', 'Production data exchange'],
+    inputs: ['New cloud-hosted platform', 'Heineken UK', 'VPN implementation', 'Production data exchange'],
     questions: ['Is every link in the production path confirmed?', 'Who owns each validation step?', 'Is monitoring ready for handover?'],
-    outcomes: ['VPN and connectivity verified', 'End-to-end exchange proven', 'Monitoring completed', 'Operational acceptance achieved'],
+    outcomes: ['VPN and connectivity verified', 'End-to-end exchange proven', 'Operational acceptance achieved', 'Post-implementation monitoring confirmed a successful cutover'],
     summary: 'For Heineken UK, the goal was not merely a working connection, but secure production connectivity that was monitored, accepted and ready to operate.'
   },
   incident: {
     title: 'Chris brings the right response together.',
     inputs: ['24/7 Priority 1 rota', 'Tier 1 enterprise customers', 'Cross-functional specialists', 'Time-critical customer communication'],
     questions: ['Which expertise will test the leading assumption?', 'What evidence changes the next decision?', 'What does the customer need to know now?'],
-    outcomes: ['Specialists mobilised quickly', 'Assumptions tested', 'Root cause found faster', 'Clear technical updates provided'],
+    outcomes: ['Technical bridge assembled and coordinated', 'Specialists directed through the investigation', 'Customers and senior leadership kept informed throughout', 'Root cause and recovery driven faster'],
     summary: 'Across seven years on E2open’s Priority 1 rota, the work was to turn urgent technical signals into a coordinated response and clear customer communication.'
   }
 };
@@ -160,6 +161,21 @@ if (contactForm) {
 
     const subject = `Website enquiry from ${formData.get('name')}`;
     const body = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\n\n${formData.get('message')}`;
-    window.location.href = `mailto:techdelivery@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:techopsmgmt@chrisdemetriou.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
+}
+
+const cookieBanner = document.querySelector('[data-cookie-banner]');
+
+if (cookieBanner) {
+  const cookiePreference = localStorage.getItem('cd-cookie-preference');
+  if (!cookiePreference) cookieBanner.hidden = false;
+
+  function setCookiePreference(preference) {
+    localStorage.setItem('cd-cookie-preference', preference);
+    cookieBanner.hidden = true;
+  }
+
+  cookieBanner.querySelector('[data-cookie-essential]').addEventListener('click', () => setCookiePreference('essential'));
+  cookieBanner.querySelector('[data-cookie-accept]').addEventListener('click', () => setCookiePreference('accepted'));
 }
