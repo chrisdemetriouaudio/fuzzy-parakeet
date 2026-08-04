@@ -115,6 +115,7 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .organisation-heading h2 { max-width: 18ch; margin: 0; font-size: clamp(2rem, 3.6vw, 3.5rem); }
 .organisation-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; padding: 0; margin: 0; list-style: none; }
 .organisation-grid li { display: grid; min-height: 5.5rem; place-items: center; padding: 1rem; border: 1px solid var(--line); background: var(--page); color: var(--muted); font: 600 clamp(.78rem, 1.4vw, 1rem)/1.2 var(--font-body); letter-spacing: -.02em; text-align: center; }
+.organisation-grid img { width: 2.25rem; height: 2.25rem; margin-bottom: .4rem; border-radius: .4rem; object-fit: contain; }
 .organisation-grid small { margin-top: .35rem; color: var(--accent); font: 500 .58rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .organisation-grid li:hover { border-color: var(--accent); color: var(--text); }
 .recruiter-brief { padding-block: var(--space-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
