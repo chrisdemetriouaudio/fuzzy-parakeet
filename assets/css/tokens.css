@@ -1,111 +1,68 @@
 /* ==========================================================================
-   tokens.css — design tokens for the landing page and /enterprise/
+   tokens.css — the enterprise site at /
    --------------------------------------------------------------------------
-   These deliberately mirror the media site's system (media/style3.css) so the
-   whole domain reads as one site: same dark ground, same gold, same faces.
-   The media site keeps its own stylesheet and does not import this one — the
-   values are matched by hand, so if you change a colour there, change it here.
-
-   Reading comfort is a hard requirement, not a preference. Three rules follow
-   from it and must not be traded away for density:
-     1. No text sits on open background. Every block lives inside a panel.
-     2. Body copy holds a ~60 character measure and 1.8 line height.
-     3. One idea per panel, with real space between panels.
+   The media site at /media/ keeps its own system entirely (dark, gold, Bebas
+   Neue, loaded from Google Fonts) and does not consume this file. The two
+   halves of the site are deliberately different: they speak to different
+   people, and forcing one typeface across both served neither.
    ========================================================================== */
 
-/* Self-hosted so the pages render identically offline and there is no
-   third-party request. Same families the media site loads from Google. */
 @font-face {
-    font-family: "Bebas Neue";
-    src: url("/assets/fonts/bebas-neue-400.woff2") format("woff2");
-    font-weight: 400; font-style: normal; font-display: swap;
+    font-family: "Geist";
+    src: url("/assets/fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
 }
+
 @font-face {
-    font-family: "Barlow Condensed";
-    src: url("/assets/fonts/barlow-condensed-600.woff2") format("woff2");
-    font-weight: 600; font-style: normal; font-display: swap;
-}
-@font-face {
-    font-family: "Barlow Condensed";
-    src: url("/assets/fonts/barlow-condensed-700.woff2") format("woff2");
-    font-weight: 700; font-style: normal; font-display: swap;
-}
-@font-face {
-    font-family: "Barlow";
-    src: url("/assets/fonts/barlow-400.woff2") format("woff2");
-    font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-    font-family: "Barlow";
-    src: url("/assets/fonts/barlow-600.woff2") format("woff2");
-    font-weight: 600; font-style: normal; font-display: swap;
-}
-@font-face {
-    font-family: "DM Mono";
-    src: url("/assets/fonts/dm-mono-400.woff2") format("woff2");
-    font-weight: 400; font-style: normal; font-display: swap;
+    font-family: "Geist Mono";
+    src: url("/assets/fonts/GeistMono-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
 }
 
 :root {
-    /* ── Colour — matched to media/style3.css ─────────────────────────── */
-    --bg-black:     #050505;
-    --bg-dark:      #0f0f0f;
-    --bg-panel:     #131313;   /* panel fill — one step up from the ground so
-                                  containers read as objects, not as tint */
-    --bg-panel-2:   #181818;   /* nested panel, or hover */
+    /* ── Ground ───────────────────────────────────────────────────────────
+       Cool blacks read technical; warm blacks read editorial. The previous
+       #050505 was borrowed from the media brand and carried its warmth.
+    ───────────────────────────────────────────────────────────────────── */
+    --ground:     #0A0C10;
+    --panel:      #12151A;
+    --panel-2:    #171B21;
+    --line:       #232830;
+    --line-soft:  #1A1E25;
 
-    --text-white:   #ffffff;
-    --text-body:    #c9c9c9;   /* body copy — brighter than the media site's
-                                  grey, because long-form reading needs it */
-    --text-grey:    #a0a0a0;   /* captions and labels */
+    --ink:        #F2F4F7;
+    --body:       #C3C9D2;
+    --mute:       #8B95A3;
 
-    --accent:       #C8A96A;
-    --accent-rgb:   200, 169, 106;
-    --accent-soft:  rgba(200, 169, 106, .12);
-    --accent-edge:  rgba(200, 169, 106, .38);
+    /* ── Signal ───────────────────────────────────────────────────────────
+       Amber, not gold. Gold reads hospitality; amber is the state that
+       exists before red, which is precisely the job — early warning. Used
+       only on the one thing that matters in any given section.
+    ───────────────────────────────────────────────────────────────────── */
+    --signal:      #E3A23C;
+    --signal-hi:   #F0B152;
+    --signal-wash: rgba(227, 162, 60, .09);
+    --signal-edge: rgba(227, 162, 60, .32);
 
-    --border:       #333333;
-    --border-soft:  #242424;
+    /* Availability is a state, not an accent — it gets its own colour so it
+       is never confused with the signal. */
+    --live:        #4ADE80;
 
-    /* ── Type — matched to media/style3.css ───────────────────────────── */
-    --font-hero:    "Bebas Neue", sans-serif;
-    --font-display: "Barlow Condensed", sans-serif;
-    --font-main:    "Barlow", sans-serif;
-    --font-mono:    "DM Mono", monospace;
+    /* ── Type ─────────────────────────────────────────────────────────── */
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    /* Sized up across the board. Barlow runs small, and this has to be
-       comfortable to read, not merely legible. */
-    --step--1:      0.9375rem;
-    --step-0:       1.0625rem;
-    --step-1:       clamp(1.125rem, 1.08rem + 0.2vw,  1.25rem);
-    --step-2:       clamp(1.375rem, 1.3rem  + 0.35vw, 1.625rem);
-    --step-3:       clamp(1.75rem,  1.6rem  + 0.7vw,  2.25rem);
-    --step-4:       clamp(2.25rem,  1.95rem + 1.4vw,  3.25rem);
-    --step-5:       clamp(3rem,     2.4rem  + 2.8vw,  5rem);
-
-    --leading-body: 1.8;
-    --measure:      60ch;
-
-    /* ── Space ────────────────────────────────────────────────────────── */
-    --space-1:      0.25rem;
-    --space-2:      0.5rem;
-    --space-3:      0.75rem;
-    --space-4:      1rem;
-    --space-5:      1.5rem;
-    --space-6:      2rem;
-    --space-7:      2.75rem;
-    --space-8:      clamp(3rem, 6vw, 4.5rem);
-    --space-9:      clamp(4rem, 8vw, 6rem);
-
-    /* ── Form ─────────────────────────────────────────────────────────── */
-    --radius-sm:    4px;
-    --radius:       6px;
-    --radius-lg:    10px;
-
-    --container:    1180px;
+    /* ── Measure and rhythm ───────────────────────────────────────────── */
+    --measure:   60ch;
+    --container: 1120px;
+    --leading:   1.75;
 
     /* ── Motion ───────────────────────────────────────────────────────── */
-    --ease:         cubic-bezier(.16, 1, .3, 1);
-    --dur-fast:     .25s;
-    --dur:          .5s;
+    --ease:     cubic-bezier(.16, 1, .3, 1);
+    --fast:     .18s;
+    --slow:     .55s;
 }
