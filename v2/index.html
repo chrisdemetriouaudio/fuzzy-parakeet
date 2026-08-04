@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/foundation-blend.css">
+    <link rel="stylesheet" href="styles/foundation-headshots.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="scripts/foundation-experience.js" defer></script>
   </head>
@@ -20,7 +20,7 @@
     <header class="site-header" data-header>
       <div class="shell header-content">
         <a class="wordmark" href="#top" aria-label="Chris Demetriou home">
-          <span aria-hidden="true">CD</span>
+          <img class="wordmark-portrait" src="images/chris-demetriou-enterprisetechnicaloperationsmanager.jpg" alt="">
           <span class="wordmark-name">Chris Demetriou</span>
         </a>
 
@@ -56,6 +56,9 @@
 
           <div class="hero-visual" aria-hidden="true">
             <svg class="system-map" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <clipPath id="map-portrait-clip"><circle cx="231" cy="216" r="20" /></clipPath>
+              </defs>
               <path class="map-orbit map-orbit-one" d="M68 216C68 126 141 53 231 53C321 53 394 126 394 216C394 306 321 379 231 379C141 379 68 306 68 216Z" />
               <path class="map-orbit map-orbit-two" d="M122 216C122 156 171 107 231 107C291 107 340 156 340 216C340 276 291 325 231 325C171 325 122 276 122 216Z" />
               <path class="map-path" d="M68 130L231 216L410 112" />
@@ -67,11 +70,12 @@
               <circle class="map-node" cx="29" cy="286" r="6" />
               <circle class="map-node" cx="132" cy="229" r="6" />
               <circle class="map-node map-node-focus" cx="231" cy="216" r="20" />
+              <image href="images/chris-demetriou-enterprisetechnicaloperationsmanager.jpg" x="211" y="196" width="40" height="40" preserveAspectRatio="xMidYMid slice" clip-path="url(#map-portrait-clip)" />
+              <circle class="map-portrait-frame" cx="231" cy="216" r="20" />
               <circle class="map-node" cx="410" cy="112" r="6" />
               <circle class="map-node" cx="411" cy="301" r="5" />
               <circle class="map-node" cx="231" cy="395" r="6" />
               <circle class="map-node" cx="231" cy="35" r="6" />
-              <text x="231" y="222" text-anchor="middle" class="map-mark">CD</text>
               <text x="231" y="21" text-anchor="middle" class="map-team-label">Project Manager</text>
               <text x="32" y="108" class="map-team-label">Cloud</text>
               <text x="18" y="314" class="map-team-label">Network</text>
@@ -164,7 +168,7 @@
             <article class="flow-stage flow-stage-context" aria-label="Chris connects the wider picture">
               <p class="flow-label">Context and judgement</p>
               <div class="context-core">
-                <span class="context-initials" aria-hidden="true">CD</span>
+                <img class="context-portrait" src="images/chris-demetriou-enterprisetechnicaloperationsmanager.jpg" alt="">
                 <h3 data-flow-title>Chris connects the migration picture.</h3>
                 <ul data-flow-questions>
                   <li>Which dependencies would make a move unsafe?</li>
