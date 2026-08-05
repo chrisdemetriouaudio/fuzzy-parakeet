@@ -3,75 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <title>Chris Demetriou — Curriculum Vitae</title>
-<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>
-  /* The CV is a print document and deliberately does NOT inherit the site's
-     dark ground — dark backgrounds waste ink and print poorly. It borrows the
-     faces and the gold accent so it still reads as the same brand. */
   :root {
-      --cv-ink:    #14161A;
-      --cv-body:   #3E4550;
-      --cv-muted:  #6A727E;
-      --cv-rule:   #D8DDE4;
-      --cv-accent: #8A6E28;   /* gold, darkened for contrast on white paper */
+      --cv-ink:    #1A1D19;
+      --cv-body:   #394038;
+      --cv-muted:  #5B6259;
+      --cv-rule:   #CDD1C7;
+      --cv-accent: #596345;
+      --cv-paper:  #F6F7F1;
   }
 </style>
 <style>
-  @page { size: A4; margin: 14mm 15mm; }
+  @page { size: A4; margin: 10mm 13mm; }
 
   * { box-sizing: border-box; }
 
   body {
       margin: 0;
-      background: #fff;
-      font-family: var(--font-main);
-      font-size: 9.2pt;
-      line-height: 1.5;
+      background: var(--cv-paper);
+      font-family: "Manrope", system-ui, sans-serif;
+      font-size: 8.6pt;
+      line-height: 1.4;
       color: var(--cv-body);
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
   }
 
-  h1, h2, h3 { margin: 0; color: var(--cv-ink); font-family: var(--font-display); font-weight: 600; letter-spacing: .01em; }
+  h1, h2, h3 { margin: 0; color: var(--cv-ink); font-family: "Newsreader", Georgia, serif; font-weight: 600; letter-spacing: .01em; }
 
   a { color: var(--cv-accent); text-decoration: none; }
 
-  .name { font-family: var(--font-hero); font-size: 30pt; font-weight: 400; line-height: 1; letter-spacing: .02em; }
+  header { padding-left: 8pt; border-left: 2pt solid var(--cv-accent); }
+  .name { font-family: "Manrope", system-ui, sans-serif; font-size: 22pt; font-weight: 700; line-height: 1; letter-spacing: .11em; text-transform: uppercase; }
 
   .role {
-      font-family: var(--font-mono);
-      font-size: 7.4pt;
+      display: grid;
+      gap: 1pt;
+      width: 145pt;
+      font-family: "DM Mono", ui-monospace, monospace;
+      font-size: 7pt;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--cv-accent);
       margin-top: 5pt;
   }
+  .role span { display: flex; justify-content: space-between; }
 
   .contact {
-      margin-top: 7pt;
-      padding-top: 7pt;
+      margin-top: 6pt;
+      padding-top: 6pt;
       border-top: .6pt solid var(--cv-rule);
       display: flex;
       flex-wrap: wrap;
       gap: 4pt 14pt;
-      font-size: 8.4pt;
+      font-size: 8pt;
   }
   .contact span { white-space: nowrap; }
 
-  section { margin-top: 13pt; }
+  section { margin-top: 10pt; }
 
   .section-label {
-      font-family: var(--font-mono);
+      font-family: "DM Mono", ui-monospace, monospace;
       font-size: 6.9pt;
       letter-spacing: .16em;
       text-transform: uppercase;
       color: var(--cv-muted);
       padding-bottom: 3pt;
       border-bottom: .6pt solid var(--cv-rule);
-      margin-bottom: 7pt;
+      margin-bottom: 5pt;
   }
 
-  .profile p { margin: 0 0 5pt; }
+  .profile p { margin: 0 0 4pt; }
   .profile p:last-child { margin-bottom: 0; }
 
   .caps {
@@ -81,43 +86,43 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      font-size: 8.5pt;
+      font-size: 8pt;
   }
   .caps li { display: flex; gap: 5pt; }
   .caps li::before { content: "·"; color: var(--cv-accent); }
 
   .employer { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
   .employer h2 { font-size: 11.5pt; }
-  .employer .dates { font-family: var(--font-mono); font-size: 8pt; color: var(--cv-muted); white-space: nowrap; }
-  .employer-note { margin: 4pt 0 0; }
+  .employer .dates { font-family: "DM Mono", ui-monospace, monospace; font-size: 8pt; color: var(--cv-muted); white-space: nowrap; }
+  .employer-note { margin: 3pt 0 0; }
 
-  .engagement { margin-top: 9pt; page-break-inside: avoid; break-inside: avoid; }
-  .engagement h3 { font-size: 9.6pt; }
+  .engagement { margin-top: 7pt; page-break-inside: avoid; break-inside: avoid; }
+  .engagement h3 { font-size: 9.2pt; }
   .engagement .meta {
-      font-family: var(--font-mono);
+      font-family: "DM Mono", ui-monospace, monospace;
       font-size: 7.2pt;
       letter-spacing: .07em;
       text-transform: uppercase;
       color: var(--cv-muted);
-      margin-top: 2pt;
+      margin-top: 1pt;
   }
-  .engagement .objective { margin: 4pt 0 3pt; }
+  .engagement .objective { margin: 3pt 0 2pt; }
   .engagement ul { margin: 0; padding-left: 11pt; }
-  .engagement li { margin-bottom: 1.5pt; }
+  .engagement li { margin-bottom: 1pt; }
 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
-  .block h3 { font-size: 9.6pt; }
-  .block p { margin: 3pt 0 0; }
+  .block h3 { font-size: 9.2pt; }
+  .block p { margin: 2pt 0 0; }
 
-  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5pt 14pt; margin: 0; padding: 0; list-style: none; font-size: 8.5pt; }
+  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2pt 14pt; margin: 0; padding: 0; list-style: none; font-size: 8pt; }
   .edu li { display: flex; gap: 5pt; }
   .edu li::before { content: "·"; color: var(--cv-accent); }
 
   .foot {
-      margin-top: 14pt;
-      padding-top: 6pt;
+      margin-top: 10pt;
+      padding-top: 5pt;
       border-top: .6pt solid var(--cv-rule);
-      font-family: var(--font-mono);
+      font-family: "DM Mono", ui-monospace, monospace;
       font-size: 7pt;
       letter-spacing: .09em;
       text-transform: uppercase;
@@ -131,11 +136,11 @@
 
 <header>
   <h1 class="name">Chris Demetriou</h1>
-  <p class="role">Enterprise Technical Delivery &middot; Technical Operations &middot; Cloud Transformation &middot; Service Transition</p>
+  <p class="role"><span>Enterprise Technology</span><span>Operations Management</span></p>
   <div class="contact">
     <span>Marple, Stockport, Greater Manchester</span>
     <span>07375 304141</span>
-    <span>techdelivery@chrisdemetriou.com</span>
+    <span>techopsmgmt@chrisdemetriou.com</span>
     <span>chrisdemetriou.com</span>
     <span>linkedin.com/in/chrisademetriou</span>
   </div>
@@ -144,11 +149,11 @@
 <section class="profile">
   <div class="section-label">Professional profile</div>
   <p>
-    An Enterprise Technical Delivery professional who bridges Solution Architecture and specialist
+    An Enterprise Technology Operations Manager who bridges Solution Architecture and specialist
     engineering teams, ensuring technical work is understood, coordinated, validated and production ready.
   </p>
   <p>
-    With more than 20 years&rsquo; experience across enterprise SaaS environments, I specialise in technical
+    With more than 20 years&rsquo; experience across enterprise SaaS environments, I specialise in technology
     delivery rather than project governance or hands-on engineering. My role is to understand complex
     technology landscapes, identify technical dependencies, facilitate engineering collaboration and help
     multidisciplinary teams deliver complex enterprise change successfully.
@@ -163,7 +168,7 @@
 <section>
   <div class="section-label">Core capabilities</div>
   <ul class="caps">
-    <li>Enterprise Technical Delivery</li>
+    <li>Enterprise Technology Operations Management</li>
     <li>Technical Operations</li>
     <li>Cloud Transformation</li>
     <li>Service Transition</li>
@@ -194,6 +199,10 @@
     engineering teams deliver cloud transformation, enterprise migrations, customer onboarding, security
     modernisation and complex production change.
   </p>
+  <p class="employer-note">
+    Selected customer programmes included SYSCO UK (Brakes), Heineken UK, Aviva, Legal &amp; General,
+    Dunelm, ASDA, PZ Cussons, TNT and Nisa; Accenture and Capgemini were managed-services delivery partners.
+  </p>
 
   <div class="engagement">
     <h3>Enterprise Cloud Transformation &amp; Cost Reduction</h3>
@@ -211,7 +220,7 @@
 
   <div class="engagement">
     <h3>Enterprise SAP Migration &amp; Business Continuity</h3>
-    <p class="meta">Customer: Sysco UK &nbsp;&middot;&nbsp; Delivery partner: Capgemini</p>
+    <p class="meta">Customer: SYSCO UK (Brakes) &nbsp;&middot;&nbsp; Delivery partner: Capgemini</p>
     <p class="objective">
       <b>Objective:</b> Deliver a business-critical SAP ERP transition while maintaining operational continuity.
     </p>
@@ -248,6 +257,7 @@
       <li>Worked alongside networking, application and customer engineering teams to coordinate secure production implementation.</li>
       <li>Validated firewall readiness, customer source IP configuration and production connectivity.</li>
       <li>Coordinated end-to-end validation before retiring legacy services.</li>
+      <li>Built and tested a middleware disaster-recovery site to strengthen operational resilience.</li>
       <li>Helped reduce enterprise technical debt while improving production security with minimal customer disruption.</li>
     </ul>
   </div>
@@ -259,10 +269,10 @@
       affecting Tier 1 enterprise customers.
     </p>
     <ul>
-      <li>Formed part of a 24/7 Priority 1 major incident rota for approximately seven years.</li>
-      <li>Rapidly assembled engineering specialists across infrastructure, networking, databases, applications and development.</li>
+      <li>Led technical response coordination on a 24/7 Priority 1 rota for approximately seven years.</li>
+      <li>Rapidly assembled and coordinated specialists across infrastructure, networking, databases, applications and development.</li>
       <li>Facilitated technical investigation, validated engineering assumptions and accelerated root cause identification.</li>
-      <li>Communicated technically informed delivery updates while engineering teams focused on service restoration.</li>
+      <li>Kept customers and senior leadership informed while engineering teams focused on service restoration.</li>
     </ul>
   </div>
 </section>
@@ -328,7 +338,7 @@
 
 <div class="foot">
   <span>Chris Demetriou &mdash; Curriculum Vitae</span>
-  <span>chrisdemetriou.com/enterprise</span>
+  <span>chrisdemetriou.com</span>
 </div>
 
 </body>
