@@ -37,5 +37,11 @@ node_modules/
 .wrangler/
 worker-configuration.d.ts
 
+# Private / unredacted documents — never publish or commit
+/private/
+*-UNREDACTED*.pdf
+*-PRIVATE*.pdf
+*-source*.pdf
+
 # macOS extended-attribute sidecar files
 ._*
