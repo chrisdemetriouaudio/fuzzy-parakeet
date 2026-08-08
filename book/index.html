@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Book a 20-minute introductory call with Chris Demetriou to discuss a contract or permanent Enterprise Technology Operations opportunity.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://chrisdemetriou.com/book/">
+    <title>Book a call | Chris Demetriou</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/foundation-prominent-lockup.css">
+  </head>
+  <body>
+    <main id="main-content">
+      <section class="foundation-section">
+        <div class="shell" style="max-width:44rem;">
+          <p class="eyebrow">Book a call</p>
+          <h1>Book a 20-minute introductory call</h1>
+          <p class="hero-intro" style="margin-top:var(--space-2);">A short, no-pressure conversation about a contract or permanent Enterprise Technology Operations opportunity — the role or programme, where I could add value, and whether it’s a fit. Bring as much or as little detail as you have.</p>
+
+          <div id="book-action" style="margin-top:var(--space-3);">
+            <div class="calendly-embed-wrap" id="book-embed">
+              <p style="padding:1.5rem; color:var(--muted);">Loading the calendar…</p>
+              <noscript><p style="padding:1.5rem;"><a href="https://calendly.com/techopsmgmt-chrisdemetriou/20min">Open the booking page ↗</a></p></noscript>
+            </div>
+            <p style="margin-top:var(--space-2); color:var(--muted); font-size:.85rem;">Prefer not to use the calendar? <a href="/#contact">Send an opportunity</a> and I’ll reply with times — or <a href="/">go back to the ETOM overview</a>.</p>
+          </div>
+
+          <p style="margin-top:var(--space-3); color:var(--muted); font-size:.85rem;">Prefer email or LinkedIn? Everything’s on the <a href="/#contact">contact section</a> of the main page.</p>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="shell">
+          <span>© 2026 Chris Demetriou</span>
+          <nav class="site-footer-nav" aria-label="Footer">
+            <a href="/#contact">Contact</a>
+            <a href="/media/">Media</a>
+            <a href="/privacy/">Privacy</a>
+          </nav>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Booking: Calendly inline embed, loaded only on /book/ -->
+    <script>
+      /* Change this one line to update the booking link everywhere on this page. */
+      var BOOKING_URL = "https://calendly.com/techopsmgmt-chrisdemetriou/20min";
+    </script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script>
+      (function () {
+        var embed = document.getElementById('book-embed');
+        if (!embed || !BOOKING_URL) return;
+        var themed = BOOKING_URL + (BOOKING_URL.indexOf('?') > -1 ? '&' : '?') +
+          'hide_gdpr_banner=1&background_color=101110&text_color=eeefe9&primary_color=899467';
+        var done = false;
+        function init() {
+          if (done) return;
+          if (window.Calendly && Calendly.initInlineWidget) {
+            done = true;
+            embed.innerHTML = '';
+            Calendly.initInlineWidget({ url: themed, parentElement: embed });
+          }
+        }
+        function fallback() {
+          if (done) return;
+          done = true;
+          embed.innerHTML =
+            '<div style="padding:1.5rem;">' +
+            '<p style="color:var(--muted);margin-bottom:1rem;">The calendar couldn’t load here.</p>' +
+            '<a class="btn btn--primary" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Open the booking page ↗</a>' +
+            '</div>';
+        }
+        if (window.Calendly) init();
+        else window.addEventListener('load', function () { setTimeout(init, 300); setTimeout(fallback, 4000); });
+      })();
+    </script>
+  </body>
+</html>

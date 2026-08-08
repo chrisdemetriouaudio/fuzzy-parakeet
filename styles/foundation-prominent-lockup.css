@@ -90,7 +90,17 @@ h1 { margin-bottom: var(--space-3); font-size: clamp(3.25rem, 8vw, 7.5rem); }
 .keep-together { white-space: nowrap; }
 h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .hero-intro { max-width: var(--reading); margin-bottom: var(--space-2); color: var(--muted); font-size: clamp(1.1rem, 1.5vw, 1.35rem); }
-.hero-closing { margin-bottom: var(--space-3); font-size: 1.1rem; }
+.hero-closing { margin-bottom: var(--space-2); font-size: 1.1rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: var(--space-2); }
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.15rem; border-radius: 10px; border: 1px solid transparent; font: 600 .9rem/1 var(--font-body); text-decoration: none; cursor: pointer; transition: background .15s ease, border-color .15s ease, color .15s ease; }
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn--primary { background: var(--accent); color: var(--page); }
+.btn--primary:hover { background: color-mix(in srgb, var(--accent) 82%, #000); }
+.btn--ghost { background: transparent; border-color: var(--line); color: var(--text); }
+.btn--ghost:hover, .btn--ghost:focus-visible { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.btn--sm { padding: .6rem .9rem; font-size: .82rem; }
+.calendly-embed-wrap { min-width: 320px; height: 760px; width: 100%; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+@media (max-width: 640px) { .calendly-embed-wrap { height: 1040px; } }
 .text-link { color: var(--accent); font-size: .85rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: .3em; }
 .hero-context { display: grid; grid-template-columns: minmax(11rem, .5fr) minmax(0, 1fr); gap: var(--space-3); padding: var(--space-2) 0 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
 .hero-context .context-label { margin-bottom: 0; }
