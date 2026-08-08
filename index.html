@@ -539,6 +539,35 @@
           b.replaceWith(w);
         });
       })();
+
+      /* Gentle, eased in-page scrolling for a calmer, premium feel */
+      (function () {
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.documentElement.style.scrollBehavior = 'auto';
+        function headerOffset(){ var h = document.querySelector('.site-header'); return h ? h.getBoundingClientRect().height + 14 : 0; }
+        function ease(t){ return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+        function glide(toY){
+          var fromY = window.pageYOffset, dist = toY - fromY;
+          if (reduce || Math.abs(dist) < 4){ window.scrollTo(0, toY); return; }
+          var dur = Math.min(1400, Math.max(650, Math.abs(dist) * 0.5)), t0 = null;
+          function step(ts){ if (t0 === null) t0 = ts; var p = Math.min((ts - t0) / dur, 1); window.scrollTo(0, fromY + dist * ease(p)); if (p < 1) requestAnimationFrame(step); }
+          requestAnimationFrame(step);
+        }
+        document.addEventListener('click', function (ev){
+          var a = ev.target.closest('a[href^="#"], a[href^="/#"]');
+          if (!a) return;
+          var href = a.getAttribute('href');
+          if (href.indexOf('/#') === 0){ if (location.pathname === '/' || location.pathname === '/index.html'){ href = href.slice(1); } else { return; } }
+          if (href === '#' || href.charAt(0) !== '#') return;
+          var id = href.slice(1);
+          var el = document.getElementById(id);
+          if (id !== 'top' && !el) return;
+          ev.preventDefault();
+          var toY = (id === 'top') ? 0 : (el.getBoundingClientRect().top + window.pageYOffset - headerOffset());
+          glide(toY);
+          if (history.replaceState){ history.replaceState(null, '', id === 'top' ? location.pathname : href); }
+        }, false);
+      })();
     </script>
   </body>
 </html>

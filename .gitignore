@@ -43,5 +43,12 @@ worker-configuration.d.ts
 *-PRIVATE*.pdf
 *-source*.pdf
 
+# Internal working files — kept local, never published to the public site
+/jobslist/
+/codex/
+/tools/
+/creative.md
+/CSS_REVIEW_PREMIUM_TYPOGRAPHY.md
+
 # macOS extended-attribute sidecar files
 ._*
