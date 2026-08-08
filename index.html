@@ -470,9 +470,11 @@
               <span class="li-card-text"><span class="li-card-name">Chris Demetriou</span><span class="li-card-sub">Enterprise Technology Operations Manager</span></span>
               <span class="li-card-cta">View profile <span aria-hidden="true">↗</span></span>
             </a>
-            </div>
-            <div class="contact-links" aria-label="Contact options">
-              <a href="mailto:TechOpsMgmt@chrisdemetriou.com">TechOpsMgmt@chrisdemetriou.com <span aria-hidden="true">↗</span></a>
+            <button type="button" class="reveal-email" aria-label="Reveal email address">
+              <span class="reveal-email-ic" aria-hidden="true">&#9993;</span>
+              <span class="reveal-email-label">Reveal email</span>
+              <span class="reveal-email-cta" aria-hidden="true">&#8595;</span>
+            </button>
             </div>
           </div>
 
@@ -517,5 +519,26 @@
         <button type="button" class="cookie-accept" data-cookie-accept>Accept</button>
       </div>
     </aside>
+    <script>
+      (function () {
+        var b = document.querySelector('.reveal-email');
+        if (!b) return;
+        b.addEventListener('click', function () {
+          var e = atob('VGVjaE9wc01nbXRAY2hyaXNkZW1ldHJpb3UuY29t');
+          var w = document.createElement('span');
+          w.className = 'revealed-email';
+          var a = document.createElement('a');
+          a.href = 'mailto:' + e; a.textContent = e;
+          var c = document.createElement('button');
+          c.type = 'button'; c.className = 'copy-email'; c.textContent = 'Copy';
+          c.addEventListener('click', function () {
+            if (navigator.clipboard) { navigator.clipboard.writeText(e); }
+            c.textContent = 'Copied'; setTimeout(function () { c.textContent = 'Copy'; }, 1500);
+          });
+          w.appendChild(a); w.appendChild(c);
+          b.replaceWith(w);
+        });
+      })();
+    </script>
   </body>
 </html>
