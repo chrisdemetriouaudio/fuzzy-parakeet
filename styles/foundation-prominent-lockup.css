@@ -213,7 +213,8 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .contact-cta-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .8fr); gap: clamp(2.5rem, 8vw, 8rem); align-items: start; }
 .contact-cta h2 { max-width: 16ch; margin-bottom: var(--space-2); text-wrap: balance; }
 .contact-introduction > p { max-width: var(--reading); color: var(--muted); }
-.contact-availability { display: inline-flex; align-items: center; gap: .55rem; width: fit-content; margin-top: var(--space-3); padding: .65rem .85rem; border-radius: 999px; background: var(--accent); color: var(--page) !important; font: 500 .68rem/1.3 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
+.contact-actions { display: inline-flex; flex-direction: column; align-items: stretch; gap: var(--space-2); margin-top: var(--space-3); }
+.contact-availability { display: flex; align-items: center; justify-content: center; gap: .55rem; padding: .65rem .85rem; border-radius: 999px; background: var(--accent); color: var(--page) !important; font: 500 .68rem/1.3 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
 .availability-dot { width: .5rem; height: .5rem; border-radius: 50%; background: #f1efe5; box-shadow: 0 0 0 0 rgb(241 239 229 / .45); animation: availability-pulse 1.8s ease-out infinite; }
 @keyframes availability-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(241 239 229 / .45); } 55% { box-shadow: 0 0 0 .45rem transparent; } }
 .contact-links { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: var(--space-2); }
@@ -245,14 +246,14 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .site-footer { padding-block: var(--space-3); border-top: 1px solid var(--line); color: var(--muted); font: .7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .site-footer .shell { display: flex; justify-content: space-between; gap: var(--space-2); }
 .footer-badge { display: block; padding-top: var(--space-2); text-align: center; text-transform: none; letter-spacing: normal; }
-.li-card { display: inline-flex; align-items: center; gap: .85rem; max-width: 100%; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--text); text-decoration: none; transition: border-color .15s ease, background .15s ease; }
+.li-card { display: flex; align-items: center; justify-content: space-between; gap: .85rem; max-width: 100%; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--text); text-decoration: none; transition: border-color .15s ease, background .15s ease; }
 .li-card:hover, .li-card:focus-visible { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
 .li-card-icon { display: inline-flex; color: #0A66C2; }
 .li-card-text { display: grid; gap: .12rem; text-align: left; }
 .li-card-name { font: 600 .9rem/1.2 var(--font-body); color: var(--text); letter-spacing: 0; text-transform: none; }
 .li-card-sub { font: 500 .68rem/1.2 var(--font-mono); color: var(--muted); letter-spacing: .02em; text-transform: none; }
 .li-card-cta { margin-left: .35rem; font: 600 .74rem/1 var(--font-body); color: var(--accent); white-space: nowrap; text-transform: none; }
-.li-card--contact { margin-top: var(--space-2); }
+.li-card--contact { margin-top: 0; }
 .cookie-settings { padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; }
 .cookie-settings:hover { color: var(--accent); }
 .cookie-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; left: 1rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); max-width: 52rem; padding: 1rem; margin-inline: auto; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1rem 3rem rgb(0 0 0 / .24); }
