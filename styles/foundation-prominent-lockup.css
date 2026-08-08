@@ -240,7 +240,18 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .form-field { display: grid; gap: .45rem; }
 .form-field label, .form-note { color: var(--muted); font: .68rem var(--font-mono); letter-spacing: .06em; }
 .form-field label { text-transform: uppercase; }
-.form-field input, .form-field textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--text); font: inherit; padding: .75rem; }
+.form-field input, .form-field textarea, .form-field select { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--text); font: inherit; padding: .75rem; }
+.form-field select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: right 1.05rem center, right .8rem center; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2rem; }
+.form-field select:focus-visible { border-color: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 28%, transparent); outline-offset: 2px; }
+.form-field select option { color: #111; }
+.form-intro { color: var(--muted); font-size: .82rem; line-height: 1.5; margin: 0; }
+.req { color: var(--accent); }
+.hp-field { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+.form-success { padding: var(--space-3); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.form-success h3 { margin: 0 0 .5rem; font-family: var(--font-editorial); font-weight: 600; }
+.form-success p { margin: 0 0 var(--space-2); color: var(--muted); }
 .form-field textarea { resize: vertical; }
 .form-field:has(:focus-visible) label, .form-field:has(:user-valid) label { color: var(--accent); }
 .form-field :is(input, textarea):focus-visible { border-color: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 28%, transparent); outline-offset: 2px; }

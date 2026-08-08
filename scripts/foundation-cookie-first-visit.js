@@ -109,7 +109,7 @@ const contactForm = document.querySelector('[data-contact-form]');
 if (contactForm) {
   const contactStatus = document.querySelector('#contact-status');
   const contactSubmit = contactForm.querySelector('.contact-submit');
-  const contactFields = contactForm.querySelectorAll('input:not([type="hidden"]), textarea');
+  const contactFields = contactForm.querySelectorAll('input:not([type="hidden"]):not([name="company_url"]), textarea, select');
 
   function setContactStatus(message, state = '') {
     contactStatus.textContent = message;
@@ -140,14 +140,31 @@ if (contactForm) {
     }, 1800);
   });
 
+  function showOpportunitySuccess(sent) {
+    const panel = document.querySelector('[data-form-success]');
+    if (!panel) return;
+    const heading = panel.querySelector('h3');
+    if (heading) heading.textContent = sent
+      ? 'Thank you — your opportunity has been sent.'
+      : 'Your email is ready — just press send in your mail app.';
+    contactForm.hidden = true;
+    panel.hidden = false;
+    panel.focus();
+  }
+
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    // Honeypot — silently ignore automated submissions.
+    const honeypot = contactForm.querySelector('[name="company_url"]');
+    if (honeypot && honeypot.value) return;
+
     const emailValue = contactEmail.value.trim();
     const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
     if (!contactForm.checkValidity() || !emailIsValid) {
       contactFields.forEach((field) => field.setAttribute('aria-invalid', String(!field.validity.valid)));
       contactEmail.setAttribute('aria-invalid', String(!emailIsValid));
-      setContactStatus('Please complete the highlighted fields with a valid email address.', 'error');
+      setContactStatus('Please complete the required fields (*) with a valid email.', 'error');
       contactForm.reportValidity();
       return;
     }
@@ -155,33 +172,64 @@ if (contactForm) {
     const formData = new FormData(contactForm);
     const token = formData.get('cf-turnstile-response');
     if (!token) {
-      setContactStatus('Please complete the security check before continuing.', 'error');
+      setContactStatus('Please complete the security check before sending.', 'error');
       return;
     }
 
+    // Web3Forms access key (public-safe — only ever delivers to the configured inbox).
+    const FORM_ACCESS_KEY = '4fe26891-092d-446f-992a-8da7191816fb';
+
     contactSubmit.disabled = true;
-    setContactStatus('Checking your details…');
+    setContactStatus('Sending your opportunity…');
     try {
-      const response = await fetch('https://turnstile-siteverify-chrisdemetriou.christian4collective.workers.dev/siteverify', {
+      // 1) Server-side spam verification (existing Turnstile worker).
+      const verifyRes = await fetch('https://turnstile-siteverify-chrisdemetriou.christian4collective.workers.dev/siteverify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token })
       });
-      const verification = await response.json();
-      if (!response.ok || verification.success !== true) {
+      const verification = await verifyRes.json();
+      if (!verifyRes.ok || verification.success !== true) {
         setContactStatus('The security check did not complete. Please try again.', 'error');
+        contactSubmit.disabled = false;
         return;
       }
 
-      setContactStatus('Verified. Opening your email client…', 'ready');
+      if (FORM_ACCESS_KEY) {
+        // 2a) Real delivery via Web3Forms.
+        formData.append('access_key', FORM_ACCESS_KEY);
+        formData.append('subject', 'New opportunity via chrisdemetriou.com');
+        formData.append('from_name', 'chrisdemetriou.com');
+        formData.delete('company_url');
+        const sendRes = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
+        });
+        const out = await sendRes.json();
+        if (!sendRes.ok || out.success !== true) throw new Error('send-failed');
+        showOpportunitySuccess(true);
+      } else {
+        // 2b) Not yet configured → open a prefilled email (address assembled at runtime, not in page source).
+        const to = atob('VGVjaE9wc01nbXRAY2hyaXNkZW1ldHJpb3UuY29t');
+        const g = (n) => (formData.get(n) || '').toString();
+        const body = [
+          'Opportunity: ' + g('opportunity_title'),
+          'Organisation: ' + g('organisation'),
+          'Engagement: ' + (g('engagement_type') || 'Not decided'),
+          'Working model: ' + (g('working_model') || 'No preference'),
+          'Expected start: ' + (g('start_date') || '—'),
+          'Job description: ' + (g('jd_url') || '—'),
+          '', g('message'), '',
+          'From: ' + g('name') + ' <' + emailValue + '>'
+        ].join('\n');
+        window.location.href = 'mailto:' + to +
+          '?subject=' + encodeURIComponent('Opportunity: ' + g('opportunity_title')) +
+          '&body=' + encodeURIComponent(body);
+        showOpportunitySuccess(false);
+      }
     } catch {
-      setContactStatus('We could not verify the form. Please try again.', 'error');
-      return;
-    } finally {
+      setContactStatus('Sorry — we couldn’t send that. Please try again, or use the Reveal email button above.', 'error');
       contactSubmit.disabled = false;
     }
-
-    setContactStatus('Your details are verified. Direct delivery is being connected; please use the email link below in the meantime.', 'ready');
   });
 }
 
