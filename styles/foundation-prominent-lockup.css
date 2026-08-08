@@ -252,6 +252,7 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .li-card-name { font: 600 .9rem/1.2 var(--font-body); color: var(--text); letter-spacing: 0; text-transform: none; }
 .li-card-sub { font: 500 .68rem/1.2 var(--font-mono); color: var(--muted); letter-spacing: .02em; text-transform: none; }
 .li-card-cta { margin-left: .35rem; font: 600 .74rem/1 var(--font-body); color: var(--accent); white-space: nowrap; text-transform: none; }
+.li-card--contact { margin-top: var(--space-2); }
 .cookie-settings { padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; }
 .cookie-settings:hover { color: var(--accent); }
 .cookie-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; left: 1rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); max-width: 52rem; padding: 1rem; margin-inline: auto; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1rem 3rem rgb(0 0 0 / .24); }
