@@ -249,9 +249,10 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .hp-field { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
-.form-success { padding: var(--space-3); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.form-success { padding: var(--space-4) var(--space-3); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); text-align: center; }
 .form-success h3 { margin: 0 0 .5rem; font-family: var(--font-editorial); font-weight: 600; }
-.form-success p { margin: 0 0 var(--space-2); color: var(--muted); }
+.form-success p { margin: 0 0 var(--space-3); color: var(--muted); }
+.form-success .hero-cta { justify-content: center; }
 .form-field textarea { resize: vertical; }
 .form-field:has(:focus-visible) label, .form-field:has(:user-valid) label { color: var(--accent); }
 .form-field :is(input, textarea):focus-visible { border-color: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 28%, transparent); outline-offset: 2px; }
