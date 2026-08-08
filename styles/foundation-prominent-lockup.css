@@ -244,9 +244,9 @@ h2 { margin-bottom: var(--space-2); font-size: clamp(2.4rem, 4.5vw, 4.5rem); }
 .form-note { margin: 0; line-height: 1.5; }
 .site-footer { padding-block: var(--space-3); border-top: 1px solid var(--line); color: var(--muted); font: .7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .site-footer .shell { display: flex; justify-content: space-between; gap: var(--space-2); }
-.site-footer-left { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
-.site-footer-link { color: var(--muted); text-decoration: none; }
-.site-footer-link:hover, .site-footer-link:focus-visible { color: var(--accent); }
+.footer-badge { display: block; padding-top: var(--space-2); text-align: center; text-transform: none; letter-spacing: normal; }
+.footer-badge .badge-base { display: inline-block; }
+.footer-badge a { color: var(--accent); }
 .cookie-settings { padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; }
 .cookie-settings:hover { color: var(--accent); }
 .cookie-banner { position: fixed; z-index: 20; right: 1rem; bottom: 1rem; left: 1rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); max-width: 52rem; padding: 1rem; margin-inline: auto; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 1rem 3rem rgb(0 0 0 / .24); }
