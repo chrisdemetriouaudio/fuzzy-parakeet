@@ -169,65 +169,24 @@ if (contactForm) {
       return;
     }
 
-    const formData = new FormData(contactForm);
-    const token = formData.get('cf-turnstile-response');
-    if (!token) {
-      setContactStatus('Please complete the security check before sending.', 'error');
-      return;
-    }
-
-    // Web3Forms access key (public-safe — only ever delivers to the configured inbox).
     const FORM_ACCESS_KEY = '4fe26891-092d-446f-992a-8da7191816fb';
+    const formData = new FormData(contactForm);
+    formData.delete('company_url');
+    formData.append('access_key', FORM_ACCESS_KEY);
+    formData.append('subject', 'New opportunity via chrisdemetriou.com');
+    formData.append('from_name', 'chrisdemetriou.com');
 
     contactSubmit.disabled = true;
     setContactStatus('Sending your opportunity…');
     try {
-      // 1) Server-side spam verification (existing Turnstile worker).
-      const verifyRes = await fetch('https://turnstile-siteverify-chrisdemetriou.christian4collective.workers.dev/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token })
+      const sendRes = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
       });
-      const verification = await verifyRes.json();
-      if (!verifyRes.ok || verification.success !== true) {
-        setContactStatus('The security check did not complete. Please try again.', 'error');
-        contactSubmit.disabled = false;
-        return;
-      }
-
-      if (FORM_ACCESS_KEY) {
-        // 2a) Real delivery via Web3Forms.
-        formData.append('access_key', FORM_ACCESS_KEY);
-        formData.append('subject', 'New opportunity via chrisdemetriou.com');
-        formData.append('from_name', 'chrisdemetriou.com');
-        formData.delete('company_url');
-        const sendRes = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST', headers: { 'Accept': 'application/json' }, body: formData
-        });
-        const out = await sendRes.json();
-        if (!sendRes.ok || out.success !== true) throw new Error('send-failed');
-        showOpportunitySuccess(true);
-      } else {
-        // 2b) Not yet configured → open a prefilled email (address assembled at runtime, not in page source).
-        const to = atob('VGVjaE9wc01nbXRAY2hyaXNkZW1ldHJpb3UuY29t');
-        const g = (n) => (formData.get(n) || '').toString();
-        const body = [
-          'Opportunity: ' + g('opportunity_title'),
-          'Organisation: ' + g('organisation'),
-          'Engagement: ' + (g('engagement_type') || 'Not decided'),
-          'Working model: ' + (g('working_model') || 'No preference'),
-          'Expected start: ' + (g('start_date') || '—'),
-          'Job description: ' + (g('jd_url') || '—'),
-          '', g('message'), '',
-          'From: ' + g('name') + ' <' + emailValue + '>'
-        ].join('\n');
-        window.location.href = 'mailto:' + to +
-          '?subject=' + encodeURIComponent('Opportunity: ' + g('opportunity_title')) +
-          '&body=' + encodeURIComponent(body);
-        showOpportunitySuccess(false);
-      }
+      const out = await sendRes.json();
+      if (!sendRes.ok || out.success !== true) throw new Error('send-failed');
+      showOpportunitySuccess(true);
     } catch {
-      setContactStatus('Sorry — we couldn’t send that. Please try again, or use the Reveal email button above.', 'error');
+      setContactStatus('Sorry — we couldn’t send that just now. Please try again, or use the Reveal email button above.', 'error');
       contactSubmit.disabled = false;
     }
   });

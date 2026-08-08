@@ -87,7 +87,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/foundation-prominent-lockup.css">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="scripts/foundation-cookie-first-visit.js" defer></script>
   </head>
   <body>
@@ -485,7 +484,7 @@
 
           <form class="contact-form" data-contact-form novalidate>
             <p class="form-intro">Tell me about the role or project. Fields marked <span class="req">*</span> are required; the rest help me reply usefully.</p>
-            <div class="hp-field" aria-hidden="true"><label for="company-url">Company URL</label><input id="company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
+            <div class="hp-field" aria-hidden="true" style="position:absolute!important;left:-9999px!important;top:auto;width:1px;height:1px;overflow:hidden;"><label for="company-url">Company URL</label><input id="company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
             <div class="form-field">
               <label for="contact-name">Name <span class="req">*</span></label>
               <input id="contact-name" name="name" autocomplete="name" required aria-describedby="contact-status">
@@ -512,6 +511,21 @@
                 </select>
               </div>
               <div class="form-field">
+                <label for="contact-length">Contract length (if contract)</label>
+                <select id="contact-length" name="contract_length">
+                  <option value="">Not sure yet</option>
+                  <option>3 months</option>
+                  <option>6 months</option>
+                  <option>12 months</option>
+                  <option>18 months</option>
+                  <option>24 months</option>
+                  <option>Ongoing / rolling</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
                 <label for="contact-model">Working model</label>
                 <select id="contact-model" name="working_model">
                   <option value="">No preference</option>
@@ -521,22 +535,19 @@
                   <option>Flexible</option>
                 </select>
               </div>
-            </div>
-            <div class="form-row">
               <div class="form-field">
                 <label for="contact-start">Expected start date</label>
                 <input id="contact-start" name="start_date" type="date">
               </div>
-              <div class="form-field">
-                <label for="contact-jd">Job-description link</label>
-                <input id="contact-jd" name="jd_url" type="url" inputmode="url" placeholder="https://…">
-              </div>
+            </div>
+            <div class="form-field">
+              <label for="contact-jd">Job-description link</label>
+              <input id="contact-jd" name="jd_url" type="url" inputmode="url" placeholder="https://…">
             </div>
             <div class="form-field">
               <label for="contact-message">Message <span class="req">*</span></label>
               <textarea id="contact-message" name="message" rows="4" required aria-describedby="contact-status"></textarea>
             </div>
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEGNlR_vCGl4yDDs" data-action="turnstile-spin-v1" data-appearance="always"></div>
             <button class="contact-submit" type="submit">Send opportunity <span aria-hidden="true">↗</span></button>
             <p id="contact-status" class="form-status" role="status" aria-live="polite">Fields marked * are required.</p>
           </form>
