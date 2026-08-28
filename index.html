@@ -264,7 +264,22 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* favour the head; the source is near-square so the crop tightens it to 4:5 */
+    object-position: 50% 20%;
     display: block;
+    /* pull the daylight cast toward the page's warm, muted grade */
+    filter: saturate(0.72) contrast(1.06) brightness(0.9);
+  }
+
+  /* vignette sinks the busy background so the portrait sits inside the spotlight */
+  .hero-portrait::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 78% 62% at 50% 32%, transparent 38%, rgba(12,10,15,0.62) 100%),
+      linear-gradient(to bottom, rgba(232,163,77,0.10) 0%, transparent 42%, rgba(12,10,15,0.55) 100%);
   }
 
   .portrait-placeholder{
@@ -855,13 +870,7 @@
         </div>
 
         <div class="hero-portrait">
-          <!-- Swap the placeholder below for: <img src="hero-portrait.jpg" alt="Chris Demetriou"> -->
-          <div class="portrait-placeholder">
-            <span class="ph-rule"></span>
-            <span>Hero portrait</span>
-            <span>4:5 &middot; awaiting photo</span>
-            <span class="ph-rule"></span>
-          </div>
+          <img src="hero-portrait.jpg" alt="Chris Demetriou" width="860" height="1075">
         </div>
 
       </div>
