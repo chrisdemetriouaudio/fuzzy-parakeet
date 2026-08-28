@@ -265,7 +265,7 @@
     height: 100%;
     object-fit: cover;
     /* favour the head; the source is near-square so the crop tightens it to 4:5 */
-    object-position: 50% 20%;
+    object-position: 50% 12%;
     display: block;
     /* pull the daylight cast toward the page's warm, muted grade */
     filter: saturate(0.72) contrast(1.06) brightness(0.9);
@@ -1441,8 +1441,9 @@ Live Performance
     }
     el.appendChild(frag);
   }
-  buildMeter(document.getElementById('meter'), 56);
-  buildMeter(document.getElementById('hero-meter'), 96);
+  buildMeter(document.getElementById('meter'), Math.max(24, Math.floor(window.innerWidth / 22)));
+  // scale the ambient meter to viewport width so bars stay legible, not crushed
+  buildMeter(document.getElementById('hero-meter'), Math.max(28, Math.floor(window.innerWidth / 14)));
 
   // ── Credits tabs ──
   (function(){
