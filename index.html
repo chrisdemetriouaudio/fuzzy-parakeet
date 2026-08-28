@@ -1418,7 +1418,11 @@ Live Performance
         </div>
 
         <div>
-          <form id="booking-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+          <form id="booking-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="4fe26891-092d-446f-992a-8da7191816fb">
+            <input type="hidden" name="subject" value="New booking enquiry via chrisdemetriou.com">
+            <input type="hidden" name="from_name" value="chrisdemetriou.com">
+            <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
             <div class="field">
               <label for="bf-name">Name</label>
               <input type="text" id="bf-name" name="name" required autocomplete="name">
@@ -1573,14 +1577,14 @@ Live Performance
           body: new FormData(form),
           headers: { 'Accept': 'application/json' }
         });
-        if (res.ok){
+        const data = await res.json().catch(function(){ return {}; });
+        if (res.ok && data.success === true){
           form.hidden = true;
           success.hidden = false;
           success.scrollIntoView({ block: 'center' });
           return;
         }
-        const data = await res.json().catch(function(){ return {}; });
-        status.textContent = (data.errors && data.errors[0] && data.errors[0].message)
+        status.textContent = data.message
           || 'Something went wrong. Please email bookings@chrisdemetriou.com instead.';
       } catch (err) {
         status.textContent = 'Network error. Please email bookings@chrisdemetriou.com instead.';
