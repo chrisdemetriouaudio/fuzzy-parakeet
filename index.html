@@ -1,638 +1,420 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Chris Demetriou is an Enterprise Technology Operations Manager who helps organisations navigate complex technology change through dependency awareness and operational readiness.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://chrisdemetriou.com/">
-    <title>Chris Demetriou | Enterprise Technology Operations</title>
-    <link rel="icon" href="/favicon.ico" sizes="any">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris Demetriou | Music Producer & Worship Musician</title>
+<meta name="description" content="Chris Demetriou — music producer and worship musician making records and playing in worship settings. New site coming soon.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://chrisdemetriou.com/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chrisdemetriou.com/">
+<meta property="og:title" content="Chris Demetriou">
+<meta property="og:description" content="Music producer and worship musician making records and playing in worship settings. New site coming soon.">
+<meta property="og:image" content="https://chrisdemetriou.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chris Demetriou">
+<meta name="twitter:description" content="Music producer and worship musician making records and playing in worship settings. New site coming soon.">
+<meta name="twitter:image" content="https://chrisdemetriou.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #121014;
+    --bg-panel: #1a1620;
+    --ink: #ede6dd;
+    --ink-muted: #928c96;
+    --amber: #e8a34d;
+    --red: #c1443c;
+    --teal: #5b8a89;
+    --line: rgba(237,230,221,0.09);
+  }
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="profile">
-    <meta property="og:site_name" content="Chris Demetriou">
-    <meta property="og:title" content="Chris Demetriou | Enterprise Technology Operations Manager">
-    <meta property="og:description" content="Chris Demetriou is an Enterprise Technology Operations Manager who helps organisations navigate complex technology change through dependency awareness and operational readiness.">
-    <meta property="og:url" content="https://chrisdemetriou.com/">
-    <meta property="og:image" content="https://chrisdemetriou.com/images/chris-demetriou-etom-og.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:alt" content="Chris Demetriou reviewing a Jira platform-migration board — Enterprise Technology Operations Manager">
-    <meta property="og:locale" content="en_GB">
+  *{ box-sizing: border-box; }
 
-    <!-- X (Twitter) Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Chris Demetriou | Enterprise Technology Operations Manager">
-    <meta name="twitter:description" content="Chris Demetriou is an Enterprise Technology Operations Manager who helps organisations navigate complex technology change through dependency awareness and operational readiness.">
-    <meta name="twitter:image" content="https://chrisdemetriou.com/images/chris-demetriou-etom-og.jpg">
-    <meta name="twitter:image:alt" content="Chris Demetriou reviewing a Jira platform-migration board — Enterprise Technology Operations Manager">
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    height: 100%;
+  }
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "https://chrisdemetriou.com/#website",
-          "url": "https://chrisdemetriou.com/",
-          "name": "Chris Demetriou",
-          "inLanguage": "en-GB",
-          "publisher": { "@id": "https://chrisdemetriou.com/#chris" }
-        },
-        {
-          "@type": "ProfilePage",
-          "@id": "https://chrisdemetriou.com/#profile",
-          "url": "https://chrisdemetriou.com/",
-          "name": "Chris Demetriou | Enterprise Technology Operations Manager",
-          "isPartOf": { "@id": "https://chrisdemetriou.com/#website" },
-          "about": { "@id": "https://chrisdemetriou.com/#chris" },
-          "inLanguage": "en-GB"
-        },
-        {
-          "@type": "Person",
-          "@id": "https://chrisdemetriou.com/#chris",
-          "name": "Chris Demetriou",
-          "jobTitle": "Enterprise Technology Operations Manager",
-          "description": "Enterprise Technology Operations Manager who helps enterprise organisations deliver complex technology change by identifying dependencies, reducing delivery risk and ensuring operational readiness.",
-          "url": "https://chrisdemetriou.com/",
-          "image": "https://chrisdemetriou.com/images/chris-demetriou-etom-og.jpg",
-          "sameAs": [ "https://linkedin.com/in/chrisademetriou" ],
-          "knowsAbout": [
-            "Enterprise Technology Operations",
-            "Operational Readiness",
-            "Technology Change",
-            "Release Management",
-            "Change Management",
-            "Enterprise Applications",
-            "Enterprise Integration",
-            "Technical Operations",
-            "Technology Governance",
-            "Enterprise Systems",
-            "Cloud Transformation",
-            "Major Incident Management"
-          ],
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Marple, Stockport",
-            "addressRegion": "Greater Manchester",
-            "addressCountry": "GB"
-          }
-        }
-      ]
-    }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/foundation-prominent-lockup.css">
-    <script src="scripts/foundation-cookie-first-visit.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+  body{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(232,163,77,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 110%, rgba(91,138,137,0.07), transparent 60%);
+  }
 
-    <header class="site-header" data-header>
-      <div class="shell header-content">
-        <a class="wordmark" href="#top" aria-label="Chris Demetriou home">
-          <img class="wordmark-portrait" src="images/chrisdemetriou-enterprisetechnicaloperationsmanager-head.jpeg" alt="">
-          <span class="wordmark-lockup">
-            <span class="wordmark-name">CHRIS DEMETRIOU</span>
-            <span class="wordmark-role"><span><i>Enterprise</i><i>Technology</i></span><span><i>Operations</i><i>Management</i></span></span>
-          </span>
-        </a>
+  /* faint grain */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    z-index: 5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
-          <span class="sr-only">Open navigation</span>
-          <span aria-hidden="true"></span><span aria-hidden="true"></span>
-        </button>
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: clamp(20px, 4vw, 44px) clamp(20px, 5vw, 56px) 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+  }
 
-        <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-navigation>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-          <details class="nav-cv">
-            <summary>Chris’s CV <span aria-hidden="true">↓</span></summary>
-            <div class="nav-cv-menu">
-              <a href="documents/Chris-Demetriou-CV.pdf" target="_blank" rel="noopener">View CV <span class="nav-cv-hint">PDF · ~130&nbsp;KB</span> <span aria-hidden="true">↗</span></a>
-              <a href="documents/Chris-Demetriou-CV.pdf" download="Chris-Demetriou-CV.pdf">Download CV <span aria-hidden="true">↓</span></a>
-            </div>
-          </details>
-        </nav>
+  header .mark{
+    color: var(--ink);
+  }
 
-        <div class="utility-controls">
-          <a class="btn btn--primary btn--sm nav-book" href="/book/" target="_blank" rel="noopener">Book a call <span aria-hidden="true">↗</span></a>
-          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to light mode" data-theme-toggle>
-            <span class="theme-toggle-icon" aria-hidden="true">◐</span><span class="sr-only" data-theme-label>Light mode</span>
-          </button>
+  .rec{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-muted);
+  }
+
+  .rec .dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px 1px rgba(193,68,60,0.7);
+    animation: blink 2.6s ease-in-out infinite;
+  }
+
+  @keyframes blink{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: 0.25; }
+  }
+
+  main{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 40px clamp(20px, 5vw, 56px);
+  }
+
+  .layout{
+    display: flex;
+    align-items: center;
+    gap: clamp(32px, 6vw, 76px);
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .content{
+    max-width: 620px;
+    flex: 1 1 420px;
+  }
+
+  .video-card{
+    flex: 0 0 auto;
+    width: min(230px, 44vw);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .video-card .video-eyebrow{
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .video-frame{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(232,163,77,0.35);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 18px 40px -18px rgba(232,163,77,0.35);
+    background: var(--bg-panel);
+  }
+
+  .video-frame iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-card .yt-link{
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+    align-self: flex-start;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .video-card .yt-link:hover, .video-card .yt-link:focus-visible{
+    color: var(--amber);
+    border-bottom-color: var(--amber);
+  }
+
+  .video-card .yt-link:focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 700px){
+    .layout{ flex-direction: column-reverse; align-items: flex-start; }
+    .video-card{ width: min(200px, 60vw); }
+  }
+
+  .eyebrow{
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin: 0 0 22px;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 28px;
+  }
+
+  h1 em{
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-muted);
+  }
+
+  p.lede{
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.65;
+    color: var(--ink-muted);
+    max-width: 52ch;
+    margin: 0 0 40px;
+    font-weight: 300;
+  }
+
+  p.lede strong{
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .actions{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .verse{
+    margin: 46px 0 44px;
+    padding-left: 22px;
+    border-left: 1px solid var(--amber);
+    max-width: 46ch;
+  }
+
+  .verse p{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+
+  .verse cite{
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  a.cta{
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--amber);
+    transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  a.cta:hover, a.cta:focus-visible{
+    color: var(--amber);
+  }
+
+  a.cta:focus-visible{
+    outline: 2px solid var(--amber);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  a.cta.quiet{
+    color: var(--ink-muted);
+    border-bottom-color: var(--line);
+  }
+
+  a.cta.quiet:hover, a.cta.quiet:focus-visible{
+    color: var(--ink);
+    border-bottom-color: var(--ink-muted);
+  }
+
+  footer{
+    padding: 0 clamp(20px, 5vw, 56px) 0;
+  }
+
+  .meter{
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 46px;
+    padding: 0 0 14px;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  .meter .bar{
+    flex: 1;
+    min-width: 2px;
+    max-width: 6px;
+    background: linear-gradient(to top, var(--teal), var(--amber) 78%, var(--red) 96%);
+    border-radius: 1px 1px 0 0;
+    opacity: 0.85;
+    animation-name: levels;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  @keyframes levels{
+    0%{ transform: scaleY(var(--min, 0.08)); }
+    100%{ transform: scaleY(var(--max, 0.55)); }
+  }
+
+  .foot-line{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .meter .bar{ animation: none !important; transform: scaleY(0.35); }
+    .rec .dot{ animation: none !important; opacity: 1; }
+  }
+
+  @media (max-width: 560px){
+    .actions{ gap: 18px; }
+    .meter{ height: 32px; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <span class="mark">CHRIS&nbsp;DEMETRIOU</span>
+    <span class="rec"><span class="dot"></span> STILL&nbsp;TRACKING</span>
+  </header>
+
+  <main>
+    <div class="layout">
+      <div class="content">
+        <p class="eyebrow">Site rebuild in progress</p>
+        <h1>The page is off air<br><em>for a minute.</em></h1>
+        <p class="lede">
+          I'm stripping this back to <strong>one thing: making records, and playing in worship settings.</strong>
+          The new site's being built around that — should be worth the wait.
+        </p>
+        <blockquote class="verse">
+          <p>&ldquo;As each has received a gift, use it to serve one another, as good stewards of God&rsquo;s varied grace.&rdquo;</p>
+          <cite>1 Peter 4:10 &middot; ESV</cite>
+        </blockquote>
+        <div class="actions">
+          <a class="cta" href="mailto:hello@chrisdemetriou.com">Get in touch →</a>
         </div>
       </div>
-    </header>
 
-    <aside class="availability-ribbon" aria-label="Current availability">
-      <div class="shell availability-ribbon-content">
-        <p><span class="ribbon-message" data-ribbon-message>Enterprise technology operations management for business-critical change.</span> <span class="ribbon-availability">Open to contract and permanent engagements · Remote or hybrid · UK.</span></p>
+      <div class="video-card">
+        <span class="video-eyebrow">Latest — YouTube Shorts</span>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=UUkK-NornrMH5v_D0WF1Hk3g&rel=0&modestbranding=1"
+            title="Chris Demetriou — latest worship shorts"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <a class="yt-link" href="https://www.youtube.com/@chrisdemetriouworship/shorts" target="_blank" rel="noopener">Subscribe on YouTube ↗</a>
       </div>
-    </aside>
+    </div>
+  </main>
 
-    <main id="main-content">
-      <section id="top" class="hero" aria-labelledby="hero-title">
-        <div class="shell hero-layout">
-          <div class="hero-copy">
-            <p class="eyebrow">Enterprise Technology Operations</p>
-            <h1 id="hero-title">Enterprise technology rarely fails because of <span class="keep-together">the technology.</span></h1>
-            <p class="hero-intro">It fails when dependencies are missed, assumptions go unchallenged and the right conversations happen too late.</p>
-            <p class="hero-closing">That’s where I come in — making enterprise technology change operationally ready, from dependencies to production cutover.</p>
-            <div class="hero-cta">
-              <a class="btn btn--primary" href="/book/" target="_blank" rel="noopener">Book a 20-minute call <span aria-hidden="true">↗</span></a>
-              <a class="btn btn--primary" href="#contact">Send an opportunity</a>
-              <a class="btn btn--ghost" href="documents/Chris-Demetriou-CV.pdf" target="_blank" rel="noopener">View CV</a>
-            </div>
-          </div>
+  <footer>
+    <div class="meter" id="meter" aria-hidden="true"></div>
+    <div class="foot-line">
+      <span>© 2026 Chris Demetriou</span>
+    </div>
+  </footer>
 
-          <div class="hero-visual" aria-hidden="true">
-            <svg class="system-map" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <clipPath id="map-portrait-clip"><circle cx="231" cy="216" r="20" /></clipPath>
-              </defs>
-              <path class="map-orbit map-orbit-one" d="M68 216C68 126 141 53 231 53C321 53 394 126 394 216C394 306 321 379 231 379C141 379 68 306 68 216Z" />
-              <path class="map-orbit map-orbit-two" d="M122 216C122 156 171 107 231 107C291 107 340 156 340 216C340 276 291 325 231 325C171 325 122 276 122 216Z" />
-              <path class="map-path" d="M68 130L231 216L410 112" />
-              <path class="map-path map-path-secondary" d="M29 286L231 216L411 301" />
-              <path class="map-path-secondary" d="M132 229L231 216" />
-              <path class="map-path map-path-secondary" d="M231 216L231 395" />
-              <path class="map-path map-path-secondary" d="M231 216L231 35" />
-              <circle class="map-node" cx="68" cy="130" r="6" />
-              <circle class="map-node" cx="29" cy="286" r="6" />
-              <circle class="map-node" cx="132" cy="229" r="6" />
-              <circle class="map-node map-node-focus" cx="231" cy="216" r="20" />
-              <image href="images/chrisdemetriou-enterprisetechnicaloperationsmanager-head.jpeg" x="211" y="196" width="40" height="40" preserveAspectRatio="xMidYMid slice" clip-path="url(#map-portrait-clip)" />
-              <circle class="map-portrait-frame" cx="231" cy="216" r="20" />
-              <circle class="map-node" cx="410" cy="112" r="6" />
-              <circle class="map-node" cx="411" cy="301" r="5" />
-              <circle class="map-node" cx="231" cy="395" r="6" />
-              <circle class="map-node" cx="231" cy="35" r="6" />
-              <text x="231" y="21" text-anchor="middle" class="map-team-label">Project Manager</text>
-              <text x="32" y="108" class="map-team-label">Cloud</text>
-              <text x="18" y="314" class="map-team-label">Network</text>
-              <text x="132" y="253" text-anchor="middle" class="map-team-label">Database</text>
-              <text x="420" y="92" text-anchor="end" class="map-team-label">Applications</text>
-              <text x="420" y="326" text-anchor="end" class="map-team-label">DevOps</text>
-              <text x="231" y="421" text-anchor="middle" class="map-team-label">Technical teams</text>
-              <text x="231" y="253" text-anchor="middle" class="map-core-label">Chris</text>
-            </svg>
-            <div class="hero-signal"><span></span> Operational picture forming</div>
-          </div>
-        </div>
-      </section>
+<script>
+  const meter = document.getElementById('meter');
+  const barCount = 56;
+  for (let i = 0; i < barCount; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    const min = (0.05 + Math.random() * 0.15).toFixed(2);
+    const max = (0.35 + Math.random() * 0.6).toFixed(2);
+    const dur = (1.6 + Math.random() * 2.2).toFixed(2);
+    const delay = (Math.random() * -3).toFixed(2);
+    bar.style.setProperty('--min', min);
+    bar.style.setProperty('--max', max);
+    bar.style.animationDuration = dur + 's';
+    bar.style.animationDelay = delay + 's';
+    meter.appendChild(bar);
+  }
+</script>
 
-      <aside class="recruiter-brief" aria-labelledby="recruiter-brief-title">
-        <div class="shell recruiter-brief-layout">
-          <div class="recruiter-brief-copy">
-            <p class="eyebrow">For recruiters and hiring managers</p>
-            <h2 id="recruiter-brief-title">Chris Demetriou is an Enterprise Technology Operations Manager.</h2>
-            <p>He helps enterprise organisations deliver complex technology change by identifying dependencies, reducing delivery risk and validating operational readiness.</p>
-          </div>
-          <dl class="recruiter-facts">
-            <div>
-              <dt>Experience</dt>
-              <dd>20+ years across enterprise SaaS and technical delivery</dd>
-            </div>
-            <div>
-              <dt>Enterprise scale</dt>
-              <dd>Platforms used by 3,000+ global organisations</dd>
-            </div>
-            <div>
-              <dt>Named experience</dt>
-              <dd>E2open · SYSCO UK (Brakes) · Capgemini · Heineken UK</dd>
-            </div>
-          </dl>
-        </div>
-      </aside>
-
-      <section class="introduction foundation-section" aria-labelledby="introduction-title">
-        <div class="shell introduction-layout" data-reveal>
-          <div class="portrait">
-            <img src="images/chris-demetriou-etom-platform-migration.jpg" width="576" height="768" alt="Chris Demetriou reviewing a Jira platform-migration board — Enterprise Technology Operations Manager" loading="lazy" decoding="async">
-          </div>
-          <div class="introduction-copy">
-            <p class="eyebrow">The person behind the questions</p>
-            <h2 id="introduction-title">I’m Chris Demetriou.</h2>
-            <p class="introduction-role">Enterprise Technology Operations Manager</p>
-            <p>I help organisations navigate complex technology change by making dependencies, governance and operational readiness visible before they become delivery risks.</p>
-            <p class="introduction-note">The role complements project delivery: it helps ensure the technology is ready to be delivered.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-i-think" class="foundation-section information-flow" aria-labelledby="flow-title">
-        <div class="shell">
-          <div class="section-layout flow-introduction">
-            <p class="eyebrow">How I think</p>
-            <div>
-              <h2 id="flow-title">Five programmes.<span>One way of working.</span></h2>
-              <p>Each example began with a different technical challenge. The work was to make the broader operational picture clear early enough for the right people to act.</p>
-            </div>
-          </div>
-
-          <div class="scenario-picker" role="group" aria-label="Enterprise experience examples" data-flow-controls>
-            <p class="flow-label">Explore the work</p>
-            <div class="scenario-actions">
-              <button type="button" class="scenario-button" aria-pressed="true" data-flow-scenario="cloud">Cloud transformation</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="sap">SAP transition</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="security">Security modernisation</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="connectivity">Customer connectivity</button>
-              <button type="button" class="scenario-button" aria-pressed="false" data-flow-scenario="incident">Major incidents</button>
-            </div>
-          </div>
-
-          <figure class="flow-diagram" id="flow-panel" aria-describedby="flow-caption" aria-live="polite">
-            <div class="flow-stage flow-stage-inputs">
-              <p class="flow-label">Operating context</p>
-              <ul class="flow-list" aria-label="Operating context for this example" data-flow-inputs>
-                <li><span class="flow-marker" aria-hidden="true"></span>80+ enterprise applications</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Global SaaS estate</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>On-prem to OCI (Oracle Cloud)</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>No extended downtime</li>
-              </ul>
-            </div>
-
-            <article class="flow-stage flow-stage-context" aria-label="Chris connects the wider picture">
-              <p class="flow-label">Context and judgement</p>
-              <div class="context-core">
-                <img class="context-portrait" src="images/chrisdemetriou-enterprisetechnicaloperationsmanager-head.jpeg" alt="">
-                <h3 data-flow-title>Chris connects the migration picture.</h3>
-                <ul data-flow-questions>
-                  <li>Which dependencies would make a move unsafe?</li>
-                  <li>Which teams need to validate readiness together?</li>
-                  <li>What must be true before each cutover?</li>
-                  <li>How do we make the cutover seamless for a large customer base?</li>
-                </ul>
-              </div>
-            </article>
-
-            <div class="flow-stage flow-stage-outcomes">
-              <p class="flow-label">Delivered readiness</p>
-              <ul class="flow-list" aria-label="Delivered readiness for this example" data-flow-outcomes>
-                <li><span class="flow-marker" aria-hidden="true"></span>Dependencies made visible</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Readiness validated early</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Assumptions challenged</li>
-                <li><span class="flow-marker" aria-hidden="true"></span>Cutover risk reduced</li>
-              </ul>
-            </div>
-            <figcaption id="flow-caption" data-flow-summary>At E2open, the cloud transformation required more than a migration plan: it needed a shared view of application, infrastructure, network and database readiness before each cutover.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="organisation-strip" aria-labelledby="organisation-title">
-        <div class="shell">
-          <div class="organisation-heading">
-            <p class="eyebrow">Organisations supported</p>
-            <h2 id="organisation-title">Experience across enterprise platforms, retail, logistics and consultancy.</h2>
-          </div>
-          <ul class="organisation-grid" aria-label="Chris's employer, enterprise customers and managed-services partners">
-            <li><img class="organisation-wordmark" src="https://companieslogo.com/img/orig/ETWO_BIG-6e974277.png?t=1720244491" alt="E2open logo"><span>E2open</span><small>Employer</small></li><li><img src="https://www.google.com/s2/favicons?domain=sysco.com&amp;sz=128" alt=""><span>SYSCO</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=aviva.com&amp;sz=128" alt=""><span>Aviva</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=legalandgeneral.com&amp;sz=128" alt=""><span>Legal &amp; General</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=heineken.com&amp;sz=128" alt=""><span>Heineken UK</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=dunelm.com&amp;sz=128" alt=""><span>Dunelm</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=asda.com&amp;sz=128" alt=""><span>ASDA</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=accenture.com&amp;sz=128" alt=""><span>Accenture</span><small>Managed services partner</small></li><li><img src="https://www.google.com/s2/favicons?domain=capgemini.com&amp;sz=128" alt=""><span>Capgemini</span><small>Managed services partner</small></li><li><img src="https://www.google.com/s2/favicons?domain=pzcussons.com&amp;sz=128" alt=""><span>PZ Cussons</span><small>Customer</small></li><li><img src="https://www.google.com/s2/favicons?domain=tnt.com&amp;sz=128" alt=""><span>TNT</span><small>Customer</small></li><li><span class="organisation-wordmark">Nisa</span><small>Customer</small></li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="experience" class="foundation-section enterprise-experience" aria-labelledby="experience-title">
-        <div class="shell">
-          <div class="section-layout experience-introduction">
-            <p class="eyebrow">Enterprise experience</p>
-            <div>
-              <h2 id="experience-title">Experience that makes complex technology change safer to deliver.</h2>
-              <p>Experience matters most when it shows how technical, operational and organisational dependencies were handled together.</p>
-            </div>
-          </div>
-
-          <details class="case-study case-study-compact" aria-labelledby="e2open-cloud-title">
-            <summary class="case-study-header">
-              <div>
-                <p class="case-study-meta">Employer: E2open</p>
-                <h3 id="e2open-cloud-title">Enterprise cloud transformation</h3>
-                <p class="case-study-scan">Migrating more than 80 enterprise applications from colocation into Oracle Cloud Infrastructure.</p>
-              </div>
-              <div class="case-study-aside">
-                <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
-              </div>
-            </summary>
-
-            <div class="case-study-details case-study-grid">
-              <section>
-                <p class="case-study-label">The objective</p>
-                <p>Move a SaaS application estate serving more than 3,000 global organisations from Equinix colocation into Oracle Cloud Infrastructure.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The dependencies</p>
-                <p>More than 80 applications brought infrastructure, networking, database and integration dependencies together, with no scope for extended downtime. Disaster-recovery planning and recovery testing were part of the readiness picture.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The contribution</p>
-                <p>Worked across infrastructure, networking, database, DevOps and application teams to establish readiness, surface dependencies and challenge assumptions before cutover — contributing to roughly £0.5m in annual operating-cost savings.</p>
-              </section>
-            </div>
-          </details>
-
-          <details class="case-study" aria-labelledby="sysco-title">
-            <summary class="case-study-header">
-              <div>
-                <p class="case-study-meta">Customer: SYSCO UK <span aria-hidden="true">·</span> Delivery partner: Capgemini</p>
-                <h3 id="sysco-title">Enterprise SAP migration and business continuity</h3>
-                <p class="case-study-scan">A business-critical SAP transition with operational continuity in view from the start.</p>
-              </div>
-              <div class="case-study-aside">
-                <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
-              </div>
-            </summary>
-
-            <div class="case-study-details">
-              <div class="case-study-summary">
-                <p class="case-study-label">The objective</p>
-                <p>Support a business-critical SAP ERP transition while maintaining operational continuity.</p>
-              </div>
-
-              <div class="case-study-grid">
-                <section>
-                  <p class="case-study-label">The dependencies</p>
-                  <p>Networking, infrastructure, databases and application teams all had to be aligned. VPN readiness, firewall changes, monitoring and end-to-end integration testing were part of the production picture.</p>
-                </section>
-                <section>
-                  <p class="case-study-label">My thinking</p>
-                  <p>Validate technical readiness early, bring customer specialists, Solution Architects and multidisciplinary engineering teams into the same conversation, and make assumptions visible before switchover.</p>
-                </section>
-                <section>
-                  <p class="case-study-label">The contribution</p>
-                  <p>Facilitated technical workshops across multiple organisations and validated the readiness work needed to reduce implementation risk and strengthen operational readiness.</p>
-                </section>
-              </div>
-
-              <div class="case-study-reflection">
-                <p class="case-study-label">What it reinforced</p>
-                <p>Business continuity is not an end-stage check. It is the result of the right technical conversations happening early enough.</p>
-              </div>
-            </div>
-          </details>
-
-          <details class="case-study case-study-compact" aria-labelledby="e2open-security-title">
-            <summary class="case-study-header">
-              <div>
-                <p class="case-study-meta">Employer: E2open</p>
-                <h3 id="e2open-security-title">Integration security modernisation</h3>
-                <p class="case-study-scan">Modernising more than 3,000 customer integrations from legacy HTTP and FTP to HTTPS and SFTP.</p>
-              </div>
-              <div class="case-study-aside">
-                <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
-              </div>
-            </summary>
-
-            <div class="case-study-details case-study-grid">
-              <section>
-                <p class="case-study-label">The objective</p>
-                <p>Retire unencrypted production exchanges and improve the security of a large customer-integration estate.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The dependencies</p>
-                <p>Customer firewall rules, source IP validation, connectivity testing and customer change windows all needed to align before legacy services could be withdrawn.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The contribution</p>
-                <p>Connected network, application and customer engineering teams to validate each migration path, reducing technical debt while keeping disruption to a minimum.</p>
-              </section>
-            </div>
-          </details>
-
-          <details class="case-study case-study-compact" aria-labelledby="heineken-title">
-            <summary class="case-study-header">
-              <div>
-                <p class="case-study-meta">Customer: Heineken UK</p>
-                <h3 id="heineken-title">Customer connectivity and operational readiness</h3>
-                <p class="case-study-scan">Secure connectivity and production readiness for a new cloud-hosted enterprise platform.</p>
-              </div>
-              <div class="case-study-aside">
-                <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
-              </div>
-            </summary>
-
-            <div class="case-study-details case-study-grid">
-              <section>
-                <p class="case-study-label">The objective</p>
-                <p>Establish secure production connectivity between Heineken UK’s head office and a new cloud-hosted enterprise platform.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The dependencies</p>
-                <p>Customer infrastructure teams, internal networking specialists, VPN implementation, production connectivity and end-to-end data exchange all had to be coordinated.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The contribution</p>
-                <p>Coordinated readiness and validation activities so monitoring and operational acceptance were complete before service transition, with post-go-live hypercare to safeguard the new connection through its first weekend in production.</p>
-              </section>
-            </div>
-          </details>
-
-          <details class="case-study case-study-compact" aria-labelledby="e2open-incident-title">
-            <summary class="case-study-header">
-              <div>
-                <p class="case-study-meta">Employer: E2open</p>
-                <h3 id="e2open-incident-title">Major incident management</h3>
-                <p class="case-study-scan">Seven years leading 24/7 Priority 1 technical incident response for Tier 1 enterprise platforms worldwide.</p>
-              </div>
-              <div class="case-study-aside">
-                <span class="case-study-toggle" aria-hidden="true">Explore case <span>↓</span></span>
-              </div>
-            </summary>
-
-            <div class="case-study-details case-study-grid">
-              <section>
-                <p class="case-study-label">The objective</p>
-                <p>Restore critical services and give enterprise customers clear, technically informed updates while incidents were still unfolding.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The dependencies</p>
-                <p>Each incident could require the right specialists across infrastructure, networking, databases, applications and development to work as one response team.</p>
-              </section>
-              <section>
-                <p class="case-study-label">The contribution</p>
-                <p>Led technical investigation under pressure, tested assumptions quickly and brought the right experts into the response to accelerate root-cause identification.</p>
-              </section>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <span id="creative-media" aria-hidden="true"></span>
-
-      <section id="contact" class="contact-cta" aria-labelledby="contact-title">
-        <div class="shell contact-cta-layout">
-          <div class="contact-introduction">
-            <p class="eyebrow">The next conversation</p>
-            <h2 id="contact-title">Building complex <span class="keep-together">enterprise technology?</span></h2>
-            <p>If you value someone who sees dependencies, operational readiness and cross-functional technology alignment early, I’d be glad to talk.</p>
-            <div class="contact-actions">
-            <p class="contact-availability"><span class="availability-dot" aria-hidden="true"></span>Available for permanent and contract opportunities.</p>
-            <a class="li-card li-card--contact" href="https://linkedin.com/in/chrisademetriou" target="_blank" rel="noopener me" aria-label="Chris Demetriou on LinkedIn (opens in a new tab)">
-              <span class="li-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
-              <span class="li-card-text"><span class="li-card-name">Chris Demetriou</span><span class="li-card-sub">Enterprise Technology Operations Manager</span></span>
-              <span class="li-card-cta">View profile <span aria-hidden="true">↗</span></span>
-            </a>
-            <button type="button" class="reveal-email" aria-label="Reveal email address">
-              <span class="reveal-email-ic" aria-hidden="true">&#9993;</span>
-              <span class="reveal-email-label">Reveal email</span>
-              <span class="reveal-email-cta" aria-hidden="true">&#8595;</span>
-            </button>
-            </div>
-          </div>
-
-          <form class="contact-form" data-contact-form novalidate>
-            <p class="form-intro">Tell me about the role or project. Fields marked <span class="req">*</span> are required; the rest help me reply usefully.</p>
-            <div class="hp-field" aria-hidden="true" style="position:absolute!important;left:-9999px!important;top:auto;width:1px;height:1px;overflow:hidden;"><label for="company-url">Company URL</label><input id="company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
-            <div class="form-field">
-              <label for="contact-name">Name <span class="req">*</span></label>
-              <input id="contact-name" name="name" autocomplete="name" required aria-describedby="contact-status">
-            </div>
-            <div class="form-field">
-              <label for="contact-email">Work email <span class="req">*</span></label>
-              <input id="contact-email" name="email" type="email" autocomplete="email" required aria-describedby="contact-status">
-            </div>
-            <div class="form-field">
-              <label for="contact-org">Organisation / recruitment company <span class="req">*</span></label>
-              <input id="contact-org" name="organisation" autocomplete="organization" required>
-            </div>
-            <div class="form-field">
-              <label for="contact-title">Opportunity or project title <span class="req">*</span></label>
-              <input id="contact-title" name="opportunity_title" required>
-            </div>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="contact-type">Engagement</label>
-                <select id="contact-type" name="engagement_type">
-                  <option value="">Not decided</option>
-                  <option>Contract</option>
-                  <option>Permanent</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="contact-length">Contract length (if contract)</label>
-                <select id="contact-length" name="contract_length">
-                  <option value="">Not sure yet</option>
-                  <option>3 months</option>
-                  <option>6 months</option>
-                  <option>12 months</option>
-                  <option>18 months</option>
-                  <option>24 months</option>
-                  <option>Ongoing / rolling</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="contact-model">Working model</label>
-                <select id="contact-model" name="working_model">
-                  <option value="">No preference</option>
-                  <option>Remote</option>
-                  <option>Hybrid</option>
-                  <option>On-site</option>
-                  <option>Flexible</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="contact-start">Expected start date</label>
-                <input id="contact-start" name="start_date" type="date">
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="contact-jd">Job-description link</label>
-              <input id="contact-jd" name="jd_url" type="url" inputmode="url" placeholder="https://…">
-            </div>
-            <div class="form-field">
-              <label for="contact-message">Message <span class="req">*</span></label>
-              <textarea id="contact-message" name="message" rows="4" required aria-describedby="contact-status"></textarea>
-            </div>
-            <button class="contact-submit" type="submit">Send opportunity <span aria-hidden="true">↗</span></button>
-            <p id="contact-status" class="form-status" role="status" aria-live="polite">Fields marked * are required.</p>
-          </form>
-          <div class="form-success" data-form-success tabindex="-1" hidden>
-            <h3>Thank you — your opportunity has been sent.</h3>
-            <p>I’ll reply personally, usually within one working day.</p>
-            <div class="hero-cta">
-              <a class="btn btn--primary" href="/book/" target="_blank" rel="noopener">Book a 20-minute call <span aria-hidden="true">↗</span></a>
-              <a class="btn btn--ghost" href="documents/Chris-Demetriou-CV.pdf" target="_blank" rel="noopener">View CV</a>
-              <a class="btn btn--ghost" href="#top">Return to top</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="shell">
-        <span>© 2026 Chris Demetriou</span>
-        <nav class="site-footer-nav" aria-label="Footer">
-          <a href="#contact">Contact</a>
-          <a href="/media/">Media</a>
-          <a href="/privacy/">Privacy</a>
-          <button type="button" class="cookie-settings" data-cookie-settings>Cookie preferences</button>
-        </nav>
-      </div>
-    </footer>
-
-    <aside class="cookie-banner" data-cookie-banner aria-label="Cookie preferences" hidden>
-      <p>This site uses essential browser storage for theme preference and form security. No analytics or advertising cookies are used.</p>
-      <div class="cookie-actions">
-        <button type="button" class="cookie-essential" data-cookie-essential>Essential only</button>
-        <button type="button" class="cookie-accept" data-cookie-accept>Accept</button>
-      </div>
-    </aside>
-    <script>
-      (function () {
-        var b = document.querySelector('.reveal-email');
-        if (!b) return;
-        b.addEventListener('click', function () {
-          var e = atob('VGVjaE9wc01nbXRAY2hyaXNkZW1ldHJpb3UuY29t');
-          var w = document.createElement('span');
-          w.className = 'revealed-email';
-          var a = document.createElement('a');
-          a.href = 'mailto:' + e; a.textContent = e;
-          var c = document.createElement('button');
-          c.type = 'button'; c.className = 'copy-email'; c.textContent = 'Copy';
-          c.addEventListener('click', function () {
-            if (navigator.clipboard) { navigator.clipboard.writeText(e); }
-            c.textContent = 'Copied'; setTimeout(function () { c.textContent = 'Copy'; }, 1500);
-          });
-          w.appendChild(a); w.appendChild(c);
-          b.replaceWith(w);
-        });
-      })();
-
-      /* Gentle, eased in-page scrolling for a calmer, premium feel */
-      (function () {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        document.documentElement.style.scrollBehavior = 'auto';
-        function headerOffset(){ var h = document.querySelector('.site-header'); return h ? h.getBoundingClientRect().height + 14 : 0; }
-        function ease(t){ return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
-        function glide(toY){
-          var fromY = window.pageYOffset, dist = toY - fromY;
-          if (reduce || Math.abs(dist) < 4){ window.scrollTo(0, toY); return; }
-          var dur = Math.min(1400, Math.max(650, Math.abs(dist) * 0.5)), t0 = null;
-          function step(ts){ if (t0 === null) t0 = ts; var p = Math.min((ts - t0) / dur, 1); window.scrollTo(0, fromY + dist * ease(p)); if (p < 1) requestAnimationFrame(step); }
-          requestAnimationFrame(step);
-        }
-        document.addEventListener('click', function (ev){
-          var a = ev.target.closest('a[href^="#"], a[href^="/#"]');
-          if (!a) return;
-          var href = a.getAttribute('href');
-          if (href.indexOf('/#') === 0){ if (location.pathname === '/' || location.pathname === '/index.html'){ href = href.slice(1); } else { return; } }
-          if (href === '#' || href.charAt(0) !== '#') return;
-          var id = href.slice(1);
-          var el = document.getElementById(id);
-          if (id !== 'top' && !el) return;
-          ev.preventDefault();
-          var toY = (id === 'top') ? 0 : (el.getBoundingClientRect().top + window.pageYOffset - headerOffset());
-          glide(toY);
-          if (history.replaceState){ history.replaceState(null, '', id === 'top' ? location.pathname : href); }
-        }, false);
-      })();
-    </script>
-  </body>
+</body>
 </html>
