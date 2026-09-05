@@ -313,6 +313,68 @@
     margin: 0 0 14px;
   }
 
+  /* credit tabs — only shown once JS puts the section in tabbed mode (small screens) */
+  .credit-tabs{ display: none; }
+
+  .credits-tabbed .credit-tabs{
+    display: flex;
+    gap: 6px;
+    position: sticky;
+    top: var(--nav-h, 42px);
+    z-index: 400;
+    margin: 0 0 18px;
+    padding: 10px 0;
+    background: rgba(18,16,20,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .credit-tab{
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 6px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .credit-tab .count{
+    display: block;
+    margin-top: 3px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+  }
+
+  .credit-tab[aria-selected="true"]{
+    color: var(--amber);
+    border-color: rgba(232,163,77,0.5);
+    background: rgba(232,163,77,0.08);
+  }
+
+  .credit-tab:focus-visible{ outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  /* in tabbed mode the tab names the panel, so the heading is for screen readers only */
+  .credits-tabbed .credit-group{ margin-bottom: 0; }
+  .credits-tabbed .credit-group h3{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .table-responsive{ width: 100%; overflow-x: auto; }
 
   .data-table{
@@ -919,7 +981,7 @@
 <span><b class="tag T" data-role="Transcription">T</b> Transcription</span>
 </div>
 
-      <div class="credit-group">
+      <div class="credit-group" data-tab="Selected">
         <h3>Selected Credits</h3>
         <div class="table-responsive">
 
@@ -977,7 +1039,7 @@
 </div>
       </div>
 
-      <div class="credit-group">
+      <div class="credit-group" data-tab="Studio">
         <h3>Studio Production</h3>
         <div class="table-responsive">
 
@@ -1155,7 +1217,7 @@
 </div>
       </div>
 
-      <div class="credit-group">
+      <div class="credit-group" data-tab="Live">
         <h3>Live Performance</h3>
         <div class="table-responsive">
 
@@ -1499,6 +1561,109 @@
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     map.forEach(function(_a, el){ obs.observe(el); });
+  })();
+
+  // credits: one tab per group on small screens, the full stack on desktop
+  (function(){
+    const section = document.getElementById('credits');
+    if (!section) return;
+    const groups = Array.from(section.querySelectorAll('.credit-group'));
+    if (groups.length < 2) return;
+
+    const nav = document.querySelector('.section-nav');
+    const mq  = window.matchMedia('(max-width: 760px)');
+
+    const tabs = document.createElement('div');
+    tabs.className = 'credit-tabs';
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', 'Credit categories');
+
+    const buttons = groups.map(function(group, i){
+      const heading = group.querySelector('h3');
+      const label = group.getAttribute('data-tab') || (heading ? heading.textContent.trim() : 'Credits');
+      const rows = group.querySelectorAll('tbody tr:not(.group-header)').length;
+
+      if (!group.id) group.id = 'credit-group-' + i;
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'credit-tab';
+      btn.id = 'credit-tab-' + i;
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-controls', group.id);
+      btn.appendChild(document.createTextNode(label));
+
+      const count = document.createElement('span');
+      count.className = 'count';
+      count.textContent = rows;
+      btn.appendChild(count);
+
+      btn.addEventListener('click', function(){ select(i, false); keepInView(i); });
+      btn.addEventListener('keydown', function(e){
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (i + 1) % buttons.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + buttons.length) % buttons.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = buttons.length - 1;
+        if (next < 0) return;
+        e.preventDefault();
+        select(next, true);
+        keepInView(next);
+      });
+
+      tabs.appendChild(btn);
+      return btn;
+    });
+
+    let active = 0;
+
+    function select(i, focus){
+      active = i;
+      groups.forEach(function(g, n){ g.hidden = mq.matches && n !== i; });
+      buttons.forEach(function(b, n){
+        b.setAttribute('aria-selected', n === i ? 'true' : 'false');
+        b.tabIndex = n === i ? 0 : -1;
+      });
+      if (focus) buttons[i].focus();
+    }
+
+    // switching tabs deep inside a long list should land on the new list's start,
+    // clear of the sticky nav and the tab bar itself
+    function keepInView(i){
+      const navH = nav ? nav.offsetHeight : 0;
+      const barH = tabs.offsetHeight;
+      const top = groups[i].getBoundingClientRect().top;
+      if (top >= navH + barH) return;
+      window.scrollTo(0, window.pageYOffset + top - navH - barH - 8);
+    }
+
+    function measureNav(){
+      if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    }
+
+    function apply(){
+      section.classList.toggle('credits-tabbed', mq.matches);
+      groups.forEach(function(g, n){
+        if (mq.matches){
+          g.setAttribute('role', 'tabpanel');
+          g.setAttribute('aria-labelledby', buttons[n].id);
+          g.tabIndex = 0;
+        } else {
+          g.removeAttribute('role');
+          g.removeAttribute('aria-labelledby');
+          g.removeAttribute('tabindex');
+        }
+      });
+      select(active, false);
+    }
+
+    groups[0].parentNode.insertBefore(tabs, groups[0]);
+    measureNav();
+    apply();
+
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply);
+    window.addEventListener('resize', measureNav);
   })();
 
   // showreel modal
