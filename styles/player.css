@@ -1650,3 +1650,10 @@ color:rgba(255,255,255,0.85);
   padding: 0 2px !important;          /* same side inset as the wordmark */
   text-align: center !important;
 }
+
+/* wave bars: grow from their middle so the icon sits on col 1's centre line */
+#bottom-player .logo-mark{ align-items: center !important; }
+#bottom-player .logo-mark .bar{ transform-origin: center center !important; }
+
+/* Cookie notice sits above the footer player, never underneath it */
+body.cd-player-on .cookie-banner{ bottom: 84px; z-index: 10001; }
