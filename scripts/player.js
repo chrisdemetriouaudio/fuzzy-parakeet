@@ -1,6 +1,152 @@
 /* Chris Demetriou — custom SoundCloud player (main + footer).
    Ported from the August 2026 media build. Uses the SoundCloud Widget API only:
    no API keys, no client secrets. Starts only after cookie consent (see index.html). */
+
+/* shared helper (was scoped inside the volume block in the original, which broke the main volume slider) */
+function setVolumeFill(slider, percent) {
+    if (!slider) return;
+    slider.style.background =
+        `linear-gradient(to right, var(--accent) ${percent}%, rgba(255,255,255,0.15) ${percent}%)`;
+}
+
+/* ── Track data: section descriptions, track notes, showreel order ── */
+    const trackSectionDescriptions = {
+
+    "On Air":
+        "Audio production broadcast on national radio and online platforms.",
+
+    "Drama":
+        "Sound design and dialogue editing shaped to support narrative tension and character perspective.",
+
+    "Podcast":
+        "Editing and sound shaping that keeps conversations clear, engaging and naturally paced.",
+
+    "Commercial":
+        "Audio crafted to establish tone, clarity and impact within tight creative constraints.",
+
+    "Comedy":
+        "Scripted character audio — performance, timing and narration.",
+
+    "Voice & Links":
+        "Presenter link production — voice, music and imaging integrated into broadcast flow."
+
+};
+
+
+/* Track-level notes */
+
+const trackDescriptions = {
+
+"The Quiet Path":
+"Atmospheric narrative soundscape · building tension through place, silence and subtle movement",
+
+"Mentalwealth":
+"Public awareness audio piece · clear narrative arc guiding listeners from problem to action",
+
+"That’ll Be The Tism":
+"Podcast identity design · intro and imaging establishing tone and audience context",
+
+"Tech Influence Unpacked":
+"Magazine programme segment mix · structured conversation shaped for clarity and pace",
+
+"Wired Different: From Chaos to Clarity":
+"Neurodiversity podcast excerpt · conversational storytelling with warmth and reflective pacing",
+
+"Proud Paws":
+"Character-led commercial scene · domestic ambience and inclusive LGBTQ+ storytelling",
+
+"Lumen Coffee House":
+"Café scene commercial · environmental sound design building place and atmosphere",
+
+"Yorkshire Fibre":
+"Rural character story · regional voice and soundscape creating a sense of place",
+
+"Bingey Box Streaming":
+"Stylised retro broadcast parody · vintage tone and period sound design",
+
+"Burger Goals":
+"Community sports campaign · energetic storytelling supporting girls’ and women’s football",
+
+"Pride Air":
+"Travel campaign story · energetic pacing celebrating LGBTQ+ community journeys",
+
+"Alpha: Ask the Big Questions":
+"Reflective campaign montage · multi-voice storytelling exploring faith and meaning",
+
+"Crunchy Morn":
+"Comedic breakfast advert · playful timing and character driven humour",
+
+"Chradio Christmas Artist Drop":
+"Radio imaging artist drop · rhythmic branding for seasonal broadcast identity",
+
+"Beautiful 2.0 – Gaydio Style Power Intro Demo - David Hernandez":
+"Radio imaging power intro demo · energetic Gaydio-style station ID featuring David Hernandez",
+
+"Feature Power Intro Demo in the style of BBC Radio 1 Xtra":
+"Fee-Fi-Fo-Fum: A Radio 1 Xtra-inspired quick-fire mystery voice game demo in an Afrobeats style.",
+
+"Power Intro Demo in the style of Heart Saturday Breakfast":
+"A high-energy, feel-good radio imaging power intro demo in the signature style of Heart Saturday Breakfast.",
+
+"Chris Radio Breakfast":
+"Breakfast show imaging · high energy stings shaping programme pace and tone",
+
+"This Is Chris Radio":
+"Station ID jingle · concise sonic branding for recognition and continuity",
+
+"Dignity for Chips: The Air Fryer Cult":
+"Scripted mock documentary comedy · narration and timing driving absurd storytelling",
+
+"Chradio Presenter Link":
+"Presenter link production · voice, music and imaging integrated into broadcast flow",
+
+"Theatre of the Mind":
+"Cinematic audio trailer · dramatic sound design creating narrative tension"
+
+};
+
+/* FAST LOOKUP MAP */
+
+const trackDescriptionsNormalized = {};
+
+Object.keys(trackDescriptions).forEach(function(key){
+    trackDescriptionsNormalized[key.toLowerCase()] = trackDescriptions[key];
+});
+
+/* SHOWREEL LISTENING ORDER (ALL TAB ONLY) */
+
+const showreelOrder = [
+
+"Proud Paws",
+"Lumen Coffee House",
+"Wired Different: From Chaos to Clarity",
+"The Quiet Path",
+"Yorkshire Fibre",
+"Mentalwealth",
+"Tech Influence Unpacked",
+
+"Dignity for Chips: The Air Fryer Cult",
+"Theatre of the Mind",
+
+"Chradio Presenter Link",
+"That’ll Be The Tism",
+
+"Chris Radio Breakfast",
+"Chradio Christmas Artist Drop",
+"This Is Chris Radio",
+
+"Proud Paws",
+"Burger Goals",
+"Pride Air",
+"Alpha: Ask the Big Questions",
+
+"Bingey Box Streaming",
+"Crunchy Morn"
+
+];
+
+
+
 // ─────────────────────────────────────────────
 // SoundCloud Engine with Preload + Loading Bar + Fallback
 // ─────────────────────────────────────────────
