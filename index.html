@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles/player.css?v=3">
+<link rel="stylesheet" href="/styles/player.css?v=4">
 <style>
   :root{
     --bg: #121014;
@@ -462,7 +462,7 @@
   /* ── WORSHIP ────────────────────────────────────────────── */
   .worship-grid{
     display: grid;
-    grid-template-columns: 1fr 232px;
+    grid-template-columns: 1fr minmax(260px, 340px);
     gap: clamp(28px, 5vw, 56px);
     align-items: start;
   }
@@ -1579,13 +1579,21 @@
             <li><a href="https://www.tiktok.com/@chrisdemetriouworship" target="_blank" rel="noopener">TikTok &#8599;</a></li>
           </ul>
         </div>
-        <div class="video-frame" id="yt-frame"
-             data-embed="https://www.youtube.com/embed/videoseries?list=UUkK-NornrMH5v_D0WF1Hk3g&amp;rel=0&amp;modestbranding=1">
-          <div class="embed-hold" id="yt-hold">
-            <p>YouTube sets cookies on your device before it will play.</p>
-            <button type="button" class="btn-inline" id="yt-load">Load YouTube player</button>
-            <a href="https://www.youtube.com/@chrisdemetriouworship" target="_blank" rel="noopener">Watch on YouTube &#8599;</a>
-          </div>
+        <div class="yt-latest" aria-label="Latest worship covers on YouTube">
+          <p class="label yt-label">Latest covers</p>
+          <a class="yt-card yt-card--lead" href="https://www.youtube.com/watch?v=zbF6648sy34" target="_blank" rel="noopener">
+            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/zbF6648sy34/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
+            <span class="yt-meta"><span class="yt-title">I Speak Jesus</span><span class="yt-sub">Charity Gayle cover</span></span>
+          </a>
+          <a class="yt-card" href="https://www.youtube.com/watch?v=CCFE2hq7-mA" target="_blank" rel="noopener">
+            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/CCFE2hq7-mA/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
+            <span class="yt-meta"><span class="yt-title">How Great Thou Art</span><span class="yt-sub">with @stairwellhymns</span></span>
+          </a>
+          <a class="yt-card" href="https://www.youtube.com/watch?v=yzA81Rq8z34" target="_blank" rel="noopener">
+            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/yzA81Rq8z34/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
+            <span class="yt-meta"><span class="yt-title">Whom Shall I Fear</span><span class="yt-sub">Chris Tomlin cover</span></span>
+          </a>
+          <a class="yt-all" href="https://www.youtube.com/@chrisdemetriouworship/videos" target="_blank" rel="noopener">All videos on YouTube &#8599;</a>
         </div>
       </div>
     </div>
@@ -1658,8 +1666,8 @@
 <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie choices" hidden>
   <div class="container">
     <p class="cookie-copy">
-      This site sets no tracking cookies of its own. The embedded SoundCloud and YouTube players set
-      their own cookies when they load. See the <a href="/cookies/">cookie policy</a>.
+      This site sets no tracking cookies of its own. The embedded SoundCloud player sets its own
+      cookies when it loads. YouTube videos open on YouTube. See the <a href="/cookies/">cookie policy</a>.
     </p>
     <div class="cookie-actions">
             <button type="button" class="btn-consent primary" id="cookie-accept">OK</button>
@@ -1798,7 +1806,7 @@
     }
 
     // Players load straight away (owner's choice); the banner is a one-time notice.
-    loadEmbed(); loadPlayer();
+    loadPlayer();
     if (banner && !read()) banner.hidden = false;
 
     var accept = document.getElementById('cookie-accept');
@@ -2042,6 +2050,6 @@
   })();
 </script>
 
-<script src="/scripts/player.js?v=3" defer></script>
+<script src="/scripts/player.js?v=4" defer></script>
 </body>
 </html>
