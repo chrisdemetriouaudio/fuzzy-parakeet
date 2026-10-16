@@ -1680,7 +1680,7 @@
   <div class="container">
     <div class="meter" id="meter" aria-hidden="true"></div>
     <div class="foot-line">
-      <span>&copy; 2026 Chris Demetriou</span>
+      <span>&copy; <span data-year>2026</span> Chris Demetriou</span>
       <span>
         <a href="/privacy/">Privacy</a>
         &nbsp;&middot;&nbsp;<a href="/cookies/">Cookies</a>
@@ -1763,6 +1763,9 @@
 
 
 <script>
+
+  // Footer year: always the current year.
+  document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = String(new Date().getFullYear()); });
 
   // ── Cookie consent + gated third-party embeds ──
   (function(){
