@@ -899,6 +899,7 @@
       <li><a href="#biography">Biography</a></li>
       <li><a href="#credits">Credits</a></li>
       <li><a href="#media">Media</a></li>
+      <li><a href="https://labs.chrisdemetriou.com/">Tech</a></li>
       <li><a href="#worship">Worship</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -1847,7 +1848,8 @@
 
   // section nav: mark the section currently in view
   (function(){
-    const links = Array.from(document.querySelectorAll('.section-nav a'));
+    // Only in-page links (#section) take part; Tech goes to labs.chrisdemetriou.com.
+    const links = Array.from(document.querySelectorAll('.section-nav a[href^="#"]'));
     const map = new Map();
     links.forEach(function(a){
       const el = document.querySelector(a.getAttribute('href'));
