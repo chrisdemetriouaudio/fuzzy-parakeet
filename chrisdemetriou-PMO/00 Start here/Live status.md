@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 18 Oct 2026, 00:42 (UK time)
+changed: 18 Oct 2026, 00:48 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,20 +9,20 @@ changed: 18 Oct 2026, 00:42 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 0
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `881255a` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `20f366d` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `81efc43`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- None.
+- 👉 **#11 Contact form asks for email after name; Genesis card says it's live**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
