@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 18:16 (UK time)
+changed: 17 Oct 2026, 18:17 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 17 Oct 2026, 18:16 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `d6374c4` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `280eefa` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `852a5df`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 18:16 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `280eefa` · docs(pmo): CDCS card shows the demo (852a5df)
 - 17 Oct 2026 · `5ad3b67` · Labs: CDCS card shows the demo (C D Construction Services, watermark)
 - 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
 - 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 18:16 (UK time)
 - 17 Oct 2026 · `f5fdcb2` · Labs: add R.E.A.CH (WordPress to Astro migration)
 - 17 Oct 2026 · `e2b9104` · docs(pmo): Labs one-screen overview released (1b7645d)
 - 17 Oct 2026 · `fdbcca1` · docs(pmo): Labs one-screen overview in review (PR #5)
-- 17 Oct 2026 · `d26f6a7` · Labs: one-screen overview with filters; full write-ups on project pages
