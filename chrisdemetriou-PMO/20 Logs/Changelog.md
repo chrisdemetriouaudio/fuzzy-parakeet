@@ -10,7 +10,12 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · Labs fits on one screen · live
+> [!success]+ 🚀 17 Oct 2026 · R.E.A.CH added to Labs · in review
+> - **What changes:** the charity site (WordPress → Astro) becomes the third project, at `/reach/`.
+> - **Also:** client sites keep their own address; three cards per row on wide screens.
+> - **Its own PMO:** `Reach-PMO` in the private reach-source repository, written up from the rescue onwards.
+
+> [!success]- 🚀 17 Oct 2026 · Labs fits on one screen · live
 > - **Released:** Labs `1b7645d` (pull request #5). Smoke test passed.
 > - **What changed:** compact cards, technology filters and key numbers on the overview; a full page per project (`/genesis/`, `/website/`).
 > - **Rollback:** `npx wrangler rollback cc4219cd-459d-465b-844e-b5ed05595300` (in `labs/`).

@@ -14,11 +14,11 @@ updated: 2026-10-17
 
 ## 👉 Your actions
 
-- Nothing right now.
+- [ ] **Merge website pull request #6** (R.E.A.CH on Labs): `gh pr merge 6 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
 
 ## 🛠️ For Claude
 
-- Nothing right now.
+- [ ] **Release Labs** after pull request #6 is merged.
 
 ## ⏳ Waiting
 
@@ -60,3 +60,4 @@ More ideas: [[Backlog & Parked]].
 ## 🧭 Other projects
 
 - **Genesis** (rehearsal scheduling) has its own PMO in the private christian4collective repository.
+- **R.E.A.CH** (charity site, WordPress → Astro) has its own PMO: `reach-children-recovery/Reach-PMO` in the private reach-source repository.

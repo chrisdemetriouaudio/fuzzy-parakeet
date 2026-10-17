@@ -9,6 +9,11 @@ updated: 2026-10-17
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 17 Oct 2026 · Client sites keep their own address on Labs
+> - **Decided:** a project built for someone else links to its real address (like reach-children-uganda.org.uk).
+> - **Decided:** each project's notes stay in its own repo's PMO; this PMO only tracks Labs.
+> - **Why:** the site belongs to the client; Labs just shows the work.
+
 > [!question]- 17 Oct 2026 · Labs overview fits on one screen
 > - **Decided:** the Tech page shows compact cards, like a GitHub profile; full write-ups get their own page.
 > - **Decided:** filter by technology with CSS only; at most 8 filters, one row.

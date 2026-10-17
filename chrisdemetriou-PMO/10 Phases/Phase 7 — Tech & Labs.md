@@ -14,7 +14,13 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- Nothing right now. Add the next project with the steps below.
+- [ ] **Merge website pull request #6,** then tell Claude to release Labs.
+
+## 🚧 In review (pull request #6, 17 Oct 2026)
+
+- [ ] **Add R.E.A.CH** (reach-children-uganda.org.uk) as the third project, with its own page.
+- [ ] **Allow client sites' own addresses** on Labs (no Labs subdomain needed).
+- [ ] **Show three cards per row** on wide screens, so every project stays in the first screen.
 
 ## ➕ Adding a new project
 
