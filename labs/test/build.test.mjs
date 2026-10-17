@@ -2,6 +2,7 @@
 // chrisdemetriou.com's nav, opens projects in a new window and loads nothing from elsewhere.
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { fileURLToPath } from "node:url";
 import { readProjects, checkProject, renderHome, countLanguages } from "../scripts/build.mjs";
 
 const projects = readProjects();
@@ -48,7 +49,7 @@ test("footer year is a placeholder the Worker fills in", () => {
 });
 
 test("the website's own languages leave out Labs and the PMO", () => {
-  const langs = countLanguages(new URL("../..", import.meta.url).pathname, ["labs/", "chrisdemetriou-PMO/", ".github/"]);
+  const langs = countLanguages(fileURLToPath(new URL("../..", import.meta.url)), ["labs/", "chrisdemetriou-PMO/", ".github/"]);
   assert.ok(langs.some((l) => l.name === "HTML"));
   assert.ok(Math.abs(langs.reduce((n, l) => n + l.pct, 0) - 100) < 0.01);
 });
