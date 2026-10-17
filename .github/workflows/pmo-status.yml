@@ -32,12 +32,16 @@ jobs:
         with:
           node-version: 22
       - name: Write the live status page
-        run: node .github/scripts/pmo-status.mjs
+        # Until the PMO is on main (its first pull request), there's nothing to update.
+        run: |
+          if [ ! -f .github/scripts/pmo-status.mjs ]; then echo "PMO not on main yet"; exit 0; fi
+          node .github/scripts/pmo-status.mjs
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
       - name: Commit it if anything changed
         run: |
+          [ -f "chrisdemetriou-PMO/00 Start here/Live status.md" ] || exit 0
           git add "chrisdemetriou-PMO/00 Start here/Live status.md"
           if git diff --cached --quiet; then echo "No change"; exit 0; fi
           git config user.name "github-actions[bot]"
