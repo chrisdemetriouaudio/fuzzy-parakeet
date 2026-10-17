@@ -14,7 +14,12 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- Nothing right now. Add the next project with the steps below.
+- [ ] **Merge website pull request #7,** then tell Claude to release Labs.
+
+## 🚧 In review (pull request #7, 17 Oct 2026)
+
+- [ ] **Add CDCS Contracts** as the fourth project, with its own page (`/cdcs/`).
+- [ ] **Fit four cards to a row** on wide screens, so all projects show at once.
 
 ## ➕ Adding a new project
 

@@ -10,7 +10,12 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · R.E.A.CH added to Labs · live
+> [!success]+ 🚀 17 Oct 2026 · CDCS Contracts added to Labs · in review
+> - **What changes:** the trade-business site and its booking system become the fourth project, at `/cdcs/`.
+> - **Also:** four cards per row on wide screens.
+> - **Its own PMO:** `CDCS-PMO` in the cdcscontracts.com repository, now synced with the local folder.
+
+> [!success]- 🚀 17 Oct 2026 · R.E.A.CH added to Labs · live
 > - **Released:** Labs `46e24ad` (pull request #6). Smoke test passed for all three projects.
 > - **Rollback:** `npx wrangler rollback 540cff34-e0b8-420e-b498-b8bf6c4423ae` (in `labs/`).
 > - **What changed:** the charity site (WordPress → Astro) is the third project, at `/reach/`.

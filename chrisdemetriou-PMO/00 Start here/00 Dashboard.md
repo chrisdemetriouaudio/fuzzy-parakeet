@@ -14,11 +14,11 @@ updated: 2026-10-17
 
 ## 👉 Your actions
 
-- Nothing right now.
+- [ ] **Merge website pull request #7** (CDCS Contracts on Labs): `gh pr merge 7 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
 
 ## 🛠️ For Claude
 
-- Nothing right now.
+- [ ] **Release Labs** after pull request #7 is merged.
 
 ## ⏳ Waiting
 
@@ -62,3 +62,4 @@ More ideas: [[Backlog & Parked]].
 
 - **Genesis** (rehearsal scheduling) has its own PMO in the private christian4collective repository.
 - **R.E.A.CH** (charity site, WordPress → Astro) has its own PMO: `reach-children-recovery/Reach-PMO` in the private reach-source repository.
+- **CDCS Contracts** (trade business + booking system) has its own PMO: `cdcscontracts.com/CDCS-PMO` in the public cdcscontracts.com repository.
