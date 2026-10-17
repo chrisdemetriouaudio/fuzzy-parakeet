@@ -10,7 +10,13 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · Labs works on phones and narrow windows · live
+> [!success]+ 🚀 17 Oct 2026 · CDCS card shows card payment · live
+> - **Released:** Labs `81efc43` (pull request #10). Smoke test passed for all four projects.
+> - **What changed:** the CDCS card mentions paying an invoice by card, adds a `stripe` tag, and adds "Invoice and pay" and "Stripe (test mode)" to its drawing.
+> - **Why:** the CDCS booking system now has a test-mode Stripe payment (cdcscontracts.com pull request #4).
+> - **Rollback:** `npx wrangler rollback 4bee75ff-e6a2-43cc-ba37-c409ae284b2f` (in `labs/`).
+
+> [!success]- 🚀 17 Oct 2026 · Labs works on phones and narrow windows · live
 > - **Released:** Labs `35507b1` (pull request #9). Smoke test passed for all four projects.
 > - **What changed:** one card per row below 640px (two squeezed columns broke names and links); a swipeable nav line on phones; no text under 11px and thumb-sized links up to tablet width.
 > - **Checked live** at 375, 560 and 1280px: no sideways scroll, nothing spills out of a card.
