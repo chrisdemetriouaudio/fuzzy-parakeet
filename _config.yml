@@ -1,0 +1,13 @@
+# GitHub Pages publishes this repo as chrisdemetriou.com. These folders and files
+# are tooling and notes, not website pages, so they are never published:
+#   labs/                 labs.chrisdemetriou.com (a Cloudflare Worker, released separately)
+#   chrisdemetriou-PMO/   the Obsidian project notes (PMO)
+exclude:
+  - labs/
+  - chrisdemetriou-PMO/
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - node_modules/
+  - package.json
+  - package-lock.json

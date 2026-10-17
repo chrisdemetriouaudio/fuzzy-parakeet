@@ -1,0 +1,58 @@
+---
+title: Decision Log
+updated: 2026-10-17
+---
+
+# 🧠 Decision Log
+
+> [!info] At a glance
+> **What:** what we decided, and why. One box per decision, newest first.
+> **Back to:** [[00 Dashboard]]
+
+> [!question]- 17 Oct 2026 · Labs lives in this repository
+> - **Decided:** Labs' code, project list and notes live in fuzzy-parakeet, not in any project's repo.
+> - **Decided:** every future project is added to Labs from here, wherever its own code lives.
+> - **How:** each project publishes its card data (`labs.json`); Labs reads it when it builds.
+> - **Why:** Labs is part of chrisdemetriou.com and shows projects from many repositories.
+
+> [!question]- 17 Oct 2026 · This PMO is public, but not on the website
+> - **Decided:** the vault is a folder in this public repository, like the Genesis PMO in its repo.
+> - **Decided:** chrisdemetriou.com never publishes it (`_config.yml` leaves it out).
+> - **Why:** one place for the site's notes. Nothing private is written here.
+
+> [!question]- 17 Oct 2026 · chrisdemetriou.com keeps its own address on Labs
+> - **Decided:** no `chrisdemetriou.labs.chrisdemetriou.com`. The card links to chrisdemetriou.com.
+> - **Why:** the site already has its address; Labs subdomains are for apps hosted there.
+
+> [!question]- 16 Oct 2026 · Labs looks like this site; projects open in a new window
+> - **Decided:** Labs uses this site's masthead, nav bar, fonts and colours. TECH opens in the same tab.
+> - **Decided:** projects are laid out like GitHub, and each opens in a new window.
+> - **Why:** Labs looked isolated and unwelcoming next to chrisdemetriou.com.
+
+> [!question]- 14 Oct 2026 · Link to YouTube, don't embed it
+> - **Decided:** worship videos are linked thumbnails.
+> - **Why:** embeds showed YouTube's bot check and set cookies.
+
+> [!question]- 29 Aug 2026 · Consent before any third-party player
+> - **Decided:** SoundCloud loads only after a visitor taps OK.
+> - **Why:** no third-party cookies before consent.
+
+> [!question]- 28 Aug 2026 · Retire old pages through the 404 page
+> - **Decided:** every retired address goes to the home page.
+> - **Why:** old links keep working without keeping old pages.
+
+> [!question]- 4 Aug 2026 · GitHub Pages for the site, Cloudflare for apps
+> - **Decided:** the static site stays on GitHub Pages.
+> - **Why:** Workers hosting was tried and added work for no gain. Apps (Labs, Genesis) use Workers.
+
+> [!question]- 10 Apr 2026 · A public playlist, not a sign-in Worker
+> - **Decided:** the On Air playlist was made public instead of read through a SoundCloud sign-in.
+> - **Why:** nothing secret to guard, fewer moving parts.
+
+> [!question]- 22 Mar 2026 · Nightly backup to a private mirror
+> - **Decided:** GitHub Actions mirrors this repository every night and on every push.
+> - **Why:** a second copy if anything happens to this one.
+
+> [!question]- 14 Mar 2026 · A custom player on the SoundCloud Widget API
+> - **Decided:** build our own player around SoundCloud's widget, not use the stock embed.
+> - **Why:** it matches the site's look, and the Widget API needs no keys.
