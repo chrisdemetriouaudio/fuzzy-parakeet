@@ -1,6 +1,6 @@
 ---
 title: Decision Log
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # 🧠 Decision Log
@@ -8,6 +8,11 @@ updated: 2026-10-17
 > [!info] At a glance
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
+
+> [!question]- 18 Oct 2026 · Genesis is described as a live app, not a demo
+> - **Decided:** the Genesis card leads with "Live, running a real band with zero admin".
+> - **Decided:** the button says "Try it with a demo band", so the sandbox reads as a way in, not the product.
+> - **Why:** "Open the live demo" made a working production app sound like an experiment.
 
 > [!question]- 17 Oct 2026 · Client sites keep their own address on Labs
 > - **Decided:** a project built for someone else links to its real address (like reach-children-uganda.org.uk).

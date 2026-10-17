@@ -1,7 +1,7 @@
 ---
 phase: 7
 status: live
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # 🧪 Phase 7 — Tech & Labs
@@ -25,7 +25,7 @@ updated: 2026-10-17
 
 ## ✅ Done
 
-> [!success]- Built 16 and 17 Oct 2026 (tap to open)
+> [!success]- Built 16 to 18 Oct 2026 (tap to open)
 > - [x] **Added TECH to the nav bar,** between Media and Worship (16 Oct 2026).
 > - [x] **Built labs.chrisdemetriou.com** as a Cloudflare Worker, first inside the Genesis repository.
 > - [x] **Gave Labs this site's look:** masthead, nav bar (TECH highlighted), fonts and colours.
@@ -47,6 +47,7 @@ updated: 2026-10-17
 > - [x] **Added CDCS Contracts** and fitted four cards per row (PR #7, 17 Oct 2026).
 > - [x] **Relabelled CDCS as a Demo** with a watermarked screenshot (PR #8, 17 Oct 2026).
 > - [x] **Made Labs work on phones and narrow windows** (PR #9, 17 Oct 2026).
+> - [x] **Rewrote the Genesis card** as a live app running a real band (PR #11, 18 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.

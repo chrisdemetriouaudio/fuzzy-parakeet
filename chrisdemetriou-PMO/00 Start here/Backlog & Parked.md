@@ -1,13 +1,13 @@
 ---
 title: Backlog & Parked
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # 💭 Backlog & Parked
 
 > [!info] At a glance
 > **What:** ideas for later, and things deliberately on hold.
-> **Updated:** 17 Oct 2026
+> **Updated:** 18 Oct 2026
 > **Back to:** [[00 Dashboard]]
 
 ## 🔴 Problems
@@ -16,6 +16,7 @@ updated: 2026-10-17
 
 ## 💭 Later (ideas, not planned yet)
 
+- 💭 **Add a Software door to chrisdemetriou.com:** "Software" in the form's dropdown, the page title and an offers section.
 - 💭 **Tidy chrisdemetriou.com on phones:** nav wraps onto two lines; 10–11px labels; player track descriptions cut off.
 
 - 💭 **Make a Labs share image** (the current one shows Genesis only).
@@ -26,7 +27,6 @@ updated: 2026-10-17
 ## 🅿️ Parked (on hold on purpose)
 
 - 🅿️ **Enterprise pages (Phase 4):** retired 28 Aug 2026; old addresses go to the home page.
-- 🅿️ **Contact form on the site:** replaced by the bookings address and cards.
 
 ## ✅ Done
 
@@ -34,3 +34,4 @@ updated: 2026-10-17
 > - [x] **Footer year always current** on every page (16 Oct 2026).
 > - [x] **TECH in the nav bar** (16 Oct 2026).
 > - [x] **Labs moved into this repository,** with its own release (17 Oct 2026).
+> - [x] **Contact form is back on the site;** Email now sits under Name (18 Oct 2026).

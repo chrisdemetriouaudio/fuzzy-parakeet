@@ -1,6 +1,6 @@
 ---
 title: Changelog
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # 📜 Changelog
@@ -10,7 +10,15 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · CDCS card shows card payment · live
+> [!success]+ 🚀 18 Oct 2026 · Contact form order and Genesis card copy · live
+> - **Released:** website (pull request #11, merged `fcb0777`) and Labs `430a150`. Smoke test passed for all four projects.
+> - **Contact form:** Email address now comes straight after Name, above Organisation / Venue.
+> - **Genesis card:** now says "Live, running a real band with zero admin", first, so it survives the two-line card.
+> - **Genesis button:** "Try it with a demo band" (was "Open the live demo").
+> - **Checked live** on chrisdemetriou.com, the Labs overview and `/genesis/`.
+> - **Rollback:** `npx wrangler rollback cf67ae4a-7562-4891-b7c3-3131503a0c2f` (in `labs/`).
+
+> [!success]- 🚀 17 Oct 2026 · CDCS card shows card payment · live
 > - **Released:** Labs `81efc43` (pull request #10). Smoke test passed for all four projects.
 > - **What changed:** the CDCS card mentions paying an invoice by card, adds a `stripe` tag, and adds "Invoice and pay" and "Stripe (test mode)" to its drawing.
 > - **Why:** the CDCS booking system now has a test-mode Stripe payment (cdcscontracts.com pull request #4).

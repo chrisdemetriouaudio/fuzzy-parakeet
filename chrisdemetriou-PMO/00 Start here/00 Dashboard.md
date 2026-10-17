@@ -1,6 +1,6 @@
 ---
 title: Dashboard
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # 🎛️ Dashboard
@@ -9,7 +9,7 @@ updated: 2026-10-17
 > **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
 > **Labs shows 4 projects** on one screen (17 Oct 2026): Genesis, chrisdemetriou.com, R.E.A.CH, CDCS Contracts.
 > **Live status, updated by itself:** [[Live status]]
-> **Checked against the live system:** 17 Oct 2026
+> **Checked against the live system:** 18 Oct 2026
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
@@ -47,6 +47,11 @@ More ideas: [[Backlog & Parked]].
 | [[Phase 7 — Tech & Labs]] | TECH page, all projects | ✅ Live (17 Oct 2026) |
 
 ## ✅ Done
+
+> [!success]- Finished 18 Oct 2026 (tap to open)
+> - [x] **Moved Email address under Name** on the contact form (pull request #11).
+> - [x] **Rewrote the Genesis card:** live, running a real band with zero admin.
+> - [x] **Released Labs** `430a150`; smoke test passed for all four projects.
 
 > [!success]- Finished 17 Oct 2026 (tap to open)
 > - [x] **Added CDCS Contracts to Labs** and released `cc64de0` (pull request #7).
