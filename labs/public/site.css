@@ -137,24 +137,24 @@ a:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:
 @media (max-width:640px){.filter-row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin:0 calc(-1*clamp(16px,4vw,44px));padding-left:clamp(16px,4vw,44px);padding-right:clamp(16px,4vw,44px);scrollbar-width:none}.filter-row::-webkit-scrollbar{display:none}}
 
 /* Pinned cards */
-.pcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:16px}
+.pcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,208px),1fr));gap:12px}
 .pcard{display:flex;flex-direction:column;border:1px solid var(--line-strong);background:var(--bg-panel);min-width:0;transition:border-color .15s ease}
 .pcard:hover{border-color:rgba(232,163,77,.45)}
 .pcard-shot{display:block;border-bottom:1px solid var(--line);background:#0f0d11}
 .pcard-shot img{display:block;width:100%;height:auto;aspect-ratio:5/2;object-fit:cover;object-position:top}
-.pcard-body{display:flex;flex-direction:column;gap:8px;padding:13px 14px 14px;flex:1;min-width:0}
-.pcard-name{margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;font-family:var(--font-display);font-weight:500;font-size:1.18rem;line-height:1.2;overflow-wrap:anywhere}
+.pcard-body{display:flex;flex-direction:column;gap:7px;padding:12px 13px 13px;flex:1;min-width:0}
+.pcard-name{margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-family:var(--font-display);font-weight:500;font-size:1.08rem;line-height:1.2;overflow-wrap:anywhere}
 .pcard-name a{color:var(--ink);text-decoration:none}
 .pcard-name a:hover{color:var(--amber)}
-.pcard-desc{margin:0;color:var(--ink-muted);font-size:.93rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pcard-meta{margin:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.8rem;color:var(--ink-muted)}
+.pcard-desc{margin:0;color:var(--ink-muted);font-size:.86rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pcard-meta{margin:0;display:flex;flex-wrap:wrap;gap:2px 12px;font-size:.76rem;color:var(--ink-muted)}
 .pcard-lang{display:inline-flex;align-items:center;gap:6px;color:var(--ink)}
 .pcard-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .pcard-tags li{font-family:var(--font-mono);font-size:10.5px;line-height:1;color:var(--amber);background:rgba(232,163,77,.08);border:1px solid rgba(232,163,77,.28);border-radius:999px;padding:5px 8px}
 .pcard-tags li.more{color:var(--ink-muted);background:none;border-color:var(--line-strong)}
-.pcard-actions{margin:auto 0 0;padding-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
-.btn.btn-sm{margin-left:0;padding:8px 12px;font-size:10.5px}
-.pcard-more{font-size:.9rem;font-weight:400;text-decoration:none;border-bottom:1px solid rgba(232,163,77,.35)}
+.pcard-actions{margin:auto 0 0;padding-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.btn.btn-sm{margin-left:0;padding:7px 10px;font-size:10px}
+.pcard-more{font-size:.84rem;font-weight:400;text-decoration:none;border-bottom:1px solid rgba(232,163,77,.35);white-space:nowrap}
 .pcard-more:hover{border-bottom-color:var(--amber)}
 /* Phones: slim rows, a small picture beside the text, so several fit on one screen. */
 @media (max-width:640px){

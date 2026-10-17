@@ -20,6 +20,7 @@ real address. Labs lives in this repo; projects can be built anywhere.
 | Genesis (rehearsal scheduling) | `https://genesis.labs.chrisdemetriou.com` | private repo christian4collective (`genesis-auth/`) |
 | chrisdemetriou.com (music portfolio) | `https://chrisdemetriou.com` (its own address, not a Labs one) | this repo (public) |
 | R.E.A.CH charity site (WordPress → Astro) | `https://reach-children-uganda.org.uk` (the charity's own address) | GitHub `chrisdemetriouaudio/reach-prod` (public); archive and PMO in private `reach-source` |
+| CDCS Contracts (trade business + booking system) | `https://cdcscontracts.com` | GitHub `chrisdemetriouaudio/cdcscontracts.com` (public); PMO in `CDCS-PMO/` |
 
 ## How it works
 - `projects.json` is the only list. `npm run build` turns it into `public/index.html`,
