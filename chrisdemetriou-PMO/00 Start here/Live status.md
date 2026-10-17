@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 18:32 (UK time)
+changed: 17 Oct 2026, 18:40 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,23 +9,24 @@ changed: 17 Oct 2026, 18:32 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 0
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `81a6043` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `fb1165a` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `852a5df`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#9 Labs: proper phone and narrow-window layout**: opened 17 Oct 2026
+- None.
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `803bc32` · Labs: proper phone and narrow-window layout
 - 17 Oct 2026 · `280eefa` · docs(pmo): CDCS card shows the demo (852a5df)
 - 17 Oct 2026 · `5ad3b67` · Labs: CDCS card shows the demo (C D Construction Services, watermark)
 - 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 18:32 (UK time)
 - 17 Oct 2026 · `7ee4752` · docs(pmo): R.E.A.CH added to Labs (PR #6, in review)
 - 17 Oct 2026 · `f5fdcb2` · Labs: add R.E.A.CH (WordPress to Astro migration)
 - 17 Oct 2026 · `e2b9104` · docs(pmo): Labs one-screen overview released (1b7645d)
-- 17 Oct 2026 · `fdbcca1` · docs(pmo): Labs one-screen overview in review (PR #5)
