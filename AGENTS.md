@@ -22,7 +22,7 @@ Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or tw
 
 ## Labs (labs/)
 
-- **Add a project:** one entry in `labs/projects.json` (description under 140 characters, `topics`, `architecture`). Apps get their own `<name>.labs.chrisdemetriou.com`; existing sites keep their real address.
+- **Add a project:** one entry in `labs/projects.json` (description under 140 characters, `topics`, `architecture`). Apps get their own `<name>.labs.chrisdemetriou.com`; existing sites (including ones built for clients) keep their real address.
 - **Live card details:** a project can publish a `labs.json` (`{ sha, at, languages, image }`) that Labs reads at build time; Genesis's demo does this on every Genesis release.
 - **Before a pull request:** `npm run check` in `labs/` (tests, build, deploy dry-run).
 - **Release:** `npm run release` in `labs/`, from `main` only. Never `wrangler deploy` on its own. It builds, deploys, stamps `/version.json` and smoke-tests every project link.

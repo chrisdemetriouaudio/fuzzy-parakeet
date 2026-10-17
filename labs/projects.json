@@ -172,5 +172,86 @@
       "chrisdemetriou-PMO/",
       ".github/"
     ]
+  },
+  {
+    "slug": "reach",
+    "name": "reach-children-uganda",
+    "title": "R.E.A.CH",
+    "status": "Live",
+    "description": "A UK children's charity's WordPress site, recovered from web archives and rebuilt in Astro: fast, static and free to host.",
+    "url": "https://reach-children-uganda.org.uk/",
+    "image": "img/reach.jpg",
+    "imageAlt": "The R.E.A.CH charity home page: \"Education is no weight to carry\", with Sponsor a child and Find out more buttons.",
+    "cta": "Open the website",
+    "github": "chrisdemetriouaudio/reach-prod",
+    "topics": [
+      "astro",
+      "wordpress-migration",
+      "wayback-machine",
+      "tailwindcss",
+      "python",
+      "typescript",
+      "github-pages",
+      "github-actions",
+      "cloudflare-workers",
+      "turnstile",
+      "structured-data",
+      "seo"
+    ],
+    "architecture": [
+      {
+        "label": "Recovery (one-off)",
+        "nodes": [
+          {
+            "name": "Wayback Machine",
+            "note": "342 saved addresses listed, 154 pages rescued"
+          },
+          {
+            "name": "Python scripts",
+            "note": "strip the archive toolbar, rebuild links, make a static copy"
+          },
+          {
+            "name": "WordPress backup",
+            "note": "uploads and content; WordPress itself left behind"
+          }
+        ]
+      },
+      {
+        "link": "content · pictures",
+        "label": "Build",
+        "nodes": [
+          {
+            "name": "Astro + Tailwind",
+            "note": "13 page templates; projects and news in data files"
+          },
+          {
+            "name": "Search basics",
+            "note": "charity and FAQ structured data, share cards, sitemap"
+          },
+          {
+            "name": "GitHub Actions",
+            "note": "builds and deploys on every push to main"
+          }
+        ]
+      },
+      {
+        "link": "HTTPS · custom domain",
+        "label": "Live",
+        "nodes": [
+          {
+            "name": "GitHub Pages",
+            "note": "the static site on the charity's own domain"
+          },
+          {
+            "name": "Contact Worker",
+            "note": "Turnstile check, then Formspree (ready, not switched on)"
+          },
+          {
+            "name": "Cookie consent",
+            "note": "no tracking cookies unless a visitor agrees"
+          }
+        ]
+      }
+    ]
   }
 ]

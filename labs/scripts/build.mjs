@@ -52,7 +52,7 @@ const LANGUAGES = {
   ".html": ["HTML", "#e34c26"],
   ".sql": ["SQL", "#e38c00"],
 };
-const GITHUB_COLOURS = Object.fromEntries(Object.values(LANGUAGES));
+const GITHUB_COLOURS = { ...Object.fromEntries(Object.values(LANGUAGES)), Astro: "#ff5a03", Shell: "#89e051", Python: "#3572a5", PHP: "#4f5d95" };
 const NOT_OURS = /(^|\/)(vendor|previews|node_modules|dist|ds-bundle)\/|(^|\/)\.|\.min\./;
 const fetchJson = async (url, headers = {}) => {
   const r = await fetch(url, { headers: { "cache-control": "no-cache", "user-agent": "labs-build", ...headers }, signal: AbortSignal.timeout(10000) });
@@ -63,8 +63,8 @@ const fetchJson = async (url, headers = {}) => {
 /** Checks one projects.json entry; throws with a plain-English reason. No network. */
 export function checkProject(p, root = ROOT) {
   for (const k of ["slug", "title", "description", "url", "image", "imageAlt", "topics", "architecture"]) if (!p[k]) throw new Error(`projects.json: "${p.slug || "?"}" is missing ${k}`);
-  // New apps go on <project>.labs.chrisdemetriou.com; chrisdemetriou.com itself is listed as it is.
-  if (!/^https:\/\/([a-z0-9-]+\.)*chrisdemetriou\.com\/$/.test(p.url)) throw new Error(`projects.json: ${p.slug} url must be on chrisdemetriou.com (new apps: https://<project>.labs.chrisdemetriou.com/)`);
+  // New apps go on <project>.labs.chrisdemetriou.com; sites built for others keep their own address.
+  if (!/^https:\/\/([a-z0-9-]+\.)+[a-z]{2,}\/$/.test(p.url)) throw new Error(`projects.json: ${p.slug} url must be an https:// home page ending in / (new apps: https://<project>.labs.chrisdemetriou.com/)`);
   if (!/^[a-z0-9-]+$/.test(p.slug) || ["img", "og"].includes(p.slug)) throw new Error(`projects.json: slug "${p.slug}" must be lower-case letters, digits and dashes (it becomes /${p.slug}/)`);
   for (const t of p.topics) if (!/^[a-z0-9-]+$/.test(t)) throw new Error(`projects.json: ${p.slug} topic "${t}" must be lower-case letters, digits and dashes`);
   if (p.github && !/^[\w.-]+\/[\w.-]+$/.test(p.github)) throw new Error(`projects.json: ${p.slug} github must be "owner/repo"`);
@@ -280,7 +280,7 @@ function renderCard(p, today, i = 0) {
           <h3 class="pcard-name"><a href="/${esc(p.slug)}/">${esc(p.name || p.slug)}</a> <span class="pill">${esc(p.status || "Live")}</span></h3>
           <p class="pcard-desc">${esc(p.description)}</p>
           <p class="pcard-meta">${lang ? `<span class="pcard-lang">${langDot(lang)}${esc(lang.name)}</span>` : ""}<span class="pcard-updated">Updated ${esc(shortDate(p.updated || today))}</span></p>
-          <ul class="pcard-tags" aria-label="Built with">${p.topics.slice(0, 4).map((t) => `<li>${esc(t)}</li>`).join("")}${p.topics.length > 4 ? `<li class="more">+${p.topics.length - 4}</li>` : ""}</ul>
+          <ul class="pcard-tags" aria-label="Built with">${p.topics.slice(0, 3).map((t) => `<li>${esc(t)}</li>`).join("")}${p.topics.length > 3 ? `<li class="more">+${p.topics.length - 3}</li>` : ""}</ul>
           <p class="pcard-actions">
             <a class="btn btn-sm" href="${url}" ${NEW_WINDOW}>Open live <span aria-hidden="true">↗</span>${NEW_WINDOW_SR}</a>
             <a class="pcard-more" href="/${esc(p.slug)}/">How it's built <span aria-hidden="true">→</span></a>

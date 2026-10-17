@@ -19,6 +19,7 @@ real address. Labs lives in this repo; projects can be built anywhere.
 |---|---|---|
 | Genesis (rehearsal scheduling) | `https://genesis.labs.chrisdemetriou.com` | private repo christian4collective (`genesis-auth/`) |
 | chrisdemetriou.com (music portfolio) | `https://chrisdemetriou.com` (its own address, not a Labs one) | this repo (public) |
+| R.E.A.CH charity site (WordPress → Astro) | `https://reach-children-uganda.org.uk` (the charity's own address) | GitHub `chrisdemetriouaudio/reach-prod` (public); archive and PMO in private `reach-source` |
 
 ## How it works
 - `projects.json` is the only list. `npm run build` turns it into `public/index.html`,
@@ -37,7 +38,7 @@ real address. Labs lives in this repo; projects can be built anywhere.
 - `npm run release`: from `main` only. Build, deploy, stamp `/version.json`, smoke-test.
 
 ## Adding a project
-1. Give it an address: `name.labs.chrisdemetriou.com` for apps; existing sites keep theirs.
+1. Give it an address: `name.labs.chrisdemetriou.com` for apps; sites built for others keep their own.
 2. Add an entry to `projects.json`: description under 140 characters, `topics`,
    `architecture` (tiers of boxes; `link` names the wire into a tier). For live
    details, either `manifest` (a `labs.json` the project publishes), `source` (a
