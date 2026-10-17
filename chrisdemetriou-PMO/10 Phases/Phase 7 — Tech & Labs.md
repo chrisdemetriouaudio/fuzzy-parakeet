@@ -9,19 +9,12 @@ updated: 2026-10-17
 > [!info] At a glance
 > **What:** the TECH page (labs.chrisdemetriou.com): every project I've built, wherever its code lives.
 > **When:** 16 Oct 2026 onwards.
-> **Status:** 🟢 Live, and the home for every new project.
+> **Status:** ✅ Live (17 Oct 2026), and the home for every new project.
 > **Back to:** [[00 Dashboard]]
 
 ## 👉 To do
 
-- [ ] **Merge the move pull requests** (website #4 and Genesis #19), then tell Claude.
-- [ ] **Open this vault in Obsidian:** Open folder as vault → `fuzzy-parakeet/chrisdemetriou-PMO`.
-
-## 🛠️ For Claude
-
-- [ ] **Release Genesis,** so its demo publishes `labs.json` (its card data for Labs).
-- [ ] **Release Labs from here** with `npm run release` in `labs/`.
-- [ ] **Check chrisdemetriou.com doesn't publish** `labs/` or this vault.
+- Nothing right now. Add the next project with the steps below.
 
 ## ➕ Adding a new project
 
@@ -41,6 +34,9 @@ updated: 2026-10-17
 > - [x] **Made the footer year always current** on every page (16 Oct 2026).
 > - [x] **Added chrisdemetriou.com itself** as the second project (17 Oct 2026).
 > - [x] **Moved Labs into this repository** with its own release, tests and this PMO (17 Oct 2026).
+> - [x] **Released Genesis** `341264c`, so its demo publishes `labs.json` (17 Oct 2026).
+> - [x] **Released Labs** `f7795a0` from here; Genesis card shows its live build (17 Oct 2026).
+> - [x] **Checked chrisdemetriou.com hides** `labs/` and this vault (17 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.

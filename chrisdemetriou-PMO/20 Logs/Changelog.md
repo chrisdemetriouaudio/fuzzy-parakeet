@@ -10,8 +10,11 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · Labs moves into this repository · in review
-> - **What changes:** Labs' code, its project list and its history move here from the Genesis repository.
+> [!success]+ 🚀 17 Oct 2026 · Labs moved into this repository · live
+> - **Released:** Labs `f7795a0` with `npm run release` in `labs/`. Smoke test passed: Labs, old address, Genesis, website.
+> - **Rollback:** `npx wrangler rollback 18adb2fb-c9ea-42a4-856a-ad3bdfbfe33c` (in `labs/`).
+> - **What changed:** Labs' code, its project list and its history moved here from the Genesis repository.
+> - **Genesis's card** now reads its build, date, languages and picture from the demo's `labs.json`.
 > - **New:** this PMO, with [[Live status]] that updates itself.
 > - **New:** chrisdemetriou.com itself is listed on Labs.
 

@@ -7,25 +7,22 @@ updated: 2026-10-17
 
 > [!info] At a glance
 > **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
-> **Right now:** moving Labs into this repository (17 Oct 2026).
+> **Labs moved here and released** on 17 Oct 2026. Genesis's card reads its live build from the demo.
 > **Live status, updated by itself:** [[Live status]]
 > **Checked against the live system:** 17 Oct 2026
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
-- [ ] **Merge website pull request #4** (Labs and this PMO move here): `gh pr merge 4 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
-- [ ] **Merge Genesis pull request #19** (Genesis stops releasing Labs): `gh pr merge 19 --repo chrisdemetriouaudio/christian4collective --merge`
-- [ ] **Open this vault in Obsidian:** Open folder as vault → `fuzzy-parakeet/chrisdemetriou-PMO`. Trust the Obsidian Git plugin when asked.
+- Nothing right now.
 
 ## 🛠️ For Claude
 
-- [ ] **Release Genesis, then Labs,** after both merges. Then check every site in [[Live status]].
-- [ ] **Check chrisdemetriou.com doesn't publish** `labs/` or this vault.
+- Nothing right now.
 
 ## ⏳ Waiting
 
-- ⏳ **Labs' Genesis card:** no languages bar until Genesis's next release publishes `labs.json`.
+- Nothing is stuck.
 
 ## 🔴 Problems
 
@@ -47,7 +44,17 @@ More ideas: [[Backlog & Parked]].
 | [[Phase 4 — Enterprise Site v2]] | Enterprise version | 🅿️ Retired (28 Aug 2026) |
 | [[Phase 5 — Artist Roster Rebuild]] | Today's design | ✅ Live (Sep 2026) |
 | [[Phase 6 — Media & Worship]] | Media and Worship | ✅ Live (14 Oct 2026) |
-| [[Phase 7 — Tech & Labs]] | TECH page, all projects | 🟢 Live, in progress |
+| [[Phase 7 — Tech & Labs]] | TECH page, all projects | ✅ Live (17 Oct 2026) |
+
+## ✅ Done
+
+> [!success]- Finished 17 Oct 2026 (tap to open)
+> - [x] **Merged website pull request #4** (Labs and this PMO moved here).
+> - [x] **Merged Genesis pull request #19** (Genesis stopped releasing Labs).
+> - [x] **Opened this vault in Obsidian** from the external drive.
+> - [x] **Released Genesis** `341264c`: its demo now publishes `labs.json` and the card picture.
+> - [x] **Released Labs** `f7795a0` from this repository; smoke test passed.
+> - [x] **Checked chrisdemetriou.com hides** `labs/`, this vault and the notes files (all 404).
 
 ## 🧭 Other projects
 
