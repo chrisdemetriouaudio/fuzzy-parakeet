@@ -26,4 +26,5 @@ Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or tw
 - **Live card details:** a project can publish a `labs.json` (`{ sha, at, languages, image }`) that Labs reads at build time; Genesis's demo does this on every Genesis release.
 - **Before a pull request:** `npm run check` in `labs/` (tests, build, deploy dry-run).
 - **Release:** `npm run release` in `labs/`, from `main` only. Never `wrangler deploy` on its own. It builds, deploys, stamps `/version.json` and smoke-tests every project link.
-- Labs keeps chrisdemetriou.com's look: same masthead, nav bar (TECH highlighted), fonts and colours. TECH opens Labs in the same tab; every project opens in a new window.
+- Labs keeps chrisdemetriou.com's look: same masthead, nav bar (TECH highlighted), fonts and colours. TECH opens Labs in the same tab; every live project opens in a new window.
+- **People don't scroll.** The overview (`/`) must show every project's card in the first screen where possible: compact cards, one row of filters (at most 8). Detail belongs on the project page (`/<slug>/`), never on the overview.

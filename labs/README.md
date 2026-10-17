@@ -1,13 +1,19 @@
 # labs.chrisdemetriou.com — Labs (chrisdemetriou.com's TECH page)
 
-The TECH page of chrisdemetriou.com. It wears the main site's masthead, nav bar
-(TECH highlighted), fonts and colours, so it feels like one site; TECH opens it in
-the same tab. Projects are laid out like GitHub repositories: name and status, the
-screenshot, "built with" topic tags, an About panel (links, a languages bar counted
-from the project's own code) and an architecture drawing. Every project link opens
-in a new window. Apps live on their own address, `<project>.labs.chrisdemetriou.com`;
-existing sites keep their real address. Labs lives in this repo; projects can be
-built anywhere.
+The TECH page of chrisdemetriou.com, in the main site's masthead, nav bar (TECH
+highlighted), fonts and colours; TECH opens it in the same tab. Laid out like a
+GitHub profile:
+
+- **`/` is an overview that fits on one screen**: key numbers, a row of technology
+  filters (CSS only, no script) and compact "pinned" cards (thumbnail, name, two-line
+  description, main language, top tags, "Open live ↗" and "How it's built →").
+  On phones the cards become slim rows so several fit on one screen.
+- **`/<slug>/` is each project's full write-up**, like a GitHub repository page:
+  screenshot, all tags, About panel with a languages bar, architecture drawing.
+
+Live projects open in a new window; write-ups open in the same tab. Apps live on
+their own address, `<project>.labs.chrisdemetriou.com`; existing sites keep their
+real address. Labs lives in this repo; projects can be built anywhere.
 
 | Project | Address | Code |
 |---|---|---|
@@ -15,9 +21,9 @@ built anywhere.
 | chrisdemetriou.com (music portfolio) | `https://chrisdemetriou.com` (its own address, not a Labs one) | this repo (public) |
 
 ## How it works
-- `projects.json` is the only list. `npm run build` turns it into `public/index.html`
-  (plain HTML, no scripts) plus `sitemap.xml` and `robots.txt` (all three generated,
-  not committed).
+- `projects.json` is the only list. `npm run build` turns it into `public/index.html`,
+  `public/<slug>/index.html`, `public/filters.css`, `sitemap.xml` and `robots.txt`
+  (all generated, not committed). Plain HTML, no scripts.
 - Each card's live details come from the project itself: Genesis's demo publishes
   `https://genesis.labs.chrisdemetriou.com/labs.json` (build, release date, languages,
   card picture) on every Genesis release; the website is counted from this repo.
