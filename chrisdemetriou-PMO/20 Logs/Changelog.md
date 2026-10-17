@@ -10,8 +10,10 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · CDCS Contracts added to Labs · in review
-> - **What changes:** the trade-business site and its booking system become the fourth project, at `/cdcs/`.
+> [!success]+ 🚀 17 Oct 2026 · CDCS Contracts added to Labs · live
+> - **Released:** Labs `cc64de0` (pull request #7). Smoke test passed for all four projects.
+> - **Rollback:** `npx wrangler rollback 599b5958-a135-4983-8656-6dbe597eb285` (in `labs/`).
+> - **What changed:** the trade-business site and its booking system are the fourth project, at `/cdcs/`.
 > - **Also:** four cards per row on wide screens.
 > - **Its own PMO:** `CDCS-PMO` in the cdcscontracts.com repository, now synced with the local folder.
 

@@ -14,12 +14,7 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- [ ] **Merge website pull request #7,** then tell Claude to release Labs.
-
-## 🚧 In review (pull request #7, 17 Oct 2026)
-
-- [ ] **Add CDCS Contracts** as the fourth project, with its own page (`/cdcs/`).
-- [ ] **Fit four cards to a row** on wide screens, so all projects show at once.
+- Nothing right now. Add the next project with the steps below.
 
 ## ➕ Adding a new project
 
@@ -49,6 +44,7 @@ updated: 2026-10-17
 > - [x] **Added R.E.A.CH,** the charity site rebuilt from WordPress in Astro (PR #6, 17 Oct 2026).
 > - [x] **Allowed client sites' own addresses** on Labs (17 Oct 2026).
 > - [x] **Showed three cards per row** on wide screens (17 Oct 2026).
+> - [x] **Added CDCS Contracts** and fitted four cards per row (PR #7, 17 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.

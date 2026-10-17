@@ -7,18 +7,18 @@ updated: 2026-10-17
 
 > [!info] At a glance
 > **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
-> **Labs shows 3 projects** on one screen (17 Oct 2026): Genesis, chrisdemetriou.com, R.E.A.CH.
+> **Labs shows 4 projects** on one screen (17 Oct 2026): Genesis, chrisdemetriou.com, R.E.A.CH, CDCS Contracts.
 > **Live status, updated by itself:** [[Live status]]
 > **Checked against the live system:** 17 Oct 2026
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
-- [ ] **Merge website pull request #7** (CDCS Contracts on Labs): `gh pr merge 7 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
+- Nothing right now.
 
 ## 🛠️ For Claude
 
-- [ ] **Release Labs** after pull request #7 is merged.
+- Nothing right now.
 
 ## ⏳ Waiting
 
@@ -49,6 +49,7 @@ More ideas: [[Backlog & Parked]].
 ## ✅ Done
 
 > [!success]- Finished 17 Oct 2026 (tap to open)
+> - [x] **Added CDCS Contracts to Labs** and released `cc64de0` (pull request #7).
 > - [x] **Added R.E.A.CH to Labs** and released `46e24ad` (pull request #6).
 > - [x] **Merged pull request #5 and released Labs** `1b7645d`: the overview fits on one screen.
 > - [x] **Merged website pull request #4** (Labs and this PMO moved here).
