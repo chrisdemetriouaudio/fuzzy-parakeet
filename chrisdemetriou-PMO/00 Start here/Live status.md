@@ -1,14 +1,14 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 14:09 (UK time)
+changed: 17 Oct 2026, 14:10 (UK time)
 ---
 
 # 🟢 Live status
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
+> **Everything answering:** 🔴 no: GitHub Pages build
 > **Open pull requests:** 0
 > **Back to:** [[00 Dashboard]]
 
@@ -16,7 +16,7 @@ changed: 17 Oct 2026, 14:09 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `8f0e734` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `68b05e3` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `46e24ad`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 14:09 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `9df860d` · docs(pmo): R.E.A.CH live on Labs (46e24ad)
 - 17 Oct 2026 · `7ee4752` · docs(pmo): R.E.A.CH added to Labs (PR #6, in review)
 - 17 Oct 2026 · `f5fdcb2` · Labs: add R.E.A.CH (WordPress to Astro migration)
 - 17 Oct 2026 · `e2b9104` · docs(pmo): Labs one-screen overview released (1b7645d)
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 14:09 (UK time)
 - 17 Oct 2026 · `8970789` · docs(pmo): Labs moved and released; Genesis card live
 - 17 Oct 2026 · `9f87a51` · Labs test: handle folders with spaces in their path
 - 17 Oct 2026 · `941b480` · docs(pmo): name the move pull requests
-- 17 Oct 2026 · `574c45c` · PMO status job: skip until the PMO is on main
