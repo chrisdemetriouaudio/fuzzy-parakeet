@@ -45,6 +45,7 @@ updated: 2026-10-17
 > - [x] **Allowed client sites' own addresses** on Labs (17 Oct 2026).
 > - [x] **Showed three cards per row** on wide screens (17 Oct 2026).
 > - [x] **Added CDCS Contracts** and fitted four cards per row (PR #7, 17 Oct 2026).
+> - [x] **Relabelled CDCS as a Demo** with a watermarked screenshot (PR #8, 17 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.

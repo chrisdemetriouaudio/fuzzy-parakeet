@@ -10,7 +10,12 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · CDCS Contracts added to Labs · live
+> [!success]+ 🚀 17 Oct 2026 · CDCS card shows the demo · live
+> - **Released:** Labs `852a5df` (pull request #8). Smoke test passed for all four projects.
+> - **What changed:** new watermarked screenshot; the card is labelled Demo, so Labs shows 3 live projects and 1 demo.
+> - **Rollback:** `npx wrangler rollback 0c6b2a74-c2c3-4d36-a366-d29c1b1df468` (in `labs/`).
+
+> [!success]- 🚀 17 Oct 2026 · CDCS Contracts added to Labs · live
 > - **Released:** Labs `cc64de0` (pull request #7). Smoke test passed for all four projects.
 > - **Rollback:** `npx wrangler rollback 599b5958-a135-4983-8656-6dbe597eb285` (in `labs/`).
 > - **What changed:** the trade-business site and its booking system are the fourth project, at `/cdcs/`.
