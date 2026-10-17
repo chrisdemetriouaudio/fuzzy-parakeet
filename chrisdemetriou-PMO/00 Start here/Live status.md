@@ -1,14 +1,14 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 20:25 (UK time)
+changed: 17 Oct 2026, 20:26 (UK time)
 ---
 
 # 🟢 Live status
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** 🔴 no: GitHub Pages build
+> **Everything answering:** ✅ yes
 > **Open pull requests:** 0
 > **Back to:** [[00 Dashboard]]
 
@@ -16,8 +16,8 @@ changed: 17 Oct 2026, 20:25 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `81efc43` (GitHub Pages: errored) |
-| labs.chrisdemetriou.com | ✅ 200 | `35507b1`, released 17 Oct 2026 |
+| chrisdemetriou.com | ✅ 200 | main `b153309` (GitHub Pages: building) |
+| labs.chrisdemetriou.com | ✅ 200 | `81efc43`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 20:25 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `b153309` · docs(pmo): Labs 81efc43 released (CDCS card payment)
 - 17 Oct 2026 · `394003f` · Labs: CDCS card shows the Stripe test-mode invoice payment
 - 17 Oct 2026 · `2d8e57a` · docs(pmo): Labs mobile layout live (35507b1)
 - 17 Oct 2026 · `803bc32` · Labs: proper phone and narrow-window layout
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 20:25 (UK time)
 - 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
 - 17 Oct 2026 · `9845007` · Labs: add CDCS Contracts; four cards per row so every project shows at once
 - 17 Oct 2026 · `9df860d` · docs(pmo): R.E.A.CH live on Labs (46e24ad)
-- 17 Oct 2026 · `7ee4752` · docs(pmo): R.E.A.CH added to Labs (PR #6, in review)
