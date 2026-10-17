@@ -257,12 +257,12 @@
   {
     "slug": "cdcs",
     "name": "cdcscontracts.com",
-    "title": "CDCS Contracts",
-    "status": "Live",
-    "description": "My trade-support business: a one-page contractor card, plus a booking system where firms request dates and I approve by e-mail.",
+    "title": "CDCS Contracts (demo)",
+    "status": "Demo",
+    "description": "A demo trade-support business: a one-page contractor card, plus a booking system where firms request dates and get approved by e-mail.",
     "url": "https://cdcscontracts.com/",
     "image": "img/cdcs.jpg",
-    "imageAlt": "The CDCS Contracts capability card: Chris Demetriou, Carpenter's Mate & Trade Support, Stockport & Greater Manchester, with Request dates and WhatsApp buttons.",
+    "imageAlt": "The CDCS Contracts demo capability card for C D Construction Services: carpenter's mate and trade support, Stockport and Greater Manchester, with a THIS IS A DEMO watermark.",
     "cta": "Open the website",
     "github": "chrisdemetriouaudio/cdcscontracts.com",
     "links": [
