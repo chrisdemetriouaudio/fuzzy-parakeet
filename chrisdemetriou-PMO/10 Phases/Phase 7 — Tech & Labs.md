@@ -14,7 +14,7 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- [ ] **Merge the move pull requests** (fuzzy-parakeet and christian4collective), then tell Claude.
+- [ ] **Merge the move pull requests** (website #4 and Genesis #19), then tell Claude.
 - [ ] **Open this vault in Obsidian:** Open folder as vault → `fuzzy-parakeet/chrisdemetriou-PMO`.
 
 ## 🛠️ For Claude

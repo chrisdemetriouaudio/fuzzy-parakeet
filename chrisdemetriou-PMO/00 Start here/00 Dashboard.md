@@ -14,8 +14,8 @@ updated: 2026-10-17
 
 ## 👉 Your actions
 
-- [ ] **Merge the fuzzy-parakeet pull request** (Labs and this PMO move here).
-- [ ] **Merge the christian4collective pull request** (Genesis stops releasing Labs).
+- [ ] **Merge website pull request #4** (Labs and this PMO move here): `gh pr merge 4 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
+- [ ] **Merge Genesis pull request #19** (Genesis stops releasing Labs): `gh pr merge 19 --repo chrisdemetriouaudio/christian4collective --merge`
 - [ ] **Open this vault in Obsidian:** Open folder as vault → `fuzzy-parakeet/chrisdemetriou-PMO`. Trust the Obsidian Git plugin when asked.
 
 ## 🛠️ For Claude
