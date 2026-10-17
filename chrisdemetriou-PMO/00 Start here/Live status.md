@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 13:11 (UK time)
+changed: 17 Oct 2026, 13:12 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 17 Oct 2026, 13:11 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `7fec595` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `fdbcca1` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `f7795a0`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 13:11 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `fdbcca1` · docs(pmo): Labs one-screen overview in review (PR #5)
 - 17 Oct 2026 · `99e3d48` · Labs: Genesis card picture from its 341264c release
 - 17 Oct 2026 · `8970789` · docs(pmo): Labs moved and released; Genesis card live
 - 17 Oct 2026 · `9f87a51` · Labs test: handle folders with spaces in their path
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 13:11 (UK time)
 - 16 Oct 2026 · `2728edc` · Footer year is always the current year (home, privacy, cookies)
 - 16 Oct 2026 · `980f211` · Nav: add TECH (links to labs.chrisdemetriou.com) between Media and Worship
 - 14 Oct 2026 · `6e9d99e` · Worship: linked YouTube thumbnails (no bot check); title separator
-- 14 Oct 2026 · `788bf54` · Worship: replace YouTube embed with linked thumbnails (no bot check)
