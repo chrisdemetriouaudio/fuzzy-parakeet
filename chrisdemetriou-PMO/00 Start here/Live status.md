@@ -16,7 +16,7 @@ changed: 17 Oct 2026, 14:06 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `429b702` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `7ee4752` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `1b7645d`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 14:06 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `7ee4752` · docs(pmo): R.E.A.CH added to Labs (PR #6, in review)
 - 17 Oct 2026 · `e2b9104` · docs(pmo): Labs one-screen overview released (1b7645d)
 - 17 Oct 2026 · `fdbcca1` · docs(pmo): Labs one-screen overview in review (PR #5)
 - 17 Oct 2026 · `d26f6a7` · Labs: one-screen overview with filters; full write-ups on project pages
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 14:06 (UK time)
 - 17 Oct 2026 · `941b480` · docs(pmo): name the move pull requests
 - 17 Oct 2026 · `574c45c` · PMO status job: skip until the PMO is on main
 - 17 Oct 2026 · `a3a7660` · Move Labs here and add the chrisdemetriou.com PMO
-- 16 Oct 2026 · `2728edc` · Footer year is always the current year (home, privacy, cookies)
