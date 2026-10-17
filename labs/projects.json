@@ -3,11 +3,11 @@
     "slug": "genesis",
     "title": "Genesis",
     "status": "Live",
-    "description": "Finds a rehearsal date the whole band can make — and automatically chases anyone who hasn't answered, then confirms.",
+    "description": "Live, running a real band with zero admin: finds a date everyone can make, chases anyone who hasn't replied, confirms.",
     "url": "https://genesis.labs.chrisdemetriou.com/",
     "image": "img/genesis.jpg",
     "imageAlt": "Genesis on a laptop: the band's shared calendar with coloured initials showing who can make each date.",
-    "cta": "Open the live demo",
+    "cta": "Try it with a demo band",
     "links": [
       {
         "label": "How it works",
