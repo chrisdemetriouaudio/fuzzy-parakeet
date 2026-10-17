@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 17:57 (UK time)
+changed: 17 Oct 2026, 17:58 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,8 +16,8 @@ changed: 17 Oct 2026, 17:57 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `fc21d99` (GitHub Pages: building) |
-| labs.chrisdemetriou.com | ✅ 200 | `46e24ad`, released 17 Oct 2026 |
+| chrisdemetriou.com | ✅ 200 | main `dcda5f6` (GitHub Pages: built) |
+| labs.chrisdemetriou.com | ✅ 200 | `cc64de0`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
@@ -26,6 +26,7 @@ changed: 17 Oct 2026, 17:57 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
 - 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
 - 17 Oct 2026 · `9845007` · Labs: add CDCS Contracts; four cards per row so every project shows at once
 - 17 Oct 2026 · `9df860d` · docs(pmo): R.E.A.CH live on Labs (46e24ad)
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 17:57 (UK time)
 - 17 Oct 2026 · `fdbcca1` · docs(pmo): Labs one-screen overview in review (PR #5)
 - 17 Oct 2026 · `d26f6a7` · Labs: one-screen overview with filters; full write-ups on project pages
 - 17 Oct 2026 · `99e3d48` · Labs: Genesis card picture from its 341264c release
-- 17 Oct 2026 · `8970789` · docs(pmo): Labs moved and released; Genesis card live
