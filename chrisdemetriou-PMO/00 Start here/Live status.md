@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 12:48 (UK time)
+changed: 17 Oct 2026, 12:49 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 17 Oct 2026, 12:48 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `f7795a0` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `99e3d48` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `f7795a0`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,8 @@ changed: 17 Oct 2026, 12:48 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 17 Oct 2026 · `99e3d48` · Labs: Genesis card picture from its 341264c release
+- 17 Oct 2026 · `8970789` · docs(pmo): Labs moved and released; Genesis card live
 - 17 Oct 2026 · `9f87a51` · Labs test: handle folders with spaces in their path
 - 17 Oct 2026 · `941b480` · docs(pmo): name the move pull requests
 - 17 Oct 2026 · `574c45c` · PMO status job: skip until the PMO is on main
@@ -34,5 +36,3 @@ changed: 17 Oct 2026, 12:48 (UK time)
 - 16 Oct 2026 · `980f211` · Nav: add TECH (links to labs.chrisdemetriou.com) between Media and Worship
 - 14 Oct 2026 · `6e9d99e` · Worship: linked YouTube thumbnails (no bot check); title separator
 - 14 Oct 2026 · `788bf54` · Worship: replace YouTube embed with linked thumbnails (no bot check)
-- 14 Oct 2026 · `6878cb7` · Load SoundCloud and YouTube players on arrival; cookie notice above footer player
-- 14 Oct 2026 · `0b98ccd` · Fix empty player tabs: restore track data, fix volume fill
