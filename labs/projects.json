@@ -1,0 +1,176 @@
+[
+  {
+    "slug": "genesis",
+    "title": "Genesis",
+    "status": "Live",
+    "description": "Finds a rehearsal date the whole band can make — and automatically chases anyone who hasn't answered, then confirms.",
+    "url": "https://genesis.labs.chrisdemetriou.com/",
+    "image": "img/genesis.jpg",
+    "imageAlt": "Genesis on a laptop: the band's shared calendar with coloured initials showing who can make each date.",
+    "cta": "Open the live demo",
+    "links": [
+      {
+        "label": "How it works",
+        "url": "https://genesis.labs.chrisdemetriou.com/about/"
+      },
+      {
+        "label": "How it's built",
+        "url": "https://genesis.labs.chrisdemetriou.com/engineering/"
+      }
+    ],
+    "topics": [
+      "cloudflare-workers",
+      "typescript",
+      "d1-sqlite",
+      "durable-objects",
+      "workers-kv",
+      "cron-triggers",
+      "passkeys",
+      "web-push",
+      "pwa",
+      "resend",
+      "turnstile",
+      "vitest",
+      "playwright",
+      "semgrep"
+    ],
+    "architecture": [
+      {
+        "label": "In the browser",
+        "nodes": [
+          {
+            "name": "Band app",
+            "note": "plain HTML, CSS and JS · installable"
+          },
+          {
+            "name": "Passkeys",
+            "note": "sign-in with WebAuthn, no passwords"
+          },
+          {
+            "name": "Web Push",
+            "note": "rehearsal alerts on members' phones"
+          }
+        ]
+      },
+      {
+        "link": "HTTPS · one origin",
+        "label": "On Cloudflare's edge",
+        "nodes": [
+          {
+            "name": "Worker",
+            "note": "TypeScript API and the static app"
+          },
+          {
+            "name": "Cron triggers",
+            "note": "reminders, rollover, e-mail outbox, health checks"
+          },
+          {
+            "name": "Durable Objects",
+            "note": "a private sandbox per demo visitor"
+          }
+        ]
+      },
+      {
+        "link": "SQL · HTTPS APIs",
+        "label": "Data and services",
+        "nodes": [
+          {
+            "name": "D1 (SQLite)",
+            "note": "source of truth, outbox, audit log"
+          },
+          {
+            "name": "Workers KV",
+            "note": "caches and health state"
+          },
+          {
+            "name": "Resend · Turnstile · ntfy",
+            "note": "e-mail, bot checks, alerts to me"
+          }
+        ]
+      }
+    ],
+    "manifest": "https://genesis.labs.chrisdemetriou.com/labs.json"
+  },
+  {
+    "slug": "website",
+    "name": "chrisdemetriou.com",
+    "title": "chrisdemetriou.com",
+    "status": "Live",
+    "description": "My music portfolio — credits, showreel and bookings. Hand-built with no framework, a custom audio player and consent-first embeds.",
+    "url": "https://chrisdemetriou.com/",
+    "image": "img/chrisdemetriou-com.jpg",
+    "imageAlt": "chrisdemetriou.com: name, roles and portrait above the bookings details, with the custom audio player along the bottom.",
+    "cta": "Open the website",
+    "github": "chrisdemetriouaudio/fuzzy-parakeet",
+    "topics": [
+      "html",
+      "css",
+      "javascript",
+      "no-framework",
+      "github-pages",
+      "github-actions",
+      "soundcloud-widget-api",
+      "web3forms",
+      "cookie-consent",
+      "responsive-design",
+      "seo"
+    ],
+    "architecture": [
+      {
+        "label": "In the browser",
+        "nodes": [
+          {
+            "name": "Hand-written pages",
+            "note": "plain HTML, CSS and JS · no framework, no build step"
+          },
+          {
+            "name": "Custom audio player",
+            "note": "main and footer player on the SoundCloud Widget API"
+          },
+          {
+            "name": "Cookie consent",
+            "note": "third-party players load only after OK"
+          }
+        ]
+      },
+      {
+        "link": "HTTPS · custom domain",
+        "label": "Hosting",
+        "nodes": [
+          {
+            "name": "GitHub Pages",
+            "note": "served straight from main"
+          },
+          {
+            "name": "GitHub Actions",
+            "note": "mirrors to a private backup on every push and nightly"
+          }
+        ]
+      },
+      {
+        "link": "Widget API · form POST",
+        "label": "Services",
+        "nodes": [
+          {
+            "name": "SoundCloud",
+            "note": "showreel and playlists"
+          },
+          {
+            "name": "YouTube",
+            "note": "worship videos, linked, never embedded"
+          },
+          {
+            "name": "Web3Forms",
+            "note": "booking form to e-mail, no server of my own"
+          }
+        ]
+      }
+    ],
+    "source": "..",
+    "exclude": [
+      "labs/",
+      "chrisdemetriou-PMO/",
+      ".github/"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "labs",
+  "private": true,
+  "type": "module",
+  "description": "labs.chrisdemetriou.com — chrisdemetriou.com's TECH page (Cloudflare Worker + static files)",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm test && npm run build && wrangler deploy --dry-run --outdir dist/dryrun",
+    "dev": "npm run build && wrangler dev --port 8795 --ip 127.0.0.1",
+    "release": "node scripts/release.mjs",
+    "release:check": "node scripts/release.mjs --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.148.0"
+  }
+}

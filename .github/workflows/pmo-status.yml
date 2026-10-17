@@ -1,0 +1,51 @@
+name: PMO live status
+
+# Keeps chrisdemetriou-PMO/00 Start here/Live status.md current: sites up, builds,
+# open pull requests and the latest changes. Commits only when something changed.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, closed, ready_for_review]
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+  pages: read
+
+concurrency:
+  group: pmo-status
+  cancel-in-progress: false
+
+jobs:
+  status:
+    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          ref: main
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        with:
+          node-version: 22
+      - name: Write the live status page
+        # Until the PMO is on main (its first pull request), there's nothing to update.
+        run: |
+          if [ ! -f .github/scripts/pmo-status.mjs ]; then echo "PMO not on main yet"; exit 0; fi
+          node .github/scripts/pmo-status.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+      - name: Commit it if anything changed
+        run: |
+          [ -f "chrisdemetriou-PMO/00 Start here/Live status.md" ] || exit 0
+          git add "chrisdemetriou-PMO/00 Start here/Live status.md"
+          if git diff --cached --quiet; then echo "No change"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs(pmo): live status [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1

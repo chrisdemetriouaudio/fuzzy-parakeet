@@ -1,0 +1,26 @@
+# ============================================================================
+# labs.chrisdemetriou.com — chrisdemetriou.com's TECH page: every project I've
+# built, wherever its code lives, laid out like GitHub repositories.
+#   Build:    npm run build     (from projects.json + each project's live labs.json)
+#   Preview:  npm run dev       (http://localhost:8795)
+#   Release:  npm run release   (from main: build, deploy, smoke test)
+# Security headers live in public/_headers. The Worker name stays "demo-hub" so
+# the old address (demo.chrisdemetriou.com) keeps working through the same Worker.
+# ============================================================================
+name = "demo-hub"
+main = "src/index.js"
+compatibility_date = "2025-04-01"
+workers_dev = false
+
+routes = [
+  { pattern = "labs.chrisdemetriou.com", custom_domain = true },
+  # Old address: kept attached so links people already have still work (forwarded, 301).
+  { pattern = "demo.chrisdemetriou.com", custom_domain = true },
+]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+run_worker_first = true
