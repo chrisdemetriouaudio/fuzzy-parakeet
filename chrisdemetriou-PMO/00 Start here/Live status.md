@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 18 Oct 2026, 00:49 (UK time)
+changed: 18 Oct 2026, 00:52 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,8 +16,8 @@ changed: 18 Oct 2026, 00:49 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `430a150` (GitHub Pages: building) |
-| labs.chrisdemetriou.com | ✅ 200 | `81efc43`, released 17 Oct 2026 |
+| chrisdemetriou.com | ✅ 200 | main `e8811d8` (GitHub Pages: building) |
+| labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
@@ -26,6 +26,7 @@ changed: 18 Oct 2026, 00:49 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 18 Oct 2026 · `e8811d8` · docs(pmo): contact form order and Genesis card copy released (PR #11, Labs 430a150)
 - 18 Oct 2026 · `8e2f2ee` · Contact form asks for email after name; Genesis card says it's live
 - 17 Oct 2026 · `b153309` · docs(pmo): Labs 81efc43 released (CDCS card payment)
 - 17 Oct 2026 · `394003f` · Labs: CDCS card shows the Stripe test-mode invoice payment
@@ -35,4 +36,3 @@ changed: 18 Oct 2026, 00:49 (UK time)
 - 17 Oct 2026 · `5ad3b67` · Labs: CDCS card shows the demo (C D Construction Services, watermark)
 - 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
 - 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
-- 17 Oct 2026 · `9845007` · Labs: add CDCS Contracts; four cards per row so every project shows at once
