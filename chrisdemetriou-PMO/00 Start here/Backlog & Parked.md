@@ -16,6 +16,8 @@ updated: 2026-10-17
 
 ## 💭 Later (ideas, not planned yet)
 
+- 💭 **Tidy chrisdemetriou.com on phones:** nav wraps onto two lines; 10–11px labels; player track descriptions cut off.
+
 - 💭 **Make a Labs share image** (the current one shows Genesis only).
 - 💭 **Release Labs automatically** after a project releases (needs a Cloudflare token in GitHub).
 - 💭 **Add the next project** to Labs: one entry in `labs/projects.json`.

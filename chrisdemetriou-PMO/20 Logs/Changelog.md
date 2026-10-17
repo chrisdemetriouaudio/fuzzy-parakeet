@@ -10,7 +10,13 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · CDCS card shows the demo · live
+> [!success]+ 🚀 17 Oct 2026 · Labs works on phones and narrow windows · live
+> - **Released:** Labs `35507b1` (pull request #9). Smoke test passed for all four projects.
+> - **What changed:** one card per row below 640px (two squeezed columns broke names and links); a swipeable nav line on phones; no text under 11px and thumb-sized links up to tablet width.
+> - **Checked live** at 375, 560 and 1280px: no sideways scroll, nothing spills out of a card.
+> - **Rollback:** `npx wrangler rollback a6321339-b6ae-45e7-a8bb-c6aaa6aaba80` (in `labs/`).
+
+> [!success]- 🚀 17 Oct 2026 · CDCS card shows the demo · live
 > - **Released:** Labs `852a5df` (pull request #8). Smoke test passed for all four projects.
 > - **What changed:** new watermarked screenshot; the card is labelled Demo, so Labs shows 3 live projects and 1 demo.
 > - **Rollback:** `npx wrangler rollback 0c6b2a74-c2c3-4d36-a366-d29c1b1df468` (in `labs/`).
