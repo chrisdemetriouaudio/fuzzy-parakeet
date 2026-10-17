@@ -58,3 +58,5 @@ labs/public/index.html
 labs/public/sitemap.xml
 labs/public/robots.txt
 labs/dist/
+labs/public/filters.css
+labs/public/*/index.html
