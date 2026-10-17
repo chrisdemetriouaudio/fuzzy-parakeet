@@ -10,7 +10,12 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · Labs moved into this repository · live
+> [!success]+ 🚀 17 Oct 2026 · Labs fits on one screen · live
+> - **Released:** Labs `1b7645d` (pull request #5). Smoke test passed.
+> - **What changed:** compact cards, technology filters and key numbers on the overview; a full page per project (`/genesis/`, `/website/`).
+> - **Rollback:** `npx wrangler rollback cc4219cd-459d-465b-844e-b5ed05595300` (in `labs/`).
+
+> [!success]- 🚀 17 Oct 2026 · Labs moved into this repository · live
 > - **Released:** Labs `f7795a0` with `npm run release` in `labs/`. Smoke test passed: Labs, old address, Genesis, website.
 > - **Rollback:** `npx wrangler rollback 18adb2fb-c9ea-42a4-856a-ad3bdfbfe33c` (in `labs/`).
 > - **What changed:** Labs' code, its project list and its history moved here from the Genesis repository.

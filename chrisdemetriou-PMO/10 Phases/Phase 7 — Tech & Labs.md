@@ -14,14 +14,7 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- [ ] **Merge website pull request #5,** then tell Claude to release Labs.
-
-## 🚧 In review (pull request #5, 17 Oct 2026)
-
-- [ ] **Overview fits on one screen:** key numbers, one row of filters, compact cards.
-- [ ] **Filter projects by technology** without any script.
-- [ ] **Full write-up on each project's own page** (`/genesis/`, `/website/`).
-- [ ] **Phone cards become slim rows,** so several fit on one screen.
+- Nothing right now. Add the next project with the steps below.
 
 ## ➕ Adding a new project
 
@@ -44,6 +37,10 @@ updated: 2026-10-17
 > - [x] **Released Genesis** `341264c`, so its demo publishes `labs.json` (17 Oct 2026).
 > - [x] **Released Labs** `f7795a0` from here; Genesis card shows its live build (17 Oct 2026).
 > - [x] **Checked chrisdemetriou.com hides** `labs/` and this vault (17 Oct 2026).
+> - [x] **Made the overview fit on one screen:** key numbers, compact cards (PR #5, 17 Oct 2026).
+> - [x] **Added technology filters** that need no script (17 Oct 2026).
+> - [x] **Gave each project its own page** with the full write-up (17 Oct 2026).
+> - [x] **Made phone cards slim rows,** so both projects show on the first screen (17 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.

@@ -7,18 +7,18 @@ updated: 2026-10-17
 
 > [!info] At a glance
 > **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
-> **Labs moved here and released** on 17 Oct 2026. Genesis's card reads its live build from the demo.
+> **Labs fits on one screen** since 17 Oct 2026: compact cards, filters, a page per project.
 > **Live status, updated by itself:** [[Live status]]
 > **Checked against the live system:** 17 Oct 2026
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
-- [ ] **Merge website pull request #5** (Labs fits on one screen): `gh pr merge 5 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
+- Nothing right now.
 
 ## 🛠️ For Claude
 
-- [ ] **Release Labs** after pull request #5 is merged.
+- Nothing right now.
 
 ## ⏳ Waiting
 
@@ -49,6 +49,7 @@ More ideas: [[Backlog & Parked]].
 ## ✅ Done
 
 > [!success]- Finished 17 Oct 2026 (tap to open)
+> - [x] **Merged pull request #5 and released Labs** `1b7645d`: the overview fits on one screen.
 > - [x] **Merged website pull request #4** (Labs and this PMO moved here).
 > - [x] **Merged Genesis pull request #19** (Genesis stopped releasing Labs).
 > - [x] **Opened this vault in Obsidian** from the external drive.
