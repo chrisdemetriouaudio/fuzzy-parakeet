@@ -14,11 +14,11 @@ updated: 2026-10-17
 
 ## 👉 Your actions
 
-- Nothing right now.
+- [ ] **Merge website pull request #5** (Labs fits on one screen): `gh pr merge 5 --repo chrisdemetriouaudio/fuzzy-parakeet --merge`
 
 ## 🛠️ For Claude
 
-- Nothing right now.
+- [ ] **Release Labs** after pull request #5 is merged.
 
 ## ⏳ Waiting
 

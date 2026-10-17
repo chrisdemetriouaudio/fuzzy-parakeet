@@ -9,6 +9,11 @@ updated: 2026-10-17
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 17 Oct 2026 · Labs overview fits on one screen
+> - **Decided:** the Tech page shows compact cards, like a GitHub profile; full write-ups get their own page.
+> - **Decided:** filter by technology with CSS only; at most 8 filters, one row.
+> - **Why:** most visitors won't scroll, so every project must be visible straight away.
+
 > [!question]- 17 Oct 2026 · Labs lives in this repository
 > - **Decided:** Labs' code, project list and notes live in fuzzy-parakeet, not in any project's repo.
 > - **Decided:** every future project is added to Labs from here, wherever its own code lives.

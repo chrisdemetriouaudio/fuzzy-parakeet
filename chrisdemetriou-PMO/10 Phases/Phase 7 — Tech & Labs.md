@@ -14,7 +14,14 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- Nothing right now. Add the next project with the steps below.
+- [ ] **Merge website pull request #5,** then tell Claude to release Labs.
+
+## 🚧 In review (pull request #5, 17 Oct 2026)
+
+- [ ] **Overview fits on one screen:** key numbers, one row of filters, compact cards.
+- [ ] **Filter projects by technology** without any script.
+- [ ] **Full write-up on each project's own page** (`/genesis/`, `/website/`).
+- [ ] **Phone cards become slim rows,** so several fit on one screen.
 
 ## ➕ Adding a new project
 
