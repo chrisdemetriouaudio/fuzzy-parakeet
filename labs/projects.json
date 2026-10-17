@@ -259,7 +259,7 @@
     "name": "cdcscontracts.com",
     "title": "CDCS Contracts (demo)",
     "status": "Demo",
-    "description": "A demo trade-support business: a one-page contractor card, plus a booking system where firms request dates and get approved by e-mail.",
+    "description": "A demo trade-support business: firms book dates online, get approved by e-mail, then pay an invoice by card (Stripe test mode).",
     "url": "https://cdcscontracts.com/",
     "image": "img/cdcs.jpg",
     "imageAlt": "The CDCS Contracts demo capability card for C D Construction Services: carpenter's mate and trade support, Stockport and Greater Manchester, with a THIS IS A DEMO watermark.",
@@ -278,6 +278,7 @@
       "javascript",
       "html",
       "github-pages",
+      "stripe",
       "resend",
       "turnstile",
       "whatsapp-alerts",
@@ -299,6 +300,10 @@
           {
             "name": "Distance check",
             "note": "postcode lookup; free within 15 miles"
+          },
+          {
+            "name": "Invoice and pay",
+            "note": "private invoice link · CIS deducted · Stripe Checkout (test mode)"
           }
         ]
       },
@@ -308,7 +313,7 @@
         "nodes": [
           {
             "name": "Pages Functions",
-            "note": "booking, availability, review and admin APIs"
+            "note": "booking, availability, review, admin and invoice APIs"
           },
           {
             "name": "D1 (SQLite)",
@@ -317,6 +322,10 @@
           {
             "name": "Retry worker",
             "note": "every 15 minutes, resends failed notifications"
+          },
+          {
+            "name": "Stripe (test mode)",
+            "note": "payment checked with Stripe before it's marked paid"
           }
         ]
       },
