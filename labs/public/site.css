@@ -143,7 +143,7 @@ a:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:
 .pcard-shot{display:block;border-bottom:1px solid var(--line);background:#0f0d11}
 .pcard-shot img{display:block;width:100%;height:auto;aspect-ratio:5/2;object-fit:cover;object-position:top}
 .pcard-body{display:flex;flex-direction:column;gap:7px;padding:12px 13px 13px;flex:1;min-width:0}
-.pcard-name{margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-family:var(--font-display);font-weight:500;font-size:1.08rem;line-height:1.2;overflow-wrap:anywhere}
+.pcard-name{margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-family:var(--font-display);font-weight:500;font-size:1.08rem;line-height:1.2;overflow-wrap:break-word;min-width:0}
 .pcard-name a{color:var(--ink);text-decoration:none}
 .pcard-name a:hover{color:var(--amber)}
 .pcard-desc{margin:0;color:var(--ink-muted);font-size:.86rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -166,7 +166,7 @@ a:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:
   .pcard-body{padding:12px;gap:6px}
   .pcard-name{font-size:1.1rem}
   .pcard-tags{display:none}
-  .pcard-actions{padding-top:2px;gap:8px 12px;flex-wrap:nowrap}
+  .pcard-actions{padding-top:2px;gap:8px 12px;flex-wrap:wrap}
   .pcard-more{font-size:.84rem;white-space:nowrap}
   .btn.btn-sm{width:auto;padding:7px 10px}
 }
@@ -192,3 +192,39 @@ footer{padding:18px 0 26px}
 .eyebrow{margin:24px 0 6px;color:var(--amber);font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 .lost h1{font-family:var(--font-display);font-weight:500;font-size:clamp(2rem,5vw,3rem);margin:0 0 12px}
 .lost p{color:var(--ink-muted)}
+
+/* ── Phones and narrow windows ──
+   One card per row below 640px (two squeezed columns broke names and links),
+   a single swipeable nav line, larger small print, and thumb-sized tap targets. */
+@media (max-width:640px){
+  .pcards{grid-template-columns:1fr}
+  .section-nav ul{flex-wrap:nowrap;overflow-x:auto;gap:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .section-nav ul::-webkit-scrollbar{display:none}
+  .section-nav li{flex:none}
+}
+/* Touch screens up to tablet size: readable small print and thumb-sized targets. */
+@media (max-width:900px){
+  .section-nav a{font-size:12px;padding:14px 0}
+  .wordmark{display:inline-block;padding:8px 0}
+  .pcard-tags li{font-size:11.5px;padding:7px 9px}
+  .pcard-name a,.repo-name a{display:inline-block;padding:7px 0}
+  .label{font-size:11.5px}
+  .stats dt{font-size:11px}
+  .pill{font-size:11px;padding:3px 9px}
+  .filter-row label{font-size:12.5px;padding:10px 13px}
+  .pcard-desc{font-size:.95rem}
+  .pcard-meta{font-size:.85rem}
+  .pcard-more{display:inline-block;padding:8px 0;font-size:.92rem}
+  .btn.btn-sm{padding:10px 12px;font-size:11px}
+  .topics li{font-size:12px;padding:8px 11px}
+  .about-site a,.about-links a{display:inline-block;padding:6px 0}
+  .lang-list{font-size:.9rem}
+  .tier-label{font-size:11px}
+  .wire-label{font-size:11px}
+  .node span{font-size:.88rem}
+  .crumbs{font-size:12px}
+  .crumbs a{display:inline-block;padding:8px 0}
+  .next-project a{display:inline-block;padding:6px 0}
+  .foot-line{font-size:11.5px}
+  .foot-line a{display:inline-block;padding:8px 0}
+}
