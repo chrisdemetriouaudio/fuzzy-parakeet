@@ -253,5 +253,91 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "cdcs",
+    "name": "cdcscontracts.com",
+    "title": "CDCS Contracts",
+    "status": "Live",
+    "description": "My trade-support business: a one-page contractor card, plus a booking system where firms request dates and I approve by e-mail.",
+    "url": "https://cdcscontracts.com/",
+    "image": "img/cdcs.jpg",
+    "imageAlt": "The CDCS Contracts capability card: Chris Demetriou, Carpenter's Mate & Trade Support, Stockport & Greater Manchester, with Request dates and WhatsApp buttons.",
+    "cta": "Open the website",
+    "github": "chrisdemetriouaudio/cdcscontracts.com",
+    "links": [
+      {
+        "label": "Booking system",
+        "url": "https://book.cdcscontracts.com/"
+      }
+    ],
+    "topics": [
+      "cloudflare-pages",
+      "cloudflare-d1",
+      "cron-triggers",
+      "javascript",
+      "html",
+      "github-pages",
+      "resend",
+      "turnstile",
+      "whatsapp-alerts",
+      "ics-calendar",
+      "mobile-first"
+    ],
+    "architecture": [
+      {
+        "label": "For contractors",
+        "nodes": [
+          {
+            "name": "Contractor card",
+            "note": "one page at cdcscontracts.com · Request dates or WhatsApp"
+          },
+          {
+            "name": "Booking form",
+            "note": "pick dates, site postcode, the job · on book.cdcscontracts.com"
+          },
+          {
+            "name": "Distance check",
+            "note": "postcode lookup; free within 15 miles"
+          }
+        ]
+      },
+      {
+        "link": "HTTPS · Pages Functions",
+        "label": "On Cloudflare",
+        "nodes": [
+          {
+            "name": "Pages Functions",
+            "note": "booking, availability, review and admin APIs"
+          },
+          {
+            "name": "D1 (SQLite)",
+            "note": "bookings, blocked dates, weekly days off"
+          },
+          {
+            "name": "Retry worker",
+            "note": "every 15 minutes, resends failed notifications"
+          }
+        ]
+      },
+      {
+        "link": "single-use links · e-mail",
+        "label": "For Chris",
+        "nodes": [
+          {
+            "name": "Review by e-mail",
+            "note": "approve, propose other dates or decline"
+          },
+          {
+            "name": "Notifications",
+            "note": "e-mail (Resend) and WhatsApp alerts"
+          },
+          {
+            "name": "Calendar file",
+            "note": "the contractor gets an .ics when dates are agreed"
+          }
+        ]
+      }
+    ]
   }
 ]
