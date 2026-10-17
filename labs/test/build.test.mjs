@@ -18,8 +18,9 @@ test("every project in projects.json passes its checks", () => {
   assert.equal(new Set(projects.map((p) => p.slug)).size, projects.length, "slugs are unique");
 });
 
-test("project addresses must be on chrisdemetriou.com, slugs and topics URL-safe", () => {
-  assert.throws(() => checkProject({ ...projects[0], url: "https://example.com/" }), /must be on chrisdemetriou.com/);
+test("project addresses must be https home pages, slugs and topics URL-safe", () => {
+  assert.throws(() => checkProject({ ...projects[0], url: "http://example.com/" }), /https/);
+  assert.throws(() => checkProject({ ...projects[0], url: "https://example.com/page" }), /https/);
   assert.throws(() => checkProject({ ...projects[0], slug: "My App" }), /slug/);
   assert.throws(() => checkProject({ ...projects[0], topics: ["Type Script"] }), /topic/);
 });
