@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-17
-changed: 17 Oct 2026, 17:43 (UK time)
+changed: 17 Oct 2026, 17:57 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,24 +9,25 @@ changed: 17 Oct 2026, 17:43 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 0
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `02d208b` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `cc64de0` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `46e24ad`, released 17 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#7 Labs: add CDCS Contracts**: opened 17 Oct 2026
+- None.
 
 ## 🕑 Latest changes on main
 
 - 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
+- 17 Oct 2026 · `9845007` · Labs: add CDCS Contracts; four cards per row so every project shows at once
 - 17 Oct 2026 · `9df860d` · docs(pmo): R.E.A.CH live on Labs (46e24ad)
 - 17 Oct 2026 · `7ee4752` · docs(pmo): R.E.A.CH added to Labs (PR #6, in review)
 - 17 Oct 2026 · `f5fdcb2` · Labs: add R.E.A.CH (WordPress to Astro migration)
@@ -35,4 +36,3 @@ changed: 17 Oct 2026, 17:43 (UK time)
 - 17 Oct 2026 · `d26f6a7` · Labs: one-screen overview with filters; full write-ups on project pages
 - 17 Oct 2026 · `99e3d48` · Labs: Genesis card picture from its 341264c release
 - 17 Oct 2026 · `8970789` · docs(pmo): Labs moved and released; Genesis card live
-- 17 Oct 2026 · `9f87a51` · Labs test: handle folders with spaces in their path
