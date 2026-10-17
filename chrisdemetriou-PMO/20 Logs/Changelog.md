@@ -10,8 +10,10 @@ updated: 2026-10-17
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 17 Oct 2026 · R.E.A.CH added to Labs · in review
-> - **What changes:** the charity site (WordPress → Astro) becomes the third project, at `/reach/`.
+> [!success]+ 🚀 17 Oct 2026 · R.E.A.CH added to Labs · live
+> - **Released:** Labs `46e24ad` (pull request #6). Smoke test passed for all three projects.
+> - **Rollback:** `npx wrangler rollback 540cff34-e0b8-420e-b498-b8bf6c4423ae` (in `labs/`).
+> - **What changed:** the charity site (WordPress → Astro) is the third project, at `/reach/`.
 > - **Also:** client sites keep their own address; three cards per row on wide screens.
 > - **Its own PMO:** `Reach-PMO` in the private reach-source repository, written up from the rescue onwards.
 

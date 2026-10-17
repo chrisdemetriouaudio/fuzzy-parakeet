@@ -14,13 +14,7 @@ updated: 2026-10-17
 
 ## 👉 To do
 
-- [ ] **Merge website pull request #6,** then tell Claude to release Labs.
-
-## 🚧 In review (pull request #6, 17 Oct 2026)
-
-- [ ] **Add R.E.A.CH** (reach-children-uganda.org.uk) as the third project, with its own page.
-- [ ] **Allow client sites' own addresses** on Labs (no Labs subdomain needed).
-- [ ] **Show three cards per row** on wide screens, so every project stays in the first screen.
+- Nothing right now. Add the next project with the steps below.
 
 ## ➕ Adding a new project
 
@@ -47,6 +41,9 @@ updated: 2026-10-17
 > - [x] **Added technology filters** that need no script (17 Oct 2026).
 > - [x] **Gave each project its own page** with the full write-up (17 Oct 2026).
 > - [x] **Made phone cards slim rows,** so both projects show on the first screen (17 Oct 2026).
+> - [x] **Added R.E.A.CH,** the charity site rebuilt from WordPress in Astro (PR #6, 17 Oct 2026).
+> - [x] **Allowed client sites' own addresses** on Labs (17 Oct 2026).
+> - [x] **Showed three cards per row** on wide screens (17 Oct 2026).
 
 > [!abstract]- 🧠 What this phase taught (tap to open)
 > - Projects publish their own card data (`labs.json`), so Labs never needs another repo's code.
