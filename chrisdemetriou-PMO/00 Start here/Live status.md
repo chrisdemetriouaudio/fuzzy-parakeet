@@ -16,7 +16,7 @@ changed: 18 Oct 2026, 23:36 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `23b943d` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `66c4666` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 18 Oct 2026, 23:36 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 18 Oct 2026 · `66c4666` · docs(pmo): homepage rebuilt tech-first is live (PR #13, #14)
 - 18 Oct 2026 · `9be16bd` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
 - 18 Oct 2026 · `fa45447` · Rebuild the homepage tech-first, with music and media as the roots
 - 18 Oct 2026 · `2c7e39e` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
