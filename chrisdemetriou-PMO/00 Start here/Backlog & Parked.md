@@ -19,6 +19,9 @@ updated: 2026-10-18
 - 💭 **Add a Software door to chrisdemetriou.com:** "Software" in the form's dropdown, the page title and an offers section.
 - 💭 **Tidy chrisdemetriou.com on phones:** nav wraps onto two lines; 10–11px labels; player track descriptions cut off.
 
+- 💭 **Run a real Fix-it ticket through the CEO agent** with an API key (design: `agents/ceo/DESIGN.md`).
+- 💭 **Wire the CEO agent's "send" to Gmail drafts,** so Chris still presses Send.
+
 - 💭 **Make a Labs share image** (the current one shows Genesis only).
 - 💭 **Release Labs automatically** after a project releases (needs a Cloudflare token in GitHub).
 - 💭 **Add the next project** to Labs: one entry in `labs/projects.json`.

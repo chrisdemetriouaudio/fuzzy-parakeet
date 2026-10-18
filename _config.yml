@@ -2,9 +2,11 @@
 # are tooling and notes, not website pages, so they are never published:
 #   labs/                 labs.chrisdemetriou.com (a Cloudflare Worker, released separately)
 #   chrisdemetriou-PMO/   the Obsidian project notes (PMO)
+#   agents/               the CEO agent and its departments (runs locally, released separately)
 exclude:
   - labs/
   - chrisdemetriou-PMO/
+  - agents/
   - AGENTS.md
   - CLAUDE.md
   - README.md

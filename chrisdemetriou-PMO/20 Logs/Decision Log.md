@@ -9,6 +9,12 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 18 Oct 2026 · The CEO agent lives in this repository
+> - **Decided:** the agent code lives in `agents/`: the CEO in `agents/ceo/`, each department in `agents/<role>/`.
+> - **Decided:** phase 1 switches on six departments (Sales, Copy, Engineering, QA, DevOps, Finance) and one pipeline, Fix-it ticket.
+> - **Decided:** anything outward-facing (send, deploy, sign, spend) waits for Chris's yes on the dashboard.
+> - **Why:** the agency is part of chrisdemetriou.com's software work, so it sits with the website.
+
 > [!question]- 18 Oct 2026 · Genesis is described as a live app, not a demo
 > - **Decided:** the Genesis card leads with "Live, running a real band with zero admin".
 > - **Decided:** the button says "Try it with a demo band", so the sandbox reads as a way in, not the product.

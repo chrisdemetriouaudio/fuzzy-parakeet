@@ -1,0 +1,24 @@
+{
+  "name": "ceo-agent",
+  "private": true,
+  "type": "module",
+  "description": "The CEO agent: one agent Chris talks to. It picks a pipeline, hands steps to department agents through a job board, and shows one dashboard. Phase 1: runs on this Mac only.",
+  "scripts": {
+    "db:local": "wrangler d1 migrations apply ceo-jobs --local",
+    "dev": "npm run db:local && wrangler dev --port 8797 --ip 127.0.0.1",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "smoke": "node scripts/smoke.mjs",
+    "check": "npm run typecheck && npm test && wrangler deploy --dry-run --outdir dist/dryrun",
+    "deploy": "echo 'Phase 1 runs on this Mac only. Nothing is deployed.' && exit 1"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261016.1",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.151.1"
+  }
+}
