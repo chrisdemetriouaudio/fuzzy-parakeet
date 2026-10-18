@@ -10,14 +10,18 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 18 Oct 2026 · Homepage rebuilt tech-first · live (website only)
+> [!success]+ 🚀 18 Oct 2026 · Labs nav matches the homepage · live
+> - **Released:** Labs by Chris (`npm run release`), after pull request #15 (`616e829`).
+> - **What changed:** Labs shows the homepage's nav: What I do · Work · About · Creative (menu) · Labs · Contact.
+> - **Note:** Labs allows no scripts, so its Creative menu doesn't close on an outside tap.
+
+> [!success]- 🚀 18 Oct 2026 · Homepage rebuilt tech-first · live
 > - **Released:** website, pull requests #13 (search tags, `26d7692`) and #14 (homepage, `23b943d`).
 > - **Search:** title, description and share card now say "Web Developer, Manchester · Automation for Small Businesses"; Person data added.
 > - **Homepage:** hero "I build tools that take the admin off.", What I do, Work (3 projects), About, Creative beginnings, Contact.
 > - **Nav:** Creative menu holds Music, Media and Worship; Tech is now Labs.
 > - **Contact:** hello@chrisdemetriou.com; shorter form starting "What admin do you want gone?".
 > - **Accessibility:** skip link, readable form errors, visible field edges, focus fixes, showreel as a proper dialog.
-> - **Not yet:** Labs still says Tech until it is released (`npm run release` in `labs/`).
 > - **Not checked live yet:** Claude can't reach the site from its cloud session.
 > - **Rollback:** revert the two merge commits on main.
 

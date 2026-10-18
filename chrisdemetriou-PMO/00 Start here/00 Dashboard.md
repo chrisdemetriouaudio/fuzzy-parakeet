@@ -16,7 +16,6 @@ updated: 2026-10-18
 ## 👉 Your actions
 
 - 👉 **Check the new homepage live** on desktop and phone, and send a test enquiry.
-- 👉 **Release Labs:** `npm run release` in `labs/`, so its nav says Labs.
 - 👉 **Ask Google to re-read the site** in Search Console.
 
 ## 🛠️ For Claude

@@ -16,7 +16,6 @@ updated: 2026-10-18
 
 ## 👉 Next up
 
-- 👉 **Release Labs after it merges:** `npm run release` in `labs/` (nav now says Labs).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
 ## 💭 Later (ideas, not planned yet)
