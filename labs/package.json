@@ -2,7 +2,7 @@
   "name": "labs",
   "private": true,
   "type": "module",
-  "description": "labs.chrisdemetriou.com — chrisdemetriou.com's TECH page (Cloudflare Worker + static files)",
+  "description": "labs.chrisdemetriou.com — chrisdemetriou.com's LABS page (Cloudflare Worker + static files)",
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test test/*.test.mjs",

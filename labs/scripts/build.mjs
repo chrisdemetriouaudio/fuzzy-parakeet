@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Builds Labs (chrisdemetriou.com's TECH page) from projects.json, in that site's
- * masthead, nav bar, fonts and colours (TECH is the current tab):
+ * Builds Labs (chrisdemetriou.com's LABS page) from projects.json, in that site's
+ * masthead, nav bar, fonts and colours (LABS is the current tab):
  *   /            an overview that fits on one screen: key numbers, technology
  *                filters (CSS only), and compact "pinned" cards like a GitHub profile;
  *   /<slug>/     each project's full write-up, like a GitHub repository page:
@@ -33,13 +33,14 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const NEW_WINDOW = `target="_blank" rel="noopener"`;
 const NEW_WINDOW_SR = `<span class="sr"> (opens in a new window)</span>`;
 
-// chrisdemetriou.com's sections, in its order; TECH is this site.
+// chrisdemetriou.com's nav, in its order; LABS is this site. Creative (music, media,
+// worship) is a menu there; here it is one link to that part of the homepage.
 const NAV = [
-  ["Biography", `${MAIN}/#biography`],
-  ["Credits", `${MAIN}/#credits`],
-  ["Media", `${MAIN}/#media`],
-  ["Tech", "/"],
-  ["Worship", `${MAIN}/#worship`],
+  ["What I do", `${MAIN}/#help`],
+  ["Work", `${MAIN}/#work`],
+  ["About", `${MAIN}/#about`],
+  ["Creative", `${MAIN}/#creative`],
+  ["Labs", "/"],
   ["Contact", `${MAIN}/#contact`],
 ];
 
@@ -197,7 +198,7 @@ const slugify = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const primaryLanguage = (p) => (p.languages && p.languages[0]) || null;
 const langDot = (l) => `<svg class="dot" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="4" fill="${l.colour}"/></svg>`;
 
-/** One page in chrisdemetriou.com's frame: masthead, nav (TECH current), footer. */
+/** One page in chrisdemetriou.com's frame: masthead, nav (LABS current), footer. */
 function page({ title, description, path, ogImage, ld, body, today, extraCss = [] }) {
   return `<!doctype html>
 <html lang="en-GB">
@@ -337,7 +338,7 @@ export function renderHome(projects, today = new Date().toISOString().slice(0, 1
   const body = `  <section class="record-header labs-head">
     <div class="container">
       <div>
-        <h1 class="record-name">Tech</h1>
+        <h1 class="record-name">Labs</h1>
         <p class="record-standfirst">Apps and websites I've designed, built and run. Open any of them live, or see how it's built.</p>
       </div>
       <dl class="stats">
@@ -375,7 +376,7 @@ export function renderProjectPage(p, projects, today = new Date().toISOString().
       ${list.length > 1 ? `<p class="next-project"><span class="label">Next project</span> <a href="/${esc(next.slug)}/">${esc(next.name || next.slug)} <span aria-hidden="true">→</span></a></p>` : ""}
     </div>
   </section>`;
-  return page({ title: `${p.title} · Tech · Chris Demetriou`, description: p.description, path: `/${p.slug}/`, ogImage: p.image, ld, body, today });
+  return page({ title: `${p.title} · Labs · Chris Demetriou`, description: p.description, path: `/${p.slug}/`, ogImage: p.image, ld, body, today });
 }
 
 export function renderSitemap(projects, today = new Date().toISOString().slice(0, 10)) {

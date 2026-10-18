@@ -16,12 +16,12 @@ updated: 2026-10-18
 
 ## 👉 Next up
 
-- 🛠️ **Rewrite the homepage copy tech-first:** hero, bio and main button. Draft for Chris to check first.
+- ⏳ **Homepage rebuilt tech-first:** in review as a pull request (18 Oct 2026).
+- 👉 **Release Labs after it merges:** `npm run release` in `labs/` (nav now says Labs).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
 ## 💭 Later (ideas, not planned yet)
 
-- 💭 **Add a Software door to chrisdemetriou.com:** "Software" in the form's dropdown, the page title and an offers section.
 - 💭 **Tidy chrisdemetriou.com on phones:** nav wraps onto two lines; 10–11px labels; player track descriptions cut off.
 
 - 💭 **Make a Labs share image** (the current one shows Genesis only).

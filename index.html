@@ -34,7 +34,7 @@
   "image": "https://chrisdemetriou.com/images/chrisdemetriouspotlight.jpeg",
   "jobTitle": "Web Developer",
   "description": "Web developer building tools that take the admin off small businesses and charities. Also a music producer and engineer.",
-  "email": "mailto:bookings@chrisdemetriou.com",
+  "email": "mailto:hello@chrisdemetriou.com",
   "address": { "@type": "PostalAddress", "addressLocality": "Manchester", "addressCountry": "GB" },
   "areaServed": [
     { "@type": "City", "name": "Manchester" },
@@ -52,7 +52,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles/player.css?v=4">
+<link rel="stylesheet" href="/styles/player.css?v=5">
 <style>
   :root{
     --bg: #121014;
@@ -62,15 +62,18 @@
     --amber: #e8a34d;
     --red: #c1443c;
     --teal: #5b8a89;
+    --teal-text: #7fb0ae;   /* teal lifted for small text */
     --line: rgba(237,230,221,0.09);
     --line-strong: rgba(237,230,221,0.16);
+    --field-edge: #7a747e;   /* 4.17:1 on --bg: form fields must be visible (WCAG 1.4.11) */
+    --error: #e5786f;        /* 6.53:1 on --bg; --red is 3.75:1, too low for text */
     --font-display: 'Fraunces', Georgia, serif;
     --font-mono: 'Space Mono', ui-monospace, monospace;
     --font-body: 'Work Sans', system-ui, -apple-system, sans-serif;
   }
 
   *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
+  html{ scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h, 48px) + 12px); scroll-padding-bottom: 96px; }
 
   html, body{
     margin: 0;
@@ -93,7 +96,7 @@
     padding: 0 clamp(20px, 4vw, 44px);
   }
 
-  a:focus-visible, button:focus-visible,
+  a:focus-visible, button:focus-visible, summary:focus-visible,
   input:focus-visible, select:focus-visible, textarea:focus-visible{
     outline: 2px solid var(--amber);
     outline-offset: 3px;
@@ -162,8 +165,68 @@
     transition: color 0.15s ease, border-color 0.15s ease;
   }
 
+  .section-nav summary{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 13px 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    list-style: none;
+  }
+  .section-nav summary::-webkit-details-marker{ display: none; }
+  .section-nav summary::after{
+    content: "";
+    width: 6px; height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+  .section-nav details[open] summary::after{ transform: translateY(1px) rotate(-135deg); }
+  .section-nav summary:hover{ color: var(--ink); }
+  .section-nav summary.current{ color: var(--amber); border-bottom-color: var(--amber); }
+
+  .nav-group{ position: relative; }
+  .nav-group ul{
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    z-index: 600;
+    display: block;
+    min-width: 180px;
+    margin: 0;
+    padding: 6px 0;
+    list-style: none;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-strong);
+  }
+  .nav-group ul a{
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-bottom: 0;
+  }
+
+  @media (max-width: 720px){
+    /* one row: "What I do" is the section straight under the hero, so it drops out here */
+    .section-nav ul{ gap: 0 18px; flex-wrap: nowrap; }
+    .section-nav .nav-help{ display: none; }
+    .section-nav a, .section-nav summary{ font-size: 11px; letter-spacing: 0.1em; }
+    .nav-group{ position: static; }
+    .section-nav .container{ position: relative; }
+    .nav-group ul{ left: 0; right: 0; min-width: 0; }
+  }
+
   .section-nav a:hover{ color: var(--ink); }
   .section-nav a.current{ color: var(--amber); border-bottom-color: var(--amber); }
+  .nav-group ul a.current{ border-bottom: 0; }
 
   /* ── RECORD HEADER (not a hero) ─────────────────────────── */
   .record-header{
@@ -226,9 +289,30 @@
     filter: saturate(0.7) contrast(1.05) brightness(0.88);
   }
 
+  .hero-id{ display: flex; align-items: center; gap: 14px; margin: 0 0 18px; }
+  .hero-id .record-roles{ margin: 0; }
+  .record-portrait--small{ display: none; width: 88px; flex: 0 0 88px; aspect-ratio: 1; }
+
+  .hero-actions{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 24px;
+    margin: 26px 0 0;
+  }
+  .hero-actions .btn-submit{ display: inline-block; text-decoration: none; }
+
+  .text-link{
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,163,77,0.4);
+  }
+  .text-link:hover{ border-bottom-color: var(--amber); }
+
   @media (max-width: 720px){
     .record-header .container{ grid-template-columns: 1fr; align-items: start; }
-    .record-portrait{ width: 190px; order: -1; margin-bottom: 6px; }
+    .record-portrait--large{ display: none; }
+    .record-portrait--small{ display: block; }
   }
 
   /* ── SECTIONS ───────────────────────────────────────────── */
@@ -258,37 +342,6 @@
 
   .prose p:last-child{ margin-bottom: 0; }
   .prose strong{ color: var(--ink); font-weight: 500; }
-
-  /* ── REPRESENTATION ─────────────────────────────────────── */
-  .rep-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 24px 40px;
-  }
-
-  .rep-item dt{
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin: 0 0 6px;
-  }
-
-  .rep-item dd{
-    margin: 0;
-    font-size: 0.98rem;
-    color: var(--ink);
-  }
-
-  .rep-item dd a{
-    color: var(--amber);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(232,163,77,0.35);
-  }
-
-  .rep-item dd a:hover{ border-bottom-color: var(--amber); }
-  .rep-item dd .sub{ display: block; color: var(--ink-muted); font-size: 0.88rem; margin-top: 3px; }
 
   /* ── CREDITS ────────────────────────────────────────────── */
   .legend{
@@ -332,75 +385,13 @@
   .credit-group{ margin-bottom: 44px; }
   .credit-group:last-child{ margin-bottom: 0; }
 
-  .credit-group h3{
+  .credit-group h4{
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 1.32rem;
     letter-spacing: -0.005em;
     color: var(--ink);
     margin: 0 0 14px;
-  }
-
-  /* credit tabs — only shown once JS puts the section in tabbed mode (small screens) */
-  .credit-tabs{ display: none; }
-
-  .credits-tabbed .credit-tabs{
-    display: flex;
-    gap: 6px;
-    position: sticky;
-    top: var(--nav-h, 42px);
-    z-index: 400;
-    margin: 0 0 18px;
-    padding: 10px 0;
-    background: rgba(18,16,20,0.94);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .credit-tab{
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 9px 6px;
-    background: transparent;
-    border: 1px solid var(--line);
-    color: var(--ink-muted);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-  }
-
-  .credit-tab .count{
-    display: block;
-    margin-top: 3px;
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    opacity: 0.6;
-  }
-
-  .credit-tab[aria-selected="true"]{
-    color: var(--amber);
-    border-color: rgba(232,163,77,0.5);
-    background: rgba(232,163,77,0.08);
-  }
-
-  .credit-tab:focus-visible{ outline: 2px solid var(--amber); outline-offset: 2px; }
-
-  /* in tabbed mode the tab names the panel, so the heading is for screen readers only */
-  .credits-tabbed .credit-group{ margin-bottom: 0; }
-  .credits-tabbed .credit-group h3{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
   }
 
   .table-responsive{ width: 100%; overflow-x: auto; }
@@ -574,20 +565,22 @@
 
   .field label{
     display: block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 500;
+    color: var(--ink);
     margin-bottom: 6px;
   }
 
-  .field .opt{ opacity: 0.6; text-transform: none; letter-spacing: 0.03em; }
+  .field .opt{ color: var(--ink-muted); font-weight: 300; }
+  .field .hint{ margin: -2px 0 8px; font-size: 0.88rem; color: var(--ink-muted); }
+  .field-error{ margin: 6px 0 0; font-size: 0.88rem; color: var(--error); }
+  .field [aria-invalid="true"]{ border-color: var(--error); }
 
   .field input, .field select, .field textarea{
     width: 100%;
     background: var(--bg);
-    border: 1px solid var(--line-strong);
+    border: 1px solid var(--field-edge);
     border-radius: 2px;
     color: var(--ink);
     font-family: var(--font-body);
@@ -597,7 +590,7 @@
   }
 
   .field textarea{ resize: vertical; min-height: 104px; }
-  .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--amber); outline: none; }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--amber); }
 
   .btn-submit{
     font-family: var(--font-mono);
@@ -616,7 +609,9 @@
   .btn-submit:hover{ background: #f2b264; }
   .btn-submit[disabled]{ opacity: 0.55; cursor: wait; }
 
-  .form-status{ margin-top: 12px; font-size: 0.88rem; color: var(--red); min-height: 1.2em; }
+  .form-status{ margin-top: 12px; font-size: 0.88rem; color: var(--error); min-height: 1.2em; }
+  .form-status a{ color: var(--amber); }
+  .form-note{ margin: 10px 0 0; font-size: 0.88rem; color: var(--ink-muted); }
 
   .form-success{
     border: 1px solid rgba(91,138,137,0.5);
@@ -633,6 +628,119 @@
   }
 
   .form-success p{ margin: 0; color: var(--ink-muted); }
+
+  /* ── SKIP LINK ──────────────────────────────────────────── */
+  .skip-link{
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    z-index: 2000;
+    padding: 10px 14px;
+    background: var(--amber);
+    color: #17110a;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-decoration: none;
+  }
+  .skip-link:focus{ top: 12px; }
+  main:focus{ outline: none; }
+  .sr{
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ── WHAT I DO / WORK ───────────────────────────────────── */
+  .band-intro{
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 60ch;
+    margin: 0 0 26px;
+  }
+
+  .help-grid, .work-grid{
+    display: grid;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .help-grid{ grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .work-grid{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .help-grid li, .work-card{
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 18px 18px 20px;
+  }
+  .help-grid h3, .work-card h3{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .help-grid p, .work-card p{ margin: 0; color: var(--ink-muted); line-height: 1.6; }
+
+  .work-card{ display: flex; flex-direction: column; gap: 10px; }
+  .work-card a{
+    margin-top: auto;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,163,77,0.4);
+    align-self: flex-start;
+  }
+  .work-card a:hover{ border-bottom-color: var(--amber); }
+  .work-card .work-tag{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-text);
+  }
+  .work-card .work-tag--demo{ color: var(--amber); }
+
+  .work-foot{ margin: 22px 0 0; color: var(--ink-muted); }
+  .work-foot .text-link{ margin-left: 6px; }
+
+  /* ── CREATIVE BEGINNINGS ────────────────────────────────── */
+  .creative-block{ margin-top: 48px; scroll-margin-top: calc(var(--nav-h, 48px) + 12px); }
+  .creative-title{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .creative-block .prose{ margin-bottom: 18px; }
+
+  details.more{ margin: 18px 0 0; border-top: 1px solid var(--line); }
+  details.more > summary{
+    padding: 14px 0;
+    color: var(--amber);
+    cursor: pointer;
+  }
+  details.more > summary:hover{ color: #f2b264; }
+  details.more[open] > summary{ margin-bottom: 8px; }
+
+  /* ── CONTACT ────────────────────────────────────────────── */
+  .contact-lead{
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .contact-sub{
+    font-size: 0.94rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .steps{ margin: 0 0 22px; padding-left: 1.3em; color: var(--ink-muted); line-height: 1.6; }
+  .steps li{ margin-bottom: 8px; }
+  .contact-mail{ color: var(--ink-muted); margin: 0; }
+  .contact-mail a{ color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(232,163,77,0.4); }
 
   /* ── FOOTER ─────────────────────────────────────────────── */
   footer .container{ padding-top: 18px; padding-bottom: 26px; }
@@ -776,50 +884,20 @@
 
   .btn-consent.primary:hover{ background: #f2b264; }
 
-  /* ── SHOWREEL TAB + MODAL ───────────────────────────────── */
-  .reel-float-btn{
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 900;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    background: #0d0b10;
-    color: var(--ink);
-    border: 1px solid var(--line-strong);
-    border-right: none;
-    border-radius: 3px 0 0 3px;
-    padding: 15px 9px;
-    cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
-  }
-
-  .reel-float-btn:hover{ background: #141018; border-color: rgba(232,163,77,0.6); }
-  .reel-float-icon{ color: var(--amber); font-size: 11px; line-height: 1; }
-
-  .reel-float-label{
-    writing-mode: vertical-rl;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .reel-modal-overlay{
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
+  /* ── SHOWREEL DIALOG ────────────────────────────────────── */
+  .reel-modal{
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
     padding: 22px;
-    background: rgba(6,5,8,0.92);
+    border: 0;
+    background: transparent;
+    color: var(--ink);
   }
-
-  .reel-modal-overlay.reel-active{ display: flex; }
+  .reel-modal[open]{ display: flex; align-items: center; justify-content: center; }
+  .reel-modal::backdrop{ background: rgba(6,5,8,0.92); }
 
   .reel-tv{
     position: relative;
@@ -894,12 +972,9 @@
 </head>
 <body>
 
-<button class="reel-float-btn" id="reel-float-btn" aria-label="Watch the showreel">
-  <span class="reel-float-icon">&#9654;</span>
-  <span class="reel-float-label">Showreel</span>
-</button>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="reel-modal-overlay" id="reel-modal" role="dialog" aria-modal="true" aria-label="Showreel" aria-hidden="true">
+<dialog class="reel-modal" id="reel-modal" aria-label="Showreel">
   <div class="reel-tv">
     <div class="reel-tv-header">Chris Demetriou &mdash; Showreel</div>
     <button class="reel-tv-close" id="reel-modal-close" aria-label="Close">&#10005;</button>
@@ -911,7 +986,7 @@
       </button>
     </div>
   </div>
-</div>
+</dialog>
 
 <header class="masthead">
   <div class="container">
@@ -923,84 +998,138 @@
 <nav class="section-nav" aria-label="Sections">
   <div class="container">
     <ul>
-      <li><a href="#biography">Biography</a></li>
-      <li><a href="#credits">Credits</a></li>
-      <li><a href="#media">Media</a></li>
-      <li><a href="https://labs.chrisdemetriou.com/">Tech</a></li>
-      <li><a href="#worship">Worship</a></li>
+      <li class="nav-help"><a href="#help">What I do</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li class="nav-group">
+        <details>
+          <summary>Creative</summary>
+          <ul>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#worship">Worship</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="https://labs.chrisdemetriou.com/">Labs</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 
-  <section class="record-header">
+  <section class="record-header" id="top">
     <div class="container">
       <div>
-        <h1 class="record-name">Chris Demetriou</h1>
-        <p class="record-roles">
-          Producer<span class="sep">/</span>Engineer<span class="sep">/</span>Worship&nbsp;Musician
-        </p>
+        <div class="hero-id">
+          <div class="record-portrait record-portrait--small" aria-hidden="true">
+            <img src="images/chrisdemetriouspotlight.jpeg" alt="" width="860" height="1075">
+          </div>
+          <p class="record-roles">
+            Chris Demetriou<span class="sep">&middot;</span>Web Developer<span class="sep">&middot;</span>Manchester
+          </p>
+        </div>
+        <h1 class="record-name">I build tools that take the admin off.</h1>
         <p class="record-standfirst">
-          Two decades of studio and live work, from feature film soundtrack and commercial
-          record production to Sunday worship.
+          For small businesses and charities: bookings, reminders, chasing and payments,
+          handled for you. Manchester-based, working UK-wide.
+        </p>
+        <p class="hero-actions">
+          <a class="btn-submit" href="#contact">Tell me what eats your time</a>
+          <a class="text-link" href="#work">See what I&rsquo;ve built</a>
         </p>
       </div>
-      <div class="record-portrait">
-        <img src="images/chrisdemetriouspotlight.jpeg" alt="Chris Demetriou, web developer, Manchester" width="860" height="1075">
+      <div class="record-portrait record-portrait--large">
+        <img src="images/chrisdemetriouspotlight.jpeg" alt="Chris Demetriou" width="860" height="1075">
       </div>
     </div>
   </section>
 
-  <section class="band" id="representation">
+  <section class="band" id="help">
     <div class="container">
-      <h2 class="band-title">Representation</h2>
-      <dl class="rep-grid">
-        <div class="rep-item">
-          <dt>Bookings</dt>
-          <dd><a href="mailto:bookings@chrisdemetriou.com">bookings@chrisdemetriou.com</a></dd>
-        </div>
-        <div class="rep-item">
-          <dt>Based</dt>
-          <dd>Manchester, United Kingdom</dd>
-        </div>
-        <div class="rep-item">
-          <dt>Available for</dt>
-          <dd>Session work &middot; Production &middot; Worship music</dd>
-        </div>
-      </dl>
+      <h2 class="band-title">What I take off your plate</h2>
+      <p class="band-intro">The jobs that come back every week. I build simple tools that do them for you.</p>
+      <ul class="help-grid">
+        <li><h3>Bookings</h3><p>People pick a date online. You approve it from your inbox.</p></li>
+        <li><h3>Reminders</h3><p>The right message goes out on time, so nobody forgets.</p></li>
+        <li><h3>Chasing</h3><p>Anyone who hasn&rsquo;t replied gets a nudge. You don&rsquo;t send it.</p></li>
+        <li><h3>Payments</h3><p>Send an invoice people can pay by card. See when it&rsquo;s paid.</p></li>
+      </ul>
     </div>
   </section>
 
-  <section class="band" id="biography">
+  <section class="band" id="work">
     <div class="container">
-      <h2 class="band-title">Biography</h2>
+      <h2 class="band-title">What I build</h2>
+      <p class="band-intro">Real tools, running now. One is a demo, and says so.</p>
+      <ul class="work-grid">
+        <li class="work-card">
+          <p class="work-tag">Live</p>
+          <h3>Genesis</h3>
+          <p>Runs a real band with zero admin. It finds a date everyone can make, chases anyone who hasn&rsquo;t replied, then confirms.</p>
+          <a href="https://genesis.labs.chrisdemetriou.com/" target="_blank" rel="noopener">Try Genesis with a demo band <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
+        </li>
+        <li class="work-card">
+          <p class="work-tag work-tag--demo">Demo</p>
+          <h3>CDCS Contracts</h3>
+          <p>A demo trade-support business. Firms book dates online, get approved by email, then pay the invoice by card (Stripe test mode).</p>
+          <a href="https://cdcscontracts.com/" target="_blank" rel="noopener">Try the CDCS demo <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
+        </li>
+        <li class="work-card">
+          <p class="work-tag">Live</p>
+          <h3>Reach Children Uganda</h3>
+          <p>A UK children&rsquo;s charity&rsquo;s WordPress site, recovered from web archives and rebuilt: fast, static and free to host.</p>
+          <a href="https://reach-children-uganda.org.uk/" target="_blank" rel="noopener">Visit the charity&rsquo;s site <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
+        </li>
+      </ul>
+      <p class="work-foot">
+        This site is hand-built too: plain code, no framework.
+        <a class="text-link" href="https://labs.chrisdemetriou.com/">See every project on Labs</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <span id="biography"></span>
+    <div class="container">
+      <h2 class="band-title">About</h2>
       <div class="prose">
         <p>
-          Chris Demetriou is a <strong>producer, engineer and musician based in Manchester</strong>.
-          His studio credits span feature film soundtrack, commercial record and session work,
-          with performance, arrangement and engineering roles on releases through DreamWorks,
-          Warner Bros, Sony Pictures, Working Title and Jerry Bruckheimer Films.
+          I&rsquo;m Chris, a web developer in Manchester. I build tools that do the repeat admin
+          for small businesses and charities: bookings, reminders, chasing and payments. You deal
+          with one person, start to finish, in plain English.
         </p>
         <p>
-          Trained across two decades in professional studio and live environments, he has worked
-          in rooms shaped by <strong>Hans Zimmer and Trevor Horn</strong>, and on sessions at SARM
-          Studios. Live work runs from tour support through festival and venue shows to corporate
-          engagements.
-        </p>
-        <p>
-          Alongside that work he runs an online worship ministry, publishing worship covers across
-          YouTube, Instagram and TikTok.
+          I came to this from two decades in music and media. Studios taught me to listen first
+          and get the detail right. I build the same way: simple to use, and cheap to run. I still
+          make music, too.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="band" id="credits">
+  <section class="band" id="creative">
     <div class="container">
-      <h2 class="band-title">Credits</h2>
-      <div class="legend">
+      <h2 class="band-title">Creative beginnings</h2>
+      <p class="band-intro">
+        Before I built tools, I spent two decades in studios, on stage and on air. Tight
+        deadlines, fine detail, people counting on you. It&rsquo;s still how I work.
+      </p>
+
+      <div class="creative-block" id="music">
+        <span id="credits"></span>
+        <h3 class="creative-title">Music</h3>
+        <div class="prose">
+          <p>
+            I&rsquo;ve performed, arranged and engineered on releases through DreamWorks, Warner
+            Bros, Sony Pictures, Working Title and Jerry Bruckheimer Films. I&rsquo;ve worked in
+            rooms shaped by <strong>Hans Zimmer and Trevor Horn</strong>, and on sessions at SARM Studios.
+          </p>
+        </div>
+        <p><button type="button" class="btn-inline" id="reel-open">Watch the showreel</button></p>
+
+        <div class="legend">
 <span><b class="tag PR" data-role="Producer">PR</b> Producer</span>
 <span><b class="tag M" data-role="Mixer">M</b> Mixer</span>
 <span><b class="tag PTE" data-role="Pro Tools Engineer">PTE</b> Pro Tools Eng</span>
@@ -1011,9 +1140,9 @@
 <span><b class="tag T" data-role="Transcription">T</b> Transcription</span>
 </div>
 
-      <div class="credit-group" data-tab="Selected">
-        <h3>Selected Credits</h3>
-        <div class="table-responsive">
+        <div class="credit-group">
+          <h4>Selected credits</h4>
+          <div class="table-responsive">
 
 <table class="data-table">
 
@@ -1067,11 +1196,13 @@
 
 </table>
 </div>
-      </div>
+        </div>
 
-      <div class="credit-group" data-tab="Studio">
-        <h3>Studio Production</h3>
-        <div class="table-responsive">
+        <details class="more">
+          <summary>Show all studio credits (26)</summary>
+          <div class="credit-group">
+            <h4>Studio production</h4>
+            <div class="table-responsive">
 
 <table class="data-table">
 
@@ -1245,11 +1376,14 @@
 
 </table>
 </div>
-      </div>
+          </div>
+        </details>
 
-      <div class="credit-group" data-tab="Live">
-        <h3>Live Performance</h3>
-        <div class="table-responsive">
+        <details class="more">
+          <summary>Show all live credits (14)</summary>
+          <div class="credit-group">
+            <h4>Live performance</h4>
+            <div class="table-responsive">
 
 <table class="data-table">
 
@@ -1270,13 +1404,13 @@
 
 <tr>
 <td data-label="Artist / Project">Sharon Corr</td>
-<td data-label="Notes">O2 Academy</td>
+<td data-label="Venue">O2 Academy</td>
 <td data-label="Location">Liverpool, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Jenn Bostic</td>
-<td data-label="Notes">Band On The Wall</td>
+<td data-label="Venue">Band On The Wall</td>
 <td data-label="Location">Manchester, UK</td>
 </tr>
 
@@ -1288,31 +1422,31 @@
 
 <tr>
 <td data-label="Artist / Project">Paloma Faith</td>
-<td data-label="Notes">TalkTalk Corporate</td>
+<td data-label="Venue">TalkTalk Corporate</td>
 <td data-label="Location">UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Pixie Lott</td>
-<td data-label="Notes">TalkTalk Corporate</td>
+<td data-label="Venue">TalkTalk Corporate</td>
 <td data-label="Location">UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Tinchy Stryder</td>
-<td data-label="Notes">TalkTalk Corporate</td>
+<td data-label="Venue">TalkTalk Corporate</td>
 <td data-label="Location">UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Noisettes</td>
-<td data-label="Notes">TalkTalk Corporate</td>
+<td data-label="Venue">TalkTalk Corporate</td>
 <td data-label="Location">UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Guillemots</td>
-<td data-label="Notes">TalkTalk Corporate</td>
+<td data-label="Venue">TalkTalk Corporate</td>
 <td data-label="Location">UK</td>
 </tr>
 
@@ -1324,7 +1458,7 @@
 
 <tr>
 <td data-label="Artist / Project">Track Dogs</td>
-<td data-label="Notes">Shrewsbury Folk Festival</td>
+<td data-label="Venue">Shrewsbury Folk Festival</td>
 <td data-label="Location">Shrewsbury, UK</td>
 </tr>
 
@@ -1336,37 +1470,37 @@
 
 <tr>
 <td data-label="Artist / Project">Bastille</td>
-<td data-label="Notes">Mojo Bar</td>
+<td data-label="Venue">Mojo Bar</td>
 <td data-label="Location">Liverpool, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">James Walsh (Starsailor)</td>
-<td data-label="Notes">Zanzibar</td>
+<td data-label="Venue">Zanzibar</td>
 <td data-label="Location">Liverpool, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Marcella Detroit (Shakespears Sister)</td>
-<td data-label="Notes">The Stables</td>
+<td data-label="Venue">The Stables</td>
 <td data-label="Location">Milton Keynes, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">John Smith</td>
-<td data-label="Notes">Epstein Theatre</td>
+<td data-label="Venue">Epstein Theatre</td>
 <td data-label="Location">Liverpool, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Rachel Sage</td>
-<td data-label="Notes">Jabez Clegg</td>
+<td data-label="Venue">Jabez Clegg</td>
 <td data-label="Location">Manchester, UK</td>
 </tr>
 
 <tr>
 <td data-label="Artist / Project">Moulettes</td>
-<td data-label="Notes">Various</td>
+<td data-label="Venue">Various</td>
 <td data-label="Location">York, UK</td>
 </tr>
 
@@ -1374,24 +1508,20 @@
 
 </table>
 </div>
+          </div>
+        </details>
       </div>
 
-    </div>
-  </section>
-
-  <section class="band" id="media">
-    <div class="container">
-      <h2 class="band-title">Media</h2>
-      <div class="prose">
-        <p>
-          Alongside studio and live work, Chris produces <strong>radio imaging, sonic branding
-          and podcasts</strong>: station imaging and interview editing for national broadcast,
-          full audio identity packages for podcasts, and audio and video podcast production
-          from edit to platform-ready delivery.
-        </p>
-        <p class="media-note">ON AIR is commissioned broadcast work. Everything else is
-        self-initiated: written to brief, produced to the same standard.</p>
-      </div>
+      <div class="creative-block" id="media">
+        <h3 class="creative-title">Media</h3>
+        <div class="prose">
+          <p>
+            I produce <strong>radio imaging, sonic branding and podcasts</strong>, from imaging
+            for national broadcast to full podcast production.
+          </p>
+          <p class="media-note">ON AIR is commissioned broadcast work. Everything else is
+          self-initiated: written to brief, produced to the same standard.</p>
+        </div>
 
       <div class="embed-hold media-hold" id="sc-hold">
         <p>The showreel player streams from SoundCloud, which sets cookies on your device before it will play.</p>
@@ -1528,8 +1658,7 @@
                   </div>
                </div><!-- /cdplayer -->
 
-
-      <h3 class="media-sub">Broadcast &amp; brand audio</h3>
+        <h4 class="media-sub">Broadcast &amp; brand audio</h4>
       <div class="table-responsive">
         <table class="data-table">
           <thead>
@@ -1556,58 +1685,61 @@
         </table>
       </div>
 
-      <h3 class="media-sub">Industry feedback</h3>
-      <div class="quote-grid">
+        <h4 class="media-sub">Industry feedback</h4>
+        <div class="quote-grid">
         <blockquote class="verse quote-lead">
           <p>&ldquo;You&rsquo;ve got the ear.&rdquo;</p>
           <cite>Former BBC Radio Managing Editor &middot; Sony Gold Award winner</cite>
         </blockquote>
         <blockquote class="verse">
-          <p>&ldquo;Just started listening to your podcast &mdash; what a professional job. Great topic, great name and a really polished sound. So impressed.&rdquo;</p>
-          <cite>BBC Radio broadcaster &middot; Sony Award-winning presenter</cite>
-        </blockquote>
-        <blockquote class="verse">
           <p>&ldquo;After completing one of our courses, Chris returned to volunteer with us and quickly became a real asset to the team. He&rsquo;s consistently reliable, always arrives early, and does an outstanding job with audio editing to a very high standard. On top of that, he&rsquo;s a genuinely lovely person who fits in brilliantly with the team and is a pleasure to work with.&rdquo;</p>
           <cite>Lee Barnes &middot; Presenter &amp; Senior Academy Lead &middot; Gaydio</cite>
         </blockquote>
-        <blockquote class="verse">
+        </div>
+        <details class="more">
+          <summary>More feedback (3)</summary>
+          <div class="quote-grid">
+          <blockquote class="verse">
+          <p>&ldquo;Just started listening to your podcast &mdash; what a professional job. Great topic, great name and a really polished sound. So impressed.&rdquo;</p>
+          <cite>BBC Radio broadcaster &middot; Sony Award-winning presenter</cite>
+        </blockquote>
+          <blockquote class="verse">
           <p>&ldquo;You&rsquo;ve definitely got a good ear for picking out great audio.&rdquo;</p>
           <cite>Producer &middot; Gaydio Breakfast with Dave Cooper</cite>
         </blockquote>
-        <blockquote class="verse">
+          <blockquote class="verse">
           <p>&ldquo;I love these &mdash; you&rsquo;ve done an amazing job with the edits.&rdquo;</p>
           <cite>Mykey Stevens &middot; Parkdean Resorts &middot; Gaydio Academy video podcast production</cite>
         </blockquote>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="worship">
-    <div class="container">
-      <h2 class="band-title">Worship</h2>
-      <div class="worship-grid">
-        <div>
-          <div class="prose">
-            <p>
-              Chris runs an online worship ministry, publishing worship covers week by week
-              across YouTube, Instagram and TikTok. <strong>The aim is simple: to bring people
-              closer to Jesus.</strong> The studio years sharpened the craft; this is what it
-              serves.
-            </p>
           </div>
-          <blockquote class="verse">
+        </details>
+      </div>
+
+      <div class="creative-block" id="worship">
+        <h3 class="creative-title">Worship</h3>
+        <div class="worship-grid">
+          <div>
+            <div class="prose">
+              <p>
+                I run an online worship ministry, publishing worship covers week by week
+                across YouTube, Instagram and TikTok. <strong>The aim is simple: to bring people
+                closer to Jesus.</strong> The studio years sharpened the craft; this is what it
+                serves.
+              </p>
+            </div>
+            <blockquote class="verse">
             <p>&ldquo;Each of you should use whatever gift you have received to serve others, as
             faithful stewards of God&rsquo;s grace in its various forms&hellip; so that in all things
             God may be praised through Jesus Christ.&rdquo;</p>
             <cite>1 Peter 4:10&ndash;11 &middot; NIV</cite>
           </blockquote>
-          <ul class="social-row">
+            <ul class="social-row">
             <li><a href="https://www.youtube.com/@chrisdemetriouworship" target="_blank" rel="noopener">YouTube &#8599;</a></li>
             <li><a href="https://www.instagram.com/chrisdemetriouworship" target="_blank" rel="noopener">Instagram &#8599;</a></li>
             <li><a href="https://www.tiktok.com/@chrisdemetriouworship" target="_blank" rel="noopener">TikTok &#8599;</a></li>
           </ul>
-        </div>
-        <div class="yt-latest" aria-label="Latest worship covers on YouTube">
+          </div>
+          <div class="yt-latest" aria-label="Latest worship covers on YouTube">
           <p class="label yt-label">Latest covers</p>
           <a class="yt-card yt-card--lead" href="https://www.youtube.com/watch?v=zbF6648sy34" target="_blank" rel="noopener">
             <span class="yt-thumb"><img src="https://i.ytimg.com/vi/zbF6648sy34/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
@@ -1623,65 +1755,73 @@
           </a>
           <a class="yt-all" href="https://www.youtube.com/@chrisdemetriouworship/videos" target="_blank" rel="noopener">All videos on YouTube &#8599;</a>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="band" id="contact">
+    <span id="representation"></span>
     <div class="container">
       <h2 class="band-title">Contact</h2>
       <div class="contact-grid">
         <div>
-          <div class="prose">
-            <p>
-              Available for session work, production and worship music. Booking enquiries are
-              handled at bookings@chrisdemetriou.com; the form below reaches that inbox
-              directly.
-            </p>
-            <p>
-              Prefer email? <a href="mailto:bookings@chrisdemetriou.com" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(232,163,77,0.35)">bookings@chrisdemetriou.com</a>
-            </p>
-          </div>
+          <p class="contact-lead">Tell me what eats your time.</p>
+          <h3 class="contact-sub">How it works</h3>
+          <ol class="steps">
+            <li>Tell me what admin you want gone. A sentence is fine.</li>
+            <li>I&rsquo;ll reply by email with questions, or a simple plan.</li>
+            <li>If it&rsquo;s a good fit, I build the tool and host it. Ongoing support is available as a monthly plan.</li>
+          </ol>
+          <p class="contact-mail">
+            Prefer email? <a href="mailto:hello@chrisdemetriou.com">hello@chrisdemetriou.com</a>
+          </p>
         </div>
 
         <div>
-          <form id="booking-form" action="https://api.web3forms.com/submit" method="POST">
+          <form id="enquiry-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="4fe26891-092d-446f-992a-8da7191816fb">
-            <input type="hidden" name="subject" value="New booking enquiry via chrisdemetriou.com">
+            <input type="hidden" name="subject" value="New enquiry via chrisdemetriou.com">
             <input type="hidden" name="from_name" value="chrisdemetriou.com">
             <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
             <div class="field">
-              <label for="bf-name">Name</label>
-              <input type="text" id="bf-name" name="name" required autocomplete="name">
+              <label for="cf-admin">What admin do you want gone?</label>
+              <p class="hint" id="cf-admin-hint">A sentence is fine. For example: chasing replies, taking bookings, sending invoices.</p>
+              <textarea id="cf-admin" name="message" rows="4" required aria-describedby="cf-admin-hint cf-admin-err"></textarea>
+              <p class="field-error" id="cf-admin-err" hidden></p>
             </div>
             <div class="field">
-              <label for="bf-email">Email address</label>
-              <input type="email" id="bf-email" name="email" required autocomplete="email">
+              <label for="cf-name">Your name</label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name" aria-describedby="cf-name-err">
+              <p class="field-error" id="cf-name-err" hidden></p>
             </div>
             <div class="field">
-              <label for="bf-org">Organisation / Venue <span class="opt">(optional)</span></label>
-              <input type="text" id="bf-org" name="organisation" autocomplete="organization">
+              <label for="cf-email">Email address</label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email" inputmode="email" aria-describedby="cf-email-err">
+              <p class="field-error" id="cf-email-err" hidden></p>
             </div>
             <div class="field">
-              <label for="bf-type">Type of engagement</label>
-              <select id="bf-type" name="engagement">
-                <option>Session Work</option>
-                <option>Production</option>
-                <option>Worship Music</option>
-                <option>Other</option>
+              <label for="cf-org">Business or charity name <span class="opt">(optional)</span></label>
+              <input type="text" id="cf-org" name="organisation" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="cf-topic">What&rsquo;s this about?</label>
+              <select id="cf-topic" name="topic">
+                <option>Admin I want gone (tools and automation)</option>
+                <option>A website</option>
+                <option>Music, production or audio</option>
+                <option>Worship</option>
+                <option>Something else</option>
               </select>
             </div>
-            <div class="field">
-              <label for="bf-message">Message</label>
-              <textarea id="bf-message" name="message" rows="4" required></textarea>
-            </div>
-            <button class="btn-submit" type="submit">Send booking enquiry</button>
+            <button class="btn-submit" type="submit">Send it over</button>
+            <p class="form-note">I&rsquo;ll reply by email.</p>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
 
           <div class="form-success" id="form-success" hidden>
-            <h3>Enquiry sent</h3>
-            <p>Thanks &mdash; it&rsquo;s been received and Chris will come back to you shortly.</p>
+            <h3 tabindex="-1">Thanks &mdash; got it.</h3>
+            <p>I&rsquo;ll read it and reply by email. Meanwhile: <a href="https://labs.chrisdemetriou.com/">See my projects on Labs</a></p>
           </div>
         </div>
       </div>
@@ -1878,142 +2018,87 @@
 
   // section nav: mark the section currently in view
   (function(){
-    // Only in-page links (#section) take part; Tech goes to labs.chrisdemetriou.com.
+    // Only in-page links (#section) take part; Labs goes to labs.chrisdemetriou.com.
+    // Music, Media and Worship sit inside the Creative menu, so "Creative" lights up for them.
+    const nav = document.querySelector('.section-nav');
+    const summary = nav ? nav.querySelector('.nav-group summary') : null;
     const links = Array.from(document.querySelectorAll('.section-nav a[href^="#"]'));
     const map = new Map();
     links.forEach(function(a){
       const el = document.querySelector(a.getAttribute('href'));
       if (el) map.set(el, a);
     });
-    if (!map.size || !('IntersectionObserver' in window)) return;
-    const obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        links.forEach(function(l){ l.classList.remove('current'); });
-        const a = map.get(e.target);
-        if (a) a.classList.add('current');
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    map.forEach(function(_a, el){ obs.observe(el); });
-  })();
-
-  // credits: one tab per group on small screens, the full stack on desktop
-  (function(){
-    const section = document.getElementById('credits');
-    if (!section) return;
-    const groups = Array.from(section.querySelectorAll('.credit-group'));
-    if (groups.length < 2) return;
-
-    const nav = document.querySelector('.section-nav');
-    const mq  = window.matchMedia('(max-width: 760px)');
-
-    const tabs = document.createElement('div');
-    tabs.className = 'credit-tabs';
-    tabs.setAttribute('role', 'tablist');
-    tabs.setAttribute('aria-label', 'Credit categories');
-
-    const buttons = groups.map(function(group, i){
-      const heading = group.querySelector('h3');
-      const label = group.getAttribute('data-tab') || (heading ? heading.textContent.trim() : 'Credits');
-      const rows = group.querySelectorAll('tbody tr:not(.group-header)').length;
-
-      if (!group.id) group.id = 'credit-group-' + i;
-
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'credit-tab';
-      btn.id = 'credit-tab-' + i;
-      btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-controls', group.id);
-      btn.appendChild(document.createTextNode(label));
-
-      const count = document.createElement('span');
-      count.className = 'count';
-      count.textContent = rows;
-      btn.appendChild(count);
-
-      btn.addEventListener('click', function(){ select(i, false); keepInView(i); });
-      btn.addEventListener('keydown', function(e){
-        let next = -1;
-        if (e.key === 'ArrowRight') next = (i + 1) % buttons.length;
-        else if (e.key === 'ArrowLeft') next = (i - 1 + buttons.length) % buttons.length;
-        else if (e.key === 'Home') next = 0;
-        else if (e.key === 'End') next = buttons.length - 1;
-        if (next < 0) return;
-        e.preventDefault();
-        select(next, true);
-        keepInView(next);
-      });
-
-      tabs.appendChild(btn);
-      return btn;
-    });
-
-    let active = 0;
-
-    function select(i, focus){
-      active = i;
-      groups.forEach(function(g, n){ g.hidden = mq.matches && n !== i; });
-      buttons.forEach(function(b, n){
-        b.setAttribute('aria-selected', n === i ? 'true' : 'false');
-        b.tabIndex = n === i ? 0 : -1;
-      });
-      if (focus) buttons[i].focus();
-    }
-
-    // switching tabs deep inside a long list should land on the new list's start,
-    // clear of the sticky nav and the tab bar itself
-    function keepInView(i){
-      const navH = nav ? nav.offsetHeight : 0;
-      const barH = tabs.offsetHeight;
-      const top = groups[i].getBoundingClientRect().top;
-      if (top >= navH + barH) return;
-      window.scrollTo(0, window.pageYOffset + top - navH - barH - 8);
-    }
 
     function measureNav(){
       if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
     }
+    measureNav();
+    window.addEventListener('resize', measureNav);
 
-    function apply(){
-      section.classList.toggle('credits-tabbed', mq.matches);
-      groups.forEach(function(g, n){
-        if (mq.matches){
-          g.setAttribute('role', 'tabpanel');
-          g.setAttribute('aria-labelledby', buttons[n].id);
-          g.tabIndex = 0;
-        } else {
-          g.removeAttribute('role');
-          g.removeAttribute('aria-labelledby');
-          g.removeAttribute('tabindex');
+    if (!map.size || !('IntersectionObserver' in window)) return;
+    function clear(){
+      links.forEach(function(l){ l.classList.remove('current'); l.removeAttribute('aria-current'); });
+      if (summary){ summary.classList.remove('current'); summary.removeAttribute('aria-current'); }
+    }
+    const hero = document.getElementById('top');
+    const obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        if (e.target === hero){ clear(); return; }   // back at the top: nothing is current
+        const a = map.get(e.target);
+        if (!a) return;
+        clear();
+        a.classList.add('current');
+        a.setAttribute('aria-current', 'true');
+        if (summary && a.closest('.nav-group')){
+          summary.classList.add('current');
+          summary.setAttribute('aria-current', 'true');
         }
       });
-      select(active, false);
-    }
-
-    groups[0].parentNode.insertBefore(tabs, groups[0]);
-    measureNav();
-    apply();
-
-    if (mq.addEventListener) mq.addEventListener('change', apply);
-    else if (mq.addListener) mq.addListener(apply);
-    window.addEventListener('resize', measureNav);
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    map.forEach(function(_a, el){ obs.observe(el); });
+    if (hero) obs.observe(hero);
   })();
 
-  // showreel modal
+  // Creative menu: a plain <details>, so it works without this. This adds the
+  // expected closing: Escape, a tap outside, focus moving on, or choosing a link.
   (function(){
-    const openBtn = document.getElementById('reel-float-btn');
+    const group = document.querySelector('.nav-group details');
+    if (!group) return;
+    const summary = group.querySelector('summary');
+    function close(focus){
+      if (!group.open) return;
+      group.open = false;
+      if (focus) summary.focus();
+    }
+    group.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ e.stopPropagation(); close(true); }
+    });
+    document.addEventListener('click', function(e){
+      if (!group.contains(e.target)) close(false);
+    });
+    group.addEventListener('focusout', function(e){
+      if (e.relatedTarget && !group.contains(e.relatedTarget)) close(false);
+    });
+    group.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ close(false); });
+    });
+  })();
+
+  // showreel: a native <dialog>, so focus stays inside and Escape closes it
+  (function(){
+    const openBtn = document.getElementById('reel-open');
     const modal   = document.getElementById('reel-modal');
     const closeBtn= document.getElementById('reel-modal-close');
     const video   = document.getElementById('reel-video');
     const playBtn = document.getElementById('reel-play-btn');
-    if (!openBtn || !modal) return;
-    let lastFocus = null;
+    if (!openBtn || !modal || typeof modal.showModal !== 'function') {
+      if (openBtn) openBtn.hidden = true;
+      return;
+    }
 
     function openReel(){
-      lastFocus = document.activeElement;
-      modal.classList.add('reel-active');
-      modal.setAttribute('aria-hidden', 'false');
+      modal.showModal();
       document.body.style.overflow = 'hidden';
       if (closeBtn) closeBtn.focus();
       if (video && video.readyState >= 1){ video.currentTime = 1; }
@@ -2023,37 +2108,70 @@
       }
     }
 
-    function closeReel(){
-      modal.classList.remove('reel-active');
-      modal.setAttribute('aria-hidden', 'true');
+    // every way out (button, backdrop, Escape) ends here; the dialog returns focus itself
+    modal.addEventListener('close', function(){
       document.body.style.overflow = '';
       if (video){ video.pause(); video.currentTime = 0; }
       if (playBtn) playBtn.classList.remove('hidden');
-      if (lastFocus) lastFocus.focus();
-    }
+    });
 
     openBtn.addEventListener('click', openReel);
-    if (closeBtn) closeBtn.addEventListener('click', closeReel);
+    if (closeBtn) closeBtn.addEventListener('click', function(){ modal.close(); });
     if (playBtn) playBtn.addEventListener('click', function(e){
       e.stopPropagation();
       if (video){ video.play().catch(function(){}); playBtn.classList.add('hidden'); }
     });
     if (video) video.addEventListener('play', function(){ playBtn && playBtn.classList.add('hidden'); });
-    modal.addEventListener('click', function(e){ if (e.target === modal) closeReel(); });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && modal.classList.contains('reel-active')) closeReel();
-    });
+    modal.addEventListener('click', function(e){ if (e.target === modal) modal.close(); });
   })();
 
-  // booking form
+  // enquiry form: checks each field in plain words, then posts to Web3Forms
   (function(){
-    const form    = document.getElementById('booking-form');
+    const form    = document.getElementById('enquiry-form');
     const success = document.getElementById('form-success');
     const status  = document.getElementById('form-status');
     if (!form) return;
+    form.noValidate = true;   // only once this script runs; without it, the browser's own checks apply
+
+    const FALLBACK = 'Please email <a href="mailto:hello@chrisdemetriou.com">hello@chrisdemetriou.com</a> instead.';
+    const checks = [
+      ['cf-admin', function(v){ return v ? '' : 'Tell me a little about the admin.'; }],
+      ['cf-name',  function(v){ return v ? '' : 'Enter your name.'; }],
+      ['cf-email', function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Enter an email address like name@example.com.'; }],
+    ];
+
+    function showError(id, msg){
+      const field = document.getElementById(id);
+      const err = document.getElementById(id + '-err');
+      if (msg){ field.setAttribute('aria-invalid', 'true'); err.textContent = 'Error: ' + msg; err.hidden = false; }
+      else { field.removeAttribute('aria-invalid'); err.textContent = ''; err.hidden = true; }
+    }
+
+    function validate(){
+      let first = null;
+      checks.forEach(function(c){
+        const msg = c[1](document.getElementById(c[0]).value.trim());
+        showError(c[0], msg);
+        if (msg && !first) first = c[0];
+      });
+      return first;
+    }
+
+    // once a field has shown an error, clear it as soon as it's fixed
+    checks.forEach(function(c){
+      document.getElementById(c[0]).addEventListener('input', function(){
+        if (this.getAttribute('aria-invalid') === 'true' && !c[1](this.value.trim())) showError(c[0], '');
+      });
+    });
 
     form.addEventListener('submit', async function(e){
       e.preventDefault();
+      const firstBad = validate();
+      if (firstBad){ document.getElementById(firstBad).focus(); return; }
+
+      const topic = document.getElementById('cf-topic').value;
+      form.querySelector('input[name="subject"]').value = 'New enquiry: ' + topic + ' — chrisdemetriou.com';
+
       const btn = form.querySelector('.btn-submit');
       status.textContent = '';
       btn.disabled = true;
@@ -2068,16 +2186,15 @@
         if (res.ok && data.success === true){
           form.hidden = true;
           success.hidden = false;
-          success.scrollIntoView({ block: 'center' });
+          success.querySelector('h3').focus();
           return;
         }
-        status.textContent = data.message
-          || 'Something went wrong. Please email bookings@chrisdemetriou.com instead.';
+        status.innerHTML = 'That didn&rsquo;t send. ' + FALLBACK;
       } catch (err) {
-        status.textContent = 'Network error. Please email bookings@chrisdemetriou.com instead.';
+        status.innerHTML = 'That didn&rsquo;t send. ' + FALLBACK;
       }
       btn.disabled = false;
-      btn.textContent = 'Send booking enquiry';
+      btn.textContent = 'Send it over';
     });
   })();
 </script>
