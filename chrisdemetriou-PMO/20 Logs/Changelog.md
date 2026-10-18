@@ -11,7 +11,8 @@ updated: 2026-10-18
 > **Back to:** [[00 Dashboard]]
 
 > [!success]+ 🚀 18 Oct 2026 · Labs nav matches the homepage · live
-> - **Released:** Labs by Chris (`npm run release`), after pull request #15 (`616e829`).
+> - **Released:** 19 Oct 2026 by Claude (`npm run release`, build `8e5e062`), checked live: nav and the "Labs" title show, every project link answers.
+> - **Corrected 19 Oct 2026:** the release on 18 Oct didn't go through (Labs stayed on the 17 Oct build, `430a150`), probably because the drive copy was behind GitHub.
 > - **What changed:** Labs shows the homepage's nav: What I do · Work · About · Creative (menu) · Labs · Contact.
 > - **Note:** Labs allows no scripts, so its Creative menu doesn't close on an outside tap.
 
