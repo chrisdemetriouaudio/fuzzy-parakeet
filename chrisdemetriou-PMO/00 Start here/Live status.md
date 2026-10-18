@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-18
-changed: 18 Oct 2026, 23:48 (UK time)
+changed: 18 Oct 2026, 23:49 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,19 +9,20 @@ changed: 18 Oct 2026, 23:48 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 2
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `b151722` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `2001e2c` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
+- 👉 **#16 Finish the hero line: "take the admin off your hands"**: opened 18 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
@@ -35,4 +36,3 @@ changed: 18 Oct 2026, 23:48 (UK time)
 - 18 Oct 2026 · `de0165d` · Lead search results with tech: web developer, automation, Manchester
 - 18 Oct 2026 · `e8811d8` · docs(pmo): contact form order and Genesis card copy released (PR #11, Labs 430a150)
 - 18 Oct 2026 · `8e2f2ee` · Contact form asks for email after name; Genesis card says it's live
-- 17 Oct 2026 · `b153309` · docs(pmo): Labs 81efc43 released (CDCS card payment)
