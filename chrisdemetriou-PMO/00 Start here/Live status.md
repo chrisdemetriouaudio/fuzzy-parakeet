@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-18
-changed: 18 Oct 2026, 23:49 (UK time)
+changed: 19 Oct 2026, 00:31 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,8 +16,8 @@ changed: 18 Oct 2026, 23:49 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `2001e2c` (GitHub Pages: building) |
-| labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
+| chrisdemetriou.com | ✅ 200 | main `5b55dfa` (GitHub Pages: building) |
+| labs.chrisdemetriou.com | ✅ 200 | `8e5e062`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
@@ -27,6 +27,7 @@ changed: 18 Oct 2026, 23:49 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 19 Oct 2026 · `5b55dfa` · docs(pmo): Labs nav actually released 19 Oct 2026 (8e5e062); the 18 Oct release hadn't gone through
 - 18 Oct 2026 · `b151722` · docs(pmo): Labs released with the homepage's nav (PR #15)
 - 18 Oct 2026 · `8048080` · Labs: same nav as chrisdemetriou.com, Creative menu included
 - 18 Oct 2026 · `66c4666` · docs(pmo): homepage rebuilt tech-first is live (PR #13, #14)
