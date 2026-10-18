@@ -9,6 +9,15 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 18 Oct 2026 · Homepage rebuilt tech-first (copy + UX agents)
+> - **Decided:** order is Hero → What I do → Work → About → Creative beginnings → Contact.
+> - **Decided:** Music, Media and Worship sit under one nav menu, **Creative**, and stay on the homepage.
+> - **Decided:** nav says **Labs**, not Tech, here and on labs.chrisdemetriou.com.
+> - **Decided:** public address is **hello@chrisdemetriou.com**; Representation block dropped.
+> - **Decided:** support is an **optional monthly plan**; no open-ended "fix anything" promise; no "sales calls" line.
+> - **Decided:** Reach Children Uganda described neutrally; "you own it" left out for now; button says "Send it over".
+> - **Why:** tech is the income; music and media are the roots that make the work different.
+
 > [!question]- 18 Oct 2026 · Tech leads the site; music and media are the roots
 > - **Decided:** chrisdemetriou.com leads with tech, aimed at small businesses and charities, Manchester first, UK-wide remote.
 > - **Decided:** label "Web Developer" (it gets searched); pitch is automation and admin tools.
