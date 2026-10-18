@@ -1,0 +1,28 @@
+# ============================================================================
+# The CEO agent, phase 1. Runs on this Mac only: no routes, no workers.dev
+# address, and the Worker refuses any request that isn't from localhost.
+#   First time:  npm install
+#   Run:         npm run dev        (http://127.0.0.1:8797)
+#   Live Claude: put ANTHROPIC_API_KEY in .dev.vars (see .dev.vars.example)
+# ============================================================================
+name = "ceo-agent"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+# The job board. Local only for now, so the id is a placeholder.
+[[d1_databases]]
+binding = "DB"
+database_name = "ceo-jobs"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# One JobRunner per job: runs its steps and holds Chris's answers.
+[[durable_objects.bindings]]
+name = "JOB_RUNNER"
+class_name = "JobRunner"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["JobRunner"]

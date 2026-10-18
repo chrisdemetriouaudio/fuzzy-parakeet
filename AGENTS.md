@@ -4,6 +4,7 @@ This repo is chrisdemetriou.com (GitHub Pages, published from `main`), plus two 
 
 - `labs/`: labs.chrisdemetriou.com, the site's TECH page. A Cloudflare Worker (`demo-hub`) that lists every project, wherever its code lives.
 - `chrisdemetriou-PMO/`: the Obsidian project notes (PMO). This is the live to-do list and history.
+- `agents/`: the CEO agent (`agents/ceo/`) and one folder per department (`agents/<role>/`). Phase 1 runs on Chris's Mac only. Design: `agents/ceo/DESIGN.md`.
 
 ## The PMO (chrisdemetriou-PMO)
 
@@ -28,3 +29,10 @@ Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or tw
 - **Release:** `npm run release` in `labs/`, from `main` only. Never `wrangler deploy` on its own. It builds, deploys, stamps `/version.json` and smoke-tests every project link.
 - Labs keeps chrisdemetriou.com's look: same masthead, nav bar (TECH highlighted), fonts and colours. TECH opens Labs in the same tab; every live project opens in a new window.
 - **People don't scroll.** The overview (`/`) must show every project's card in the first screen where possible: compact cards, one row of filters (at most 8). Detail belongs on the project page (`/<slug>/`), never on the overview.
+
+## Agents (agents/)
+
+- **One folder per role:** `agents/ceo/` holds the router, job board and dashboard; each department is `agents/<role>/agent.ts`.
+- **Gates are the rule:** a department may only ask to send, deploy, sign or spend. Chris says yes on the dashboard. Never wire an outward action without his say-so.
+- **Before a pull request:** `npm run check` in `agents/ceo/` (typecheck, tests, deploy dry-run), plus `npm run smoke` against `npm run dev`.
+- **Phase 1 is local only:** never deploy it. `npm run deploy` refuses on purpose.
