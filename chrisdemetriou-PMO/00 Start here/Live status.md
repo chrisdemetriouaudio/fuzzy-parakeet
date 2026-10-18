@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-18
-changed: 18 Oct 2026, 22:54 (UK time)
+changed: 18 Oct 2026, 22:57 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,19 +9,20 @@ changed: 18 Oct 2026, 22:54 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 2
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `10e591b` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `805f09d` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
+- 👉 **#13 Lead search results with tech: web developer, automation, Manchester**: opened 18 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
@@ -34,4 +35,3 @@ changed: 18 Oct 2026, 22:54 (UK time)
 - 17 Oct 2026 · `803bc32` · Labs: proper phone and narrow-window layout
 - 17 Oct 2026 · `280eefa` · docs(pmo): CDCS card shows the demo (852a5df)
 - 17 Oct 2026 · `5ad3b67` · Labs: CDCS card shows the demo (C D Construction Services, watermark)
-- 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
