@@ -33,13 +33,14 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const NEW_WINDOW = `target="_blank" rel="noopener"`;
 const NEW_WINDOW_SR = `<span class="sr"> (opens in a new window)</span>`;
 
-// chrisdemetriou.com's nav, in its order; LABS is this site. Creative (music, media,
-// worship) is a menu there; here it is one link to that part of the homepage.
+// chrisdemetriou.com's nav, item for item; LABS is this site. A [label, [...items]]
+// entry is the Creative menu: a native <details>, so it works with no script
+// (Labs' CSP allows none).
 const NAV = [
   ["What I do", `${MAIN}/#help`],
   ["Work", `${MAIN}/#work`],
   ["About", `${MAIN}/#about`],
-  ["Creative", `${MAIN}/#creative`],
+  ["Creative", [["Music", `${MAIN}/#music`], ["Media", `${MAIN}/#media`], ["Worship", `${MAIN}/#worship`]]],
   ["Labs", "/"],
   ["Contact", `${MAIN}/#contact`],
 ];
@@ -191,9 +192,19 @@ function renderArchitecture(p) {
         </section>`;
 }
 
-const navHtml = () => NAV.map(([label, href]) => href === "/"
-  ? `      <li><a class="current" href="/" aria-current="page">${label}</a></li>`
-  : `      <li><a href="${href}">${label}</a></li>`).join("\n");
+const navHtml = () => NAV.map(([label, href]) => {
+  if (Array.isArray(href)) return `      <li class="nav-group">
+        <details>
+          <summary>${label}</summary>
+          <ul>
+${href.map(([l, h]) => `            <li><a href="${h}">${l}</a></li>`).join("\n")}
+          </ul>
+        </details>
+      </li>`;
+  if (href === "/") return `      <li><a class="current" href="/" aria-current="page">${label}</a></li>`;
+  const cls = label === "What I do" ? ` class="nav-help"` : "";
+  return `      <li${cls}><a href="${href}">${label}</a></li>`;
+}).join("\n");
 const slugify = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const primaryLanguage = (p) => (p.languages && p.languages[0]) || null;
 const langDot = (l) => `<svg class="dot" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="4" fill="${l.colour}"/></svg>`;
