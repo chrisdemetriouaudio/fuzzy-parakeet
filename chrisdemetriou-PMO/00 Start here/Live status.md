@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-18
-changed: 18 Oct 2026, 12:43 (UK time)
+changed: 18 Oct 2026, 15:51 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 18 Oct 2026, 12:43 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `9483411` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `2b92da7` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 18 Oct 2026, 12:43 (UK time)
 - 17 Oct 2026 · `280eefa` · docs(pmo): CDCS card shows the demo (852a5df)
 - 17 Oct 2026 · `5ad3b67` · Labs: CDCS card shows the demo (C D Construction Services, watermark)
 - 17 Oct 2026 · `dcda5f6` · docs(pmo): CDCS Contracts live on Labs (cc64de0)
-- 17 Oct 2026 · `02d208b` · docs(pmo): CDCS Contracts added to Labs (PR #7, in review)
