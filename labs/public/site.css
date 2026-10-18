@@ -35,7 +35,24 @@ a:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:
 .section-nav a{display:inline-block;padding:13px 0;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;border-bottom:2px solid transparent;transition:color .15s ease,border-color .15s ease}
 .section-nav a:hover{color:var(--ink)}
 .section-nav a.current{color:var(--amber);border-bottom-color:var(--amber)}
-@media (max-width:520px){.section-nav ul{gap:0 18px}}
+/* Creative menu: same as chrisdemetriou.com (a native <details>, no script) */
+.section-nav summary{display:inline-flex;align-items:center;gap:6px;padding:13px 0;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);border-bottom:2px solid transparent;cursor:pointer;list-style:none}
+.section-nav summary::-webkit-details-marker{display:none}
+.section-nav summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s ease}
+.section-nav details[open] summary::after{transform:translateY(1px) rotate(-135deg)}
+.section-nav summary:hover{color:var(--ink)}
+.section-nav summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+.nav-group{position:relative}
+.nav-group ul{position:absolute;top:100%;left:-16px;z-index:600;display:block;min-width:180px;margin:0;padding:6px 0;list-style:none;background:var(--bg-panel);border:1px solid var(--line-strong)}
+.nav-group ul a{display:flex;align-items:center;min-height:44px;padding:0 16px;border-bottom:0}
+@media (max-width:720px){
+  .section-nav ul{gap:0 18px;flex-wrap:nowrap}
+  .section-nav .nav-help{display:none}
+  .section-nav a,.section-nav summary{font-size:11px;letter-spacing:.1em}
+  .section-nav .container{position:relative}
+  .nav-group{position:static}
+  .nav-group ul{left:0;right:0;min-width:0}
+}
 
 /* ── Header ── */
 .record-header{border-bottom:1px solid var(--line);background:radial-gradient(ellipse 70% 90% at 78% 30%,rgba(232,163,77,.06),transparent 68%)}
@@ -198,13 +215,11 @@ footer{padding:18px 0 26px}
    a single swipeable nav line, larger small print, and thumb-sized tap targets. */
 @media (max-width:640px){
   .pcards{grid-template-columns:1fr}
-  .section-nav ul{flex-wrap:nowrap;overflow-x:auto;gap:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .section-nav ul::-webkit-scrollbar{display:none}
   .section-nav li{flex:none}
 }
 /* Touch screens up to tablet size: readable small print and thumb-sized targets. */
 @media (max-width:900px){
-  .section-nav a{font-size:12px;padding:14px 0}
+  .section-nav a,.section-nav summary{padding:14px 0}
   .wordmark{display:inline-block;padding:8px 0}
   .pcard-tags li{font-size:11.5px;padding:7px 9px}
   .pcard-name a,.repo-name a{display:inline-block;padding:7px 0}
