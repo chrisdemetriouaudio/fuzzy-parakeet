@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-18
-changed: 18 Oct 2026, 23:44 (UK time)
+changed: 18 Oct 2026, 23:48 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 18 Oct 2026, 23:44 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `a0cbf33` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `b151722` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 18 Oct 2026, 23:44 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 18 Oct 2026 · `b151722` · docs(pmo): Labs released with the homepage's nav (PR #15)
 - 18 Oct 2026 · `8048080` · Labs: same nav as chrisdemetriou.com, Creative menu included
 - 18 Oct 2026 · `66c4666` · docs(pmo): homepage rebuilt tech-first is live (PR #13, #14)
 - 18 Oct 2026 · `9be16bd` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
