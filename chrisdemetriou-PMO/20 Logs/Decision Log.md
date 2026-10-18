@@ -9,6 +9,18 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 18 Oct 2026 · Tech leads the site; music and media are the roots
+> - **Decided:** chrisdemetriou.com leads with tech, aimed at small businesses and charities, Manchester first, UK-wide remote.
+> - **Decided:** label "Web Developer" (it gets searched); pitch is automation and admin tools.
+> - **Decided:** AI stays behind the scenes: sell the outcome, name AI only where a tool really uses it.
+> - **Decided:** keep the dark, warm look; copy in first person; main button "Tell me what eats your time".
+> - **Why:** music and media are passion; tech is passion plus income. Old SEO said music only.
+> - **Done first:** search titles, descriptions, share card and Person data updated (step 1). Copy rewrite is step 2.
+
+> [!question]- 18 Oct 2026 · Public CV taken off the site
+> - **Decided:** the CV PDF is not published; it was removed from the site and from `main`'s history.
+> - **Why:** it should not be downloadable by anyone with the link.
+
 > [!question]- 18 Oct 2026 · Genesis is described as a live app, not a demo
 > - **Decided:** the Genesis card leads with "Live, running a real band with zero admin".
 > - **Decided:** the button says "Try it with a demo band", so the sandbox reads as a way in, not the product.

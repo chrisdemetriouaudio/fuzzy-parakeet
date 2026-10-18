@@ -14,6 +14,11 @@ updated: 2026-10-18
 
 - 🔴 **Fix the SoundCloud player error** in `scripts/player.js` (reading `split` of undefined).
 
+## 👉 Next up
+
+- 🛠️ **Rewrite the homepage copy tech-first:** hero, bio and main button. Draft for Chris to check first.
+- 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
+
 ## 💭 Later (ideas, not planned yet)
 
 - 💭 **Add a Software door to chrisdemetriou.com:** "Software" in the form's dropdown, the page title and an offers section.

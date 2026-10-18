@@ -329,7 +329,7 @@ export function renderHome(projects, today = new Date().toISOString().slice(0, 1
   const ld = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Tech · Chris Demetriou",
+    name: "Automation & Web Apps · Chris Demetriou",
     url: `${SITE}/`,
     author: { "@type": "Person", name: "Chris Demetriou", url: `${MAIN}/` },
     hasPart: list.map((p) => ({ "@type": "SoftwareApplication", name: p.title, description: p.description, url: `${SITE}/${p.slug}/`, applicationCategory: "WebApplication", keywords: p.topics.join(", ") })),
@@ -361,7 +361,7 @@ export function renderHome(projects, today = new Date().toISOString().slice(0, 1
       </ul>
     </div>
   </section>`;
-  return page({ title: "Tech · Chris Demetriou", description: "Apps and websites designed, built and run by Chris Demetriou. Each one is live — open it, or see how it's built.", path: "/", ogImage: "img/og-genesis.png", ld, body, today, extraCss: ["/filters.css"] });
+  return page({ title: "Automation & Web Apps · Chris Demetriou, Manchester", description: "Live tools I've built that take the admin off: bookings, chasing, payments. Open any of them, or see how it's built.", path: "/", ogImage: "img/og-genesis.png", ld, body, today, extraCss: ["/filters.css"] });
 }
 
 export function renderProjectPage(p, projects, today = new Date().toISOString().slice(0, 10)) {
