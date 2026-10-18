@@ -9,12 +9,15 @@ updated: 2026-10-18
 > **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
 > **Labs shows 4 projects** on one screen (17 Oct 2026): Genesis, chrisdemetriou.com, R.E.A.CH, CDCS Contracts.
 > **Live status, updated by itself:** [[Live status]]
-> **Checked against the live system:** 18 Oct 2026
+> **Homepage rebuilt tech-first** (18 Oct 2026): web developer first, music and media as the roots.
+> **Checked against the live system:** 18 Oct 2026 (before the rebuild)
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
-- Nothing right now.
+- 👉 **Check the new homepage live** on desktop and phone, and send a test enquiry.
+- 👉 **Release Labs:** `npm run release` in `labs/`, so its nav says Labs.
+- 👉 **Ask Google to re-read the site** in Search Console.
 
 ## 🛠️ For Claude
 

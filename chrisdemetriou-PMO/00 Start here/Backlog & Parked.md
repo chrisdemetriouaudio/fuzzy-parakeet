@@ -16,7 +16,6 @@ updated: 2026-10-18
 
 ## 👉 Next up
 
-- ⏳ **Homepage rebuilt tech-first:** in review as a pull request (18 Oct 2026).
 - 👉 **Release Labs after it merges:** `npm run release` in `labs/` (nav now says Labs).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
