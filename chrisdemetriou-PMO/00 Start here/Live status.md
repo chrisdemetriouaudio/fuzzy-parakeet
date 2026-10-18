@@ -16,7 +16,7 @@ changed: 18 Oct 2026, 23:36 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `66c4666` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `b1ec9c1` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `430a150`, released 18 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 18 Oct 2026, 23:36 (UK time)
 - 18 Oct 2026 · `8e2f2ee` · Contact form asks for email after name; Genesis card says it's live
 - 17 Oct 2026 · `b153309` · docs(pmo): Labs 81efc43 released (CDCS card payment)
 - 17 Oct 2026 · `394003f` · Labs: CDCS card shows the Stripe test-mode invoice payment
-- 17 Oct 2026 · `2d8e57a` · docs(pmo): Labs mobile layout live (35507b1)
