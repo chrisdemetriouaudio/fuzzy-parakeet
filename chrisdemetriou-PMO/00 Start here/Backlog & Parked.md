@@ -19,6 +19,11 @@ updated: 2026-10-18
 - 👉 **Add client quotes to the homepage** once Chris has them (between Work and About).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
+## 👉 Next up (Operations Engineer)
+
+- 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
+- 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.
+
 ## 💭 Later (ideas, not planned yet)
 
 - 💭 **Tidy chrisdemetriou.com on phones:** nav wraps onto two lines; 10–11px labels; player track descriptions cut off.

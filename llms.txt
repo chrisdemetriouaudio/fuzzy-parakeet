@@ -1,0 +1,37 @@
+# Chris Demetriou – Operations Engineer, Manchester
+
+> Chris Demetriou is an Operations Engineer based in Manchester, UK, who builds custom internal tools and automated workflows for organisations across the UK. Clients own the code and the hosting accounts outright: no seat licences, no licence fees ("Zero Software Tax").
+
+## Internal Tool Blueprints
+
+- Booking Engine: clients choose an available slot, the organisation approves it from its inbox, and calendar invites are issued automatically.
+- Reminder Pipeline: scheduled email, push and WhatsApp alerts.
+- Chasing Engine: finds who hasn't replied, nudges only them, and confirms once everyone is in.
+- Payment Pipeline: invoices, card payments through Stripe, and each payment verified before the record is marked paid.
+- Client Portal: secure passkey sign-in for clients, members or volunteers.
+- Self-Checking Records: directories and records that re-check themselves on a schedule and flag anything out of date.
+
+## How it works
+
+- Free written workflow audit by email: a one-page map of which steps can be automated. No calls or meetings.
+- Fixed price per agreed scope, written down before any work starts.
+- Handover: code in the client's GitHub, the tool in the client's Cloudflare account, plain-English notes. Optional monthly support plan.
+- Running costs are billed to the client's own accounts at cost, typically from about £4 a month.
+
+## Proof (live tools)
+
+- [Neuro Support Checker](https://neurosupport.labs.chrisdemetriou.com/): a free UK directory of 900 support groups for autism, ADHD, dyslexia and more, re-checked every morning.
+- [Genesis](https://genesis.labs.chrisdemetriou.com/): a scheduling and chasing engine running a working band's diary.
+- [CDCS Contracts](https://cdcscontracts.com/): a demo booking-to-payment pipeline for a trade business (Stripe test mode).
+- [Reach Children Uganda](https://reach-children-uganda.org.uk/): legacy system recovery for a UK children's charity; 154 pages recovered from web archives and rebuilt off WordPress.
+- [Labs](https://labs.chrisdemetriou.com/): build notes for every project.
+
+## Background
+
+- Sixteen years on enterprise systems used by thousands of companies worldwide.
+- Twenty years in professional studios: performer on an Oscar-nominated song (Accidentally In Love, Shrek 2), orchestral arranger on a GRAMMY-nominated single (Seal, Walk On By), assistant engineer on Hans Zimmer's King Arthur soundtrack. Full credits: https://chrisdemetriou.com/creative/
+
+## Contact
+
+- Workflow audit form: https://chrisdemetriou.com/#contact
+- Email: hello@chrisdemetriou.com

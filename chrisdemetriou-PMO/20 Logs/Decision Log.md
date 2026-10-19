@@ -9,6 +9,13 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 19 Oct 2026 · Homepage: the deck plus the best of both sessions
+> - **Decided by Chris:** two sessions had conflicting decisions; the Operations Engineer deck wins, with the best of the other session kept.
+> - **Kept from the deck:** Operations Engineer; clients own code and accounts; free written audit, no calls; fixed price; IDE look.
+> - **Kept from the other session:** `/creative/`; Neuro Support Checker; 16 years on enterprise systems; "Sound familiar?" problems; no "admin" wording.
+> - **Decided:** the Core Four widen to six blueprints (+ Client Portal, Self-Checking Records); "Admin Debt" becomes "repetitive manual work".
+> - **Why:** one direction for the site, without losing real facts.
+
 > [!question]- 19 Oct 2026 · Music, Media and Worship move to their own page
 > - **Decided by Chris:** the homepage is for buyers; Music, Media and Worship move to `/creative/`.
 > - **Decided:** the Creative menu links there; old links like `/#music` forward to it.

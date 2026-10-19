@@ -183,7 +183,7 @@
     "name": "chrisdemetriou.com",
     "title": "chrisdemetriou.com",
     "status": "Live",
-    "description": "My music portfolio — credits, showreel and bookings. Hand-built with no framework, a custom audio player and consent-first embeds.",
+    "description": "This site: hand-built in plain HTML, CSS and JavaScript, no framework, with structured data for search and AI engines.",
     "url": "https://chrisdemetriou.com/",
     "image": "img/chrisdemetriou-com.jpg",
     "imageAlt": "chrisdemetriou.com: name, roles and portrait above the bookings details, with the custom audio player along the bottom.",
