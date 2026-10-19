@@ -41,7 +41,7 @@ const NAV = [
   ["What I do", `${MAIN}/#help`],
   ["Work", `${MAIN}/#work`],
   ["About", `${MAIN}/#about`],
-  ["Creative", [["Music", `${MAIN}/#music`], ["Media", `${MAIN}/#media`], ["Worship", `${MAIN}/#worship`]]],
+  ["Creative", [["Music", `${MAIN}/creative/#music`], ["Media", `${MAIN}/creative/#media`], ["Worship", `${MAIN}/creative/#worship`]]],
   ["Labs", "/"],
   ["Contact", `${MAIN}/#contact`],
 ];

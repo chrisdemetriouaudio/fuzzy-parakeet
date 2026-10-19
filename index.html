@@ -49,10 +49,13 @@
   ]
 }
 </script>
+<script>
+  // Music, Media and Worship moved to /creative/ (Oct 2026): old links still land there.
+  (function(){ var id = location.hash.slice(1); if (/^(creative|music|credits|media|worship|cdplayer)$/.test(id)) location.replace('/creative/#' + id); })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles/player.css?v=6">
 <style>
   :root{
     --bg: #121014;
@@ -667,6 +670,7 @@
   }
   .help-grid{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
   .work-grid{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  @media (min-width: 960px){ .work-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
   .help-grid li, .work-card{
     border: 1px solid var(--line);
@@ -681,6 +685,36 @@
     margin: 0 0 6px;
   }
   .help-grid p, .work-card p{ margin: 0; color: var(--ink-muted); line-height: 1.6; }
+  .work-card .work-result{ color: var(--ink); padding-left: 10px; border-left: 2px solid var(--amber); }
+  .work-result strong{ font-weight: 500; color: var(--amber); }
+
+  .pain-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 10px 32px;
+  }
+  .pain-list li{ position: relative; padding-left: 22px; color: var(--ink); font-size: 1.04rem; line-height: 1.5; }
+  .pain-list li::before{ content: "\2013"; position: absolute; left: 0; color: var(--amber); }
+  .help-sub{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 44px 0 10px;
+  }
+
+  .faq-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 16px;
+    margin: 0;
+  }
+  .faq-grid > div{ border: 1px solid var(--line); background: var(--bg-panel); padding: 18px 18px 20px; }
+  .faq-grid dt{ font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; color: var(--ink); margin: 0 0 6px; }
+  .faq-grid dd{ margin: 0; color: var(--ink-muted); line-height: 1.6; }
 
   .work-card{ display: flex; flex-direction: column; gap: 10px; }
   .work-card a{
@@ -974,20 +1008,6 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<dialog class="reel-modal" id="reel-modal" aria-label="Showreel">
-  <div class="reel-tv">
-    <div class="reel-tv-header">Chris Demetriou &ndash; Showreel</div>
-    <button class="reel-tv-close" id="reel-modal-close" aria-label="Close">&#10005;</button>
-    <div class="reel-tv-screen">
-      <video id="reel-video" src="/video/chrisdemetriou_musicREEL_FINAL2026.mp4" controls playsinline preload="none" controlsList="nodownload"></video>
-      <button class="reel-play-btn" id="reel-play-btn" aria-label="Play showreel">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        <span class="reel-play-text">Play showreel</span>
-      </button>
-    </div>
-  </div>
-</dialog>
-
 <header class="masthead">
   <div class="container">
     <span class="wordmark">Chris Demetriou</span>
@@ -1005,9 +1025,9 @@
         <details>
           <summary>Creative</summary>
           <ul>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#media">Media</a></li>
-            <li><a href="#worship">Worship</a></li>
+            <li><a href="/creative/#music">Music</a></li>
+            <li><a href="/creative/#media">Media</a></li>
+            <li><a href="/creative/#worship">Worship</a></li>
           </ul>
         </details>
       </li>
@@ -1048,7 +1068,16 @@
 
   <section class="band" id="help">
     <div class="container">
-      <h2 class="band-title">What I can build for you</h2>
+      <h2 class="band-title">Sound familiar?</h2>
+      <ul class="pain-list">
+        <li>You answer the same booking emails every evening.</li>
+        <li>People forget appointments, and the slot goes to waste.</li>
+        <li>You chase customers, members or volunteers who never reply.</li>
+        <li>Invoices go out late, and get paid even later.</li>
+        <li>Your information lives in five spreadsheets that never agree.</li>
+        <li>You pay every month for software that doesn&rsquo;t quite fit.</li>
+      </ul>
+      <h3 class="help-sub">What I can build for you</h3>
       <p class="band-intro">Apps that handle the jobs that come back every week, so your team can get on with the work that matters.</p>
       <ul class="help-grid">
         <li><h3>Online booking</h3><p>Customers book and pay any time, day or night. No back-and-forth, no double bookings.</p></li>
@@ -1068,20 +1097,30 @@
       <ul class="work-grid">
         <li class="work-card">
           <p class="work-tag">Live</p>
+          <h3>Neuro Support Checker</h3>
+          <p>A free UK directory of 900 support groups for autism, ADHD, dyslexia and more.</p>
+          <p class="work-result"><strong>Result:</strong> every group is checked each morning, so families aren&rsquo;t sent to one that&rsquo;s closed.</p>
+          <a href="https://neurosupport.labs.chrisdemetriou.com/" target="_blank" rel="noopener">Open the directory <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
+        </li>
+        <li class="work-card">
+          <p class="work-tag">Live</p>
           <h3>Genesis</h3>
-          <p>Runs a real band&rsquo;s diary. It finds a date everyone can make, chases anyone who hasn&rsquo;t replied, then confirms the date.</p>
+          <p>Runs a real band&rsquo;s diary: finds a date everyone can make, chases replies, then confirms.</p>
+          <p class="work-result"><strong>Result:</strong> rehearsals get booked without anyone chasing.</p>
           <a href="https://genesis.labs.chrisdemetriou.com/" target="_blank" rel="noopener">Try Genesis with a demo band <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
         </li>
         <li class="work-card">
           <p class="work-tag work-tag--demo">Demo</p>
           <h3>CDCS Contracts</h3>
-          <p>A demo trade-support business. Firms book dates online and get approval by email, then pay the invoice by card (Stripe test mode).</p>
+          <p>A demo trade-support business. Firms book dates online, get approval by email, then pay by card (Stripe test mode).</p>
+          <p class="work-result"><strong>Result:</strong> the whole journey, from booking to paid invoice, in one place.</p>
           <a href="https://cdcscontracts.com/" target="_blank" rel="noopener">Try the CDCS demo <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
         </li>
         <li class="work-card">
           <p class="work-tag">Live</p>
           <h3>Reach Children Uganda</h3>
-          <p>A UK children&rsquo;s charity. I recovered its WordPress site from web archives and rebuilt it to load fast and cost nothing to host.</p>
+          <p>A UK children&rsquo;s charity. I recovered its WordPress site from web archives and rebuilt it from scratch.</p>
+          <p class="work-result"><strong>Result:</strong> free to host, and quick to load.</p>
           <a href="https://reach-children-uganda.org.uk/" target="_blank" rel="noopener">Visit the charity&rsquo;s site <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
         </li>
       </ul>
@@ -1107,660 +1146,33 @@
           and get the detail right. Sixteen years on enterprise systems used by thousands of companies
           worldwide taught me to test everything before it goes live, and to keep it running when it matters.
           I bring both to every project, and build apps that are simple to use and cheap to run.
-          I still make music in my spare time, too.
+          I still make music in my spare time: <a class="text-link" href="/creative/">see my creative work</a>.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="band" id="creative">
+  <section class="band" id="questions">
     <div class="container">
-      <h2 class="band-title">Creative beginnings</h2>
-      <p class="band-intro">
-        Before I built tools, I spent 20 years in studios, on stage and on air. Tight
-        deadlines, fine detail, people counting on you. It&rsquo;s still how I work.
-      </p>
-
-      <div class="creative-block" id="music">
-        <span id="credits"></span>
-        <h3 class="creative-title">Music</h3>
-        <div class="prose">
-          <p>
-            I&rsquo;ve performed, arranged and engineered on releases through DreamWorks, Warner
-            Bros, Sony Pictures, Working Title and Jerry Bruckheimer Films. I&rsquo;ve worked in
-            rooms shaped by <strong>Hans Zimmer and Trevor Horn</strong>, and on sessions at SARM Studios.
-          </p>
+      <h2 class="band-title">Good to know</h2>
+      <dl class="faq-grid">
+        <div>
+          <dt>What does it cost?</dt>
+          <dd>It depends on what you need, so you&rsquo;ll get a clear price before I build anything. Running costs stay low: several of my apps run on free hosting.</dd>
         </div>
-        <p><button type="button" class="btn-inline" id="reel-open">Watch the showreel</button></p>
-
-        <div class="legend">
-<span><b class="tag PR" data-role="Producer">PR</b> Producer</span>
-<span><b class="tag M" data-role="Mixer">M</b> Mixer</span>
-<span><b class="tag PTE" data-role="Pro Tools Engineer">PTE</b> Pro Tools Eng</span>
-<span><b class="tag AE" data-role="Assistant Engineer">AE</b> Asst Eng</span><br>
-<span><b class="tag P" data-role="Performer">P</b> Performer</span>
-<span><b class="tag OA" data-role="Orchestral Arranger">OA</b> Arranger</span>
-<span><b class="tag C" data-role="Composer">C</b> Composer</span>
-<span><b class="tag T" data-role="Transcription">T</b> Transcription</span>
-</div>
-
-        <div class="credit-group">
-          <h4>Selected credits</h4>
-          <div class="table-responsive">
-
-<table class="data-table">
-
-<thead>
-<tr>
-<th>Project</th>
-<th>Label/Studio</th>
-<th>Role</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr class="row-highlight">
-<td data-label="Project">Counting Crows – Accidentally In Love – Shrek 2 (OST)</td>
-<td data-label="Label/Studio">DreamWorks Records &middot; Feature Film OST<span class="award-badge">⭐ Oscar Nominated</span></td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-<tr class="row-highlight">
-<td data-label="Project">Seal – Walk On By</td>
-<td data-label="Label/Studio">Warner Bros Records &middot; Single <span class="award-badge">⭐ GRAMMY Nominated</span></td>
-<td data-label="Role"><span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr>
-<td data-label="Project">Hans Zimmer – King Arthur – Moya Brennan</td>
-<td data-label="Label/Studio">DreamWorks &middot; Feature Film OST</td>
-<td data-label="Role"><span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Project">Elton John – Mona Lisa Smile</td>
-<td data-label="Label/Studio">Sony Pictures &middot; Feature Film OST</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Project">Coyote Ugly (Director&rsquo;s Cut)</td>
-<td data-label="Label/Studio">Jerry Bruckheimer Films &middot; Feature Film OST</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Project">Sugababes – Overload – Bridget Jones: The Edge Of Reason (OST)</td>
-<td data-label="Label/Studio">Working Title Films</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-</tbody>
-
-</table>
-</div>
+        <div>
+          <dt>Do I need to be technical?</dt>
+          <dd>No. Tell me the problem in your own words, and I&rsquo;ll explain every step in plain English.</dd>
         </div>
-
-        <details class="more">
-          <summary>Show all studio credits (26)</summary>
-          <div class="credit-group">
-            <h4>Studio production</h4>
-            <div class="table-responsive">
-
-<table class="data-table">
-
-<thead>
-<tr>
-<th>Artist / Project</th>
-<th>Notes</th>
-<th>Role</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td data-label="Artist / Project">Counting Crows – Shrek 2 (OST)</td>
-<td data-label="Notes">Accidentally In Love &mdash; Violin</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Elton John / Macy Gray – Mona Lisa Smile (OST)</td>
-<td data-label="Notes">In The Heart Of Every Girl / Santa Baby</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Coyote Ugly (Director&rsquo;s Cut) (OST)</td>
-<td data-label="Notes">&mdash;</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Hans Zimmer – King Arthur (OST)</td>
-<td data-label="Notes">End credits song, feat. Moya Brennan</td>
-<td data-label="Role"><span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Seal – Seal IV (Album)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Seal – Walk On By (Single)</td>
-<td data-label="Notes">GRAMMY Nominated</td>
-<td data-label="Role"><span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Robbie Williams / Kylie Minogue – The Magic Roundabout (OST)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">SugaBabes – Bridget Jones Diary (OST)</td>
-<td data-label="Notes">Freak Like Me</td>
-<td data-label="Role"><span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Olympics 2004 – The Olympic Torch Theme (Single)</td>
-<td data-label="Notes">Pass The Flame</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag PTE" data-role="Pro Tools Engineer">PTE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Enrique Iglesias feat. Kelis – Not In Love (Single)</td>
-<td data-label="Notes">Not In Love</td>
-<td data-label="Role"><span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Beth Orton – Daybreaker (EP)</td>
-<td data-label="Notes">Concrete Sky</td>
-<td data-label="Role"><span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Lisa Stansfield – The Moment (Album)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag AE" data-role="Assistant Engineer">AE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Chris Demetriou / Cavendish Music – Celtic Music (Library)</td>
-<td data-label="Notes">Amazon Prime: The London Underground Killer</td>
-<td data-label="Role"><span class="tag PR" data-role="Producer">PR</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Raintown Seers – Love, Lost, Home (Album)</td>
-<td data-label="Notes">&mdash;</td>
-<td data-label="Role"><span class="tag PR" data-role="Producer">PR</span> <span class="tag M" data-role="Mixer">M</span> <span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Raintown Seers – Start A Fire (Album)</td>
-<td data-label="Notes">&mdash;</td>
-<td data-label="Role"><span class="tag PR" data-role="Producer">PR</span> <span class="tag M" data-role="Mixer">M</span> <span class="tag PTE" data-role="Pro Tools Engineer">PTE</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Track Dogs – Where To Now? (Album)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Panza – Infanticidio (Single)</td>
-<td data-label="Notes">Sado</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Endless Shame – Generation Blind (Single)</td>
-<td data-label="Notes">Erase The Beautiful</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Jessicas Ghost – Losing Track of Time (Album)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span> <span class="tag PTE" data-role="Pro Tools Engineer">PTE</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Backwoods Creek – It's About Time (EP)</td>
-<td data-label="Notes">Various</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Steve Young – The Great North Road (EP)</td>
-<td data-label="Notes">Trembling Heart</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Donna Marie Songs – Shelter (Single)</td>
-<td data-label="Notes">Shelter</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Máiréad, Johnny Brady – If You Loved Me Once (Single)</td>
-<td data-label="Notes">&mdash;</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Linen Ray – On The Mend (Single)</td>
-<td data-label="Notes">Apple Of My Eye</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span> <span class="tag OA" data-role="Orchestral Arranger">OA</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Lazlo Baby – Together For Ukraine (Single)</td>
-<td data-label="Notes">Shche Sto Hram</td>
-<td data-label="Role"><span class="tag M" data-role="Mixer">M</span></td>
-</tr>
-
-<tr class="reveal-row">
-<td data-label="Artist / Project">Rachel Adedeji (X Factor) / Phil Ramacon – X Factor</td>
-<td data-label="Notes">String Session</td>
-<td data-label="Role"><span class="tag P" data-role="Performer">P</span></td>
-</tr>
-
-</tbody>
-
-</table>
-</div>
-          </div>
-        </details>
-
-        <details class="more">
-          <summary>Show all live credits (14)</summary>
-          <div class="credit-group">
-            <h4>Live performance</h4>
-            <div class="table-responsive">
-
-<table class="data-table">
-
-<thead>
-<tr>
-<th>Artist</th>
-<th>Venue</th>
-<th>Location</th>
-</tr>
-</thead>
-
-<tbody>
-
-<!-- Group: Tour Support -->
-<tr class="group-header">
-<td colspan="3">Tour support</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Sharon Corr</td>
-<td data-label="Venue">O2 Academy</td>
-<td data-label="Location">Liverpool, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Jenn Bostic</td>
-<td data-label="Venue">Band On The Wall</td>
-<td data-label="Location">Manchester, UK</td>
-</tr>
-
-
-<!-- Group: Corporate -->
-<tr class="group-header">
-<td colspan="3">Corporate</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Paloma Faith</td>
-<td data-label="Venue">TalkTalk Corporate</td>
-<td data-label="Location">UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Pixie Lott</td>
-<td data-label="Venue">TalkTalk Corporate</td>
-<td data-label="Location">UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Tinchy Stryder</td>
-<td data-label="Venue">TalkTalk Corporate</td>
-<td data-label="Location">UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Noisettes</td>
-<td data-label="Venue">TalkTalk Corporate</td>
-<td data-label="Location">UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Guillemots</td>
-<td data-label="Venue">TalkTalk Corporate</td>
-<td data-label="Location">UK</td>
-</tr>
-
-
-<!-- Group: Festival -->
-<tr class="group-header">
-<td colspan="3">Festival</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Track Dogs</td>
-<td data-label="Venue">Shrewsbury Folk Festival</td>
-<td data-label="Location">Shrewsbury, UK</td>
-</tr>
-
-
-<!-- Group: Venue Shows -->
-<tr class="group-header">
-<td colspan="3">Venue shows</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Bastille</td>
-<td data-label="Venue">Mojo Bar</td>
-<td data-label="Location">Liverpool, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">James Walsh (Starsailor)</td>
-<td data-label="Venue">Zanzibar</td>
-<td data-label="Location">Liverpool, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Marcella Detroit (Shakespears Sister)</td>
-<td data-label="Venue">The Stables</td>
-<td data-label="Location">Milton Keynes, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">John Smith</td>
-<td data-label="Venue">Epstein Theatre</td>
-<td data-label="Location">Liverpool, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Rachel Sage</td>
-<td data-label="Venue">Jabez Clegg</td>
-<td data-label="Location">Manchester, UK</td>
-</tr>
-
-<tr>
-<td data-label="Artist / Project">Moulettes</td>
-<td data-label="Venue">Various</td>
-<td data-label="Location">York, UK</td>
-</tr>
-
-</tbody>
-
-</table>
-</div>
-          </div>
-        </details>
-      </div>
-
-      <div class="creative-block" id="media">
-        <h3 class="creative-title">Media</h3>
-        <div class="prose">
-          <p>
-            I produce <strong>radio imaging, sonic branding and podcasts</strong>: from idents
-            and jingles for a national radio station to full podcast production.
-          </p>
-          <p class="media-note">The On Air tab is commissioned broadcast work. Everything else is
-          my own: written to a brief and produced to the same standard.</p>
+        <div>
+          <dt>Is our data safe?</dt>
+          <dd>Apps use encrypted connections and secure sign-in, and collect only what they need. Before we start, I&rsquo;ll tell you where your data is stored.</dd>
         </div>
-
-      <div class="embed-hold media-hold" id="sc-hold">
-        <p>The showreel player streams from SoundCloud, which sets cookies on your device before it will play.</p>
-        <button type="button" class="btn-inline" id="sc-load">Load the showreel player</button>
-        <a href="https://soundcloud.com/chrisdemetrioumusic" target="_blank" rel="noopener">Listen on SoundCloud &#8599;</a>
-      </div>
-
-               <!-- Custom SoundCloud Player -->
-               <div class="cdplayer" id="cdplayer" aria-label="Audio showreel player">
-
-                  <!-- Hidden wrapper — iframe must render for Widget API to work; display:none breaks SC Widget API -->
-                  <div id="sc-iframe-wrap" style="position:absolute;left:-9999px;top:0;width:300px;height:166px;opacity:0;pointer-events:none;">
-
-
-                     <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-                        data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2112905759&color=%23eeff00&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
-                     </iframe>
-
-                     <iframe id="sc-widget-onair" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-                        data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content/s-Ou4a5qsDEdL&color=%23eeff00&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
-                     </iframe>
-
-                  </div>
-
-                  <!-- Now Playing header -->
-                  <div class="cdp-stage">
-                     <div class="cdp-artwork" id="cdp-artwork">
-                        <img id="cdp-artwork-img" src="" alt="" style="position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:cover;border-radius:8px;display:none;z-index:1;">
-                        <div class="cdp-artwork-inner" style="position:relative;z-index:2;">
-                           <div class="cdp-eq" id="cdp-eq">
-                              <span></span><span></span><span></span><span></span><span></span>
-                              <span></span><span></span><span></span><span></span><span></span>
-                              <span></span><span></span><span></span><span></span><span></span>
-                              <span></span><span></span><span></span><span></span><span></span>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="cdp-meta">
-                        <div class="cdp-label">NOW PLAYING</div>
-                        <div class="cdp-title" id="cdp-title">Select a track to begin</div>
-                        <div class="cdp-artist">Chris Demetriou</div>
-                        <div class="cdp-track-count" id="cdp-track-count"></div>
-                     </div>
-                  </div>
-
-                  <!-- Waveform (replaces progress bar) -->
-                  <div class="cdp-waveform-wrap" id="cdp-waveform-wrap">
-                     <canvas id="cdp-waveform"></canvas>
-                     <div class="cdp-waveform-time">
-                        <span id="cdp-current">0:00</span>
-                        <span class="cdp-time-sep"> / </span>
-                        <span id="cdp-duration">0:00</span>
-                     </div>
-                  </div>
-
-                  <!-- Controls -->
-                  <div class="cdp-controls">
-
-                     <button class="cdp-btn cdp-btn--sm" id="cdp-prev" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                     </button>
-
-                     <div class="cdp-play-ring-wrap">
-                        <svg class="cdp-progress-ring" viewBox="0 0 56 56" aria-hidden="true">
-                           <circle class="cdp-ring-track" cx="28" cy="28" r="26"/>
-                           <circle class="cdp-ring-fill" id="cdp-ring-fill" cx="28" cy="28" r="26"/>
-                        </svg>
-                        <button class="cdp-btn cdp-btn--lg" id="cdp-play" aria-label="Play/Pause">
-                           <svg class="cdp-icon-play" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M8 5v14l11-7z"/>
-                           </svg>
-                           <svg class="cdp-icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none">
-                              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                           </svg>
-                        </button>
-                     </div>
-
-                     <button class="cdp-btn cdp-btn--sm" id="cdp-next" aria-label="Next">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M6 18l8.5-6L6 6v12zm2.5-6l5.5 3.91V8.09L8.5 12zM16 6h2v12h-2z"/>
-                        </svg>
-                     </button>
-
-                     <input
-                        type="range"
-                        id="cdp-volume"
-                        min="0"
-                        max="100"
-                        step="1"
-                        value="100"
-                     >
-
-                  </div>
-                      <div class="cdp-tabs" id="cdp-tabs">
-                        <div class="cdp-tab active" data-tab="commercial">Commercial</div>
-                        <div class="cdp-tab" data-tab="on-air">On Air</div>
-                        <div class="cdp-tab" data-tab="podcast">Podcast</div>
-                        <div class="cdp-tab" data-tab="drama">Drama</div>
-                        <div class="cdp-tab" data-tab="comedy">Comedy</div>
-                        <div class="cdp-tab" data-tab="voice">Voice &amp; Links</div>
-                      </div>
-                  <!-- Tracklist -->
-                  <div class="cdp-tracklist" id="cdp-tracklist">
-                     <div class="cdp-tracklist-loading">Loading tracks…</div>
-                  </div>
-
-                  <div class="cdp-footer">
-
-                  <div class="cdp-footer-left">
-
-                  <!-- <span class="cdp-footer-brand">CDAUDIO PLAYER</span> -->
-
-                  <div class="cdp-footer-bars">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  </div>
-
-                  </div>
-
-                  <div class="cdp-footer-right">
-
-                  <span class="cdp-powered">Developed using
-
-                  <img
-                  src="https://cdn.prod.website-files.com/62a0a0168756b795debc65bc/68632537191e7a5a13a365c5_03-tertiary-stacked-white-transparent.png"
-                  alt="SoundCloud"
-                  class="cdp-soundcloud-logo"></span>
-
-                  </div>
-
-                  </div>
-               </div><!-- /cdplayer -->
-
-        <h4 class="media-sub">Broadcast &amp; brand audio</h4>
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr><th>Client / Organisation</th><th>Output</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Client"><a class="media-link" href="https://gaydio.co.uk" target="_blank" rel="noopener">Gaydio &middot; Breakfast Show</a></td>
-              <td data-label="Output"><strong>Broadcast imaging &amp; podcast production</strong> &middot; Imaging, interview editing and podcast production for a national radio station</td>
-            </tr>
-            <tr>
-              <td data-label="Client"><a class="media-link" href="https://gaydio.co.uk" target="_blank" rel="noopener">Gaydio Academy</a></td>
-              <td data-label="Output"><strong>Podcast editor &amp; mixer</strong> &middot; Audio and video podcast production: editing, clean-up, mixing and delivery ready to publish &middot; Video editing for web and social media</td>
-            </tr>
-            <tr>
-              <td data-label="Client"><a class="media-link" href="https://linktr.ee/thatllbethetism" target="_blank" rel="noopener">That&rsquo;ll Be The Tism Podcast</a></td>
-              <td data-label="Output"><strong>Sonic branding &amp; audio imaging</strong> &middot; Full audio package (intro, stings, beds, idents and segment markers), delivered and in use on the show</td>
-            </tr>
-            <tr>
-              <td data-label="Client">Bauer Media Group (submission)</td>
-              <td data-label="Output"><strong>Audio post-production</strong> &middot; News-read demo produced to broadcast standard: editing, audio restoration and final mix</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-        <h4 class="media-sub">Industry feedback</h4>
-        <div class="quote-grid">
-        <blockquote class="verse quote-lead">
-          <p>&ldquo;You&rsquo;ve got the ear.&rdquo;</p>
-          <cite>Former BBC Radio Managing Editor &middot; Sony Gold Award winner</cite>
-        </blockquote>
-        <blockquote class="verse">
-          <p>&ldquo;After completing one of our courses, Chris returned to volunteer with us and quickly became a real asset to the team. He&rsquo;s consistently reliable, always arrives early, and does an outstanding job with audio editing to a very high standard. On top of that, he&rsquo;s a genuinely lovely person who fits in brilliantly with the team and is a pleasure to work with.&rdquo;</p>
-          <cite>Lee Barnes &middot; Presenter &amp; Senior Academy Lead &middot; Gaydio</cite>
-        </blockquote>
+        <div>
+          <dt>What if you&rsquo;re not around?</dt>
+          <dd>Every project comes with plain-English notes on how it works and how to run it, so nothing lives only in my head.</dd>
         </div>
-        <details class="more">
-          <summary>More feedback (3)</summary>
-          <div class="quote-grid">
-          <blockquote class="verse">
-          <p>&ldquo;Just started listening to your podcast &mdash; what a professional job. Great topic, great name and a really polished sound. So impressed.&rdquo;</p>
-          <cite>BBC Radio broadcaster &middot; Sony Award-winning presenter</cite>
-        </blockquote>
-          <blockquote class="verse">
-          <p>&ldquo;You&rsquo;ve definitely got a good ear for picking out great audio.&rdquo;</p>
-          <cite>Producer &middot; Gaydio Breakfast with Dave Cooper</cite>
-        </blockquote>
-          <blockquote class="verse">
-          <p>&ldquo;I love these &mdash; you&rsquo;ve done an amazing job with the edits.&rdquo;</p>
-          <cite>Mykey Stevens &middot; Parkdean Resorts &middot; Gaydio Academy video podcast production</cite>
-        </blockquote>
-          </div>
-        </details>
-      </div>
-
-      <div class="creative-block" id="worship">
-        <h3 class="creative-title">Worship</h3>
-        <div class="worship-grid">
-          <div>
-            <div class="prose">
-              <p>
-                I run an online worship ministry. I share worship covers week by week on
-                YouTube, Instagram and TikTok. <strong>The aim is simple: to bring people
-                closer to Jesus.</strong> The studio years sharpened my craft. This is what
-                it&rsquo;s for.
-              </p>
-            </div>
-            <blockquote class="verse">
-            <p>&ldquo;Each of you should use whatever gift you have received to serve others, as
-            faithful stewards of God&rsquo;s grace in its various forms&hellip; so that in all things
-            God may be praised through Jesus Christ.&rdquo;</p>
-            <cite>1 Peter 4:10&ndash;11 &middot; NIV</cite>
-          </blockquote>
-            <ul class="social-row">
-            <li><a href="https://www.youtube.com/@chrisdemetriouworship" target="_blank" rel="noopener">YouTube &#8599;</a></li>
-            <li><a href="https://www.instagram.com/chrisdemetriouworship" target="_blank" rel="noopener">Instagram &#8599;</a></li>
-            <li><a href="https://www.tiktok.com/@chrisdemetriouworship" target="_blank" rel="noopener">TikTok &#8599;</a></li>
-          </ul>
-          </div>
-          <div class="yt-latest" aria-label="Latest worship covers on YouTube">
-          <p class="label yt-label">Latest covers</p>
-          <a class="yt-card yt-card--lead" href="https://www.youtube.com/watch?v=zbF6648sy34" target="_blank" rel="noopener">
-            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/zbF6648sy34/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
-            <span class="yt-meta"><span class="yt-title">I Speak Jesus</span><span class="yt-sub">Charity Gayle cover</span></span>
-          </a>
-          <a class="yt-card" href="https://www.youtube.com/watch?v=CCFE2hq7-mA" target="_blank" rel="noopener">
-            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/CCFE2hq7-mA/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
-            <span class="yt-meta"><span class="yt-title">How Great Thou Art</span><span class="yt-sub">with @stairwellhymns</span></span>
-          </a>
-          <a class="yt-card" href="https://www.youtube.com/watch?v=yzA81Rq8z34" target="_blank" rel="noopener">
-            <span class="yt-thumb"><img src="https://i.ytimg.com/vi/yzA81Rq8z34/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-play" aria-hidden="true"></span></span>
-            <span class="yt-meta"><span class="yt-title">Whom Shall I Fear</span><span class="yt-sub">Chris Tomlin cover</span></span>
-          </a>
-          <a class="yt-all" href="https://www.youtube.com/@chrisdemetriouworship/videos" target="_blank" rel="noopener">All videos on YouTube &#8599;</a>
-        </div>
-        </div>
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -1775,7 +1187,7 @@
           <ol class="steps">
             <li>Tell me what you need it to do. A sentence is fine.</li>
             <li>I&rsquo;ll reply by email with questions or a simple plan.</li>
-            <li>If it&rsquo;s a good fit, I build the tool and host it for you. I also offer ongoing support for a monthly fee.</li>
+            <li>If it&rsquo;s a good fit, I build the app and host it for you. I also offer ongoing support for a monthly fee.</li>
           </ol>
           <p class="contact-mail">
             Prefer email? <a href="mailto:hello@chrisdemetriou.com">hello@chrisdemetriou.com</a>
@@ -1835,18 +1247,6 @@
 </main>
 
 
-<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie choices" hidden>
-  <div class="container">
-    <p class="cookie-copy">
-      This site doesn&rsquo;t set any tracking cookies of its own. The SoundCloud player sets its own
-      cookies when it loads. YouTube videos open on YouTube&rsquo;s own site. Read the <a href="/cookies/">cookie policy</a>.
-    </p>
-    <div class="cookie-actions">
-            <button type="button" class="btn-consent primary" id="cookie-accept">OK</button>
-    </div>
-  </div>
-</div>
-
 <footer>
   <div class="container">
     <div class="meter" id="meter" aria-hidden="true"></div>
@@ -1855,155 +1255,15 @@
       <span>
         <a href="/privacy/">Privacy</a>
         &nbsp;&middot;&nbsp;<a href="/cookies/">Cookies</a>
-        &nbsp;&middot;&nbsp;<a href="#" id="cookie-reopen">Cookie settings</a>
       </span>
     </div>
   </div>
 </footer>
 
-<div class="bottom-player" id="bottom-player" role="region" aria-label="Now playing">
-
-  <div class="ap-loading">
-    <div class="ap-loading-bar"></div>
-  </div>
-
-  <div class="bottom-player-inner">
-
-    <!-- Artwork -->
-    <div class="ap-col ap-col-artwork">
-      <div class="ap-artwork">
-        <img id="ap-artwork-img" src="" alt="Artwork">
-      </div>
-    </div>
-
-    <!-- Track -->
-    <div class="ap-col ap-col-track">
-      <div class="ap-track-meta">
-        <div class="ap-track-title">Loading...</div>
-        <div class="ap-track-sub">Artist / Project</div>
-        <div class="ap-track-extra">Album or descriptor</div>
-      </div>
-    </div>
-
-    <!-- Waveform -->
-   <div class="ap-col ap-col-waveform">
-  <div class="ap-waveform-wrap">
-    <canvas id="ap-waveform"></canvas>
-    <div class="ap-time-overlay">0:00 / 0:00</div>
-  </div>
-</div>
-
-    <!-- Controls -->
-    <div class="ap-col ap-col-controls">
-      <button class="ap-btn" id="ap-prev-btn" aria-label="Previous track">⏮</button>
-
-      <button class="ap-btn ap-play-btn" id="ap-play-btn" aria-label="Play or pause">
-        <span class="ap-icon-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="ap-icon-pause" style="display:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></span>
-      </button>
-
-      <button class="ap-btn" id="ap-next-btn" aria-label="Next track">⏭</button>
-
-      <input type="range" id="ap-volume" aria-label="Volume" min="0" max="100" step="1" value="100">
-    </div>
-
-    <!-- Brand -->
-    <a href="#cdplayer" class="ap-player-link">
-    <div class="ap-col ap-col-brand">
-      <div class="ap-brand">
-        <div class="ap-brand-row">
-          <span class="cdaudio-wordmark-text">
-            CHRIS<span class="logo-d">D</span>
-          </span>
-          <span class="logo-mark">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </span>
-        </div>
-        <span class="ap-player-tagline" aria-label="Player"><span aria-hidden="true">P</span><span aria-hidden="true">L</span><span aria-hidden="true">A</span><span aria-hidden="true">Y</span><span aria-hidden="true">E</span><span aria-hidden="true">R</span></span>
-      </div>
-    </div>
-
-  </div>
-
-
-
 <script>
 
   // Footer year: always the current year.
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = String(new Date().getFullYear()); });
-
-  // ── Cookie consent + gated third-party embeds ──
-  (function(){
-    var KEY = 'cd-consent-v1';
-    var banner = document.getElementById('cookie-banner');
-    var frame  = document.getElementById('yt-frame');
-    var hold   = document.getElementById('yt-hold');
-
-    function read(){
-      try { return localStorage.getItem(KEY); } catch (e) { return null; }
-    }
-    function write(v){
-      try { localStorage.setItem(KEY, v); } catch (e) {}
-    }
-
-    function loadEmbed(){
-      if (!frame || frame.querySelector('iframe')) return;
-      var src = frame.getAttribute('data-embed');
-      if (!src) return;
-      var f = document.createElement('iframe');
-      f.src = src;
-      f.title = 'Chris Demetriou – recent worship covers';
-      f.loading = 'lazy';
-      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      f.setAttribute('allowfullscreen', '');
-      if (hold) hold.remove();
-      frame.appendChild(f);
-    }
-
-    // SoundCloud showreel: iframes and the Widget API load only after consent
-    function loadPlayer(){
-      if (document.body.classList.contains('cd-player-on')) return;
-      document.querySelectorAll('#cdplayer iframe[data-src]').forEach(function(f){
-        f.src = f.getAttribute('data-src'); f.removeAttribute('data-src');
-      });
-      document.body.classList.add('cd-player-on');
-      var s = document.createElement('script');
-      s.src = 'https://w.soundcloud.com/player/api.js';
-      s.onload = function(){ if (window.cdStartPlayer) window.cdStartPlayer(); };
-      document.head.appendChild(s);
-      if (window.cdStartPlayer) window.cdStartPlayer(); // waits for SC internally
-    }
-
-    // Players load straight away (owner's choice); the banner is a one-time notice.
-    loadPlayer();
-    if (banner && !read()) banner.hidden = false;
-
-    var accept = document.getElementById('cookie-accept');
-    var reject = document.getElementById('cookie-reject');
-    if (accept) accept.addEventListener('click', function(){
-      write('accepted'); if (banner) banner.hidden = true;
-    });
-    if (reject) reject.addEventListener('click', function(){
-      write('rejected'); if (banner) banner.hidden = true;
-    });
-
-    // per-embed consent, without changing the site-wide choice
-    var one = document.getElementById('yt-load');
-    if (one) one.addEventListener('click', loadEmbed);
-    var scOne = document.getElementById('sc-load');
-    if (scOne) scOne.addEventListener('click', loadPlayer);
-
-    var reopen = document.getElementById('cookie-reopen');
-    if (reopen) reopen.addEventListener('click', function(e){
-      e.preventDefault(); if (banner) banner.hidden = false;
-    });
-  })();
 
   // static level bars — the motif kept, the animation dropped
   (function(){
@@ -2089,46 +1349,6 @@
     });
   })();
 
-  // showreel: a native <dialog>, so focus stays inside and Escape closes it
-  (function(){
-    const openBtn = document.getElementById('reel-open');
-    const modal   = document.getElementById('reel-modal');
-    const closeBtn= document.getElementById('reel-modal-close');
-    const video   = document.getElementById('reel-video');
-    const playBtn = document.getElementById('reel-play-btn');
-    if (!openBtn || !modal || typeof modal.showModal !== 'function') {
-      if (openBtn) openBtn.hidden = true;
-      return;
-    }
-
-    function openReel(){
-      modal.showModal();
-      document.body.style.overflow = 'hidden';
-      if (closeBtn) closeBtn.focus();
-      if (video && video.readyState >= 1){ video.currentTime = 1; }
-      else if (video){
-        video.addEventListener('loadedmetadata', function(){ video.currentTime = 1; }, { once: true });
-        video.load();
-      }
-    }
-
-    // every way out (button, backdrop, Escape) ends here; the dialog returns focus itself
-    modal.addEventListener('close', function(){
-      document.body.style.overflow = '';
-      if (video){ video.pause(); video.currentTime = 0; }
-      if (playBtn) playBtn.classList.remove('hidden');
-    });
-
-    openBtn.addEventListener('click', openReel);
-    if (closeBtn) closeBtn.addEventListener('click', function(){ modal.close(); });
-    if (playBtn) playBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      if (video){ video.play().catch(function(){}); playBtn.classList.add('hidden'); }
-    });
-    if (video) video.addEventListener('play', function(){ playBtn && playBtn.classList.add('hidden'); });
-    modal.addEventListener('click', function(e){ if (e.target === modal) modal.close(); });
-  })();
-
   // enquiry form: checks each field in plain words, then posts to Web3Forms
   (function(){
     const form    = document.getElementById('enquiry-form');
@@ -2203,6 +1423,5 @@
   })();
 </script>
 
-<script src="/scripts/player.js?v=4" defer></script>
 </body>
 </html>

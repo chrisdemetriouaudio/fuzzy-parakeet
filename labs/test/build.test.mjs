@@ -27,7 +27,7 @@ test("project addresses must be https home pages, slugs and topics URL-safe", ()
 
 test("every page keeps chrisdemetriou.com's nav in the same tab, with Labs current", () => {
   for (const html of [home, ...pages.map(([, h]) => h)]) {
-    for (const s of ["#help", "#work", "#about", "#music", "#media", "#worship", "#contact"]) assert.ok(html.includes(`href="https://chrisdemetriou.com/${s}"`), s);
+    for (const s of ["#help", "#work", "#about", "creative/#music", "creative/#media", "creative/#worship", "#contact"]) assert.ok(html.includes(`href="https://chrisdemetriou.com/${s}"`), s);
     assert.match(html, /<a class="current" href="\/" aria-current="page">Labs<\/a>/);
     const nav = html.match(/<nav class="section-nav"[\s\S]*?<\/nav>/)[0];
     assert.ok(!nav.includes("_blank"));

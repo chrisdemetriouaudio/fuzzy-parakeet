@@ -9,6 +9,14 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 19 Oct 2026 · Music, Media and Worship move to their own page
+> - **Decided by Chris:** the homepage is for buyers; Music, Media and Worship move to `/creative/`.
+> - **Decided:** the Creative menu links there; old links like `/#music` forward to it.
+> - **Decided:** homepage order is problems, what I build, work with results, About, "Good to know", contact.
+> - **Decided:** "Good to know" promises a clear price before any build, but no figures until Chris picks a charging model.
+> - **Decided:** no client quotes until Chris has real ones; nothing made up.
+> - **Why:** a business owner or trustee should see their problem, proof and a way in, without scrolling past 20 years of credits.
+
 > [!question]- 19 Oct 2026 · Homepage sells apps, not "admin"
 > - **Decided by Chris:** no "admin" wording; he builds apps, not the odd automation script.
 > - **Decided by Chris:** keep "Web Developer · Manchester, UK" in the hero.
