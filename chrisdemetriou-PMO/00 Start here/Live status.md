@@ -1,7 +1,7 @@
 ---
 title: Live status
-updated: 2026-10-18
-changed: 19 Oct 2026, 00:52 (UK time)
+updated: 2026-10-19
+changed: 19 Oct 2026, 03:36 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,25 +9,25 @@ changed: 19 Oct 2026, 00:52 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 3
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `d373df9` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `ad8ba98` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `8e5e062`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#17 Homepage copy: plain UK English review**: opened 19 Oct 2026
-- 👉 **#16 Finish the hero line: "take the admin off your hands"**: opened 18 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 19 Oct 2026 · `ad8ba98` · Homepage copy: plain UK English review (#17)
+- 19 Oct 2026 · `b6e8f5d` · Homepage copy: plain UK English review
 - 19 Oct 2026 · `5b55dfa` · docs(pmo): Labs nav actually released 19 Oct 2026 (8e5e062); the 18 Oct release hadn't gone through
 - 18 Oct 2026 · `b151722` · docs(pmo): Labs released with the homepage's nav (PR #15)
 - 18 Oct 2026 · `8048080` · Labs: same nav as chrisdemetriou.com, Creative menu included
@@ -36,5 +36,3 @@ changed: 19 Oct 2026, 00:52 (UK time)
 - 18 Oct 2026 · `fa45447` · Rebuild the homepage tech-first, with music and media as the roots
 - 18 Oct 2026 · `2c7e39e` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
 - 18 Oct 2026 · `de0165d` · Lead search results with tech: web developer, automation, Manchester
-- 18 Oct 2026 · `e8811d8` · docs(pmo): contact form order and Genesis card copy released (PR #11, Labs 430a150)
-- 18 Oct 2026 · `8e2f2ee` · Contact form asks for email after name; Genesis card says it's live
