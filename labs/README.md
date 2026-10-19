@@ -17,6 +17,7 @@ real address. Labs lives in this repo; projects can be built anywhere.
 
 | Project | Address | Code |
 |---|---|---|
+| Neuro Support Checker (UK support directory, checked daily; pinned first) | `https://neurosupport.labs.chrisdemetriou.com` | GitHub `chrisdemetriouaudio/neuro-support-checker` (public) |
 | Genesis (rehearsal scheduling) | `https://genesis.labs.chrisdemetriou.com` | private repo christian4collective (`genesis-auth/`) |
 | chrisdemetriou.com (music portfolio) | `https://chrisdemetriou.com` (its own address, not a Labs one) | this repo (public) |
 | R.E.A.CH charity site (WordPress → Astro) | `https://reach-children-uganda.org.uk` (the charity's own address) | GitHub `chrisdemetriouaudio/reach-prod` (public); archive and PMO in private `reach-source` |
@@ -44,6 +45,6 @@ real address. Labs lives in this repo; projects can be built anywhere.
    `architecture` (tiers of boxes; `link` names the wire into a tier). For live
    details, either `manifest` (a `labs.json` the project publishes), `source` (a
    folder in this repo) or `github` (a public repo: languages, last push and a
-   "Code on GitHub" link).
+   "Code on GitHub" link). Cards go newest first; `"pinned": true` puts one first.
 3. Add its screenshot to `public/img/` (880×550 works best).
 4. `npm run check`, open a pull request, then `npm run release` after it's merged.

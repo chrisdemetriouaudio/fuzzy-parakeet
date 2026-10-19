@@ -9,6 +9,12 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 19 Oct 2026 · Neuro Support Checker is pinned first on Labs
+> - **Decided by Chris:** Neuro Support Checker is the first card on Labs.
+> - **Decided:** `"pinned": true` in `labs/projects.json` beats "newest first"; the rest stay newest first.
+> - **Decided:** five cards fit in one row on desktop, so every project shows on the first screen.
+> - **Why:** it's the project Chris is proudest of; people don't scroll.
+
 > [!question]- 19 Oct 2026 · Reposition as Operations Engineer (Proposed)
 > - **Status:** Proposed. Chris to confirm the 10 open points in the copy deck.
 > - **Proposed:** identity "Operations Engineer"; offer = custom internal tools and automated workflows (Booking Engine, Reminder Pipeline, Chasing Engine, Payment Pipeline).
