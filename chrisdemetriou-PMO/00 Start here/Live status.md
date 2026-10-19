@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-19
-changed: 19 Oct 2026, 03:36 (UK time)
+changed: 19 Oct 2026, 03:38 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 19 Oct 2026, 03:36 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `7c4bd02` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `ccfeb8e` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `8e5e062`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 19 Oct 2026, 03:36 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 19 Oct 2026 · `ccfeb8e` · docs(pmo): homepage copy in plain UK English released (PR #17)
 - 19 Oct 2026 · `ad8ba98` · Homepage copy: plain UK English review (#17)
 - 19 Oct 2026 · `b6e8f5d` · Homepage copy: plain UK English review
 - 19 Oct 2026 · `5b55dfa` · docs(pmo): Labs nav actually released 19 Oct 2026 (8e5e062); the 18 Oct release hadn't gone through
@@ -35,4 +36,3 @@ changed: 19 Oct 2026, 03:36 (UK time)
 - 18 Oct 2026 · `9be16bd` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
 - 18 Oct 2026 · `fa45447` · Rebuild the homepage tech-first, with music and media as the roots
 - 18 Oct 2026 · `2c7e39e` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
-- 18 Oct 2026 · `de0165d` · Lead search results with tech: web developer, automation, Manchester
