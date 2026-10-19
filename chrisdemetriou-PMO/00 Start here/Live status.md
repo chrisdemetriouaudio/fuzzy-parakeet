@@ -1,32 +1,32 @@
 ---
 title: Live status
 updated: 2026-10-19
-changed: 19 Oct 2026, 15:42 (UK time)
+changed: 19 Oct 2026, 15:43 (UK time)
 ---
 
 # 🟢 Live status
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Everything answering:** 🔴 no: GitHub Pages build
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `982e526` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `c5c5054` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `982e526`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#19 Homepage: sell web apps, not admin; global IT in About; hide footer player**: opened 19 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 19 Oct 2026 · `7560b40` · feat(home): sell web apps, not admin; add global IT to About; hide footer player
 - 19 Oct 2026 · `b01ad8c` · feat(labs): add Neuro Support Checker, pinned as the first card
 - 19 Oct 2026 · `9a977bc` · docs(pmo): Operations Engineer repositioning proposed (19 Oct 2026)
 - 19 Oct 2026 · `ccfeb8e` · docs(pmo): homepage copy in plain UK English released (PR #17)
@@ -36,4 +36,3 @@ changed: 19 Oct 2026, 15:42 (UK time)
 - 18 Oct 2026 · `b151722` · docs(pmo): Labs released with the homepage's nav (PR #15)
 - 18 Oct 2026 · `8048080` · Labs: same nav as chrisdemetriou.com, Creative menu included
 - 18 Oct 2026 · `66c4666` · docs(pmo): homepage rebuilt tech-first is live (PR #13, #14)
-- 18 Oct 2026 · `9be16bd` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
