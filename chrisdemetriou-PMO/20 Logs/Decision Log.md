@@ -9,6 +9,13 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 19 Oct 2026 · Reposition as Operations Engineer (Proposed)
+> - **Status:** Proposed. Chris to confirm the 10 open points in the copy deck.
+> - **Proposed:** identity "Operations Engineer"; offer = custom internal tools and automated workflows (Booking Engine, Reminder Pipeline, Chasing Engine, Payment Pipeline).
+> - **Proposed:** "Zero Software Tax": clients own the tool; no seat licences. Banned: "web developer", "web designer".
+> - **Proposed:** IDE-style restyle (Inter + JetBrains Mono, amber accent); music, media and worship move to `/creative/`.
+> - **Why:** Chris doesn't want web-design work; the value is replacing manual admin and per-seat software.
+
 > [!question]- 18 Oct 2026 · Homepage rebuilt tech-first (copy + UX agents)
 > - **Decided:** order is Hero → What I do → Work → About → Creative beginnings → Contact.
 > - **Decided:** Music, Media and Worship sit under one nav menu, **Creative**, and stay on the homepage.
