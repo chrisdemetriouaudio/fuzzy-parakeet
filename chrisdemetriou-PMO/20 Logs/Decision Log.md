@@ -9,6 +9,14 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 19 Oct 2026 · Homepage sells apps, not "admin"
+> - **Decided by Chris:** no "admin" wording; he builds apps, not the odd automation script.
+> - **Decided by Chris:** keep "Web Developer · Manchester, UK" in the hero.
+> - **Decided:** hero "I build web apps that save you hours every week."; six "What I can build for you" boxes.
+> - **Decided:** About adds 16 years on enterprise systems (global IT) next to music and media.
+> - **Decided by Chris:** the footer audio bar is switched off; the showreel player stays.
+> - **Why:** "bookings, reminders, chasing and payments" sounded narrow and boring.
+
 > [!question]- 19 Oct 2026 · Neuro Support Checker is pinned first on Labs
 > - **Decided by Chris:** Neuro Support Checker is the first card on Labs.
 > - **Decided:** `"pinned": true` in `labs/projects.json` beats "newest first"; the rest stay newest first.
