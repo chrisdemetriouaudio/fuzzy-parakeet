@@ -38,9 +38,10 @@ const NEW_WINDOW_SR = `<span class="sr"> (opens in a new window)</span>`;
 // entry is the Creative menu: a native <details>, so it works with no script
 // (Labs' CSP allows none).
 const NAV = [
-  ["What I do", `${MAIN}/#help`],
-  ["Work", `${MAIN}/#work`],
-  ["About", `${MAIN}/#about`],
+  ["Tools", `${MAIN}/#tools`],
+  ["Proof", `${MAIN}/#proof`],
+  ["Process", `${MAIN}/#process`],
+  ["FAQ", `${MAIN}/#faq`],
   ["Creative", [["Music", `${MAIN}/creative/#music`], ["Media", `${MAIN}/creative/#media`], ["Worship", `${MAIN}/creative/#worship`]]],
   ["Labs", "/"],
   ["Contact", `${MAIN}/#contact`],
@@ -203,7 +204,7 @@ ${href.map(([l, h]) => `            <li><a href="${h}">${l}</a></li>`).join("\n"
         </details>
       </li>`;
   if (href === "/") return `      <li><a class="current" href="/" aria-current="page">${label}</a></li>`;
-  const cls = label === "What I do" ? ` class="nav-help"` : "";
+  const cls = label === "Process" || label === "FAQ" ? ` class="nav-wide"` : "";   // hidden on phones, as on the homepage
   return `      <li${cls}><a href="${href}">${label}</a></li>`;
 }).join("\n");
 const slugify = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-");
