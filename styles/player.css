@@ -8,9 +8,10 @@
   --font-hero: var(--font-display, Georgia, serif);
 }
 
-/* Nothing from SoundCloud loads until the visitor allows embeds */
-html body:not(.cd-player-on) #bottom-player{ display: none !important; }
-body.cd-player-on{ padding-bottom: 84px; }
+/* Nothing from SoundCloud loads until the visitor allows embeds.
+   The footer bar is switched off (19 Oct 2026): it distracted from the page. player.js still
+   drives its markup alongside the main player, so the markup stays, hidden. */
+html body #bottom-player{ display: none !important; }
 #cdplayer{ display: none; }
 body.cd-player-on #cdplayer{ display: block; }
 body.cd-player-on #sc-hold{ display: none; }
@@ -1656,7 +1657,7 @@ color:rgba(255,255,255,0.85);
 #bottom-player .logo-mark .bar{ transform-origin: center center !important; }
 
 /* Cookie notice sits above the footer player, never underneath it */
-body.cd-player-on .cookie-banner{ bottom: 84px; z-index: 10001; }
+body.cd-player-on .cookie-banner{ z-index: 10001; }
 
 /* ── Worship: latest YouTube covers as linked thumbnails (no embed, no bot check) ── */
 .yt-latest{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
