@@ -1,5 +1,92 @@
 [
   {
+    "slug": "neurosupport",
+    "title": "Neuro Support Checker",
+    "status": "Live",
+    "pinned": true,
+    "description": "A free UK directory of 900 support groups for autism, ADHD, dyslexia and more, checked every morning so nobody is sent to a closed one.",
+    "url": "https://neurosupport.labs.chrisdemetriou.com/",
+    "image": "img/neurosupport.jpg",
+    "imageAlt": "Neuro Support Checker: \"Support for autism, ADHD, dyslexia, learning disability, Down syndrome, brain injury and more, across the UK\", above the \"Is it still running?\" website check.",
+    "cta": "Find support",
+    "github": "chrisdemetriouaudio/neuro-support-checker",
+    "links": [
+      {
+        "label": "How the checks work",
+        "url": "https://neurosupport.labs.chrisdemetriou.com/#how"
+      }
+    ],
+    "topics": [
+      "cloudflare-workers",
+      "typescript",
+      "github-actions",
+      "d1-sqlite",
+      "passkeys",
+      "charity-registers",
+      "open-data",
+      "postcodes-io",
+      "github-pages",
+      "resend",
+      "accessibility",
+      "opendyslexic"
+    ],
+    "architecture": [
+      {
+        "label": "In the browser",
+        "nodes": [
+          {
+            "name": "Directory",
+            "note": "phone-first · filter by condition, who it's for, near you"
+          },
+          {
+            "name": "Is it still running?",
+            "note": "paste a website, get a live check in seconds"
+          },
+          {
+            "name": "Display settings",
+            "note": "OpenDyslexic font, wider spacing, high contrast, dark"
+          }
+        ]
+      },
+      {
+        "link": "HTTPS · one origin",
+        "label": "On Cloudflare's edge",
+        "nodes": [
+          {
+            "name": "Worker",
+            "note": "serves the directory, live checks and postcode look-ups"
+          },
+          {
+            "name": "Passkey admin",
+            "note": "WebAuthn sign-in · approved admins and audit log in D1"
+          },
+          {
+            "name": "postcodes.io · Resend",
+            "note": "council area for Near you · admin sign-in links"
+          }
+        ]
+      },
+      {
+        "link": "Git commits · GitHub API",
+        "label": "Every morning on GitHub",
+        "nodes": [
+          {
+            "name": "GitHub Actions",
+            "note": "visits each site once, politely; rebuilds the directory"
+          },
+          {
+            "name": "UK charity registers",
+            "note": "all 4 nations: finds new groups, checks they're still registered"
+          },
+          {
+            "name": "A person decides",
+            "note": "flags open a GitHub issue; only an admin closes a listing"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "slug": "genesis",
     "title": "Genesis",
     "status": "Live",

@@ -14,12 +14,13 @@ updated: 2026-10-18
 
 ## 👉 To do
 
-- Nothing right now. Add the next project with the steps below.
+- 👉 **Release Neuro Support Checker to Labs:** merge `claude/cool-ride-8e5h7f`, then `npm run release` in `labs/`.
+- 🛠️ **Then check it live:** first card on desktop and phone, five cards in one row.
 
 ## ➕ Adding a new project
 
 1. **Give it its own address:** `<name>.labs.chrisdemetriou.com` (apps), or its real address (sites).
-2. **Add one entry** to `labs/projects.json`: description, topics, architecture.
+2. **Add one entry** to `labs/projects.json`: description, topics, architecture. `"pinned": true` puts it first.
 3. **Add its picture** to `labs/public/img/`, or let it publish a `labs.json` with one.
 4. **Release Labs:** `npm run release` in `labs/`.
 

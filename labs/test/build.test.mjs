@@ -4,7 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { readProjects, checkProject, renderHome, renderProjectPage, renderFilterCss, renderSitemap, filterTopics, countLanguages } from "../scripts/build.mjs";
+import { readProjects, checkProject, renderHome, renderProjectPage, renderFilterCss, renderSitemap, filterTopics, countLanguages, sortProjects } from "../scripts/build.mjs";
 
 const projects = readProjects();
 const today = "2031-05-04";
@@ -46,6 +46,13 @@ test("the overview has one compact card per project, with both ways in", () => {
     for (const a of more) assert.ok(!a.includes("_blank"), "write-ups open in the same tab");
   }
   assert.ok(!home.includes('<section class="arch"'), "architecture lives on the project pages, not the overview");
+});
+
+test("pinned projects come first, then newest", () => {
+  const order = sortProjects([{ slug: "old", updated: "2026-01-01" }, { slug: "new", updated: "2026-10-01" }, { slug: "pin", updated: "2025-01-01", pinned: true }], today);
+  assert.deepEqual(order.map((p) => p.slug), ["pin", "new", "old"]);
+  const first = home.match(/<li class="pcard"[\s\S]*?<a class="pcard-shot" href="\/([^/]+)\/"/)[1];
+  assert.equal(first, projects.find((p) => p.pinned)?.slug ?? first, "the pinned project is the first card");
 });
 
 test("the overview shows the key numbers", () => {

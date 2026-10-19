@@ -15,6 +15,7 @@ updated: 2026-10-18
 
 ## 👉 Your actions
 
+- 👉 **Release Neuro Support Checker to Labs:** merge `claude/cool-ride-8e5h7f`, then `npm run release` in `labs/`.
 - 👉 **Check the new homepage live** on desktop and phone, and send a test enquiry.
 - 👉 **Ask Google to re-read the site** in Search Console.
 

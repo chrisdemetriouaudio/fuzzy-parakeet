@@ -20,6 +20,7 @@
  *   - `source`: a folder in this repo, counted here (the website itself);
  *   - `github`: a public GitHub repository — GitHub's own languages and last push.
  * If a project can't be reached, its card keeps the picture it has and drops the bar.
+ * Cards go newest first; `"pinned": true` puts a project ahead of the rest.
  */
 import { readFileSync, writeFileSync, existsSync, statSync, mkdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -261,9 +262,9 @@ ${body}
 `;
 }
 
-/** Newest first, like GitHub's "Last updated" sort; ties keep projects.json order. */
+/** `pinned` projects first, then newest, like GitHub's "Last updated" sort; ties keep projects.json order. */
 export function sortProjects(projects, today) {
-  return projects.map((p, i) => ({ p, i })).sort((a, b) => (b.p.updated || today).localeCompare(a.p.updated || today) || a.i - b.i).map((x) => x.p);
+  return projects.map((p, i) => ({ p, i })).sort((a, b) => !!b.p.pinned - !!a.p.pinned || (b.p.updated || today).localeCompare(a.p.updated || today) || a.i - b.i).map((x) => x.p);
 }
 
 /** Technologies to filter by, at most 8 (one row): the most used first, then the ones each
