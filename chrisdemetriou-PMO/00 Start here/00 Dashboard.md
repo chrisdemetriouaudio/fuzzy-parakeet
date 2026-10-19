@@ -15,7 +15,9 @@ updated: 2026-10-18
 
 ## 👉 Your actions
 
-- 👉 **Release Neuro Support Checker to Labs:** merge `claude/cool-ride-8e5h7f`, then `npm run release` in `labs/`.
+- 👉 **Release Labs:** `npm run release` in `labs/` (adds Neuro Support Checker and the new Creative links).
+- 👉 **Decide your charging model** (fixed price, day rate or monthly), then add it to "Good to know".
+- 👉 **Send Claude 1 or 2 client quotes:** the band, Reach, or a Neuro Support Checker user.
 - 👉 **Check the new homepage live** on desktop and phone, and send a test enquiry.
 - 👉 **Ask Google to re-read the site** in Search Console.
 

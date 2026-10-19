@@ -16,6 +16,7 @@ updated: 2026-10-18
 
 ## 👉 Next up
 
+- 👉 **Add client quotes to the homepage** once Chris has them (between Work and About).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
 ## 💭 Later (ideas, not planned yet)
