@@ -667,6 +667,7 @@
   }
   .help-grid{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
   .work-grid{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  @media (min-width: 960px){ .work-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
   .help-grid li, .work-card{
     border: 1px solid var(--line);
@@ -1066,6 +1067,12 @@
       <h2 class="band-title">What I build</h2>
       <p class="band-intro">Real projects, live now. One is a demo, and it says so.</p>
       <ul class="work-grid">
+        <li class="work-card">
+          <p class="work-tag">Live</p>
+          <h3>Neuro Support Checker</h3>
+          <p>A free UK directory of 900 support groups for autism, ADHD, dyslexia and more. It checks every one each morning, so families aren&rsquo;t sent to a group that&rsquo;s closed.</p>
+          <a href="https://neurosupport.labs.chrisdemetriou.com/" target="_blank" rel="noopener">Open the directory <span aria-hidden="true">&#8599;</span><span class="sr"> (opens in a new tab)</span></a>
+        </li>
         <li class="work-card">
           <p class="work-tag">Live</p>
           <h3>Genesis</h3>
