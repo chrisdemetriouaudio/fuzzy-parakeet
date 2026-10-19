@@ -31,12 +31,14 @@ updated: 2026-10-18
 > - **Decided:** five cards fit in one row on desktop, so every project shows on the first screen.
 > - **Why:** it's the project Chris is proudest of; people don't scroll.
 
-> [!question]- 19 Oct 2026 · Reposition as Operations Engineer (Proposed)
-> - **Status:** Proposed. Chris to confirm the 10 open points in the copy deck.
-> - **Proposed:** identity "Operations Engineer"; offer = custom internal tools and automated workflows (Booking Engine, Reminder Pipeline, Chasing Engine, Payment Pipeline).
-> - **Proposed:** "Zero Software Tax": clients own the tool; no seat licences. Banned: "web developer", "web designer".
-> - **Proposed:** IDE-style restyle (Inter + JetBrains Mono, amber accent); music, media and worship move to `/creative/`.
-> - **Why:** Chris doesn't want web-design work; the value is replacing manual admin and per-seat software.
+> [!question]- 19 Oct 2026 · Reposition as Operations Engineer (Agreed)
+> - **Decided:** identity "Operations Engineer"; offer = custom internal tools and automated workflows (Booking Engine, Reminder Pipeline, Chasing Engine, Payment Pipeline). Banned: "web developer", "web designer".
+> - **Decided:** clients own it: code in their GitHub, hosting in their Cloudflare account. No licence fees; infrastructure billed to their accounts at cost (from about £4 a month; paid tiers, not free).
+> - **Decided:** support is an optional monthly plan; builds are fixed price per agreed scope.
+> - **Decided:** the workflow audit is free, written only, by email, one page. No calls.
+> - **Decided:** reminders list email, push and WhatsApp only (no SMS until a build uses it).
+> - **Decided:** IDE-style restyle (Inter + JetBrains Mono, amber kept); music, media and worship move to `/creative/`; no LinkedIn or GitHub links; Reach Children Uganda stays as "legacy system recovery".
+> - **Why:** Chris doesn't want web-design work; the value is replacing manual admin and per-seat software. Calls with strangers don't suit how Chris works.
 
 > [!question]- 18 Oct 2026 · Homepage rebuilt tech-first (copy + UX agents)
 > - **Decided:** order is Hero → What I do → Work → About → Creative beginnings → Contact.
