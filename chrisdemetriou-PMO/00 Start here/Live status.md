@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-19
-changed: 19 Oct 2026, 03:56 (UK time)
+changed: 19 Oct 2026, 04:03 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 19 Oct 2026, 03:56 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `e441c91` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `9a977bc` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `8e5e062`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 19 Oct 2026, 03:56 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 19 Oct 2026 · `9a977bc` · docs(pmo): Operations Engineer repositioning proposed (19 Oct 2026)
 - 19 Oct 2026 · `ccfeb8e` · docs(pmo): homepage copy in plain UK English released (PR #17)
 - 19 Oct 2026 · `ad8ba98` · Homepage copy: plain UK English review (#17)
 - 19 Oct 2026 · `b6e8f5d` · Homepage copy: plain UK English review
@@ -35,4 +36,3 @@ changed: 19 Oct 2026, 03:56 (UK time)
 - 18 Oct 2026 · `66c4666` · docs(pmo): homepage rebuilt tech-first is live (PR #13, #14)
 - 18 Oct 2026 · `9be16bd` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
 - 18 Oct 2026 · `fa45447` · Rebuild the homepage tech-first, with music and media as the roots
-- 18 Oct 2026 · `2c7e39e` · Merge remote-tracking branch 'origin/main' into claude/tech-first-homepage
