@@ -10,7 +10,13 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 18 Oct 2026 · Labs nav matches the homepage · live
+> [!success]+ 🚀 19 Oct 2026 · Homepage copy in plain UK English · live
+> - **Hero:** "I build tools that take the admin off your hands." (was cut off: "…take the admin off.")
+> - **Whole page reviewed:** British spelling, plain words, no jargon, sentence-case headings, spaced en dashes. Text only (pull request #17, `ad8ba98`); #16 closed.
+> - **Checked live:** new hero and description show; no sideways scroll on a phone.
+> - **Left for Chris:** Sugababes credit details disagree between the highlight row and the full list.
+
+> [!success]- 🚀 18 Oct 2026 · Labs nav matches the homepage · live
 > - **Released:** 19 Oct 2026 by Claude (`npm run release`, build `8e5e062`), checked live: nav and the "Labs" title show, every project link answers.
 > - **Corrected 19 Oct 2026:** the release on 18 Oct didn't go through (Labs stayed on the 17 Oct build, `430a150`), probably because the drive copy was behind GitHub.
 > - **What changed:** Labs shows the homepage's nav: What I do · Work · About · Creative (menu) · Labs · Contact.
