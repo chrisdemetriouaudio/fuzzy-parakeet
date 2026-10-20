@@ -13,6 +13,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Space+Mono:wght@400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/page.css">
+<script>
+  // Display settings (/scripts/display.js), applied before the page paints so there's no flash
+  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):p.theme;if(t==="light")r.setAttribute("data-theme","light");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/styles/display.css">
 </head>
 <body>
 
@@ -27,7 +32,7 @@
   <div class="shell">
     <p class="eyebrow">Legal</p>
     <h1>Cookie policy</h1>
-    <p class="updated">Last updated: 18 October 2026</p>
+    <p class="updated">Last updated: 20 October 2026</p>
 
     <div class="note">
       <p>
@@ -46,7 +51,7 @@
     </p>
 
     <h2>What this site stores</h2>
-    <table>
+    <table tabindex="0" aria-label="What this site stores">
       <thead>
         <tr><th>Name</th><th>Type</th><th>Purpose</th><th>Lasts</th></tr>
       </thead>
@@ -56,6 +61,12 @@
           <td>Local storage</td>
           <td>Remembers whether you allowed or declined third-party embeds, so you are not asked on every visit. Holds no identifier and is never sent anywhere.</td>
           <td>Until you clear your browser data</td>
+        </tr>
+        <tr>
+          <td>cd-display</td>
+          <td>Local storage</td>
+          <td>Remembers the display settings you choose (theme, text size, font, spacing, contrast, reading mask). Only set if you change one. Holds no identifier and is never sent anywhere.</td>
+          <td>Until you press &ldquo;Reset all&rdquo; or clear your browser data</td>
         </tr>
       </tbody>
     </table>
@@ -74,14 +85,14 @@
     </p>
 
     <h2>Other services, and why they set nothing</h2>
-    <table>
+    <table tabindex="0" aria-label="Other services">
       <thead>
         <tr><th>Service</th><th>Role</th><th>Cookies</th></tr>
       </thead>
       <tbody>
         <tr><td>GitHub Pages</td><td>Hosts and serves the site</td><td>None. Processes your IP address to deliver the page.</td></tr>
         <tr><td>Google Fonts</td><td>Supplies the typefaces</td><td>None. Your browser requests the font files, so your IP is visible to Google.</td></tr>
-        <tr><td>Web3Forms</td><td>Delivers the booking form to email</td><td>None. Acts only when you submit the form.</td></tr>
+        <tr><td>Web3Forms</td><td>Delivers the enquiry forms to email</td><td>None. Acts only when you submit the form.</td></tr>
         <tr><td>Showreel video</td><td>Plays the reel</td><td>None. The file is hosted on this site, not a video platform.</td></tr>
       </tbody>
     </table>
@@ -114,5 +125,6 @@
 </footer>
 
 <script src="/scripts/year.js" defer></script>
+<script src="/scripts/display.js" defer></script>
 </body>
 </html>

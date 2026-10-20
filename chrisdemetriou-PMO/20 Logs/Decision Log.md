@@ -9,6 +9,12 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · Display settings on chrisdemetriou.com (Agreed)
+> - **Status:** Agreed. Chris asked for the Neuro Support Checker's accessibility panel on this site.
+> - **Decided:** a **Display** button on every page: theme (dark, light, match device), text size, dyslexia-friendly font (OpenDyslexic), wider spacing, high contrast, reading mask.
+> - **Decided:** dark stays the default; choices are saved on the visitor's device only (`cd-display`), listed in the cookie and privacy pages.
+> - **Why:** Chris is neurodivergent and wants the site and services to be accessible. Every mode passes axe-core (WCAG 2.2 AA) on desktop and phone.
+
 > [!question]- 20 Oct 2026 · Search & publishing: evidence first, few pages (Proposed)
 > - **Status:** Proposed. Chris reviews the pull request.
 > - **Proposed:** pages are built from evidence records only after Chris approves that exact version; any later edit voids the approval.

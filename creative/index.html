@@ -353,14 +353,14 @@
   .tag.PTE{ background: var(--teal);  color: #0b1414; border-color: var(--teal); }
   .tag.AE { background: transparent; color: var(--teal); border-color: rgba(91,138,137,0.6); }
   .tag.P  { background: var(--ink);   color: #17110a; border-color: var(--ink); }
-  .tag.OA { background: var(--red);   color: #fdeceb; border-color: var(--red); }
-  .tag.C  { background: transparent; color: var(--red); border-color: rgba(193,68,60,0.65); }
+  .tag.OA { background: #a8352e;   color: #fff; border-color: #a8352e; }   /* 6.5:1 */
+  .tag.C  { background: transparent; color: #e5786f; border-color: rgba(229,120,111,0.65); }   /* 6.5:1 */
   .tag.T  { background: transparent; color: var(--ink-muted); border-color: var(--line); }
 
   .credit-group{ margin-bottom: 44px; }
   .credit-group:last-child{ margin-bottom: 0; }
 
-  .credit-group h4{
+  .credit-group h3{
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 1.32rem;
@@ -944,7 +944,13 @@
     html{ scroll-behavior: auto; }
     *, *::before, *::after{ transition-duration: 0.01ms !important; animation: none !important; }
   }
+  #cdplayer .cdp-footer-right .cdp-powered{ color: #b3adb8 !important; }   /* 8.1:1 on the player panel */
 </style>
+<script>
+  // Display settings (/scripts/display.js), applied before the page paints so there's no flash
+  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):p.theme;if(t==="light")r.setAttribute("data-theme","light");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/styles/display.css">
 </head>
 <body>
 
@@ -1027,7 +1033,7 @@
     <div class="container">
       <div class="creative-block" id="music">
         <span id="credits"></span>
-        <h3 class="creative-title">Music</h3>
+        <h2 class="creative-title">Music</h2>
         <div class="prose">
           <p>
             I&rsquo;ve performed, arranged and engineered on releases through DreamWorks, Warner
@@ -1049,7 +1055,7 @@
 </div>
 
         <div class="credit-group">
-          <h4>Selected credits</h4>
+          <h3>Selected credits</h3>
           <div class="table-responsive">
 
 <table class="data-table">
@@ -1109,7 +1115,7 @@
         <details class="more">
           <summary>Show all studio credits (26)</summary>
           <div class="credit-group">
-            <h4>Studio production</h4>
+            <h3>Studio production</h3>
             <div class="table-responsive">
 
 <table class="data-table">
@@ -1290,7 +1296,7 @@
         <details class="more">
           <summary>Show all live credits (14)</summary>
           <div class="credit-group">
-            <h4>Live performance</h4>
+            <h3>Live performance</h3>
             <div class="table-responsive">
 
 <table class="data-table">
@@ -1421,7 +1427,7 @@
       </div>
 
       <div class="creative-block" id="media">
-        <h3 class="creative-title">Media</h3>
+        <h2 class="creative-title">Media</h2>
         <div class="prose">
           <p>
             I produce <strong>radio imaging, sonic branding and podcasts</strong>: from idents
@@ -1444,11 +1450,11 @@
                   <div id="sc-iframe-wrap" style="position:absolute;left:-9999px;top:0;width:300px;height:166px;opacity:0;pointer-events:none;">
 
 
-                     <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                     <iframe id="sc-widget" title="SoundCloud showreel (controlled by the player)" tabindex="-1" aria-hidden="true" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
                         data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2112905759&color=%23eeff00&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
                      </iframe>
 
-                     <iframe id="sc-widget-onair" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                     <iframe id="sc-widget-onair" title="SoundCloud On Air showreel (controlled by the player)" tabindex="-1" aria-hidden="true" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
                         data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/chrisdemetrioumusic/sets/on-air-published-content/s-Ou4a5qsDEdL&color=%23eeff00&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false">
                      </iframe>
 
@@ -1516,6 +1522,7 @@
                      <input
                         type="range"
                         id="cdp-volume"
+                        aria-label="Volume"
                         min="0"
                         max="100"
                         step="1"
@@ -1566,7 +1573,7 @@
                   </div>
                </div><!-- /cdplayer -->
 
-        <h4 class="media-sub">Broadcast &amp; brand audio</h4>
+        <h3 class="media-sub">Broadcast &amp; brand audio</h3>
       <div class="table-responsive">
         <table class="data-table">
           <thead>
@@ -1593,7 +1600,7 @@
         </table>
       </div>
 
-        <h4 class="media-sub">Industry feedback</h4>
+        <h3 class="media-sub">Industry feedback</h3>
         <div class="quote-grid">
         <blockquote class="verse quote-lead">
           <p>&ldquo;You&rsquo;ve got the ear.&rdquo;</p>
@@ -1624,7 +1631,7 @@
       </div>
 
       <div class="creative-block" id="worship">
-        <h3 class="creative-title">Worship</h3>
+        <h2 class="creative-title">Worship</h2>
         <div class="worship-grid">
           <div>
             <div class="prose">
@@ -2112,5 +2119,6 @@
 </script>
 
 <script src="/scripts/player.js?v=4" defer></script>
+<script src="/scripts/display.js" defer></script>
 </body>
 </html>
