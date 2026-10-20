@@ -316,7 +316,7 @@ ${preview ? "" : `<link rel="canonical" href="${url}">`}
   // Display settings (/scripts/display.js), applied before the page paints so there's no flash
   (function(){var r=document.documentElement,p={};try{p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{};}catch(e){}try{var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;if(t==="dark")r.removeAttribute("data-theme");["text","font","spacing","contrast","motion"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});if(p.motion!=="reduced"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)r.classList.add("motion");}catch(e){}})();
 </script>
-<link rel="stylesheet" href="/styles/display.css?v=4">
+<link rel="stylesheet" href="/styles/display.css?v=5">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>

@@ -23,7 +23,7 @@ updated: 2026-10-20
 
 ## 👉 Next up (repositioning)
 
-- 👉 **"Your week" look for the rest:** `/creative/`, legal pages, generated pages and the share image. Homepage live (PR #27); Labs restyled and light by default (needs `npm run release`). #next
+- 🛠️ **"Your week" look on `/creative/`, privacy and cookies:** in review (pull request). Still to do: generated pages and the share image. #next
 - 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
 - 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.
 

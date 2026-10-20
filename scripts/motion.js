@@ -63,7 +63,7 @@
   function place(){
     ticking = false;
     if (!nav || !ink) return;
-    var t = hover || nav.querySelector(":scope > ul > li > a.current");
+    var t = hover || nav.querySelector(":scope > ul > li > a.current, :scope > ul > li > details > summary.current");
     nav.querySelectorAll(".inked").forEach(function(x){ if (x !== t) x.classList.remove("inked"); });
     if (!t || !moving()){ ink.style.opacity = "0"; return; }
     var r = t.getBoundingClientRect(), n = nav.getBoundingClientRect();
