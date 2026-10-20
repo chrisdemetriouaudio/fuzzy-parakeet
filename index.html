@@ -467,10 +467,10 @@
   .blk.t2{ grid-row: span 2; }
   .blk.free{ background: transparent; border: 2px dashed var(--free); }
   .blk em{ display: none; font-style: normal; }
-  .week.after .blk:not(.free){ background: var(--done-bg); color: var(--done-ink); border-style: dashed; border-color: var(--done-line); }
-  .week.after .blk:not(.free)::before{ content: "✓ "; }
-  .week.after .blk .task{ display: none; }
-  .week.after .blk em{ display: inline; }
+  .blk.done{ background: var(--done-bg); color: var(--done-ink); border-style: dashed; border-color: var(--done-line); }
+  .blk.done::before{ content: "✓ "; }
+  .blk.done .task{ display: none; }
+  .blk.done em{ display: inline; }
   .week-foot{ display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px; margin: 14px 0 0; padding-top: 12px; border-top: 2px dashed var(--border); font-size: 15px; color: var(--ink-muted); }
   .week-foot b{ font-family: var(--head); font-weight: 800; font-size: 18px; color: var(--ink); }
   .week.after .week-foot b{ color: var(--done-ink); }
@@ -488,8 +488,8 @@
     .day > .blk{ grid-column: 2; justify-self: start; padding: 6px 10px; font-size: 0.875rem; }
     .blk.t2{ grid-row: auto; }
     .blk.free{ display: none; }
-    .week.after .blk .task{ display: inline; }
-    .week.after .blk em{ display: block; font-weight: 400; }
+    .blk.done .task{ display: inline; }
+    .blk.done em{ display: block; font-weight: 400; }
   }
 
   /* ── PROBLEMS ──────────────────────────────────────────── */
@@ -634,6 +634,75 @@
   footer a{ color: var(--ink-muted); text-decoration: none; }
   footer a:hover{ color: var(--ink); text-decoration: underline; }
 
+  .copy{ margin-left: 6px; padding: 3px 10px; font: inherit; font-weight: 700; font-size: 14px; color: var(--ink); background: var(--surface); border: 2px solid var(--edge); border-radius: 999px; cursor: pointer; }
+  .copy[hidden]{ display: none; }
+  .copy.copied{ color: var(--done-ink); border-color: var(--done-line); background: var(--done-bg); }
+
+  /* ── MICRO-BEHAVIOURS ──────────────────────────────────────
+     Only while <html> has .motion: the <head> script adds it unless the visitor chose
+     "Reduce motion" in Display, or their device asks for less motion. /scripts/motion.js
+     adds the scroll reveals, counting numbers, sliding nav highlight and smooth FAQ. */
+  :root{ --ease-out: cubic-bezier(.2, .7, .2, 1); --ease-spring: cubic-bezier(.34, 1.56, .64, 1); }
+  @keyframes cd-rise{ from{ opacity: 0; transform: translateY(16px); } to{ opacity: 1; transform: none; } }
+  @keyframes cd-slap{ 0%{ opacity: 0; transform: rotate(-10deg) scale(.85); } 60%{ opacity: 1; transform: rotate(-1deg) scale(1.04); } 100%{ transform: rotate(-2deg) scale(1); } }
+  @keyframes cd-draw{ from{ transform: rotate(-1deg) scaleX(0); } to{ transform: rotate(-1deg) scaleX(1); } }
+  @keyframes cd-stamp{ 0%{ transform: none; } 35%{ transform: scale(.9) rotate(-3deg); } 70%{ transform: scale(1.05) rotate(1deg); } 100%{ transform: none; } }
+  @keyframes cd-pop{ 0%{ transform: scale(1); } 40%{ transform: scale(1.12); } 100%{ transform: scale(1); } }
+
+  /* hero: the sticker is slapped on, the copy rises, the marker is drawn */
+  .motion .hi{ animation: cd-slap .7s .1s var(--ease-out) both; }
+  .motion .hero h1{ animation: cd-rise .7s .05s var(--ease-out) both; }
+  .motion .standfirst{ animation: cd-rise .7s .15s var(--ease-out) both; }
+  .motion .hero-actions, .motion .hero-note{ animation: cd-rise .7s .25s var(--ease-out) both; }
+  .motion .credential{ animation: cd-rise .7s .35s var(--ease-out) both; }
+  .motion .week{ animation: cd-rise .8s .3s var(--ease-out) both; }
+  .motion .marker::after{ transform-origin: left center; animation: cd-draw .8s .75s var(--ease-out) both; }
+
+  /* the week: each block flips in turn and gets stamped */
+  .motion .blk{ transition: background-color .3s ease, border-color .3s ease, color .3s ease, transform .18s var(--ease-out), box-shadow .18s var(--ease-out); }
+  .motion .blk.done{ animation: cd-stamp .5s var(--ease-out) both; }
+  .motion .week-foot b{ display: inline-block; }
+  .motion .week.after .week-foot b{ animation: cd-pop .45s 1s var(--ease-spring) both; }
+
+  /* numbers count up: the real number stays in the text; the ticking one is drawn over it */
+  .num-up{ position: relative; display: inline-block; font-variant-numeric: tabular-nums; }
+  .num-up.counting{ -webkit-text-fill-color: transparent; }
+  .num-up.counting::after{ content: attr(data-now); position: absolute; left: 0; top: 0; -webkit-text-fill-color: currentColor; }
+
+  /* scroll reveals (motion.js marks what starts below the fold) */
+  .motion [data-reveal]{ opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease-out) var(--d, 0ms), transform .6s var(--ease-out) var(--d, 0ms); }
+  .motion [data-reveal].in{ opacity: 1; transform: none; }
+  @media print{ .motion [data-reveal]{ opacity: 1; transform: none; } }
+
+  /* tactile: buttons spring, cards lift, stickers wiggle */
+  .motion .btn{ transition: transform .2s var(--ease-spring), box-shadow .2s var(--ease-out), background-color .15s ease; }
+  .motion .masthead{ transition: box-shadow .25s ease; }
+  .masthead.scrolled{ box-shadow: 0 10px 24px -18px rgba(0, 0, 0, .55); }
+  .motion .section-nav a, .motion .section-nav summary{ transition: background-color .2s ease, color .2s ease; }
+  .nav-ink{ position: absolute; z-index: 0; top: 0; left: 0; height: 0; width: 0; border-radius: 10px; background: var(--c2); opacity: 0; pointer-events: none; transition: transform .35s var(--ease-out), width .35s var(--ease-out), height .35s var(--ease-out), opacity .2s ease; }
+  .has-ink{ position: relative; }
+  .has-ink li{ position: relative; z-index: 1; }
+  .has-ink a.current{ background: transparent; color: var(--ink); }
+  .has-ink a.inked, .has-ink summary.inked{ color: var(--blk-ink); }
+  .has-ink a:hover, .has-ink summary:hover{ background: transparent; }
+  .motion .proof, .motion .problem, .motion .blueprint, .motion .steps li{ transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out), border-color .2s ease; }
+  .motion .proof img{ transition: transform .6s var(--ease-out); }
+  .motion .pill, .motion .tag, .motion .blueprint .num, .motion .steps li::before, .motion .portrait{ transition: transform .35s var(--ease-spring); }
+  .motion .faq summary::after{ transition: transform .3s var(--ease-spring), background-color .2s ease; }
+  .motion .faq details[open] summary::after{ transform: rotate(180deg); }
+  @media (hover: hover){
+    .motion .proof:hover{ transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--shadow); }
+    .motion .proof:hover img{ transform: scale(1.035); }
+    .motion .proof:hover .pill{ transform: rotate(-6deg) scale(1.08); }
+    .motion .proof:hover .pill.demo{ transform: rotate(6deg) scale(1.08); }
+    .motion .problem:hover, .motion .blueprint:hover, .motion .steps li:hover{ transform: translateY(-3px); border-color: var(--edge); }
+    .motion .problem:hover .tag{ transform: rotate(-4deg) scale(1.06); }
+    .motion .blueprint:hover .num{ transform: rotate(-12deg) scale(1.1); }
+    .motion .steps li:hover::before{ transform: rotate(-10deg) scale(1.08); }
+    .motion .portrait:hover{ transform: rotate(1deg) scale(1.02); }
+    .motion .week:not(.after) .blk:not(.free):not(.done):hover{ transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--blk-ink); }
+  }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
     *, *::before, *::after{ transition-duration: 0.01ms !important; animation: none !important; }
@@ -641,9 +710,9 @@
 </style>
 <script>
   // Display settings (/scripts/display.js), applied before the page paints so there's no flash
-  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;if(t==="dark")r.removeAttribute("data-theme");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
+  (function(){var r=document.documentElement,p={};try{p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{};}catch(e){}try{var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;if(t==="dark")r.removeAttribute("data-theme");["text","font","spacing","contrast","motion"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});if(p.motion!=="reduced"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)r.classList.add("motion");}catch(e){}})();
 </script>
-<link rel="stylesheet" href="/styles/display.css?v=3">
+<link rel="stylesheet" href="/styles/display.css?v=4">
 </head>
 <body>
 
@@ -750,7 +819,7 @@
             <li class="blk free" aria-hidden="true"></li>
           </ul>
         </div>
-        <p class="week-foot"><span>Admin blocks this week</span> <b id="week-count" aria-live="polite">10 by hand</b></p>
+        <p class="week-foot"><span>Admin blocks this week</span> <b id="week-count" aria-hidden="true">10 by hand</b><span class="sr" id="week-status" aria-live="polite">10 by hand</span></p>
       </figure>
     </div>
   </section>
@@ -859,7 +928,7 @@
           <div class="proof-body">
             <span class="pill live"><span class="dot" aria-hidden="true"></span>Live</span>
             <h3>Neuro Support Checker</h3>
-            <p>A free UK directory of nearly 900 support organisations for autism, ADHD, dyslexia and more.</p>
+            <p>A free UK directory of nearly <span class="num-up" data-to="900">900</span> support organisations for autism, ADHD, dyslexia and more.</p>
             <p class="result">Every listing is re-checked every 1 to 3 days, and daily if anything looks wrong, so nobody is sent to a group that has closed.</p>
             <p class="proof-links">
               <a href="https://neurosupport.labs.chrisdemetriou.com/" target="_blank" rel="noopener">Open the directory <span aria-hidden="true">↗</span><span class="sr"> (opens in a new tab)</span></a>
@@ -899,7 +968,7 @@
             <span class="pill live"><span class="dot" aria-hidden="true"></span>Live</span>
             <h3>Reach Children Uganda</h3>
             <p>Legacy system recovery for a UK children&rsquo;s charity.</p>
-            <p class="result">342 archived addresses scanned and 154 pages recovered, then rebuilt off WordPress onto free hosting. No plugins, no hosting bill.</p>
+            <p class="result"><span class="num-up" data-to="342">342</span> archived addresses scanned and <span class="num-up" data-to="154">154</span> pages recovered, then rebuilt off WordPress onto free hosting. No plugins, no hosting bill.</p>
             <p class="proof-links">
               <a href="https://reach-children-uganda.org.uk/" target="_blank" rel="noopener">Visit the charity&rsquo;s site <span aria-hidden="true">↗</span><span class="sr"> (opens in a new tab)</span></a>
               <a href="https://labs.chrisdemetriou.com/reach/">How it&rsquo;s built<span class="sr">: Reach Children Uganda</span> <span aria-hidden="true">→</span></a>
@@ -1117,7 +1186,7 @@
             <li>If it&rsquo;s worth building: a written scope with a fixed price.</li>
             <li>Build and handover: code and accounts in your name.</li>
           </ol>
-          <p>Prefer email? <a href="mailto:hello@chrisdemetriou.com">hello@chrisdemetriou.com</a></p>
+          <p>Prefer email? <a href="mailto:hello@chrisdemetriou.com">hello@chrisdemetriou.com</a> <button type="button" class="copy" data-copy="hello@chrisdemetriou.com" aria-label="Copy the email address" hidden>Copy</button><span class="sr" role="status" id="copy-status"></span></p>
         </aside>
       </div>
     </div>
@@ -1182,19 +1251,45 @@
   })();
 
   // The example week: Before shows the jobs done by hand; After shows the tool doing each one.
+  // With motion on, the blocks flip one at a time and the count ticks down, and the week
+  // plays itself once when it first comes into view (unless the visitor got there first).
   (function(){
     const week = document.getElementById('week');
     if (!week) return;
-    const sw = week.querySelector('.switch'), count = document.getElementById('week-count');
-    const total = week.querySelectorAll('.blk:not(.free)').length;
+    const sw = week.querySelector('.switch'), count = document.getElementById('week-count'), status = document.getElementById('week-status');
+    const blocks = Array.from(week.querySelectorAll('.blk:not(.free)'));
+    const total = blocks.length;
+    let timers = [], touched = false;
+    const moving = function(){ return document.documentElement.classList.contains('motion'); };
+    blocks.forEach(function(b, i){ b.style.setProperty('--i', i); });
+    function label(left){ return left === 0 ? '0 by hand · ' + total + ' run themselves' : left + ' by hand'; }
     function show(view){
-      week.classList.toggle('after', view === 'after');
+      const after = view === 'after';
+      timers.forEach(clearTimeout); timers = [];
+      week.classList.toggle('after', after);
       sw.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.view === view)); });
-      count.textContent = view === 'after' ? '0 by hand · ' + total + ' run themselves' : total + ' by hand';
+      status.textContent = label(after ? 0 : total);
+      const step = moving() ? 90 : 0;
+      if (!step){ blocks.forEach(function(b){ b.classList.toggle('done', after); }); count.textContent = label(after ? 0 : total); return; }
+      (after ? blocks : blocks.slice().reverse()).forEach(function(b, i){
+        timers.push(setTimeout(function(){
+          b.classList.toggle('done', after);
+          const left = blocks.filter(function(x){ return !x.classList.contains('done'); }).length;
+          count.textContent = label(left);
+        }, i * step));
+      });
     }
-    sw.querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.view); }); });
+    sw.querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){ touched = true; show(b.dataset.view); }); });
     sw.hidden = false;
     show('before');
+    if (moving() && 'IntersectionObserver' in window){
+      const seen = new IntersectionObserver(function(entries){
+        if (!entries[0].isIntersecting) return;
+        seen.disconnect();
+        setTimeout(function(){ if (!touched && moving()) show('after'); }, 1100);
+      }, { threshold: 0.6 });
+      seen.observe(week);
+    }
   })();
 
   // Creative menu: a plain <details>, so it works without this. This adds the
@@ -1285,6 +1380,7 @@
     });
   })();
 </script>
-<script src="/scripts/display.js?v=3" defer></script>
+<script src="/scripts/motion.js?v=1" defer></script>
+<script src="/scripts/display.js?v=4" defer></script>
 </body>
 </html>

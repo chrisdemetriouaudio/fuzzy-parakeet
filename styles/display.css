@@ -94,6 +94,10 @@
 :root[data-spacing="wide"] body{ line-height: 1.9; letter-spacing: .06em; word-spacing: .16em; }
 :root[data-spacing="wide"] p{ margin-bottom: 1.5em; }
 
+/* ── Reduce motion: no animations, transitions or smooth scrolling ── */
+:root[data-motion="reduced"]{ scroll-behavior: auto !important; }
+:root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+
 /* ── Reading mask ────────────────────────────────────────── */
 .reading-mask{ position: fixed; left: 0; right: 0; z-index: 10005; pointer-events: none; background: rgba(5,8,14,.62); }   /* above the cookie banner (10001) */
 .reading-mask--top{ top: 0; } .reading-mask--bottom{ bottom: 0; }
