@@ -372,7 +372,7 @@ export function renderHome(projects, today = new Date().toISOString().slice(0, 1
       </ul>
     </div>
   </section>`;
-  return page({ title: "Labs · Custom software by Chris Demetriou, Manchester", description: "Custom software, tools and web applications I've designed, built, tested and launched. Open any of them, or see how it's built.", path: "/", ogImage: "img/og-genesis.png", ld, body, today, extraCss: ["/filters.css"] });
+  return page({ title: "Labs: Custom Software Projects | Chris Demetriou", description: "Custom software, tools and web applications I've designed, built, tested and launched. Open any of them, or see how it's built.", path: "/", ogImage: "img/og-genesis.png", ld, body, today, extraCss: ["/filters.css"] });
 }
 
 export function renderProjectPage(p, projects, today = new Date().toISOString().slice(0, 10)) {
@@ -386,7 +386,7 @@ export function renderProjectPage(p, projects, today = new Date().toISOString().
       ${list.length > 1 ? `<p class="next-project"><span class="label">Next project</span> <a href="/${esc(next.slug)}/">${esc(next.name || next.slug)} <span aria-hidden="true">→</span></a></p>` : ""}
     </div>
   </section>`;
-  return page({ title: `${p.title} · Labs · Chris Demetriou`, description: p.description, path: `/${p.slug}/`, ogImage: p.image, ld, body, today });
+  return page({ title: `${p.title} | Labs | Chris Demetriou`, description: p.description, path: `/${p.slug}/`, ogImage: p.image, ld, body, today });
 }
 
 export function renderSitemap(projects, today = new Date().toISOString().slice(0, 10)) {

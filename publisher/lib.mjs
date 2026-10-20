@@ -353,7 +353,7 @@ export function renderRedirect(r, ctx) {
   const to = r.redirectTo;
   return `<!DOCTYPE html>
 ${GENERATED_MARK} id=${r.id} retired -- edit content/records/${r.id}.json, not this file -->
-<html lang="en-GB"><head><meta charset="UTF-8"><title>Moved · Chris Demetriou</title>
+<html lang="en-GB"><head><meta charset="UTF-8"><title>Moved | Chris Demetriou</title>
 <meta name="robots" content="noindex"><link rel="canonical" href="${SITE}${esc(to)}">
 <meta http-equiv="refresh" content="0; url=${esc(to)}"></head>
 <body><p>This page has moved: <a href="${esc(to)}">continue</a>.</p></body></html>
