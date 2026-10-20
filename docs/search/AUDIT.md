@@ -53,7 +53,7 @@ Checked 20 Oct 2026, against the live site, the repository and current published
 | V3 | "Genesis is running a real band": whose band? The public demo uses fictional data. | Homepage; genesis demo | Medium | High | Low | 👤 |
 | V4 | No analytics or conversion tracking. Enquiries can only be counted in the Web3Forms dashboard. | Repo search | High for measurement | High | Low | 👤 Needs approval (it changes the privacy notice) |
 | V5 | Search Console and Bing Webmaster Tools ownership, and sitemap submission, are unknown. | Not accessible from here | High | — | Low | 👤 |
-| V6 | The portrait JPEG is 251 KB but is shown at 180 px. | `images/` | Low | High | Low | 🔎 Make a small copy |
+| V6 | The portrait JPEG is 251 KB but is shown at 180 px. | `images/` | Low | High | Low | ✅ Homepage now uses a 34 KB portrait and a 3 KB avatar (`/creative/` still uses the original) |
 | V7 | Labs has pending changes (nav, title, Neuro fix) that aren't live until it's released. | `labs/version.json` = 982e526 | Medium | High | Low | 👤 `npm run release` |
 | ✔︎ | HTTPS. `http→https`, `www→apex`, `/creative→/creative/` and `demo.→labs.` are all 301s. Self-referencing canonicals on every page. No `X-Robots-Tag`. `robots.txt` allows everything and names the sitemap. `?utm_*` serves 200 with the canonical. `/index.html` duplicates `/` but its canonical points to `/` (GitHub Pages can't send a 301 there). | curl, 20 Oct 2026 | — | High | — | Fine |
 | ✔︎ | All main content is in the delivered HTML, with no JavaScript needed. The forms also post without JS (Web3Forms' own thank-you page). One `h1` per page. The FAQ structured data matches the visible FAQ word for word. | Repo and live HTML | — | High | — | Fine |

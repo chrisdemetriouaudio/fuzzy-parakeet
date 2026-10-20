@@ -61,11 +61,14 @@
   toggle.setAttribute("aria-controls", "display-panel");
   toggle.setAttribute("aria-label", "Display settings");
   toggle.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 18L8.2 5h1.6L15 18M5 14h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 11.5c.6-.9 1.5-1.4 2.6-1.4 1.6 0 2.4 1 2.4 2.5V18m0-3.5c-.8-.4-1.6-.5-2.5-.5-1.5 0-2.5.8-2.5 2s.9 2 2.2 2c1.3 0 2.3-.8 2.8-1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Display</span>';
-  var tools = document.createElement("span");
-  tools.className = "mast-tools";
-  if (slot.children.length > 1) tools.appendChild(slot.lastElementChild);
+  var tools = slot.querySelector(".mast-tools");   // a page can leave a slot for it
+  if (!tools){
+    tools = document.createElement("span");
+    tools.className = "mast-tools";
+    if (slot.children.length > 1) tools.appendChild(slot.lastElementChild);
+    slot.appendChild(tools);
+  }
   tools.appendChild(toggle);
-  slot.appendChild(tools);
 
   // the panel
   var panel = document.createElement("div");

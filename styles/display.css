@@ -10,15 +10,18 @@
 /* ── Light theme ─────────────────────────────────────────── */
 :root[data-theme="light"]{
   color-scheme: light;
-  --bg:#FAF8F4; --surface:#FFFFFF; --surface-2:#F1EDE6; --bg-panel:#FFFFFF;
-  --border:#DDD7CC; --border-strong:#6F6A73; --field-edge:#6F6A73;
+  --bg:#FFF7EC; --surface:#FFFFFF; --surface-2:#F5EBDD; --bg-panel:#FFFFFF;
+  --border:#E3D6C3; --border-strong:#6F6A73; --field-edge:#6F6A73;
   --line:rgba(22,24,29,.12); --line-strong:rgba(22,24,29,.22);
-  --ink:#16181D; --ink-muted:#4B5260;
-  --accent:#8C4F06; --accent-hover:#6F3F05; --accent-ink:#FFFFFF; --amber:#8C4F06;
+  --ink:#23201C; --ink-muted:#5E564C;
+  --accent:#B53A1E; --accent-hover:#93301A; --accent-ink:#FFFFFF; --amber:#8C4F06;
   --live:#1B7A45; --link:#1D55C0; --error:#B3261E; --red:#B3261E; --teal:#2B6C6A; --teal-text:#2B6C6A;
+  /* homepage ("Your week") */
+  --edge:#23201C; --shadow:#23201C; --marker:#FFE08A; --marker-y:.02em; --marker-h:.28em; --link-line:#B53A1E;
+  --blk-ink:#23201C; --c1:#FBD9CC; --c2:#FFE08A; --c3:#DCE8FF; --c4:#E9E0FF; --free:#E3D6C3;
+  --done-bg:#D3EEE3; --done-line:#1F6E52; --done-ink:#1F6E52; --sticker-live:#D3EEE3; --hover:#F5EBDD;
 }
-:root[data-theme="light"] .section-nav{ background: rgba(250,248,244,.94); }
-:root[data-theme="light"] .hero{ background-image: radial-gradient(rgba(22,24,29,.08) 1px, transparent 1px); }
+:root[data-theme="light"] body > .section-nav{ background: rgba(255,247,236,.94); }
 :root[data-theme="light"] .record-header{ background: none; }
 :root[data-theme="light"] :is(.tag.PR, .tag.PTE, .tag.OA, .tag.P, .btn-submit, .btn-inline, .btn-consent.primary, .skip-link){ color: var(--accent-ink); }
 :root[data-theme="light"] .cookie-banner{ background: var(--bg-panel); }
@@ -37,6 +40,8 @@
   --ink:#FFF; --ink-muted:#FFF;
   --accent:#FFE14D; --accent-hover:#FFF; --accent-ink:#000; --amber:#FFE14D;
   --live:#7DFF9E; --link:#FFE14D; --error:#FF8A80; --red:#FF8A80; --teal:#FFF; --teal-text:#FFF;
+  --edge:#FFF; --shadow:transparent; --btn-shadow:transparent; --marker:#FFE14D; --link-line:#FFE14D;
+  --blk-ink:#000; --free:#FFF; --done-bg:#000; --done-line:#7DFF9E; --done-ink:#7DFF9E; --sticker-live:#7DFF9E; --hover:#333;
 }
 :root[data-contrast="high"][data-theme="light"]{
   color-scheme: light;
@@ -45,11 +50,13 @@
   --ink:#000; --ink-muted:#000;
   --accent:#0033CC; --accent-hover:#000; --accent-ink:#FFF; --amber:#0033CC;
   --live:#00561F; --link:#0033CC; --error:#A40000; --red:#A40000; --teal:#000; --teal-text:#000;
+  --edge:#000; --shadow:transparent; --btn-shadow:transparent; --marker:#FFE14D; --link-line:#0033CC;
+  --blk-ink:#000; --free:#000; --done-bg:#FFF; --done-line:#00561F; --done-ink:#00561F; --sticker-live:#7DFF9E; --hover:#E6E6E6;
 }
 :root[data-contrast="high"][data-theme="light"] .cdplayer{
   --bg-panel:#000; --ink:#FFF; --ink-muted:#FFF; --amber:#FFE14D; --accent:#FFE14D; --accent-ink:#000; --text-white:#FFF; --text-grey:#FFF; --line:#FFF; --line-strong:#FFF;
 }
-:root[data-contrast="high"] .section-nav{ background: var(--bg); border-bottom: 3px solid var(--ink); }
+:root[data-contrast="high"] body > .section-nav{ background: var(--bg); border-bottom: 3px solid var(--ink); }
 :root[data-contrast="high"] .hero{ background-image: none; }
 :root[data-contrast="high"] .card,
 :root[data-contrast="high"] .field input, :root[data-contrast="high"] .field select, :root[data-contrast="high"] .field textarea,
@@ -72,6 +79,7 @@
 :root[data-font="dyslexic"]{
   --font:"OpenDyslexic", system-ui, sans-serif; --mono:"OpenDyslexic", system-ui, sans-serif;
   --font-body:"OpenDyslexic", system-ui, sans-serif; --font-display:"OpenDyslexic", system-ui, sans-serif; --font-mono:"OpenDyslexic", system-ui, sans-serif;
+  --head:"OpenDyslexic", system-ui, sans-serif;
 }
 :root[data-font="dyslexic"] body, :root[data-font="dyslexic"] button, :root[data-font="dyslexic"] input,
 :root[data-font="dyslexic"] select, :root[data-font="dyslexic"] textarea,
@@ -94,9 +102,10 @@
 /* ── The button and the panel ────────────────────────────── */
 .mast-tools{ display: inline-flex; align-items: center; gap: 12px; }
 .display-toggle{
-  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px;
-  font: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
-  background: transparent; border: 1px solid var(--border-strong, var(--line-strong)); border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 4px 13px;
+  font: inherit; font-size: 15px; font-weight: 700; color: var(--ink);
+  background: var(--surface, transparent); border: 2px solid var(--edge, var(--border-strong, var(--line-strong))); border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--shadow, transparent); cursor: pointer;
 }
 .display-toggle svg{ width: 20px; height: 20px; }
 .display-toggle:hover{ border-color: var(--accent, var(--amber)); }
