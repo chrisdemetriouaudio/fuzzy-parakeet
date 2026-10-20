@@ -31,7 +31,7 @@ updated: 2026-10-18
 - 💭 **Make a Labs share image** (the current one shows Genesis only).
 - 💭 **Release Labs automatically** after a project releases (needs a Cloudflare token in GitHub).
 - 💭 **Add the next project** to Labs: one entry in `labs/projects.json`.
-- 💭 **Check the site with an accessibility scanner** and fix what it finds.
+- 💭 **Display settings on Labs:** Labs' security policy (CSP) blocks scripts, so the panel needs a small CSP change and its own copy there first.
 
 ## 🅿️ Parked (on hold on purpose)
 
@@ -44,3 +44,4 @@ updated: 2026-10-18
 > - [x] **TECH in the nav bar** (16 Oct 2026).
 > - [x] **Labs moved into this repository,** with its own release (17 Oct 2026).
 > - [x] **Contact form is back on the site;** Email now sits under Name (18 Oct 2026).
+> - [x] **Accessibility scanner (axe-core) run on every page;** `/creative/` contrast, headings, iframes and volume label fixed. **Display settings** panel added (20 Oct 2026, in review).

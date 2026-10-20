@@ -167,7 +167,7 @@ td:first-child{ color: var(--ink); white-space: nowrap; }
 .site-footer a{ color: var(--ink-muted); border-bottom: 1px solid var(--line); margin-left: 16px; }
 .site-footer a:hover{ color: var(--amber); }
 
-a:focus-visible, button:focus-visible{
+a:focus-visible, button:focus-visible, table:focus-visible{
   outline: 2px solid var(--amber);
   outline-offset: 3px;
   border-radius: 2px;

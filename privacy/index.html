@@ -13,6 +13,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Space+Mono:wght@400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/page.css">
+<script>
+  // Display settings (/scripts/display.js), applied before the page paints so there's no flash
+  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):p.theme;if(t==="light")r.setAttribute("data-theme","light");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/styles/display.css">
 </head>
 <body>
 
@@ -27,7 +32,7 @@
   <div class="shell">
     <p class="eyebrow">Legal</p>
     <h1>Privacy notice</h1>
-    <p class="updated">Last updated: 19 October 2026</p>
+    <p class="updated">Last updated: 20 October 2026</p>
 
     <p>
       This website (chrisdemetriou.com) is run by <strong>Chris Demetriou</strong>, a sole trader
@@ -82,9 +87,10 @@
 
     <h2>Storage on your device</h2>
     <p>
-      The site stores a single value in your browser&rsquo;s local storage recording whether you
-      allowed or declined third-party embeds, so it does not ask again on every visit. It
-      contains no identifier and never leaves your device. Clearing your browser data removes it.
+      The site stores up to two values in your browser&rsquo;s local storage: whether you
+      allowed or declined third-party embeds, so it does not ask again on every visit, and any
+      display settings you choose (theme, text size, font, spacing, contrast). Neither contains an
+      identifier, and neither leaves your device. Clearing your browser data removes them.
     </p>
 
     <h2>How long it is kept</h2>
@@ -121,5 +127,6 @@
 </footer>
 
 <script src="/scripts/year.js" defer></script>
+<script src="/scripts/display.js" defer></script>
 </body>
 </html>

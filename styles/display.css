@@ -1,0 +1,143 @@
+/* Display settings: the same panel as the Neuro Support Checker.
+   scripts/display.js sets data-theme, data-text, data-font, data-spacing and data-contrast on
+   <html>; everything below reacts to those. It works on every page because it overrides the
+   colour tokens each page already uses (homepage: --surface/--border/--accent…, older pages:
+   --bg-panel/--line/--amber…). Every colour here is checked for WCAG AA contrast. */
+
+@font-face{ font-family:"OpenDyslexic"; src:url("/fonts/OpenDyslexic-Regular.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face{ font-family:"OpenDyslexic"; src:url("/fonts/OpenDyslexic-Bold.otf") format("opentype"); font-weight:500 800; font-style:normal; font-display:swap; }
+
+/* ── Light theme ─────────────────────────────────────────── */
+:root[data-theme="light"]{
+  color-scheme: light;
+  --bg:#FAF8F4; --surface:#FFFFFF; --surface-2:#F1EDE6; --bg-panel:#FFFFFF;
+  --border:#DDD7CC; --border-strong:#6F6A73; --field-edge:#6F6A73;
+  --line:rgba(22,24,29,.12); --line-strong:rgba(22,24,29,.22);
+  --ink:#16181D; --ink-muted:#4B5260;
+  --accent:#8C4F06; --accent-hover:#6F3F05; --accent-ink:#FFFFFF; --amber:#8C4F06;
+  --live:#1B7A45; --link:#1D55C0; --error:#B3261E; --red:#B3261E; --teal:#2B6C6A; --teal-text:#2B6C6A;
+}
+:root[data-theme="light"] .section-nav{ background: rgba(250,248,244,.94); }
+:root[data-theme="light"] .hero{ background-image: radial-gradient(rgba(22,24,29,.08) 1px, transparent 1px); }
+:root[data-theme="light"] .record-header{ background: none; }
+:root[data-theme="light"] :is(.tag.PR, .tag.PTE, .tag.OA, .tag.P, .btn-submit, .btn-inline, .btn-consent.primary, .skip-link){ color: var(--accent-ink); }
+:root[data-theme="light"] .cookie-banner{ background: var(--bg-panel); }
+/* The CD player is drawn as a physical device, so it keeps its dark finish in every theme */
+:root[data-theme="light"] .cdplayer{
+  color-scheme: dark;
+  --bg-panel:#1a1620; --ink:#ede6dd; --ink-muted:#928c96; --amber:#e8a34d; --accent:#e8a34d; --accent-ink:#14100A;
+  --text-white:#ede6dd; --text-grey:#928c96; --line:rgba(237,230,221,.09); --line-strong:rgba(237,230,221,.16);
+}
+
+/* ── High contrast (dark: black, white, yellow; light: white, black, blue) ── */
+:root[data-contrast="high"]{
+  color-scheme: dark;
+  --bg:#000; --surface:#000; --surface-2:#000; --bg-panel:#000;
+  --border:#FFF; --border-strong:#FFF; --field-edge:#FFF; --line:#FFF; --line-strong:#FFF;
+  --ink:#FFF; --ink-muted:#FFF;
+  --accent:#FFE14D; --accent-hover:#FFF; --accent-ink:#000; --amber:#FFE14D;
+  --live:#7DFF9E; --link:#FFE14D; --error:#FF8A80; --red:#FF8A80; --teal:#FFF; --teal-text:#FFF;
+}
+:root[data-contrast="high"][data-theme="light"]{
+  color-scheme: light;
+  --bg:#FFF; --surface:#FFF; --surface-2:#FFF; --bg-panel:#FFF;
+  --border:#000; --border-strong:#000; --field-edge:#000; --line:#000; --line-strong:#000;
+  --ink:#000; --ink-muted:#000;
+  --accent:#0033CC; --accent-hover:#000; --accent-ink:#FFF; --amber:#0033CC;
+  --live:#00561F; --link:#0033CC; --error:#A40000; --red:#A40000; --teal:#000; --teal-text:#000;
+}
+:root[data-contrast="high"][data-theme="light"] .cdplayer{
+  --bg-panel:#000; --ink:#FFF; --ink-muted:#FFF; --amber:#FFE14D; --accent:#FFE14D; --accent-ink:#000; --text-white:#FFF; --text-grey:#FFF; --line:#FFF; --line-strong:#FFF;
+}
+:root[data-contrast="high"] .section-nav{ background: var(--bg); border-bottom: 3px solid var(--ink); }
+:root[data-contrast="high"] .hero{ background-image: none; }
+:root[data-contrast="high"] .card,
+:root[data-contrast="high"] .field input, :root[data-contrast="high"] .field select, :root[data-contrast="high"] .field textarea,
+:root[data-contrast="high"] .display-panel{ border: 2px solid var(--ink) !important; }
+:root[data-contrast="high"] main a:not(.btn):not(.btn-submit){ text-decoration: underline; }
+:root[data-contrast="high"] .masthead, :root[data-contrast="high"] footer .container{ border-color: var(--ink); }
+
+/* ── Text size: bigger letters that re-wrap at any width ─── */
+/* long words (email addresses, links) break rather than push the page sideways */
+:root:is([data-text="large"], [data-text="xlarge"], [data-font="dyslexic"], [data-spacing="wide"]) body{ overflow-wrap: break-word; }
+:root[data-text="large"]{ font-size: 115%; }
+:root[data-text="large"] body{ font-size: 20px; }
+:root[data-text="xlarge"]{ font-size: 130%; }
+:root[data-text="xlarge"] body{ font-size: 23px; }
+:root:is([data-text="large"], [data-text="xlarge"]) :is(.label, .section-nav a, .section-nav summary, .meta, .hero-note, .credential){ font-size: 14px; }
+:root:is([data-text="large"], [data-text="xlarge"]) .section-nav ul{ flex-wrap: wrap; }
+:root:is([data-text="large"], [data-text="xlarge"]) :is(input, select, textarea, button){ max-width: 100%; }
+
+/* ── Dyslexia-friendly font ──────────────────────────────── */
+:root[data-font="dyslexic"]{
+  --font:"OpenDyslexic", system-ui, sans-serif; --mono:"OpenDyslexic", system-ui, sans-serif;
+  --font-body:"OpenDyslexic", system-ui, sans-serif; --font-display:"OpenDyslexic", system-ui, sans-serif; --font-mono:"OpenDyslexic", system-ui, sans-serif;
+}
+:root[data-font="dyslexic"] body, :root[data-font="dyslexic"] button, :root[data-font="dyslexic"] input,
+:root[data-font="dyslexic"] select, :root[data-font="dyslexic"] textarea,
+:root[data-font="dyslexic"] h1, :root[data-font="dyslexic"] h2, :root[data-font="dyslexic"] h3{ font-family: "OpenDyslexic", system-ui, sans-serif; }
+:root[data-font="dyslexic"] h1, :root[data-font="dyslexic"] h2, :root[data-font="dyslexic"] h3{ letter-spacing: 0; line-height: 1.3; }
+/* capitals are harder to read for many dyslexic readers */
+:root[data-font="dyslexic"] .label, :root[data-font="dyslexic"] .section-nav a, :root[data-font="dyslexic"] .section-nav summary,
+:root[data-font="dyslexic"] .band-title, :root[data-font="dyslexic"] .btn-submit, :root[data-font="dyslexic"] .pill,
+:root[data-font="dyslexic"] .step-tag, :root[data-font="dyslexic"] .spec dt{ text-transform: none; letter-spacing: 0; }
+
+/* ── Wider spacing ───────────────────────────────────────── */
+:root[data-spacing="wide"] body{ line-height: 1.9; letter-spacing: .06em; word-spacing: .16em; }
+:root[data-spacing="wide"] p{ margin-bottom: 1.5em; }
+
+/* ── Reading mask ────────────────────────────────────────── */
+.reading-mask{ position: fixed; left: 0; right: 0; z-index: 10005; pointer-events: none; background: rgba(5,8,14,.62); }   /* above the cookie banner (10001) */
+.reading-mask--top{ top: 0; } .reading-mask--bottom{ bottom: 0; }
+.reading-mask[hidden]{ display: none; }
+
+/* ── The button and the panel ────────────────────────────── */
+.mast-tools{ display: inline-flex; align-items: center; gap: 12px; }
+.display-toggle{
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 12px;
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--ink);
+  background: transparent; border: 1px solid var(--border-strong, var(--line-strong)); border-radius: 999px; cursor: pointer;
+}
+.display-toggle svg{ width: 20px; height: 20px; }
+.display-toggle:hover{ border-color: var(--accent, var(--amber)); }
+.display-toggle:focus-visible, .display-panel :focus-visible{ outline: 2px solid var(--accent, var(--amber)); outline-offset: 3px; }
+
+.display-panel{
+  position: fixed; top: 64px; right: 16px; z-index: 10010;
+  width: min(380px, calc(100vw - 32px)); max-height: calc(100vh - 80px); overflow: auto;
+  padding: 18px; color: var(--ink);
+  background: var(--surface, var(--bg-panel)); border: 1px solid var(--border-strong, var(--line-strong)); border-radius: 10px;
+  box-shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+  font-family: var(--font, var(--font-body)); font-size: 16px; line-height: 1.5; letter-spacing: normal; word-spacing: normal;
+}
+.display-panel[hidden]{ display: none; }
+.display-head{ display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.display-head h2{ margin: 0; font-size: 1.15rem; letter-spacing: 0; text-transform: none; color: var(--ink); border: 0; padding: 0; font-family: inherit; }
+.display-panel button{ font: inherit; font-size: 15px; color: var(--ink); background: transparent; border: 1px solid var(--border-strong, var(--line-strong)); border-radius: 6px; padding: 8px 12px; min-height: 44px; cursor: pointer; }
+.display-panel fieldset{ margin: 14px 0 0; padding: 0; border: 0; }
+.display-panel legend{ font-weight: 600; margin-bottom: 8px; padding: 0; }
+.segmented{ display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-strong, var(--line-strong)); border-radius: 8px; overflow: hidden; }
+.segmented input{ position: absolute; opacity: 0; width: 1px; height: 1px; }
+.segmented label{ display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 6px; text-align: center; cursor: pointer; font-size: 15px; }
+.segmented label + input + label{ border-left: 1px solid var(--border-strong, var(--line-strong)); }
+.segmented input:checked + label{ background: var(--accent, var(--amber)); color: var(--accent-ink, #14100A); font-weight: 600; }
+.segmented input:focus-visible + label{ outline: 2px solid var(--accent, var(--amber)); outline-offset: -4px; }
+.segmented .size-2{ font-size: 17px; } .segmented .size-3{ font-size: 19px; }
+.switches{ list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 4px; }
+.switch{ display: flex; justify-content: space-between; align-items: center; gap: 14px; min-height: 52px; padding: 6px 0; cursor: pointer; border-top: 1px solid var(--border, var(--line)); }
+.switch small{ display: block; color: var(--ink-muted); font-size: 14px; }
+.switch input{
+  appearance: none; -webkit-appearance: none; flex: none; position: relative;
+  width: 46px; height: 26px; border-radius: 999px; margin: 0; cursor: pointer;
+  background: var(--surface-2, var(--line-strong)); border: 2px solid var(--border-strong, var(--ink-muted));
+}
+.switch input::after{ content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink-muted); transition: transform .15s ease; }
+.switch input:checked{ background: var(--accent, var(--amber)); border-color: var(--accent, var(--amber)); }
+.switch input:checked::after{ transform: translateX(20px); background: var(--accent-ink, #14100A); }
+.display-foot{ display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border, var(--line)); }
+.display-foot p{ margin: 0; font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 760px){
+  .display-toggle span{ display: none; }   /* icon only on phones; the button keeps its name */
+  .display-panel{ top: 56px; right: 8px; width: calc(100vw - 16px); }
+}
+@media (prefers-reduced-motion: reduce){ .switch input::after{ transition: none; } }
