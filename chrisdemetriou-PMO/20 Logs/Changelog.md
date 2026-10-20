@@ -10,7 +10,12 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · `/creative/`, privacy and cookies in the "Your week" look · live
+> [!success]+ 🚀 20 Oct 2026 · Aligned page titles; contact form default · live (Labs needs a release)
+> - **Released:** pull request #33 (`f973bb0`).
+> - **Titles:** every page is "Page | Chris Demetriou"; Creative is "Creative: Music, Media & Worship | Chris Demetriou". Labs titles change with its next release.
+> - **`/creative/` contact form:** "What's this about?" defaults to "A web app or tool".
+
+> [!success]- 🚀 20 Oct 2026 · `/creative/`, privacy and cookies in the "Your week" look · live
 > - **Released:** pull request #32 (`6a0086a`), live 18:40 UTC.
 > - **`/creative/`:** homepage header and nav, fonts, light default, stickers, colour-coded role tags, restyled tables, quotes, YouTube cards, form and showreel. CD player keeps its dark finish.
 > - **Privacy and cookies:** same header, fonts and palette.
