@@ -15,6 +15,7 @@ updated: 2026-10-18
 
 ## 👉 Your actions
 
+- 👉 **Phase 8:** review the Search & Publishing pull request, then answer the questions in [[Phase 8 — Search & Publishing]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
 - 👉 **Bing Webmaster Tools:** import the site from Search Console.
@@ -50,6 +51,7 @@ Positioning: Software Developer & Consultant (20 Oct 2026). History: [[Operation
 | [[Phase 5 — Artist Roster Rebuild]] | Today's design | ✅ Live (Sep 2026) |
 | [[Phase 6 — Media & Worship]] | Media and Worship | ✅ Live (14 Oct 2026) |
 | [[Phase 7 — Tech & Labs]] | TECH page, all projects | ✅ Live (17 Oct 2026) |
+| [[Phase 8 — Search & Publishing]] | Get found; evidence-gated pages | 🛠️ Now (20 Oct 2026) |
 
 ## ✅ Done
 

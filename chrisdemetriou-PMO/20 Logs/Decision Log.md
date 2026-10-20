@@ -9,6 +9,14 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 20 Oct 2026 · Search & publishing: evidence first, few pages (Proposed)
+> - **Status:** Proposed. Chris reviews the pull request.
+> - **Proposed:** pages are built from evidence records only after Chris approves that exact version; any later edit voids the approval.
+> - **Proposed:** case studies go on the main site (`/work/`); Labs keeps the technical build notes.
+> - **Proposed:** no city pages, no one-page-per-blueprint pages, no music credit pages, no embed-only worship pages.
+> - **Proposed:** music service pages wait until Chris confirms which services he still sells.
+> - **Why:** qualified enquiries and trust, not page count. Google's spam policy targets pages mass-produced without user value.
+
 > [!question]- 20 Oct 2026 · Title is "Software Developer & Consultant"
 > - **Decided by Chris:** replaces "Operations Engineer" on the site, share card, structured data, `llms.txt`, `/creative/` and Labs.
 > - **Decided by Chris:** subtitle "I turn business problems into custom tools and applications—from the first idea to a tested, working solution."; headline "Custom software that solves your business problems".
