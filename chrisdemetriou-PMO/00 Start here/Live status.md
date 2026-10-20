@@ -8,25 +8,25 @@ changed: 20 Oct 2026, 11:14 (UK time)
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Everything answering:** 🔴 no: GitHub Pages build
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `f510371` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `5b60728` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `982e526`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#23 Point both forms at the new Web3Forms key for hello@**: opened 20 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `135ce27` · Point both forms at the new Web3Forms key for hello@
 - 20 Oct 2026 · `ec31bf1` · docs(pmo): Software Developer & Consultant live (PR #22)
 - 20 Oct 2026 · `df9a9b4` · Reposition as Software Developer & Consultant
 - 20 Oct 2026 · `05c7026` · docs(pmo): Operations Engineer homepage live (PR #21)
@@ -36,4 +36,3 @@ changed: 20 Oct 2026, 11:14 (UK time)
 - 19 Oct 2026 · `8f23c70` · feat(site): homepage sells to buyers; Music, Media and Worship move to /creative/
 - 19 Oct 2026 · `35cc7c4` · feat(home): Neuro Support Checker first in "What I build"
 - 19 Oct 2026 · `7560b40` · feat(home): sell web apps, not admin; add global IT to About; hide footer player
-- 19 Oct 2026 · `b01ad8c` · feat(labs): add Neuro Support Checker, pinned as the first card
