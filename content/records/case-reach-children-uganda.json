@@ -1,0 +1,126 @@
+{
+  "id": "case-reach-children-uganda",
+  "family": "case-studies",
+  "slug": "reach-children-uganda",
+  "title": "Recovering a UK children's charity's website from web archives",
+  "status": "evidence-needed",
+  "audience": "Trustees or managers of a small charity whose old website is broken, lost or expensive to keep running.",
+  "intent": {
+    "key": "recover-lost-charity-website",
+    "primary": "Can a lost or broken charity website be recovered and rebuilt cheaply, and what does it involve?",
+    "related": [
+      "Can you recover a website from the Wayback Machine?",
+      "How do you move a charity off WordPress?"
+    ]
+  },
+  "uniqueValue": "Shows a real recovery: how many archived addresses were found, how many pages were rescued, and how the rebuild removed the running costs. The Labs page covers the build; this page is for the charity deciding whether to ask.",
+  "indexable": true,
+  "seo": {
+    "title": "Charity website recovery case study | Chris Demetriou",
+    "description": "How a UK children's charity's website was recovered from web archives and rebuilt as a fast static site that is free to host."
+  },
+  "role": {
+    "summary": "I recovered the site from web archives and rebuilt it.",
+    "relationship": "unknown",
+    "status": "awaiting-confirmation"
+  },
+  "claims": [
+    {
+      "id": "c-archive",
+      "kind": "metric",
+      "text": "342 saved addresses were listed in the Wayback Machine and 154 pages were rescued.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (reach architecture: Wayback Machine)",
+          "public": true
+        },
+        {
+          "ref": "https://labs.chrisdemetriou.com/reach/",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-rebuild",
+      "kind": "fact",
+      "text": "The site was rebuilt as a static site: fast, and free to host. WordPress itself was left behind.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (reach description and architecture)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-scripts",
+      "kind": "process",
+      "text": "Python scripts stripped the archive toolbar, rebuilt the links and made a static copy.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (reach architecture: Python scripts)",
+          "public": true
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "text": "Yes, if enough of it was archived. For this UK children's charity, 342 saved addresses were listed in the Wayback Machine and 154 pages were rescued, then rebuilt as a static site that is fast and free to host.",
+      "claims": [
+        "c-archive",
+        "c-rebuild"
+      ]
+    },
+    {
+      "heading": "How the recovery worked",
+      "text": "Scripts stripped the archive toolbar from every saved page, rebuilt the links between pages and produced a clean static copy. WordPress itself was left behind, so there are no plugins to update.",
+      "claims": [
+        "c-scripts",
+        "c-rebuild"
+      ]
+    }
+  ],
+  "originalNotes": [],
+  "media": [
+    {
+      "src": "/images/proof/reach.jpg",
+      "alt": "Screenshot of the rebuilt Reach Children Uganda website",
+      "width": 880,
+      "height": 550,
+      "rights": null,
+      "permissionSource": null
+    }
+  ],
+  "links": {
+    "internal": [
+      "/",
+      "/#contact"
+    ],
+    "related": []
+  },
+  "nextAction": {
+    "label": "Describe your problem for a free written audit",
+    "href": "/#contact"
+  },
+  "location": null,
+  "localEvidence": [],
+  "author": "Chris Demetriou",
+  "draftedBy": "Claude, from the sources listed on each claim (19–20 Oct 2026)",
+  "substantiveModified": "2026-10-20",
+  "editorialTasks": [
+    "Chris: was this commissioned, done as a volunteer, or a favour? (role.relationship)",
+    "Chris: does the charity agree to being named in a case study, and to the screenshot being used?",
+    "Chris: intake answers: what the brief was, what was hardest, why static rather than another WordPress host, and anything that happened afterwards (e.g. hosting cost before and after).",
+    "Decide whether this page should exist alongside the Labs build notes, or replace the Reach section on Labs."
+  ],
+  "history": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude (draft)",
+      "change": "Candidate created from Labs build notes; blocked on relationship, permission and Chris's own notes."
+    }
+  ]
+}

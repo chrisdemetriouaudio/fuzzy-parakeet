@@ -28,3 +28,12 @@ Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or tw
 - **Release:** `npm run release` in `labs/`, from `main` only. Never `wrangler deploy` on its own. It builds, deploys, stamps `/version.json` and smoke-tests every project link.
 - Labs keeps chrisdemetriou.com's look: same masthead, nav bar (TECH highlighted), fonts and colours. TECH opens Labs in the same tab; every live project opens in a new window.
 - **People don't scroll.** The overview (`/`) must show every project's card in the first screen where possible: compact cards, one row of filters (at most 8). Detail belongs on the project page (`/<slug>/`), never on the overview.
+
+## Search and evidence-gated publishing (content/, publisher/, docs/search/)
+
+- Pages under `/work/` and `/resources/` are **generated** from `content/records/*.json` by `node publisher/cli.mjs build`. Edit the record, never the generated HTML. `sitemap.xml` is generated too (core pages come from `content/core-pages.json`).
+- A record becomes a page only when every gate passes **and** Chris has approved that exact version. **Never edit `content/approvals.json`, and never run `approve`:** approval is Chris's alone, and CI rejects AI-authored approvals.
+- Never invent facts, roles, results, quotes or permissions. Missing evidence goes in `editorialTasks`. Award wording describes the recording, never Chris ("performer on an Oscar-nominated song").
+- The repo is public: no private evidence, emails or private links in records.
+- Before a pull request: `node --test publisher/test/*.test.mjs` and `node publisher/cli.mjs check`. Details are in `docs/search/PUBLISHING.md`.
+- After a substantive change to a hand-written page, update its `lastmod` in `content/core-pages.json`, then run `build`.

@@ -60,3 +60,4 @@ labs/public/robots.txt
 labs/dist/
 labs/public/filters.css
 labs/public/*/index.html
+/.preview/
