@@ -19,7 +19,7 @@
   /* homepage ("Your week") */
   --edge:#23201C; --shadow:#23201C; --marker:#FFE08A; --marker-y:.02em; --marker-h:.28em; --link-line:#B53A1E;
   --blk-ink:#23201C; --c1:#FBD9CC; --c2:#FFE08A; --c3:#DCE8FF; --c4:#E9E0FF; --free:#E3D6C3;
-  --done-bg:#D3EEE3; --done-line:#1F6E52; --done-ink:#1F6E52; --sticker-live:#D3EEE3; --hover:#F5EBDD; --side:#5E35A6;
+  --done-bg:#D3EEE3; --done-line:#1F6E52; --done-ink:#1F6E52; --sticker-live:#D3EEE3; --hover:#F5EBDD; --side: var(--ink);
 }
 :root[data-theme="light"] body > .section-nav{ background: rgba(255,247,236,.94); }
 :root[data-theme="light"] .record-header{ background: none; }
@@ -41,7 +41,7 @@
   --accent:#FFE14D; --accent-hover:#FFF; --accent-ink:#000; --amber:#FFE14D;
   --live:#7DFF9E; --link:#FFE14D; --error:#FF8A80; --red:#FF8A80; --teal:#FFF; --teal-text:#FFF;
   --edge:#FFF; --shadow:transparent; --btn-shadow:transparent; --marker:#FFE14D; --link-line:#FFE14D;
-  --blk-ink:#000; --free:#FFF; --done-bg:#000; --done-line:#7DFF9E; --done-ink:#7DFF9E; --sticker-live:#7DFF9E; --hover:#333; --side:#E2D4FF;
+  --blk-ink:#000; --free:#FFF; --done-bg:#000; --done-line:#7DFF9E; --done-ink:#7DFF9E; --sticker-live:#7DFF9E; --hover:#333; --side: var(--ink);
 }
 :root[data-contrast="high"][data-theme="light"]{
   color-scheme: light;
@@ -51,7 +51,7 @@
   --accent:#0033CC; --accent-hover:#000; --accent-ink:#FFF; --amber:#0033CC;
   --live:#00561F; --link:#0033CC; --error:#A40000; --red:#A40000; --teal:#000; --teal-text:#000;
   --edge:#000; --shadow:transparent; --btn-shadow:transparent; --marker:#FFE14D; --link-line:#0033CC;
-  --blk-ink:#000; --free:#000; --done-bg:#FFF; --done-line:#00561F; --done-ink:#00561F; --sticker-live:#7DFF9E; --hover:#E6E6E6; --side:#3B1A80;
+  --blk-ink:#000; --free:#000; --done-bg:#FFF; --done-line:#00561F; --done-ink:#00561F; --sticker-live:#7DFF9E; --hover:#E6E6E6; --side: var(--ink);
 }
 :root[data-contrast="high"][data-theme="light"] .cdplayer{
   --bg-panel:#000; --ink:#FFF; --ink-muted:#FFF; --amber:#FFE14D; --accent:#FFE14D; --accent-ink:#000; --text-white:#FFF; --text-grey:#FFF; --line:#FFF; --line-strong:#FFF;

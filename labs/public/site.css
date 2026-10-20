@@ -20,7 +20,7 @@
   --c1:#FBD9CC; --c2:#FFE08A; --c3:#DCE8FF; --c4:#E9E0FF;
   --done-ink:#1F6E52; --sticker-live:#D3EEE3;
   --hover:#F5EBDD;
-  --side:#5E35A6;            /* Creative in the nav: 8:1 */
+  --side: var(--ink);            /* Creative uses the theme text colour. */
   --font:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif;
   --head:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
