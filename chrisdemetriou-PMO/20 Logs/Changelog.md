@@ -10,7 +10,14 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Homepage rebuilt for the Operations Engineer positioning · live
+> [!success]+ 🚀 20 Oct 2026 · Software Developer & Consultant · live
+> - **Released:** pull request #22 (`6ca2840`).
+> - **Homepage:** title "Custom Software Developer & Consultant | Chris Demetriou"; headline "Custom software that solves your business problems"; subtitle "I turn business problems into custom tools and applications—from the first idea to a tested, working solution."
+> - **Also:** Process follows idea → design → build and test → launch; About and FAQ in first person; structured data, share image, `llms.txt` and `/creative/` updated.
+> - **Checked live:** new title, headline and `llms.txt` are served.
+> - **Not yet:** Labs title and nav need a Labs release.
+
+> [!success]- 🚀 20 Oct 2026 · Homepage rebuilt for the Operations Engineer positioning · live
 > - **Released:** pull request #21 (`67e6719`). The first Pages deploy failed with a GitHub server error (500); re-run once, then live.
 > - **Homepage:** "Custom internal tools that run your repetitive work for you."; six Internal Tool Blueprints; proof with screenshots; Zero Software Tax; process; About; FAQ; free written workflow audit form.
 > - **Look:** Inter + JetBrains Mono, cool dark surfaces, amber kept; all text colours pass WCAG AA.
