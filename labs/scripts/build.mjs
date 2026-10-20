@@ -42,9 +42,9 @@ const NAV = [
   ["Proof", `${MAIN}/#proof`],
   ["Process", `${MAIN}/#process`],
   ["FAQ", `${MAIN}/#faq`],
-  ["Creative", [["Music", `${MAIN}/creative/#music`], ["Media", `${MAIN}/creative/#media`], ["Worship", `${MAIN}/creative/#worship`]]],
   ["Labs", "/"],
   ["Contact", `${MAIN}/#contact`],
+  ["Creative", [["Music", `${MAIN}/creative/#music`], ["Media", `${MAIN}/creative/#media`], ["Worship", `${MAIN}/creative/#worship`]]],
 ];
 
 // GitHub's language colours, so the bar reads the way it does there.
@@ -195,7 +195,7 @@ function renderArchitecture(p) {
 }
 
 const navHtml = () => NAV.map(([label, href]) => {
-  if (Array.isArray(href)) return `      <li class="nav-group">
+  if (Array.isArray(href)) return `      <li class="nav-group nav-side">
         <details>
           <summary>${label}</summary>
           <ul>
@@ -204,7 +204,7 @@ ${href.map(([l, h]) => `            <li><a href="${h}">${l}</a></li>`).join("\n"
         </details>
       </li>`;
   if (href === "/") return `      <li><a class="current" href="/" aria-current="page">${label}</a></li>`;
-  const cls = label === "Process" || label === "FAQ" ? ` class="nav-wide"` : "";   // hidden on phones, as on the homepage
+  const cls = label === "Process" || label === "FAQ" ? ` class="nav-wide"` : label === "Contact" ? ` class="nav-cta"` : "";   // as on the homepage
   return `      <li${cls}><a href="${href}">${label}</a></li>`;
 }).join("\n");
 const slugify = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-");

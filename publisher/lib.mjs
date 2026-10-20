@@ -323,7 +323,7 @@ ${preview ? "" : `<link rel="canonical" href="${url}">`}
 ${preview ? `<p class="preview-banner">PREVIEW · status: ${esc(r.status)} · not published · noindex</p>` : ""}
 <header class="masthead"><div class="container"><a class="wordmark" href="/">Chris Demetriou</a></div></header>
 <nav class="section-nav" aria-label="Sections"><div class="container"><ul>
-${NAV.map(([l, h, wide]) => `<li${wide ? ' class="nav-wide"' : ""}><a href="${h}">${l}</a></li>`).join("")}<li><a href="/creative/">Creative</a></li><li><a href="https://labs.chrisdemetriou.com/">Labs</a></li><li><a href="/#contact">Contact</a></li>
+${NAV.map(([l, h, wide]) => `<li${wide ? ' class="nav-wide"' : ""}><a href="${h}">${l}</a></li>`).join("")}<li><a href="https://labs.chrisdemetriou.com/">Labs</a></li><li><a href="/#contact">Contact</a></li><li class="nav-side"><a href="/creative/">Creative</a></li>
 </ul></div></nav>
 <main id="main" tabindex="-1">
   <article class="container record">
