@@ -4,7 +4,7 @@
 // saved settings before it paints, so there's no flash; this file adds the button and panel.
 (function(){
   var KEY = "cd-display";
-  var DEFAULTS = { theme: "dark", text: "normal", font: "default", spacing: "normal", contrast: "normal", mask: "off" };
+  var DEFAULTS = { theme: "light", text: "normal", font: "default", spacing: "normal", contrast: "normal", mask: "off" };
   var root = document.documentElement;
   var slot = document.querySelector(".masthead .container, .masthead .shell");
   if (!slot) return;
@@ -13,10 +13,10 @@
   try { prefs = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { prefs = {}; }
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {} }
 
-  var lightQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+  var darkQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
   function resolvedTheme(){
     var t = prefs.theme || DEFAULTS.theme;
-    if (t === "auto") return lightQuery && lightQuery.matches ? "light" : "dark";
+    if (t === "auto") return darkQuery && darkQuery.matches ? "dark" : "light";
     return t;
   }
 
@@ -45,7 +45,7 @@
 
   function apply(){
     var theme = resolvedTheme();
-    if (theme === "light") root.setAttribute("data-theme", "light"); else root.removeAttribute("data-theme");
+    if (theme === "dark") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", "light");
     ["text", "font", "spacing", "contrast"].forEach(function(k){
       var v = prefs[k];
       if (v && v !== DEFAULTS[k]) root.setAttribute("data-" + k, v); else root.removeAttribute("data-" + k);
@@ -89,7 +89,7 @@
   }
   panel.innerHTML =
     '<div class="display-head"><h2 id="display-heading" tabindex="-1">Display settings</h2><button type="button" class="display-close">Close</button></div>' +
-    radios("theme", "Theme", [["dark", "Dark"], ["light", "Light"], ["auto", "Match device"]]) +
+    radios("theme", "Theme", [["light", "Light"], ["dark", "Dark"], ["auto", "Match device"]]) +
     radios("text", "Text size", [["normal", "Normal"], ["large", "Large", "size-2"], ["xlarge", "Larger", "size-3"]]) +
     '<ul class="switches">' +
       sw("font", "dyslexic", "Dyslexia-friendly font", "OpenDyslexic: heavier letter bottoms help stop letters flipping") +
@@ -118,7 +118,7 @@
   panel.querySelector(".display-reset").addEventListener("click", function(){ prefs = {}; save(); apply(); sync(); });
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !panel.hidden) close(true); });
   document.addEventListener("click", function(e){ if (!panel.hidden && !panel.contains(e.target) && !toggle.contains(e.target)) close(false); });
-  if (lightQuery && lightQuery.addEventListener) lightQuery.addEventListener("change", function(){ if (prefs.theme === "auto") apply(); });
+  if (darkQuery && darkQuery.addEventListener) darkQuery.addEventListener("change", function(){ if (prefs.theme === "auto") apply(); });
 
   sync(); apply();
 })();

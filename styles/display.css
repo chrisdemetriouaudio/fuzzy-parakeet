@@ -7,7 +7,7 @@
 @font-face{ font-family:"OpenDyslexic"; src:url("/fonts/OpenDyslexic-Regular.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap; }
 @font-face{ font-family:"OpenDyslexic"; src:url("/fonts/OpenDyslexic-Bold.otf") format("opentype"); font-weight:500 800; font-style:normal; font-display:swap; }
 
-/* ── Light theme ─────────────────────────────────────────── */
+/* ── Light theme: the default (data-theme="light" is in each page's markup) ── */
 :root[data-theme="light"]{
   color-scheme: light;
   --bg:#FFF7EC; --surface:#FFFFFF; --surface-2:#F5EBDD; --bg-panel:#FFFFFF;

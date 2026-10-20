@@ -293,7 +293,7 @@ export function renderPage(r, ctx, { preview = false } = {}) {
     .map((o) => `<li><a href="${routeOf(o, ctx.families)}">${esc(o.title)}</a></li>`).join("");
   return `<!DOCTYPE html>
 ${GENERATED_MARK} id=${r.id} version=${versionHash(r).slice(0, 12)} -- edit content/records/${r.id}.json, not this file -->
-<html lang="en-GB">
+<html lang="en-GB" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -314,9 +314,9 @@ ${preview ? "" : `<link rel="canonical" href="${url}">`}
 <link rel="stylesheet" href="/styles/record.css">
 <script>
   // Display settings (/scripts/display.js), applied before the page paints so there's no flash
-  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):p.theme;if(t==="light")r.setAttribute("data-theme","light");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
+  (function(){try{var p=JSON.parse(localStorage.getItem("cd-display")||"{}")||{},r=document.documentElement;var t=p.theme==="auto"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p.theme;if(t==="dark")r.removeAttribute("data-theme");["text","font","spacing","contrast"].forEach(function(k){var v=p[k];if(typeof v==="string"&&/^[a-z]+$/.test(v)&&v!=="normal"&&v!=="default")r.setAttribute("data-"+k,v);});}catch(e){}})();
 </script>
-<link rel="stylesheet" href="/styles/display.css?v=2">
+<link rel="stylesheet" href="/styles/display.css?v=3">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -343,7 +343,7 @@ ${notes}
 </main>
 <footer><div class="container"><span>&copy; Chris Demetriou · Software Developer &amp; Consultant, Manchester</span>
 <nav aria-label="Footer"><a href="/creative/">Creative</a> <a href="https://labs.chrisdemetriou.com/">Labs</a> <a href="/privacy/">Privacy</a> <a href="/cookies/">Cookies</a></nav></div></footer>
-<script src="/scripts/display.js?v=2" defer></script>
+<script src="/scripts/display.js?v=3" defer></script>
 </body>
 </html>
 `;
