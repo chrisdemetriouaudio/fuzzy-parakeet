@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 11:53 (UK time)
+changed: 20 Oct 2026, 11:55 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 11:53 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `bebdd30` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `a85a6b6` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `d6788d5`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 11:53 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `a85a6b6` · docs(pmo): Phase 8 renamed SEO, AEO & GEO; PR #25 live
 - 20 Oct 2026 · `2a6cf48` · Search fixes and an evidence-gated publishing system (Phase 8)
 - 20 Oct 2026 · `7407abc` · docs(pmo): Phase 8 — Search & Publishing
 - 20 Oct 2026 · `574e4fb` · docs(pmo): tidy the Dashboard action list (duplicates and done items)
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 11:53 (UK time)
 - 20 Oct 2026 · `135ce27` · Point both forms at the new Web3Forms key for hello@
 - 20 Oct 2026 · `ec31bf1` · docs(pmo): Software Developer & Consultant live (PR #22)
 - 20 Oct 2026 · `df9a9b4` · Reposition as Software Developer & Consultant
-- 20 Oct 2026 · `05c7026` · docs(pmo): Operations Engineer homepage live (PR #21)
