@@ -166,6 +166,8 @@
   .section-nav details[open] summary::after{ transform: translateY(1px) rotate(-135deg); }
   .section-nav summary:hover{ color: var(--ink); }
   .section-nav summary.current{ color: var(--amber); border-bottom-color: var(--amber); }
+  .section-nav .nav-side{ padding-left: 18px; border-left: 1px dashed var(--line-strong); }   /* Creative after Contact, set apart (as on the homepage) */
+  .nav-side > details > ul{ left: auto; right: 0; }
 
   .nav-group{ position: relative; }
   .nav-group ul{
@@ -984,7 +986,9 @@
       <li><a href="/#proof">Proof</a></li>
       <li class="nav-wide"><a href="/#process">Process</a></li>
       <li class="nav-wide"><a href="/#faq">FAQ</a></li>
-      <li class="nav-group">
+      <li><a href="https://labs.chrisdemetriou.com/">Labs</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-group nav-side">
         <details>
           <summary>Creative</summary>
           <ul>
@@ -994,8 +998,6 @@
           </ul>
         </details>
       </li>
-      <li><a href="https://labs.chrisdemetriou.com/">Labs</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>

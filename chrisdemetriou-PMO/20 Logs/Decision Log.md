@@ -9,6 +9,11 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · Nav: Creative after Contact, set apart (Agreed)
+> - **Status:** Agreed by Chris (option A).
+> - **Decided:** Tools · Proof · Process · FAQ · Labs · **Contact** (a button), then a divider and **Creative** in purple. Same on the homepage, `/creative/`, Labs and generated pages.
+> - **Why:** Creative sat in the middle of the business path and broke its flow; the path now ends on Contact, and Creative reads as a separate side door.
+
 > [!success]- 20 Oct 2026 · Micro-behaviours, with a "Reduce motion" switch (Agreed)
 > - **Status:** Agreed by Chris ("the site doesn't feel premium yet").
 > - **Decided:** small, purposeful movement: the week plays itself once, blocks reveal as you scroll, numbers count up, the nav highlight slides, cards lift, FAQ answers glide, email copies in one tap.
