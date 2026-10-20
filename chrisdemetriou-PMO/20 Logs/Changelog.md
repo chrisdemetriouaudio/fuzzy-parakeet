@@ -10,7 +10,14 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 20 Oct 2026 · Creative navigation separated · main site live
+> [!success]+ 🚀 20 Oct 2026 · `/creative/`, privacy and cookies in the "Your week" look · live
+> - **Released:** pull request #32 (`6a0086a`), live 18:40 UTC.
+> - **`/creative/`:** homepage header and nav, fonts, light default, stickers, colour-coded role tags, restyled tables, quotes, YouTube cards, form and showreel. CD player keeps its dark finish.
+> - **Privacy and cookies:** same header, fonts and palette.
+> - **Checked:** axe-core finds nothing on all four pages in all 9 Display modes, desktop and phone.
+> - **Still old:** generated `/work/` pages (none published) and the share image.
+
+> [!success]- 20 Oct 2026 · Creative navigation separated · main site live
 > - **Merged:** PR #31 (`4910b98`), placing Creative after Contact with a divider.
 > - **Verified:** live homepage HTML contains Music, Media and Worship dropdown links.
 > - **Checks:** pull-request content checks passed; browser verification unavailable in this session.
