@@ -9,6 +9,11 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · Light mode is the default on chrisdemetriou.com and Labs (Agreed)
+> - **Status:** Agreed by Chris. Replaces "dark by default" from earlier the same day.
+> - **Decided:** both sites open in the light "Your week" palette, even without JavaScript. Dark stays one tap away in the Display panel on chrisdemetriou.com.
+> - **Labs:** light only for now. The Display panel needs a script, and Labs' security policy (CSP) allows none; adding it is a separate decision.
+
 > [!success]- 20 Oct 2026 · New look: warm and personal, with clever UI (Agreed)
 > - **Status:** Agreed by Chris. **Chosen: 1 "Your week", dark by default** (light stays in the Display panel).
 > - **Decided:** the current look feels machine-made; the redesign is **warm and personal**: **quirky, creative, not distracting, tech, clever UI**.

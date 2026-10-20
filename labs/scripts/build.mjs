@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Builds Labs (chrisdemetriou.com's LABS page) from projects.json, in that site's
- * masthead, nav bar, fonts and colours (LABS is the current tab):
+ * "Your week" look: same header, nav, fonts and colours (LABS is the current tab):
  *   /            an overview that fits on one screen: key numbers, technology
  *                filters (CSS only), and compact "pinned" cards like a GitHub profile;
  *   /<slug>/     each project's full write-up, like a GitHub repository page:
@@ -168,7 +168,7 @@ function renderLanguages(langs) {
   const rects = langs.map((l) => { const r = `<rect x="${x.toFixed(2)}" width="${l.pct.toFixed(2)}" height="8" fill="${l.colour}"/>`; x += l.pct; return r; }).join("");
   const legend = langs.map((l) => `<li><svg class="dot" viewBox="0 0 8 8" aria-hidden="true"><circle cx="4" cy="4" r="4" fill="${l.colour}"/></svg><span class="lang-name">${esc(l.name)}</span> <span class="lang-pct">${l.pct < 0.1 ? "<0.1" : l.pct.toFixed(1)}%</span></li>`).join("");
   return `
-            <h4 class="label about-h">Languages</h4>
+            <h3 class="label about-h">Languages</h3>
             <svg class="lang-bar" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true">${rects}</svg>
             <ul class="lang-list">${legend}</ul>`;
 }
@@ -188,7 +188,7 @@ function renderArchitecture(p) {
   }
   return `
         <section class="arch" aria-labelledby="arch-${esc(p.slug)}">
-          <h4 class="label arch-h" id="arch-${esc(p.slug)}">Architecture</h4>
+          <h2 class="label arch-h" id="arch-${esc(p.slug)}">Architecture</h2>
           <div class="arch-flow">${parts.join("")}
           </div>
         </section>`;
@@ -221,7 +221,7 @@ function page({ title, description, path, ogImage, ld, body, today, extraCss = [
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${SITE}${path}"> <!-- nosemgrep: html.security.audit.missing-integrity.missing-integrity — a canonical URL loads nothing -->
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE}${path}">
@@ -229,8 +229,8 @@ function page({ title, description, path, ogImage, ld, body, today, extraCss = [
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- nosemgrep: html.security.audit.missing-integrity.missing-integrity — a preconnect loads nothing -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- nosemgrep: html.security.audit.missing-integrity.missing-integrity — a preconnect loads nothing -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&amp;family=Space+Mono:wght@400;700&amp;family=Work+Sans:wght@300;400;500&amp;display=swap"> <!-- nosemgrep: html.security.audit.missing-integrity.missing-integrity — Google Fonts CSS varies by browser, so it can't carry a fixed hash; the same fonts as chrisdemetriou.com -->
-<link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap"> <!-- nosemgrep: html.security.audit.missing-integrity.missing-integrity — Google Fonts CSS varies by browser, so it can't carry a fixed hash; the same fonts as chrisdemetriou.com -->
+<link rel="stylesheet" href="/site.css?v=2">
 ${extraCss.map((h) => `<link rel="stylesheet" href="${h}">`).join("\n")}
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
@@ -238,17 +238,14 @@ ${extraCss.map((h) => `<link rel="stylesheet" href="${h}">`).join("\n")}
 <a class="skip" href="#main">Skip to the content</a>
 <header class="masthead">
   <div class="container">
-    <a class="wordmark" href="${MAIN}/">Chris Demetriou</a>
-    <span class="label">Manchester, UK</span>
+    <a class="me" href="${MAIN}/"><img src="/img/chris-avatar.jpg" alt="" width="96" height="96"><span><b>Chris Demetriou</b><small>Software developer &amp; consultant</small></span></a>
+    <nav class="section-nav" aria-label="Sections">
+      <ul>
+${navHtml()}
+      </ul>
+    </nav>
   </div>
 </header>
-<nav class="section-nav" aria-label="Sections">
-  <div class="container">
-    <ul>
-${navHtml()}
-    </ul>
-  </div>
-</nav>
 <main id="main">
 ${body}
 </main>
@@ -291,7 +288,7 @@ function renderCard(p, today, i = 0) {
       <li class="pcard" data-topics="${esc(p.topics.join(" "))}">
         <a class="pcard-shot" href="/${esc(p.slug)}/" tabindex="-1" aria-hidden="true"><img src="/${esc(p.image)}" width="880" height="550" alt=""${i >= 4 ? ` loading="lazy"` : ""}></a>
         <div class="pcard-body">
-          <h3 class="pcard-name"><a href="/${esc(p.slug)}/">${esc(p.name || p.slug)}</a> <span class="pill">${esc(p.status || "Live")}</span></h3>
+          <h3 class="pcard-name"><a href="/${esc(p.slug)}/">${esc(p.name || p.slug)}</a> <span class="pill pill-${slugify(p.status || "Live")}">${esc(p.status || "Live")}</span></h3>
           <p class="pcard-desc">${esc(p.description)}</p>
           <p class="pcard-meta">${lang ? `<span class="pcard-lang">${langDot(lang)}${esc(lang.name)}</span>` : ""}<span class="pcard-updated">Updated ${esc(shortDate(p.updated || today))}</span></p>
           <ul class="pcard-tags" aria-label="Built with">${p.topics.slice(0, 3).map((t) => `<li>${esc(t)}</li>`).join("")}${p.topics.length > 3 ? `<li class="more">+${p.topics.length - 3}</li>` : ""}</ul>
@@ -313,7 +310,7 @@ function renderProject(p, today) {
     <article class="repo" id="${esc(p.slug)}" aria-labelledby="name-${esc(p.slug)}">
       <header class="repo-head">
         <h1 class="repo-name" id="name-${esc(p.slug)}"><span class="repo-owner">chrisdemetriou /</span> <a href="${url}" ${NEW_WINDOW}>${esc(p.name || p.slug)}${NEW_WINDOW_SR}</a></h1>
-        <span class="pill">${esc(p.status || "Live")}</span>
+        <span class="pill pill-${slugify(p.status || "Live")}">${esc(p.status || "Live")}</span>
         <a class="btn" href="${url}" ${NEW_WINDOW}>${esc(p.cta || "Open it")} <span aria-hidden="true">↗</span>${NEW_WINDOW_SR}</a>
       </header>
       <div class="repo-grid">

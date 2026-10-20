@@ -21,7 +21,7 @@ updated: 2026-10-18
 
 ## 👉 Next up (repositioning)
 
-- 👉 **"Your week" look for the rest:** `/creative/`, legal pages, generated pages, Labs and the share image (homepage live 20 Oct 2026, PR #27). #next
+- 👉 **"Your week" look for the rest:** `/creative/`, legal pages, generated pages and the share image. Homepage live (PR #27); Labs restyled and light by default (needs `npm run release`). #next
 - 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
 - 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.
 
@@ -32,7 +32,8 @@ updated: 2026-10-18
 - 💭 **Make a Labs share image** (the current one shows Genesis only).
 - 💭 **Release Labs automatically** after a project releases (needs a Cloudflare token in GitHub).
 - 💭 **Add the next project** to Labs: one entry in `labs/projects.json`.
-- 💭 **Display settings on Labs:** Labs' security policy (CSP) blocks scripts, so the panel needs a small CSP change and its own copy there first.
+- ❓ **Display settings on Labs (dark mode, text size, dyslexia font…):** needs Labs' CSP to allow its own script (`script-src 'self'`) and fonts (`font-src 'self'`). #decision
+- 💭 **New Labs screenshot of chrisdemetriou.com** (the card still shows the old dark design).
 
 ## 🅿️ Parked (on hold on purpose)
 
