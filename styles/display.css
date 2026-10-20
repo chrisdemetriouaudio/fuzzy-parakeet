@@ -14,7 +14,7 @@
   --border:#E3D6C3; --border-strong:#6F6A73; --field-edge:#6F6A73;
   --line:rgba(22,24,29,.12); --line-strong:rgba(22,24,29,.22);
   --ink:#23201C; --ink-muted:#5E564C;
-  --accent:#B53A1E; --accent-hover:#93301A; --accent-ink:#FFFFFF; --amber:#8C4F06;
+  --accent:#B53A1E; --accent-hover:#93301A; --accent-ink:#FFFFFF; --amber:#B53A1E;
   --live:#1B7A45; --link:#1D55C0; --error:#B3261E; --red:#B3261E; --teal:#2B6C6A; --teal-text:#2B6C6A;
   /* homepage ("Your week") */
   --edge:#23201C; --shadow:#23201C; --marker:#FFE08A; --marker-y:.02em; --marker-h:.28em; --link-line:#B53A1E;
@@ -23,13 +23,13 @@
 }
 :root[data-theme="light"] body > .section-nav{ background: rgba(255,247,236,.94); }
 :root[data-theme="light"] .record-header{ background: none; }
-:root[data-theme="light"] :is(.tag.PR, .tag.PTE, .tag.OA, .tag.P, .btn-submit, .btn-inline, .btn-consent.primary, .skip-link){ color: var(--accent-ink); }
+:root[data-theme="light"] :is(.btn-submit, .btn-inline, .btn-consent.primary, .skip-link){ color: var(--accent-ink); }
 :root[data-theme="light"] .cookie-banner{ background: var(--bg-panel); }
 /* The CD player is drawn as a physical device, so it keeps its dark finish in every theme */
 :root[data-theme="light"] .cdplayer{
   color-scheme: dark;
-  --bg-panel:#1a1620; --ink:#ede6dd; --ink-muted:#928c96; --amber:#e8a34d; --accent:#e8a34d; --accent-ink:#14100A;
-  --text-white:#ede6dd; --text-grey:#928c96; --line:rgba(237,230,221,.09); --line-strong:rgba(237,230,221,.16);
+  --bg-panel:#262019; --ink:#F6EDE0; --ink-muted:#C9BCAB; --amber:#F06B4C; --accent:#F06B4C; --accent-ink:#1B0F0A;
+  --text-white:#F6EDE0; --text-grey:#C9BCAB; --line:rgba(246,237,224,.12); --line-strong:rgba(246,237,224,.22);
 }
 
 /* ── High contrast (dark: black, white, yellow; light: white, black, blue) ── */
