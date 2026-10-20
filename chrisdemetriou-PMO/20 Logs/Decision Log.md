@@ -9,6 +9,12 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · New look: warm and personal, with clever UI (Agreed)
+> - **Status:** Agreed by Chris. Which of the 3 mock-ups to build is still open.
+> - **Decided:** the current look feels machine-made; the redesign is **warm and personal**: **quirky, creative, not distracting, tech, clever UI**.
+> - **Decided:** **no music or studio imagery** on the software site (Chris: an analogue studio session "has nothing to do with custom software builds"). Music stays on `/creative/`.
+> - **Mock-ups:** 1 "Your week" (before/after switch), 2 "Quick maths" (hours-a-year sentence), 3 "Plain English switch" (techy/plain words).
+
 > [!success]- 20 Oct 2026 · Display settings on chrisdemetriou.com (Agreed)
 > - **Status:** Agreed. Chris asked for the Neuro Support Checker's accessibility panel on this site.
 > - **Decided:** a **Display** button on every page: theme (dark, light, match device), text size, dyslexia-friendly font (OpenDyslexic), wider spacing, high contrast, reading mask.

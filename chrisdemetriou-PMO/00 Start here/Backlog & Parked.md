@@ -21,6 +21,7 @@ updated: 2026-10-18
 
 ## 👉 Next up (repositioning)
 
+- ❓ **Pick the new look** from 3 mock-ups: Your week · Quick maths · Plain English switch. #decision
 - 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
 - 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.
 
