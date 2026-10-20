@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 11:23 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `8ac6b87` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `574e4fb` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `982e526`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 11:23 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `574e4fb` · docs(pmo): tidy the Dashboard action list (duplicates and done items)
 - 20 Oct 2026 · `8ac6b87` · docs(pmo): forms deliver to hello@ (PR #23); About heading live (PR #24)
 - 20 Oct 2026 · `b1e23bc` · About: don't repeat "taught me precision" under the new heading
 - 20 Oct 2026 · `94cefc6` · About heading: say it plainly
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 11:23 (UK time)
 - 20 Oct 2026 · `05c7026` · docs(pmo): Operations Engineer homepage live (PR #21)
 - 20 Oct 2026 · `c4a621b` · Rebuild the homepage for the Operations Engineer positioning
 - 19 Oct 2026 · `690411d` · docs(pmo): add the agreed Operations Engineer copy deck to the vault
-- 19 Oct 2026 · `f6b4bd3` · docs(pmo): Operations Engineer repositioning agreed (10 decisions, 19 Oct 2026)
