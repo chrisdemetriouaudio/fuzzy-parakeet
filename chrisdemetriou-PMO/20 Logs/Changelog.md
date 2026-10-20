@@ -10,7 +10,13 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Software Developer & Consultant · live
+> [!success]+ 🚀 20 Oct 2026 · Forms deliver to hello@; About heading · live
+> - **Forms:** both forms (homepage audit, `/creative/` enquiry) use a new Web3Forms key for hello@chrisdemetriou.com (pull request #23). The old August key delivered to an older address.
+> - **Checked:** Chris sent a test from a private window; it arrived at hello@ and shows in the Web3Forms dashboard.
+> - **About heading:** "Studios and enterprise IT taught me precision." (pull request #24), checked live.
+> - **Tip:** after a change, test in a private window; GitHub Pages pages can be cached for up to 10 minutes.
+
+> [!success]- 🚀 20 Oct 2026 · Software Developer & Consultant · live
 > - **Released:** pull request #22 (`6ca2840`).
 > - **Homepage:** title "Custom Software Developer & Consultant | Chris Demetriou"; headline "Custom software that solves your business problems"; subtitle "I turn business problems into custom tools and applications—from the first idea to a tested, working solution."
 > - **Also:** Process follows idea → design → build and test → launch; About and FAQ in first person; structured data, share image, `llms.txt` and `/creative/` updated.

@@ -18,7 +18,6 @@ updated: 2026-10-18
 - 👉 **Release Labs** (`npm run release` in `labs/`, from `main`) so its nav matches the new homepage.
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
 - 👉 **Bing Webmaster Tools:** import the site from Search Console.
-- 👉 **Send a test audit request** through the new form and check it reaches hello@.
 
 - 👉 **Release Labs:** `npm run release` in `labs/` (adds Neuro Support Checker and the new Creative links).
 - 👉 **Decide your charging model** (fixed price, day rate or monthly), then add it to "Good to know".
