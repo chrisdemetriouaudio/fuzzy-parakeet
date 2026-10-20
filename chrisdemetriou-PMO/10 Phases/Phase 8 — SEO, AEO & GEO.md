@@ -4,18 +4,17 @@ status: now
 updated: 2026-10-20
 ---
 
-# 🔎 Phase 8 — Search & Publishing
+# 🔎 Phase 8 — SEO, AEO & GEO
 
 > [!info] At a glance
-> **What:** get found by the right people in Google, Bing and AI answers. Pages are built only from real evidence, and only after you approve them.
+> **What:** SEO (Google and Bing), AEO (answer engines) and GEO (AI answers like ChatGPT): get found by the right people. Pages are built only from real evidence, and only after you approve them.
 > **When:** 20 Oct 2026 onwards.
-> **Status:** 🛠️ System built and tested (pull request, not merged). **0 pages publishable yet.** They wait on your answers below.
+> **Status:** ✅ Fixes and publishing system live (pull request #25, 20 Oct 2026). **0 new pages yet.** They wait on your answers below.
 > **Rule:** quality enquiries, not page count. A page only exists if it helps someone even without search engines.
 > **Back to:** [[00 Dashboard]]
 
 ## 👉 To do
 
-- 👉 **Review and merge the Search & Publishing pull request.** Nothing new goes live except fixes.
 - 👉 **Verify Search Console and Bing Webmaster Tools;** submit the sitemap.
 - 👉 **Answer V1:** is the *King Arthur* credit DreamWorks? (`/creative/`)
 - 👉 **Answer V2:** was the Gaydio work commissioned, volunteer or training?
@@ -47,4 +46,5 @@ updated: 2026-10-20
 > - [x] **Generated the sitemap** with real change dates.
 > - [x] **Added screenshot alt text** and a name-disambiguation line in the structured data.
 > - [x] **Built the evidence-gated publisher** with 17 tests, including every rejection case.
+> - [x] **Merged pull request #25** and checked live: Neuro wording, honest 404, sitemap, tooling kept private.
 > - [x] **Drafted 4 candidate pages;** all correctly blocked until evidence and your approval exist.

@@ -10,7 +10,13 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Forms deliver to hello@; About heading · live
+> [!success]+ 🚀 20 Oct 2026 · Phase 8: search fixes and evidence-gated publishing · live
+> - **Released:** pull request #25 (`611ce15`). The new "Content checks" CI passed.
+> - **Fixed live:** Neuro Support Checker wording (897 organisations, every 1 to 3 days); an honest 404 page (only /media/, /book/, /enterprise/ forward); sitemap with real dates; screenshot alt text; name disambiguation in the structured data.
+> - **Built:** `content/` evidence records, `publisher/` (gates, approvals tied to versions, 17 tests), `docs/search/`. Not public (checked: 404).
+> - **Published pages:** none yet; 4 candidates wait on Chris (see [[Phase 8 — SEO, AEO & GEO]]).
+
+> [!success]- 🚀 20 Oct 2026 · Forms deliver to hello@; About heading · live
 > - **Forms:** both forms (homepage audit, `/creative/` enquiry) use a new Web3Forms key for hello@chrisdemetriou.com (pull request #23). The old August key delivered to an older address.
 > - **Checked:** Chris sent a test from a private window; it arrived at hello@ and shows in the Web3Forms dashboard.
 > - **About heading:** "Studios and enterprise IT taught me precision." (pull request #24), checked live.
