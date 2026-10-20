@@ -4,7 +4,7 @@
 // saved settings before it paints, so there's no flash; this file adds the button and panel.
 (function(){
   var KEY = "cd-display";
-  var DEFAULTS = { theme: "light", text: "normal", font: "default", spacing: "normal", contrast: "normal", mask: "off" };
+  var DEFAULTS = { theme: "light", text: "normal", font: "default", spacing: "normal", contrast: "normal", motion: "normal", mask: "off" };
   var root = document.documentElement;
   var slot = document.querySelector(".masthead .container, .masthead .shell");
   if (!slot) return;
@@ -14,6 +14,7 @@
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {} }
 
   var darkQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  var calmQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   function resolvedTheme(){
     var t = prefs.theme || DEFAULTS.theme;
     if (t === "auto") return darkQuery && darkQuery.matches ? "dark" : "light";
@@ -46,10 +47,12 @@
   function apply(){
     var theme = resolvedTheme();
     if (theme === "dark") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", "light");
-    ["text", "font", "spacing", "contrast"].forEach(function(k){
+    ["text", "font", "spacing", "contrast", "motion"].forEach(function(k){
       var v = prefs[k];
       if (v && v !== DEFAULTS[k]) root.setAttribute("data-" + k, v); else root.removeAttribute("data-" + k);
     });
+    // animations run unless the visitor or their device asked for less motion (see /scripts/motion.js)
+    root.classList.toggle("motion", prefs.motion !== "reduced" && !(calmQuery && calmQuery.matches));
     setMask(prefs.mask === "on");
   }
 
@@ -95,6 +98,7 @@
       sw("font", "dyslexic", "Dyslexia-friendly font", "OpenDyslexic: heavier letter bottoms help stop letters flipping") +
       sw("spacing", "wide", "Wider spacing", "More space between letters, words and lines") +
       sw("contrast", "high", "High contrast", "Strong colours and outlines") +
+      sw("motion", "reduced", "Reduce motion", "Turns off animations and movement") +
       sw("mask", "on", "Reading mask", "Dims the page except a strip that follows your finger or mouse") +
     "</ul>" +
     '<div class="display-foot"><p>Saved on this device only.</p><button type="button" class="display-reset">Reset all</button></div>';
@@ -118,6 +122,7 @@
   panel.querySelector(".display-reset").addEventListener("click", function(){ prefs = {}; save(); apply(); sync(); });
   document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !panel.hidden) close(true); });
   document.addEventListener("click", function(e){ if (!panel.hidden && !panel.contains(e.target) && !toggle.contains(e.target)) close(false); });
+  if (calmQuery && calmQuery.addEventListener) calmQuery.addEventListener("change", apply);
   if (darkQuery && darkQuery.addEventListener) darkQuery.addEventListener("change", function(){ if (prefs.theme === "auto") apply(); });
 
   sync(); apply();

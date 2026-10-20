@@ -9,6 +9,12 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · Micro-behaviours, with a "Reduce motion" switch (Agreed)
+> - **Status:** Agreed by Chris ("the site doesn't feel premium yet").
+> - **Decided:** small, purposeful movement: the week plays itself once, blocks reveal as you scroll, numbers count up, the nav highlight slides, cards lift, FAQ answers glide, email copies in one tap.
+> - **Decided:** **Reduce motion** in the Aa (Display) panel turns all of it off; the device's own "reduce motion" setting is respected too. Nothing on the page depends on the movement.
+> - **Labs:** CSS-only touches (no script there); they follow the device setting.
+
 > [!success]- 20 Oct 2026 · Light mode is the default on chrisdemetriou.com and Labs (Agreed)
 > - **Status:** Agreed by Chris. Replaces "dark by default" from earlier the same day.
 > - **Decided:** both sites open in the light "Your week" palette, even without JavaScript. Dark stays one tap away in the Display panel on chrisdemetriou.com.

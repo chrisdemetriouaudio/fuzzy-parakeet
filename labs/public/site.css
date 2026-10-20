@@ -230,4 +230,23 @@ footer{border-top:2px dashed var(--border);padding:24px 0 34px}
   .next-project a{display:inline-block;padding:6px 0}
   .foot-line a{display:inline-block;padding:8px 0}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important}}
+/* ── Micro-behaviours: CSS only (Labs runs no script), off when the device asks for less motion ── */
+@keyframes cd-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s ease,background-color .15s ease}
+  .pcard,.repo{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+  .pcard-shot img,.shot img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .pill,.filter-row label{transition:transform .35s cubic-bezier(.34,1.56,.64,1),background-color .15s ease,border-color .15s ease}
+  .record-name,.record-standfirst,.stats,.crumbs{animation:cd-rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .record-standfirst{animation-delay:.08s}.stats{animation-delay:.16s}
+  .pcards>li,.repo{animation:cd-rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .pcards>li:nth-child(2){animation-delay:.06s}.pcards>li:nth-child(3){animation-delay:.12s}.pcards>li:nth-child(4){animation-delay:.18s}.pcards>li:nth-child(5){animation-delay:.24s}.pcards>li:nth-child(n+6){animation-delay:.3s}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .pcard:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--shadow)}
+  .pcard:hover .pcard-shot img{transform:scale(1.04)}
+  .pcard:hover .pill{transform:rotate(-6deg) scale(1.08)}
+  .shot:hover img{transform:scale(1.02)}
+  .filter-row label:hover{transform:rotate(-2deg)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation:none !important}}
