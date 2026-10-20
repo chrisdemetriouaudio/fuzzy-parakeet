@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 12:11 (UK time)
+changed: 20 Oct 2026, 12:35 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 12:11 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `17bdf29` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `230babf` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `d6788d5`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 12:11 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `230babf` · docs(pmo): log the warm-and-personal redesign direction
 - 20 Oct 2026 · `17bdf29` · docs(pmo): log Display settings release
 - 20 Oct 2026 · `3554e1b` · Add Display settings panel and fix accessibility issues
 - 20 Oct 2026 · `a85a6b6` · docs(pmo): Phase 8 renamed SEO, AEO & GEO; PR #25 live
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 12:11 (UK time)
 - 20 Oct 2026 · `8ac6b87` · docs(pmo): forms deliver to hello@ (PR #23); About heading live (PR #24)
 - 20 Oct 2026 · `b1e23bc` · About: don't repeat "taught me precision" under the new heading
 - 20 Oct 2026 · `94cefc6` · About heading: say it plainly
-- 20 Oct 2026 · `135ce27` · Point both forms at the new Web3Forms key for hello@
