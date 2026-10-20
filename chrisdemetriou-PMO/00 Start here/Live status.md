@@ -1,7 +1,7 @@
 ---
 title: Live status
-updated: 2026-10-19
-changed: 20 Oct 2026, 00:58 (UK time)
+updated: 2026-10-20
+changed: 20 Oct 2026, 01:03 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 00:58 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `bd1fad6` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `05c7026` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `982e526`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 00:58 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `05c7026` · docs(pmo): Operations Engineer homepage live (PR #21)
 - 20 Oct 2026 · `c4a621b` · Rebuild the homepage for the Operations Engineer positioning
 - 19 Oct 2026 · `690411d` · docs(pmo): add the agreed Operations Engineer copy deck to the vault
 - 19 Oct 2026 · `f6b4bd3` · docs(pmo): Operations Engineer repositioning agreed (10 decisions, 19 Oct 2026)
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 00:58 (UK time)
 - 19 Oct 2026 · `b01ad8c` · feat(labs): add Neuro Support Checker, pinned as the first card
 - 19 Oct 2026 · `9a977bc` · docs(pmo): Operations Engineer repositioning proposed (19 Oct 2026)
 - 19 Oct 2026 · `ccfeb8e` · docs(pmo): homepage copy in plain UK English released (PR #17)
-- 19 Oct 2026 · `ad8ba98` · Homepage copy: plain UK English review (#17)
