@@ -2,9 +2,15 @@
 # are tooling and notes, not website pages, so they are never published:
 #   labs/                 labs.chrisdemetriou.com (a Cloudflare Worker, released separately)
 #   chrisdemetriou-PMO/   the Obsidian project notes (PMO)
+#   content/              evidence records, drafts and approvals (never public pages)
+#   publisher/            the publishing generator and its tests
+#   docs/                 search and publishing documentation
 exclude:
   - labs/
   - chrisdemetriou-PMO/
+  - content/
+  - publisher/
+  - docs/
   - AGENTS.md
   - CLAUDE.md
   - README.md

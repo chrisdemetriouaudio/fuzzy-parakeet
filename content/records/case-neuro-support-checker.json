@@ -1,0 +1,120 @@
+{
+  "id": "case-neuro-support-checker",
+  "family": "case-studies",
+  "slug": "neuro-support-checker",
+  "title": "Building a UK neurodiversity support directory that checks itself",
+  "status": "evidence-needed",
+  "audience": "Organisations that keep a public list or directory (members, suppliers, services) that goes out of date.",
+  "intent": {
+    "key": "keep-public-directory-up-to-date-automatically",
+    "primary": "How can a public directory stay accurate without someone checking every listing by hand?",
+    "related": [
+      "How do you stop sending people to organisations that have closed?"
+    ]
+  },
+  "uniqueValue": "A working, public example of self-checking records: nearly 900 listings re-checked every 1 to 3 days. Useful to anyone maintaining a list people rely on.",
+  "indexable": true,
+  "seo": {
+    "title": "Self-checking directory case study | Chris Demetriou",
+    "description": "How the Neuro Support Checker keeps nearly 900 UK support organisations up to date by re-checking every listing every 1 to 3 days."
+  },
+  "role": {
+    "summary": "I designed and built the directory and its checking.",
+    "relationship": "self-initiated",
+    "status": "owner-provided"
+  },
+  "claims": [
+    {
+      "id": "c-count",
+      "kind": "metric",
+      "text": "The directory lists 897 UK organisations across 18 conditions (19 Oct 2026).",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "https://neurosupport.labs.chrisdemetriou.com/ (read 20 Oct 2026)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-cadence",
+      "kind": "fact",
+      "text": "Listings are checked every 1 to 3 days, and daily if anything looks wrong; each shows when it was last checked.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "https://neurosupport.labs.chrisdemetriou.com/ (read 20 Oct 2026)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-free",
+      "kind": "fact",
+      "text": "It is free to use.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (neurosupport description)",
+          "public": true
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "text": "By re-checking the listings on a schedule instead of by hand. The Neuro Support Checker lists 897 UK organisations across 18 conditions, and checks each one every 1 to 3 days, daily if anything looks wrong.",
+      "claims": [
+        "c-count",
+        "c-cadence"
+      ]
+    },
+    {
+      "heading": "What a visitor sees",
+      "text": "Every listing shows when it was last checked, so a family can see straight away whether the information is current. The directory is free to use.",
+      "claims": [
+        "c-cadence",
+        "c-free"
+      ]
+    }
+  ],
+  "originalNotes": [],
+  "media": [
+    {
+      "src": "/images/proof/neurosupport.jpg",
+      "alt": "Screenshot of the Neuro Support Checker directory home page",
+      "width": 880,
+      "height": 550,
+      "rights": "owned",
+      "permissionSource": null
+    }
+  ],
+  "links": {
+    "internal": [
+      "/",
+      "/#contact"
+    ],
+    "related": []
+  },
+  "nextAction": {
+    "label": "Describe your problem for a free written audit",
+    "href": "/#contact"
+  },
+  "location": null,
+  "localEvidence": [],
+  "author": "Chris Demetriou",
+  "draftedBy": "Claude, from the live directory and Labs notes (20 Oct 2026)",
+  "substantiveModified": "2026-10-20",
+  "editorialTasks": [
+    "Chris: intake answers: why you built it, what the checks look for, what was hardest, and what you'd do differently.",
+    "Chris: anything that has happened because of it (feedback from families or organisations, corrections it caught), with permission to quote.",
+    "Chris: confirm 'designed and built the directory and its checking' is exactly your role."
+  ],
+  "history": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude (draft)",
+      "change": "Candidate created; numbers taken from the live directory. Blocked on Chris's own notes."
+    }
+  ]
+}

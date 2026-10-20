@@ -21,7 +21,7 @@
 
 ## Proof (live tools)
 
-- [Neuro Support Checker](https://neurosupport.labs.chrisdemetriou.com/): a free UK directory of 900 support groups for autism, ADHD, dyslexia and more, re-checked every morning.
+- [Neuro Support Checker](https://neurosupport.labs.chrisdemetriou.com/): a free UK directory of nearly 900 support organisations for autism, ADHD, dyslexia and more, re-checked every 1 to 3 days.
 - [Genesis](https://genesis.labs.chrisdemetriou.com/): a scheduling and chasing engine running a working band's diary.
 - [CDCS Contracts](https://cdcscontracts.com/): a demo booking-to-payment pipeline for a trade business (Stripe test mode).
 - [Reach Children Uganda](https://reach-children-uganda.org.uk/): legacy system recovery for a UK children's charity; 154 pages recovered from web archives and rebuilt off WordPress.

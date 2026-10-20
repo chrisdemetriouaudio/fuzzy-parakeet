@@ -1,0 +1,34 @@
+{
+  "case-studies": {
+    "label": "Case study",
+    "route": "work",
+    "enabled": true,
+    "maxPages": 8,
+    "requiresOriginalNotes": true,
+    "purpose": "A verified project: the problem, exactly what Chris did, what was hard, and what happened. Sparse credits stay on /creative/."
+  },
+  "resources": {
+    "label": "Resource",
+    "route": "resources",
+    "enabled": true,
+    "maxPages": 6,
+    "requiresOriginalNotes": false,
+    "purpose": "Something that helps a visitor complete a task, grounded in how Chris actually works."
+  },
+  "services": {
+    "label": "Service",
+    "route": "services",
+    "enabled": false,
+    "maxPages": 6,
+    "requiresOriginalNotes": true,
+    "purpose": "Switched off until Chris confirms which services he sells and the facts a buyer needs (deliverables, what the client supplies, limits)."
+  },
+  "recordings": {
+    "label": "Recording",
+    "route": "recordings",
+    "enabled": false,
+    "maxPages": 6,
+    "requiresOriginalNotes": true,
+    "purpose": "Switched off: an original recording with real production or arrangement notes and cleared rights. Never just a wrapper round an embed."
+  }
+}

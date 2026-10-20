@@ -1,0 +1,189 @@
+{
+  "id": "resource-workflow-audit-example",
+  "family": "resources",
+  "slug": "workflow-audit-example",
+  "title": "What a free workflow audit looks like: a worked example",
+  "status": "draft",
+  "audience": "A business owner deciding whether to ask for the free written audit, who wants to know what they'd get back.",
+  "intent": {
+    "key": "see-example-workflow-audit",
+    "primary": "What will I actually receive if I ask for the free workflow audit?",
+    "related": [
+      "What should I include when I describe my process?",
+      "Which parts of a booking process can run themselves?"
+    ]
+  },
+  "uniqueValue": "Shows the deliverable before anyone commits: a one-page map worked through on a real booking-to-payment demo, with what could run itself and what stays with a person. The homepage only says 'a one-page map'.",
+  "indexable": true,
+  "seo": {
+    "title": "Free workflow audit: a worked example | Chris Demetriou",
+    "description": "See what the free written workflow audit looks like: a one-page map of a booking-to-payment process, showing which steps a tool could run."
+  },
+  "role": {
+    "summary": "I wrote this example, based on the CDCS Contracts demo I built.",
+    "relationship": "self-initiated",
+    "status": "owner-provided"
+  },
+  "claims": [
+    {
+      "id": "a-free",
+      "kind": "fact",
+      "text": "The workflow audit is free, written, sent by email, and capped at one page. There are no calls.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "chrisdemetriou-PMO Decision Log, 19 Oct 2026 (Operations Engineer decisions: written audit)",
+          "public": true
+        },
+        {
+          "ref": "https://chrisdemetriou.com/#process",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-format",
+      "kind": "process",
+      "text": "The one-page map lists each step of the process, who does it today, and whether a tool could run it.",
+      "status": "awaiting-confirmation",
+      "sources": [
+        {
+          "ref": "Proposed format; Chris has not yet confirmed what his map contains",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-illustrative",
+      "kind": "fact",
+      "text": "This example is illustrative. It uses the booking-to-payment process from the CDCS Contracts demo, not a real client's business.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (cdcs: 'A demo trade-support business')",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-cdcs-parts",
+      "kind": "fact",
+      "text": "The CDCS demo has a booking form with a postcode distance check (free within 15 miles), review by email, a calendar file once dates are agreed, a private invoice link with CIS deducted, card payment through Stripe in test mode, a payment check before an invoice is marked paid, and a worker that resends failed notifications every 15 minutes.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (cdcs architecture)",
+          "public": true
+        },
+        {
+          "ref": "https://labs.chrisdemetriou.com/cdcs/",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-human",
+      "kind": "fact",
+      "text": "In the demo, the owner still approves each job by email: approve, propose other dates, or decline.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (cdcs architecture: Review by e-mail)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-fixed",
+      "kind": "fact",
+      "text": "If a tool is worth building, the next step is a written scope with a fixed price, agreed before any work starts.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "chrisdemetriou-PMO Decision Log, 19 Oct 2026 (fixed price per agreed scope)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "a-honest",
+      "kind": "fact",
+      "text": "The audit says plainly whether a custom tool is worth it.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "https://chrisdemetriou.com/#contact ('tell you straight whether a custom tool is worth it'), approved by Chris 19 Oct 2026",
+          "public": true
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "text": "One page, by email: each step of your process, who does it today, and which steps a tool could run. Below is an example, worked through on the booking-to-payment process from the CDCS Contracts demo. It is illustrative, not a real client.",
+      "claims": [
+        "a-free",
+        "a-format",
+        "a-illustrative"
+      ]
+    },
+    {
+      "heading": "The steps a tool could run",
+      "text": "In the CDCS demo, these steps run by themselves:",
+      "items": [
+        "A contractor picks dates on a booking form, which checks the distance to the site by postcode (free within 15 miles).",
+        "Once dates are agreed, the contractor gets a calendar file automatically.",
+        "The invoice goes out as a private link, with CIS deducted, and the contractor pays by card through Stripe.",
+        "The payment is checked with Stripe before the invoice is marked paid.",
+        "If a notification fails, it is resent every 15 minutes until it goes through."
+      ],
+      "claims": [
+        "a-cdcs-parts"
+      ]
+    },
+    {
+      "heading": "The step that stays with a person",
+      "text": "Deciding which jobs to take. In the demo, the owner approves each booking by email, proposes other dates, or declines. A good map is as clear about what should stay human as about what can be automated.",
+      "claims": [
+        "a-human"
+      ]
+    },
+    {
+      "heading": "What happens after the map",
+      "text": "If a tool is worth building, you get a written scope with a fixed price, agreed before any work starts. If it isn't worth it, the map says so.",
+      "claims": [
+        "a-fixed",
+        "a-honest"
+      ]
+    }
+  ],
+  "originalNotes": [],
+  "media": [],
+  "links": {
+    "internal": [
+      "/#process",
+      "/#contact"
+    ],
+    "related": []
+  },
+  "nextAction": {
+    "label": "Request your free written audit",
+    "href": "/#contact"
+  },
+  "location": null,
+  "localEvidence": [],
+  "author": "Chris Demetriou",
+  "draftedBy": "Claude, from the CDCS build notes and the Decision Log (20 Oct 2026)",
+  "substantiveModified": "2026-10-20",
+  "editorialTasks": [
+    "Chris: confirm or correct what your one-page map contains (claim a-format).",
+    "Chris: read the preview and approve it (node publisher/cli.mjs approve resource-workflow-audit-example)."
+  ],
+  "history": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude (draft)",
+      "change": "Draft written from the CDCS build notes and the agreed audit process; one claim awaits Chris."
+    }
+  ]
+}

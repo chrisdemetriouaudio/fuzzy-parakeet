@@ -1,0 +1,119 @@
+{
+  "id": "case-genesis",
+  "family": "case-studies",
+  "slug": "genesis",
+  "title": "Genesis: scheduling a working band without anyone chasing",
+  "status": "evidence-needed",
+  "audience": "Anyone who coordinates a group (a team, volunteers, members) and loses hours finding dates and chasing replies.",
+  "intent": {
+    "key": "automate-finding-dates-and-chasing-replies",
+    "primary": "How can a group find a date everyone can make without someone chasing replies by hand?",
+    "related": [
+      "How does an automatic chasing system decide who to nudge?"
+    ]
+  },
+  "uniqueValue": "A tool in daily use that finds a date, chases only the people who haven't replied, and confirms. The public demo lets a visitor try it with a pretend band.",
+  "indexable": true,
+  "seo": {
+    "title": "Genesis scheduling and chasing case study | Chris Demetriou",
+    "description": "How Genesis finds a date a whole band can make, chases only the people who haven't replied, and confirms, with no one doing it by hand."
+  },
+  "role": {
+    "summary": "I designed and built Genesis.",
+    "relationship": "unknown",
+    "status": "awaiting-confirmation"
+  },
+  "claims": [
+    {
+      "id": "c-what",
+      "kind": "fact",
+      "text": "Genesis finds a date everyone can make, chases anyone who hasn't replied, and confirms.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "labs/projects.json (genesis description)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-live",
+      "kind": "fact",
+      "text": "Genesis is running a real band.",
+      "status": "awaiting-confirmation",
+      "sources": [
+        {
+          "ref": "Decision Log, 18 Oct 2026 (Genesis is described as a live app)",
+          "public": true
+        }
+      ]
+    },
+    {
+      "id": "c-demo",
+      "kind": "fact",
+      "text": "A public demo uses fictional data and a pretend band.",
+      "status": "owner-provided",
+      "sources": [
+        {
+          "ref": "https://genesis.labs.chrisdemetriou.com/ (read 20 Oct 2026)",
+          "public": true
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "text": "Genesis does it automatically: it finds a date everyone can make, chases only the people who haven't replied, and confirms once everyone is in. It is running a real band.",
+      "claims": [
+        "c-what",
+        "c-live"
+      ]
+    },
+    {
+      "heading": "Try it",
+      "text": "The public demo uses fictional data and a pretend band, so you can see the whole flow without signing up.",
+      "claims": [
+        "c-demo"
+      ]
+    }
+  ],
+  "originalNotes": [],
+  "media": [
+    {
+      "src": "/images/proof/genesis.jpg",
+      "alt": "Screenshot of the Genesis app finding a rehearsal date",
+      "width": 880,
+      "height": 550,
+      "rights": "owned",
+      "permissionSource": null
+    }
+  ],
+  "links": {
+    "internal": [
+      "/",
+      "/#contact"
+    ],
+    "related": []
+  },
+  "nextAction": {
+    "label": "Describe your problem for a free written audit",
+    "href": "/#contact"
+  },
+  "location": null,
+  "localEvidence": [],
+  "author": "Chris Demetriou",
+  "draftedBy": "Claude, from Labs notes and the live demo (20 Oct 2026)",
+  "substantiveModified": "2026-10-20",
+  "editorialTasks": [
+    "Chris: whose band runs on Genesis, and what's your relationship to it (your own band, commissioned, a favour)? Can it be named?",
+    "Chris: intake answers: how rehearsals were arranged before, what was hardest to build, and what changed afterwards.",
+    "Chris: is the screenshot from the demo (fictional data) or the real band? Real band data needs the band's permission."
+  ],
+  "history": [
+    {
+      "date": "2026-10-20",
+      "by": "Claude (draft)",
+      "change": "Candidate created; blocked on the band relationship, permission and Chris's own notes."
+    }
+  ]
+}
