@@ -8,7 +8,7 @@ changed: 20 Oct 2026, 14:13 (UK time)
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
+> **Everything answering:** 🔴 no: GitHub Pages build
 > **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 14:13 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `3dc2445` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `3dc2445` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `d6788d5`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
