@@ -10,7 +10,13 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Homepage: "Your week" look · live
+> [!success]+ 🚀 20 Oct 2026 · Light by default; Labs in the "Your week" look · live (Labs needs a release)
+> - **Released:** pull request #28 (`3dc2445`), chrisdemetriou.com live 13:14 UTC.
+> - **Light by default** on every page, even without JavaScript. Dark and Match device stay in the Display panel.
+> - **Labs:** same header, fonts and palette as the homepage, light. Live only after `npm run release` in `labs/`.
+> - **Checked:** axe-core finds nothing on all pages in every Display mode, and on Labs with its real security policy.
+
+> [!success]- 🚀 20 Oct 2026 · Homepage: "Your week" look · live
 > - **Released:** pull request #27 (`38985ce`), live 13:01 UTC. Content checks passed.
 > - **New look:** dark by default (warm charcoal, cream outlines, tomato shadows, sticky-note colours); light and high contrast in Display.
 > - **Hero:** "Hi, I'm Chris" sticker and an example week with a Before/After switch.
