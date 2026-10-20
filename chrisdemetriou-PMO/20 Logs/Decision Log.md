@@ -10,7 +10,7 @@ updated: 2026-10-18
 > **Back to:** [[00 Dashboard]]
 
 > [!success]- 20 Oct 2026 · New look: warm and personal, with clever UI (Agreed)
-> - **Status:** Agreed by Chris. Which of the 3 mock-ups to build is still open.
+> - **Status:** Agreed by Chris. **Chosen: 1 "Your week", dark by default** (light stays in the Display panel).
 > - **Decided:** the current look feels machine-made; the redesign is **warm and personal**: **quirky, creative, not distracting, tech, clever UI**.
 > - **Decided:** **no music or studio imagery** on the software site (Chris: an analogue studio session "has nothing to do with custom software builds"). Music stays on `/creative/`.
 > - **Mock-ups:** 1 "Your week" (before/after switch), 2 "Quick maths" (hours-a-year sentence), 3 "Plain English switch" (techy/plain words).
