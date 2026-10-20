@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 11:07 (UK time)
+changed: 20 Oct 2026, 11:09 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 11:07 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `c733c75` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `ec31bf1` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `982e526`, released 19 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 11:07 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `ec31bf1` · docs(pmo): Software Developer & Consultant live (PR #22)
 - 20 Oct 2026 · `df9a9b4` · Reposition as Software Developer & Consultant
 - 20 Oct 2026 · `05c7026` · docs(pmo): Operations Engineer homepage live (PR #21)
 - 20 Oct 2026 · `c4a621b` · Rebuild the homepage for the Operations Engineer positioning
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 11:07 (UK time)
 - 19 Oct 2026 · `35cc7c4` · feat(home): Neuro Support Checker first in "What I build"
 - 19 Oct 2026 · `7560b40` · feat(home): sell web apps, not admin; add global IT to About; hide footer player
 - 19 Oct 2026 · `b01ad8c` · feat(labs): add Neuro Support Checker, pinned as the first card
-- 19 Oct 2026 · `9a977bc` · docs(pmo): Operations Engineer repositioning proposed (19 Oct 2026)
