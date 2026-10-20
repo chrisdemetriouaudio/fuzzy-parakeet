@@ -1,6 +1,6 @@
 ---
 title: Changelog
-updated: 2026-10-18
+updated: 2026-10-20
 ---
 
 # 📜 Changelog
@@ -10,7 +10,14 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Phase 8: search fixes and evidence-gated publishing · live
+> [!success]+ 🚀 20 Oct 2026 · Display settings and accessibility fixes · live
+> - **Released:** pull request #26 (`87ec727`). Content checks passed.
+> - **New:** a **Display** button on every page: theme (dark, light, match device), text size, dyslexia-friendly font (OpenDyslexic), wider spacing, high contrast, reading mask. Saved on the visitor's device only.
+> - **Fixed:** `/creative/` contrast, heading order, embedded-player titles and the volume label; cookie tables scroll by keyboard.
+> - **Checked:** axe-core (WCAG 2.2 AA) finds nothing on 4 pages × 9 display modes × desktop and phone.
+> - **Not yet:** Labs (its security policy blocks scripts; see [[Backlog & Parked]]).
+
+> [!success]- 🚀 20 Oct 2026 · Phase 8: search fixes and evidence-gated publishing · live
 > - **Released:** pull request #25 (`611ce15`). The new "Content checks" CI passed.
 > - **Fixed live:** Neuro Support Checker wording (897 organisations, every 1 to 3 days); an honest 404 page (only /media/, /book/, /enterprise/ forward); sitemap with real dates; screenshot alt text; name disambiguation in the structured data.
 > - **Built:** `content/` evidence records, `publisher/` (gates, approvals tied to versions, 17 tests), `docs/search/`. Not public (checked: 404).
