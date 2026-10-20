@@ -10,7 +10,16 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Light by default; Labs in the "Your week" look · live (Labs needs a release)
+> [!success]+ 🚀 20 Oct 2026 · Micro-behaviours and "Reduce motion" · live (Labs needs a release)
+> - **Released:** pull request #30 (`2e52f07`), live 15:52 UTC.
+> - **New:** the week plays itself once, scroll reveals, counting numbers, sliding nav highlight, header shadow, card lifts, smooth FAQ, copy-email button.
+> - **Display panel:** "Reduce motion" turns it all off; the device setting is respected too.
+> - **Labs:** CSS-only lifts and a staggered card entrance, live after `npm run release`.
+
+> [!success]- 🚀 20 Oct 2026 · Proof tiles link to Labs · live
+> - **Released:** pull request #29 (`5822843`). Each proof tile has "How it's built →" to its Labs page, as well as the live link.
+
+> [!success]- 🚀 20 Oct 2026 · Light by default; Labs in the "Your week" look · live (Labs needs a release)
 > - **Released:** pull request #28 (`3dc2445`), chrisdemetriou.com live 13:14 UTC.
 > - **Light by default** on every page, even without JavaScript. Dark and Match device stay in the Display panel.
 > - **Labs:** same header, fonts and palette as the homepage, light. Live only after `npm run release` in `labs/`.
