@@ -7,7 +7,7 @@ updated: 2026-10-19
 
 > [!info] At a glance
 > **What:** the agreed copy, design system and SEO/AEO/GEO plan for the homepage overhaul.
-> **Status:** ✅ Agreed 19 Oct 2026 (10 decisions, Part 5). 🛠️ Not built yet: PR 1 (homepage) then PR 2 (Labs).
+> **Status:** ✅ Built 20 Oct 2026 (PR #21). ⚠️ The title "Operations Engineer" was replaced on 20 Oct 2026 by "Software Developer & Consultant"; the rest still applies.
 > **Back to:** [[00 Dashboard]] · [[Decision Log]]
 
 > Copy + UX/visual identity + SEO/AEO/GEO. Agreed with Chris, 19 Oct 2026. **Nothing is live yet.**
