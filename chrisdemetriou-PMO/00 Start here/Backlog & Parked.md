@@ -19,7 +19,7 @@ updated: 2026-10-18
 - 👉 **Add client quotes to the homepage** once Chris has them (between Work and About).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.
 
-## 👉 Next up (Operations Engineer)
+## 👉 Next up (repositioning)
 
 - 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
 - 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.

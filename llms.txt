@@ -1,6 +1,6 @@
-# Chris Demetriou – Operations Engineer, Manchester
+# Chris Demetriou – Software Developer & Consultant, Manchester
 
-> Chris Demetriou is an Operations Engineer based in Manchester, UK, who builds custom internal tools and automated workflows for organisations across the UK. Clients own the code and the hosting accounts outright: no seat licences, no licence fees ("Zero Software Tax").
+> Chris Demetriou is an independent software developer and consultant based in Manchester, UK. He turns business problems into custom tools and applications, from the first idea to a tested, working solution: understanding the problem, designing the solution, building, testing and launching it. Clients own the code and the hosting accounts outright: no seat licences, no licence fees ("Zero Software Tax").
 
 ## Internal Tool Blueprints
 
@@ -13,8 +13,9 @@
 
 ## How it works
 
-- Free written workflow audit by email: a one-page map of which steps can be automated. No calls or meetings.
-- Fixed price per agreed scope, written down before any work starts.
+- Understand the problem: a free written audit by email, with a one-page map of what a tool could fix. No calls or meetings.
+- Design the solution: a written design and scope with a fixed price, agreed before any work starts.
+- Build and test, then launch.
 - Handover: code in the client's GitHub, the tool in the client's Cloudflare account, plain-English notes. Optional monthly support plan.
 - Running costs are billed to the client's own accounts at cost, typically from about £4 a month.
 

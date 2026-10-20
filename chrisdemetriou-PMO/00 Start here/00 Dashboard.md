@@ -43,7 +43,7 @@ updated: 2026-10-18
 - [ ] **Release Labs from GitHub instead of by hand:** add a Cloudflare token to this repository.
 
 More ideas: [[Backlog & Parked]].
-Next big job: [[Operations Engineer copy deck]] (agreed 19 Oct 2026, not built yet).
+Positioning: Software Developer & Consultant (20 Oct 2026). History: [[Operations Engineer copy deck]].
 
 ## 🚦 Phases
 

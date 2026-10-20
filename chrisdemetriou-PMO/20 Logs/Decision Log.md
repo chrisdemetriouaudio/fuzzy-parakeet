@@ -9,6 +9,14 @@ updated: 2026-10-18
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!question]- 20 Oct 2026 · Title is "Software Developer & Consultant"
+> - **Decided by Chris:** replaces "Operations Engineer" on the site, share card, structured data, `llms.txt`, `/creative/` and Labs.
+> - **Decided by Chris:** subtitle "I turn business problems into custom tools and applications—from the first idea to a tested, working solution."; headline "Custom software that solves your business problems".
+> - **Decided by Chris:** homepage search title "Custom Software Developer & Consultant | Chris Demetriou" and the matching description.
+> - **Decided:** the Process steps follow the journey: understand the problem → design the solution → build and test → launch and hand over.
+> - **Kept:** ownership, written audit (no calls), fixed price, blueprints, Zero Software Tax, music/media/worship on `/creative/`.
+> - **Why:** "Operations Engineer" sounded like an employee job title and hid the consulting half (understanding and designing). Earlier entries stay as history.
+
 > [!question]- 19 Oct 2026 · Homepage: the deck plus the best of both sessions
 > - **Decided by Chris:** two sessions had conflicting decisions; the Operations Engineer deck wins, with the best of the other session kept.
 > - **Kept from the deck:** Operations Engineer; clients own code and accounts; free written audit, no calls; fixed price; IDE look.
