@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 17:55 (UK time)
+changed: 20 Oct 2026, 17:57 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 17:55 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `d2807a8` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `f32d633` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `83215d8`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,8 @@ changed: 20 Oct 2026, 17:55 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `f32d633` · Use neutral theme ink for Creative navigation
+- 20 Oct 2026 · `383769d` · docs(pmo): record Creative navigation release [skip ci]
 - 20 Oct 2026 · `7d2d276` · Nav: Creative after Contact, set apart
 - 20 Oct 2026 · `cd64c8a` · docs(pmo): log proof-tile links and micro-behaviours releases
 - 20 Oct 2026 · `a716dc3` · Micro-behaviours, with a Reduce motion switch
@@ -34,5 +36,3 @@ changed: 20 Oct 2026, 17:55 (UK time)
 - 20 Oct 2026 · `d0036f0` · Light by default; Labs in the "Your week" look
 - 20 Oct 2026 · `8e96b59` · docs(pmo): log the "Your week" homepage release
 - 20 Oct 2026 · `8c148ef` · Homepage: "Your week" look, dark by default
-- 20 Oct 2026 · `a9e279b` · docs(pmo): Chris chose the "Your week" look, dark by default
-- 20 Oct 2026 · `230babf` · docs(pmo): log the warm-and-personal redesign direction
