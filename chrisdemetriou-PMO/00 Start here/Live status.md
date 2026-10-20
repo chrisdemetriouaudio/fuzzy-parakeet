@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 16:01 (UK time)
+changed: 20 Oct 2026, 16:51 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,24 +9,24 @@ changed: 20 Oct 2026, 16:01 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `7da9833` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `2e52f07` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `83215d8`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#30 Micro-behaviours, with a Reduce motion switch**: opened 20 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `a716dc3` · Micro-behaviours, with a Reduce motion switch
 - 20 Oct 2026 · `7789d48` · Proof tiles link to their Labs write-ups
 - 20 Oct 2026 · `936f6a3` · docs(pmo): log light-by-default and the Labs restyle
 - 20 Oct 2026 · `d0036f0` · Light by default; Labs in the "Your week" look
@@ -36,4 +36,3 @@ changed: 20 Oct 2026, 16:01 (UK time)
 - 20 Oct 2026 · `230babf` · docs(pmo): log the warm-and-personal redesign direction
 - 20 Oct 2026 · `17bdf29` · docs(pmo): log Display settings release
 - 20 Oct 2026 · `3554e1b` · Add Display settings panel and fix accessibility issues
-- 20 Oct 2026 · `a85a6b6` · docs(pmo): Phase 8 renamed SEO, AEO & GEO; PR #25 live
