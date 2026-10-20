@@ -10,7 +10,15 @@ updated: 2026-10-18
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 19 Oct 2026 · Homepage copy in plain UK English · live
+> [!success]+ 🚀 20 Oct 2026 · Homepage rebuilt for the Operations Engineer positioning · live
+> - **Released:** pull request #21 (`67e6719`). The first Pages deploy failed with a GitHub server error (500); re-run once, then live.
+> - **Homepage:** "Custom internal tools that run your repetitive work for you."; six Internal Tool Blueprints; proof with screenshots; Zero Software Tax; process; About; FAQ; free written workflow audit form.
+> - **Look:** Inter + JetBrains Mono, cool dark surfaces, amber kept; all text colours pass WCAG AA.
+> - **SEO / AEO / GEO:** new title, description and share image; Person, ProfessionalService (6 services) and FAQPage data; `llms.txt`; AI crawlers named in `robots.txt`.
+> - **Checked live:** new title, `llms.txt`, share image and FAQ data are served.
+> - **Not yet:** Labs nav still shows the old items until Labs is released.
+
+> [!success]- 🚀 19 Oct 2026 · Homepage copy in plain UK English · live
 > - **Hero:** "I build tools that take the admin off your hands." (was cut off: "…take the admin off.")
 > - **Whole page reviewed:** British spelling, plain words, no jargon, sentence-case headings, spaced en dashes. Text only (pull request #17, `ad8ba98`); #16 closed.
 > - **Checked live:** new hero and description show; no sideways scroll on a phone.

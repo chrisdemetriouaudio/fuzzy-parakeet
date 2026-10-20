@@ -15,6 +15,11 @@ updated: 2026-10-18
 
 ## 👉 Your actions
 
+- 👉 **Release Labs** (`npm run release` in `labs/`, from `main`) so its nav matches the new homepage.
+- 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
+- 👉 **Bing Webmaster Tools:** import the site from Search Console.
+- 👉 **Send a test audit request** through the new form and check it reaches hello@.
+
 - 👉 **Release Labs:** `npm run release` in `labs/` (adds Neuro Support Checker and the new Creative links).
 - 👉 **Decide your charging model** (fixed price, day rate or monthly), then add it to "Good to know".
 - 👉 **Send Claude 1 or 2 client quotes:** the band, Reach, or a Neuro Support Checker user.
