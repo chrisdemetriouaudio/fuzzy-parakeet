@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 18:31 (UK time)
+changed: 20 Oct 2026, 19:39 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,24 +9,24 @@ changed: 20 Oct 2026, 18:31 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `4cb992c` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `6a0086a` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `4cb992c`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#32 /creative/, privacy and cookies in the "Your week" look**: opened 20 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `53d7201` · /creative/, privacy and cookies in the "Your week" look
 - 20 Oct 2026 · `f32d633` · Use neutral theme ink for Creative navigation
 - 20 Oct 2026 · `383769d` · docs(pmo): record Creative navigation release [skip ci]
 - 20 Oct 2026 · `7d2d276` · Nav: Creative after Contact, set apart
@@ -36,4 +36,3 @@ changed: 20 Oct 2026, 18:31 (UK time)
 - 20 Oct 2026 · `936f6a3` · docs(pmo): log light-by-default and the Labs restyle
 - 20 Oct 2026 · `d0036f0` · Light by default; Labs in the "Your week" look
 - 20 Oct 2026 · `8e96b59` · docs(pmo): log the "Your week" homepage release
-- 20 Oct 2026 · `8c148ef` · Homepage: "Your week" look, dark by default
