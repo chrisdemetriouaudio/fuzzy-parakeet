@@ -9,6 +9,15 @@ updated: 2026-10-20
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 20 Oct 2026 · Page titles follow one pattern: "Page | Chris Demetriou" (Agreed)
+> - **Status:** Agreed by Chris.
+> - **Decided:** every title and share title uses " | Chris Demetriou". Creative is "Creative: Music, Media & Worship | Chris Demetriou"; Labs is "Labs: Custom Software Projects | Chris Demetriou"; project pages "Genesis | Labs | Chris Demetriou".
+> - **Unchanged:** the homepage title, "Custom Software Developer & Consultant | Chris Demetriou".
+
+> [!success]- 20 Oct 2026 · chrisdemetriou.com stays on GitHub Pages (Agreed)
+> - **Status:** Agreed by Chris, after considering a move to Cloudflare to avoid the 10-minute cache after releases.
+> - **Why:** the showreel video is 93 MB and Cloudflare's limit is 25 MB per file; Chris chose to keep GitHub Pages. Releases can take up to 10 minutes to show (a private window shows them straight away).
+
 > [!success]- 20 Oct 2026 · Nav: Creative after Contact, set apart (Agreed)
 > - **Status:** Merged in PR #31; verified live homepage HTML on 20 Oct 2026. Labs release remains pending.
 > - **Decided:** Tools · Proof · Process · FAQ · Labs · **Contact** (a button), then a divider and **Creative** in purple. Same on the homepage, `/creative/`, Labs and generated pages.
