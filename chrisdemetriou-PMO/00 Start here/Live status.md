@@ -1,14 +1,14 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 14:00 (UK time)
+changed: 20 Oct 2026, 14:02 (UK time)
 ---
 
 # 🟢 Live status
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** 🔴 no: GitHub Pages build
+> **Everything answering:** ✅ yes
 > **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 14:00 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `38985ce` (GitHub Pages: errored) |
+| chrisdemetriou.com | ✅ 200 | main `8e96b59` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `d6788d5`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 14:00 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `8e96b59` · docs(pmo): log the "Your week" homepage release
 - 20 Oct 2026 · `8c148ef` · Homepage: "Your week" look, dark by default
 - 20 Oct 2026 · `a9e279b` · docs(pmo): Chris chose the "Your week" look, dark by default
 - 20 Oct 2026 · `230babf` · docs(pmo): log the warm-and-personal redesign direction
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 14:00 (UK time)
 - 20 Oct 2026 · `2a6cf48` · Search fixes and an evidence-gated publishing system (Phase 8)
 - 20 Oct 2026 · `7407abc` · docs(pmo): Phase 8 — Search & Publishing
 - 20 Oct 2026 · `574e4fb` · docs(pmo): tidy the Dashboard action list (duplicates and done items)
-- 20 Oct 2026 · `8ac6b87` · docs(pmo): forms deliver to hello@ (PR #23); About heading live (PR #24)
