@@ -1,6 +1,6 @@
 ---
 title: Backlog & Parked
-updated: 2026-10-18
+updated: 2026-10-20
 ---
 
 # 💭 Backlog & Parked
@@ -15,6 +15,8 @@ updated: 2026-10-18
 - 🔴 **Fix the SoundCloud player error** in `scripts/player.js` (reading `split` of undefined).
 
 ## 👉 Next up
+
+- 👉 **Release matching Labs navigation:** main-site Creative separation is live (PR #31).
 
 - 👉 **Add client quotes to the homepage** once Chris has them (between Work and About).
 - 👉 **Ask Google to re-read the site** in Search Console once the new tags are live.

@@ -1,6 +1,6 @@
 ---
 title: Decision Log
-updated: 2026-10-18
+updated: 2026-10-20
 ---
 
 # 🧠 Decision Log
@@ -10,7 +10,7 @@ updated: 2026-10-18
 > **Back to:** [[00 Dashboard]]
 
 > [!success]- 20 Oct 2026 · Nav: Creative after Contact, set apart (Agreed)
-> - **Status:** Agreed by Chris (option A).
+> - **Status:** Merged in PR #31; verified live homepage HTML on 20 Oct 2026. Labs release remains pending.
 > - **Decided:** Tools · Proof · Process · FAQ · Labs · **Contact** (a button), then a divider and **Creative** in purple. Same on the homepage, `/creative/`, Labs and generated pages.
 > - **Why:** Creative sat in the middle of the business path and broke its flow; the path now ends on Contact, and Creative reads as a separate side door.
 

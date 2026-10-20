@@ -1,6 +1,6 @@
 ---
 title: Dashboard
-updated: 2026-10-18
+updated: 2026-10-20
 ---
 
 # 🎛️ Dashboard
@@ -54,6 +54,10 @@ Positioning: Software Developer & Consultant (20 Oct 2026). History: [[Operation
 | [[Phase 8 — SEO, AEO & GEO]] | Get found (SEO, AEO, GEO); evidence-gated pages | 🛠️ Now (20 Oct 2026) |
 
 ## ✅ Done
+
+> [!success]- Finished 20 Oct 2026
+> - [x] **Merged Creative navigation after Contact** (PR #31); verified live homepage HTML.
+> - **Labs:** matching navigation still needs its separate release.
 
 > [!success]- Finished 18 Oct 2026 (tap to open)
 > - [x] **Moved Email address under Name** on the contact form (pull request #11).

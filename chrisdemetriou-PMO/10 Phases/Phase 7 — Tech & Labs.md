@@ -1,7 +1,7 @@
 ---
 phase: 7
 status: live
-updated: 2026-10-18
+updated: 2026-10-20
 ---
 
 # 🧪 Phase 7 — Tech & Labs
@@ -25,6 +25,10 @@ updated: 2026-10-18
 4. **Release Labs:** `npm run release` in `labs/`.
 
 ## ✅ Done
+
+> [!success]- Finished 20 Oct 2026
+> - [x] **Merged Creative navigation after Contact** (PR #31); verified live homepage HTML.
+> - **Labs:** matching navigation still needs its separate release.
 
 > [!success]- Built 16 to 18 Oct 2026 (tap to open)
 > - [x] **Added TECH to the nav bar,** between Media and Worship (16 Oct 2026).

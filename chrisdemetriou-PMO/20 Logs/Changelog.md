@@ -10,7 +10,13 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Micro-behaviours and "Reduce motion" · live (Labs needs a release)
+> [!success]+ 20 Oct 2026 · Creative navigation separated · main site live
+> - **Merged:** PR #31 (`4910b98`), placing Creative after Contact with a divider.
+> - **Verified:** live homepage HTML contains Music, Media and Worship dropdown links.
+> - **Checks:** pull-request content checks passed; browser verification unavailable in this session.
+> - **Labs:** matching changes need a separate release.
+
+> [!success]- 🚀 20 Oct 2026 · Micro-behaviours and "Reduce motion" · live (Labs needs a release)
 > - **Released:** pull request #30 (`2e52f07`), live 15:52 UTC.
 > - **New:** the week plays itself once, scroll reveals, counting numbers, sliding nav highlight, header shadow, card lifts, smooth FAQ, copy-email button.
 > - **Display panel:** "Reduce motion" turns it all off; the device setting is respected too.
