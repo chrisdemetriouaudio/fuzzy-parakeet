@@ -21,7 +21,7 @@ updated: 2026-10-18
 
 ## 👉 Next up (repositioning)
 
-- 🛠️ **"Your week" homepage** built; in review (pull request). Then `/creative/`, legal pages, generated pages, Labs and the share image. #next
+- 👉 **"Your week" look for the rest:** `/creative/`, legal pages, generated pages, Labs and the share image (homepage live 20 Oct 2026, PR #27). #next
 - 🛠️ **Labs restyle and case studies (PR 2):** same IDE look as the homepage; projects grouped by job.
 - 👉 **After PR 1 is live:** resubmit the sitemap in Google Search Console and import the site into Bing Webmaster Tools.
 

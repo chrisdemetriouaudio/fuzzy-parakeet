@@ -10,7 +10,14 @@ updated: 2026-10-20
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Display settings and accessibility fixes · live
+> [!success]+ 🚀 20 Oct 2026 · Homepage: "Your week" look · live
+> - **Released:** pull request #27 (`38985ce`), live 13:01 UTC. Content checks passed.
+> - **New look:** dark by default (warm charcoal, cream outlines, tomato shadows, sticky-note colours); light and high contrast in Display.
+> - **Hero:** "Hi, I'm Chris" sticker and an example week with a Before/After switch.
+> - **Checked:** axe-core finds nothing at 3 screen sizes × 9 Display modes × Before/After; keyboard, anchors, form and no-JS checked.
+> - **Not yet:** `/creative/`, legal pages, generated pages, Labs and the share image.
+
+> [!success]- 🚀 20 Oct 2026 · Display settings and accessibility fixes · live
 > - **Released:** pull request #26 (`87ec727`). Content checks passed.
 > - **New:** a **Display** button on every page: theme (dark, light, match device), text size, dyslexia-friendly font (OpenDyslexic), wider spacing, high contrast, reading mask. Saved on the visitor's device only.
 > - **Fixed:** `/creative/` contrast, heading order, embedded-player titles and the volume label; cookie tables scroll by keyboard.
