@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-20
-changed: 20 Oct 2026, 16:51 (UK time)
+changed: 20 Oct 2026, 16:53 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 20 Oct 2026, 16:51 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `e47b897` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `cd64c8a` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `83215d8`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -26,6 +26,7 @@ changed: 20 Oct 2026, 16:51 (UK time)
 
 ## 🕑 Latest changes on main
 
+- 20 Oct 2026 · `cd64c8a` · docs(pmo): log proof-tile links and micro-behaviours releases
 - 20 Oct 2026 · `a716dc3` · Micro-behaviours, with a Reduce motion switch
 - 20 Oct 2026 · `7789d48` · Proof tiles link to their Labs write-ups
 - 20 Oct 2026 · `936f6a3` · docs(pmo): log light-by-default and the Labs restyle
@@ -35,4 +36,3 @@ changed: 20 Oct 2026, 16:51 (UK time)
 - 20 Oct 2026 · `a9e279b` · docs(pmo): Chris chose the "Your week" look, dark by default
 - 20 Oct 2026 · `230babf` · docs(pmo): log the warm-and-personal redesign direction
 - 20 Oct 2026 · `17bdf29` · docs(pmo): log Display settings release
-- 20 Oct 2026 · `3554e1b` · Add Display settings panel and fix accessibility issues
