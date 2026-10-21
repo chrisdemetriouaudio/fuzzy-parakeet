@@ -11,7 +11,7 @@ Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D24.
 - **`worker/build.mjs`**: hashes every inline script before each `dev` and `deploy`, so the CSP can't go stale.
 - **`worker/media.js`**: serves the showreel from R2 at its old address, with seeking (byte ranges).
 - **`worker/parity.mjs`**: the URL-parity check (`npm run parity -- <address>`).
-- **`worker/test/`**: 8 tests. They also run in CI (`.github/workflows/site-check.yml`).
+- **`worker/test/`**: 9 tests. They also run in CI (`.github/workflows/site-check.yml`).
 - **`_config.yml`**: keeps `worker/` and `wrangler.jsonc` off GitHub Pages.
 - **The live site is unchanged.** GitHub Pages keeps serving it until the cutover.
 
@@ -108,7 +108,7 @@ Your DNS is already on Cloudflare (D17). So the Zoho records never move, and onl
 1. **Check mail works now.** Send from Zoho to another address and reply. Both arrive?
 2. **Back up the DNS.** Cloudflare → chrisdemetriou.com → **DNS → Records → Export**. Keep the file.
 3. **Write down the records you must not touch:** MX (Zoho), TXT (SPF), `zmail._domainkey` (DKIM), `_dmarc` (DMARC), and `labs`, `demo` and the other Labs subdomains.
-4. **Claude swaps the routes** in a small PR: `chrisdemetriou.com` and `www` in, `preview` out. **Don't merge it yet.**
+4. **Claude swaps the routes** in a small PR (branch `claude/lead-chat-cutover`): `chrisdemetriou.com` and `www` in, `preview` out. **Don't merge it yet.**
 5. **Deploy that PR's branch from your Mac:** `git fetch && git switch <branch> && npx wrangler deploy`. By hand, because wrangler may ask a question the auto-deploy can't answer.
    - If it asks to replace the existing DNS records for `chrisdemetriou.com` and `www`, answer **y**.
    - If it stops with an error instead, delete only the GitHub records (A `185.199.108–111.153`, AAAA `2606:50c0:8000–8003::153`, CNAME `www` → `chrisdemetriouaudio.github.io`). Then run the deploy again. The site is down for a minute or two, so do it at a quiet time.

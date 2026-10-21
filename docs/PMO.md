@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Preview live at preview.chrisdemetriou.com; parity: all checks pass (21 Oct). **Chris:** say "merge", then add the 2 Cloudflare secrets ([02-migrate.md](lead-chat/02-migrate.md), "Auto-deploy"). |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Preview passed parity and Chris's by-eye check; auto-deploy works. **Chris:** the cutover checklist in [02-migrate.md](lead-chat/02-migrate.md), step by step in chat. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -90,6 +90,7 @@
 | I04 | Two PMOs: docs/PMO.md (spec) vs. chrisdemetriou-PMO vault (AGENTS.md) | Chris | Closed 2026-10-21 by D18 |
 | I05 | Labs cards live in labs/projects.json, not labs.yml | Claude Code | Noted for Phase 10 |
 | I06 | After the move, merging to main no longer publishes the site by itself | Chris | Closed 2026-10-21 by D24 |
+| I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
 
 ### Dependencies
 | ID | Dependency | Owner | Status |
@@ -100,7 +101,7 @@
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
-| X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Open: steps in lead-chat/02-migrate.md, "Auto-deploy" |
+| X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Done 2026-10-21; test run green (tests, deploy, parity) |
 
 ---
 
@@ -112,6 +113,8 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-21 | 2 | Cutover PR prepared: routes → chrisdemetriou.com + www; AGENTS.md describes the Worker | wrangler.jsonc, AGENTS.md, docs/lead-chat/02-migrate.md, docs/PMO.md, vault |
+| 2026-10-21 | 2 | Secrets added by Chris; manual Deploy site run green; Chris checked the preview by eye | — |
 | 2026-10-21 | 2 | Auto-deploy on merge (D24); parity defaults to the Worker's own address; test that the workflow watches every published path | .github/workflows/deploy-site.yml, worker/parity.mjs, worker/test/site.test.mjs, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 2 | Preview deployed by Chris; parity run against it: all checks pass | — |
 | 2026-10-21 | 2 | Preview moved to preview.chrisdemetriou.com; workers.dev off (D23) | wrangler.jsonc, worker/index.js, worker/parity.mjs, docs/lead-chat/02-migrate.md, docs/PMO.md |

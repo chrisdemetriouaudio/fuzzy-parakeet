@@ -1,7 +1,7 @@
 // chrisdemetriou.com on Cloudflare Workers.
 //   Test:     npm test             (headers, allowlist, video ranges)
 //   Preview:  npm run dev          (http://127.0.0.1:8790)
-//   Deploy:   npx wrangler deploy  (until the cutover, this updates https://preview.chrisdemetriou.com)
+//   Deploy:   automatic on merge to main (.github/workflows/deploy-site.yml), or npx wrangler deploy
 //   Check:    npm run parity -- <address>
 // The repo root is the assets folder; .assetsignore lists the only files that go live.
 // worker/build.mjs runs before every dev and deploy: it hashes the pages' inline scripts
@@ -13,10 +13,11 @@
   "compatibility_date": "2026-10-01",
   "workers_dev": false,
   "preview_urls": false,
-  // The preview, on Chris's own domain rather than the account's workers.dev name (D23).
-  // At the cutover this becomes chrisdemetriou.com and www.chrisdemetriou.com.
+  // The live site (cutover from GitHub Pages, Phase 9 step 2). www redirects to the apex in
+  // worker/index.js. The first route is the address `npm run parity` checks by default.
   "routes": [
-    { "pattern": "preview.chrisdemetriou.com", "custom_domain": true }
+    { "pattern": "chrisdemetriou.com", "custom_domain": true },
+    { "pattern": "www.chrisdemetriou.com", "custom_domain": true }
   ],
   "build": { "command": "node worker/build.mjs" },
   "assets": {

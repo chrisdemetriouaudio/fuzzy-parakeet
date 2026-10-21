@@ -10,15 +10,14 @@ updated: 2026-10-21
 > [!info] At a glance
 > **What:** an AI chat on every page that helps a visitor describe one costly task, then turns it into a written audit request. Plus a passkey portal (sign-in with Face ID or a fingerprint, no password) where clients see their audit, scope and fixed price.
 > **When:** 20 Oct 2026 onwards.
-> **Status:** 👉 Step 2 of 10: the preview is live and passes every check (21 Oct 2026).
+> **Status:** 👉 Step 2 of 10: the cutover (21 Oct 2026). The preview passed every check.
 > **Steps:** match Phases 1 to 10 in the spec. Say "next" to move on.
 > **Back to:** [[00 Dashboard]]
 
 ## 👉 To do
 
-- 👉 **Check preview.chrisdemetriou.com by eye** once your Wi-Fi's DNS catches up.
-- 👉 **Add 2 Cloudflare secrets on GitHub** for the auto-deploy (`02-migrate.md`, "Auto-deploy").
 - 👉 **Point chrisdemetriou.com at the Worker;** check e-mail still flows both ways.
+- 👉 **Turn off GitHub Pages** once the checks pass.
 - 🛠️ **Step 3: build the database** (Cloudflare D1) and one config file.
 - 🛠️ **Step 4: build the chat API** with daily caps and the form as fallback.
 - 👉 **Step 5: add the Resend e-mail records** in Cloudflare (one SPF record only).
@@ -38,6 +37,8 @@ updated: 2026-10-21
 ## ✅ Done
 
 > [!success]- Step 2 built 21 Oct 2026 (tap to open)
+> - [x] **Checked the preview by eye** (NordVPN's DNS hid it at first).
+> - [x] **Added the Cloudflare secrets;** the auto-deploy ran green.
 > - [x] **Deployed the preview;** the parity check passed on Cloudflare.
 > - [x] **Decided: merging deploys the site by itself** (GitHub Action).
 > - [x] **Created the R2 bucket and uploaded the showreel** (Western Europe).
