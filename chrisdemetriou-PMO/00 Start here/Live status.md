@@ -8,25 +8,25 @@ changed: 21 Oct 2026, 23:15 (UK time)
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Everything answering:** 🔴 no: GitHub Pages build
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `59bd9a0` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `18f4aad` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#37 Lead chat step 2: deploy the site on merge (GitHub Action)**: opened 21 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 21 Oct 2026 · `2fd2fdc` · ci(site): deploy chrisdemetriou.com on merge to main (D24)
 - 21 Oct 2026 · `ea09b21` · feat(site): preview on preview.chrisdemetriou.com, workers.dev off
 - 21 Oct 2026 · `c3b05b8` · feat(site): Worker for chrisdemetriou.com, with R2 showreel (Phase 9 step 2)
 - 21 Oct 2026 · `2d4ec72` · docs(pmo): add Phase 9, Lead chat & portal, to the vault
@@ -36,4 +36,3 @@ changed: 21 Oct 2026, 23:15 (UK time)
 - 20 Oct 2026 · `1ea1af1` · docs(pmo): log aligned titles and the contact form default
 - 20 Oct 2026 · `fccd08f` · Creative contact form: default topic is "A web app or tool"
 - 20 Oct 2026 · `1de4061` · Page titles follow one pattern: "Page / Chris Demetriou"
-- 20 Oct 2026 · `47e1dcd` · docs(pmo): log the /creative/, privacy and cookies restyle
