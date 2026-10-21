@@ -1,6 +1,6 @@
 ---
 title: Decision Log
-updated: 2026-10-20
+updated: 2026-10-21
 ---
 
 # 🧠 Decision Log
@@ -8,6 +8,12 @@ updated: 2026-10-20
 > [!info] At a glance
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
+
+> [!success]- 21 Oct 2026 · Site moves to Cloudflare Workers; showreel goes to R2 (Agreed)
+> - **Status:** Agreed by Chris. Supersedes "chrisdemetriou.com stays on GitHub Pages" (20 Oct 2026).
+> - **Decided:** the lead chat build moves the site to Workers. The 93 MB showreel moves to an R2 bucket and the Worker serves it at the same URL.
+> - **Why:** the chat API and passkey portal need the site's own domain. R2 removes the 25 MB file limit with no quality loss.
+> - **Tracked in:** `docs/PMO.md` (D16).
 
 > [!success]- 20 Oct 2026 · Page titles follow one pattern: "Page | Chris Demetriou" (Agreed)
 > - **Status:** Agreed by Chris.

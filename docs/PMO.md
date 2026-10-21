@@ -11,8 +11,8 @@
 
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
-| 1 | Recon | Awaiting Chris | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). **Chris:** answer the hosting question (I01), then run `dig NS chrisdemetriou.com +short` and paste the result (I02). |
-| 2 | Migrate to Workers static assets + DNS checklist | Blocked | | | ⛔ Waiting on I01 (showreel too big for Workers) and I02 (where DNS lives). |
+| 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
+| 2 | Migrate to Workers static assets + DNS checklist | Blocked | | | ⛔ Waiting on I02. **Chris:** run `dig NS chrisdemetriou.com +short` and paste the result. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D16 | 2026-10-21 | Showreel moves to an R2 bucket; the site Worker serves it at the same URL, with seeking (range requests) | 93 MB > 25 MiB Workers file limit; keeps full quality and every URL; unblocks D10. Supersedes the vault decision of 20 Oct "stays on GitHub Pages" | Chris |
 
 ---
 
@@ -61,6 +62,7 @@
 | R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | `.assetsignore` or copy-to-dist; URL-parity check in Phase 2 | Claude Code | Open |
 | R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hash inline scripts; ship report-only first; test every page | Claude Code | Open |
 | R10 | Public repo exposes the system prompt and blueprint map | Low | High | Nothing secret in them; blueprints already on the homepage | Chris | Open |
+| R11 | Enabling R2 asks for a card | Low | Med | Charged only above the free tier (10 GB storage, 10M reads a month, free egress); showreel is 0.09 GB | Chris | Open |
 
 ### Assumptions
 | ID | Assumption | Status |
@@ -73,7 +75,7 @@
 ### Issues
 | ID | Issue | Owner | Status |
 |---|---|---|---|
-| I01 | Hosting conflict: D10 (migrate) vs. vault decision 20 Oct "stays on GitHub Pages"; 93 MB showreel > 25 MiB Workers file limit | Chris | Open: choose an option (asked in chat) |
+| I01 | Hosting conflict: D10 (migrate) vs. vault decision 20 Oct "stays on GitHub Pages"; 93 MB showreel > 25 MiB Workers file limit | Chris | Closed 2026-10-21 by D16 |
 | I02 | DNS location unclear: spec says GoDaddy; Labs Custom Domains imply a Cloudflare zone | Chris | Open: run `dig NS chrisdemetriou.com +short` |
 | I03 | Live site has no CSP (GitHub Pages can't set headers), so Phase 2 creates one | Claude Code | Open: Phase 2 |
 | I04 | Two PMOs: docs/PMO.md (spec) vs. chrisdemetriou-PMO vault (AGENTS.md) | Chris | Open: using docs/PMO.md for this build |
@@ -87,6 +89,7 @@
 | X03 | Resend account + domain verification | Chris | Open |
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
+| X06 | R2 bucket created and showreel uploaded (steps come in Phase 2) | Chris | Open |
 
 ---
 
@@ -96,3 +99,4 @@
 |---|---|---|---|
 | 2026-10-20 | Setup | Spec and PMO created | CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
+| 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
