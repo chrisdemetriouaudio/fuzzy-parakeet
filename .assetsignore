@@ -1,0 +1,28 @@
+# What the Worker publishes as chrisdemetriou.com. The whole repo is the assets folder,
+# so this is an allowlist: ignore everything, then let back in only the website.
+# A new public folder must be added here, or it won't go live. Same rules as .gitignore.
+# The bare names at the end are never published, even inside a public folder.
+# The showreel (video/) is served from R2 by worker/index.js, not from here.
+/*
+!/index.html
+!/404.html
+!/creative/
+!/privacy/
+!/cookies/
+!/work/
+!/resources/
+!/styles/
+!/scripts/
+!/fonts/
+!/images/
+!/robots.txt
+!/sitemap.xml
+!/llms.txt
+!/favicon.ico
+!/favicon-32.png
+!/apple-touch-icon.png
+!/icon-192.png
+!/icon-512.png
+!/og-image.jpg
+.DS_Store
+._*

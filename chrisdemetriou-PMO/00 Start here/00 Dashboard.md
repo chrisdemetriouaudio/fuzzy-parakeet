@@ -1,6 +1,6 @@
 ---
 title: Dashboard
-updated: 2026-10-20
+updated: 2026-10-21
 ---
 
 # 🎛️ Dashboard
@@ -11,10 +11,12 @@ updated: 2026-10-20
 > **Live status, updated by itself:** [[Live status]]
 > **Homepage rebuilt tech-first** (18 Oct 2026): web developer first, music and media as the roots.
 > **Checked against the live system:** 18 Oct 2026 (before the rebuild)
+> **Lead chat and portal started** (21 Oct 2026): [[Phase 9 — Lead chat & portal]].
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
+- 👉 **Phase 9, step 2:** create the R2 bucket, deploy the preview, run the parity check; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
@@ -52,6 +54,7 @@ Positioning: Software Developer & Consultant (20 Oct 2026). History: [[Operation
 | [[Phase 6 — Media & Worship]] | Media and Worship | ✅ Live (14 Oct 2026) |
 | [[Phase 7 — Tech & Labs]] | TECH page, all projects | ✅ Live (17 Oct 2026) |
 | [[Phase 8 — SEO, AEO & GEO]] | Get found (SEO, AEO, GEO); evidence-gated pages | 🛠️ Now (20 Oct 2026) |
+| [[Phase 9 — Lead chat & portal]] | AI chat for audit requests; client portal | 🛠️ Now (21 Oct 2026) |
 
 ## ✅ Done
 
