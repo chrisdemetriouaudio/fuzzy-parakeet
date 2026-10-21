@@ -16,7 +16,7 @@ updated: 2026-10-21
 
 ## 👉 Your actions
 
-- 👉 **Phase 9:** say "next" in the chat after each step; [[Phase 9 — Lead chat & portal]].
+- 👉 **Phase 9, step 2:** create the R2 bucket, deploy the preview, run the parity check; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
@@ -25,7 +25,6 @@ updated: 2026-10-21
 
 ## 🛠️ For Claude
 
-- 🛠️ **Phase 9, step 2:** move the site to Cloudflare Workers; showreel to R2.
 - 🛠️ **Labs redesign (PR 2):** same look as the homepage; case-study pages grouped by job.
 
 ## ⏳ Waiting

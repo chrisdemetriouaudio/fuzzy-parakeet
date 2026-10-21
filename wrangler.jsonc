@@ -1,0 +1,28 @@
+// chrisdemetriou.com on Cloudflare Workers.
+//   Test:     npm test             (headers, allowlist, video ranges)
+//   Preview:  npm run dev          (http://127.0.0.1:8790)
+//   Deploy:   npx wrangler deploy  (until the apex moves, this is the workers.dev preview)
+//   Check:    npm run parity -- <address>
+// The repo root is the assets folder; .assetsignore lists the only files that go live.
+// worker/build.mjs runs before every dev and deploy: it hashes the pages' inline scripts
+// for the Content-Security-Policy.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "chrisdemetriou-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "build": { "command": "node worker/build.mjs" },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+  // The showreel is 93 MB, over the 25 MiB limit for one static asset (D16).
+  "r2_buckets": [
+    { "binding": "MEDIA", "bucket_name": "chrisdemetriou-media" }
+  ]
+}

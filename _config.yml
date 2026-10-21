@@ -4,13 +4,16 @@
 #   chrisdemetriou-PMO/   the Obsidian project notes (PMO)
 #   content/              evidence records, drafts and approvals (never public pages)
 #   publisher/            the publishing generator and its tests
-#   docs/                 search and publishing documentation
+#   docs/                 search, publishing and lead chat documentation
+#   worker/, wrangler.jsonc  the Cloudflare Worker that will serve this site (Phase 9)
 exclude:
   - labs/
   - chrisdemetriou-PMO/
   - content/
   - publisher/
   - docs/
+  - worker/
+  - wrangler.jsonc
   - AGENTS.md
   - CLAUDE.md
   - README.md

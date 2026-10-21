@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | | | Ready. **Chris:** say "next" to start. |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Worker built and tested locally ([lead-chat/02-migrate.md](lead-chat/02-migrate.md)). **Chris:** say "merge", then run the 4 preview steps in 02-migrate.md and paste the parity result. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -43,6 +43,10 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D22 | 2026-10-21 | Trailing-slash redirects are 301; the asset server's 307 is rewritten | Same as GitHub Pages; search engines keep the folder address | Claude Code (proposed) |
+| D21 | 2026-10-21 | HSTS max-age 1 year without includeSubDomains | Same as GitHub Pages; doesn't force HTTPS on subdomains nobody has checked | Claude Code (proposed) |
+| D20 | 2026-10-21 | The Worker sets the CSP per page; inline scripts allowed by SHA-256 hashes rebuilt before every dev and deploy; styles allow inline | Strict scripts with no change to the pages; hashes can't go stale; /creative/ uses style attributes | Claude Code (proposed) |
+| D19 | 2026-10-21 | The repo root is the Worker's assets folder; .assetsignore is an allowlist of the 32 site files, tested in CI against what GitHub Pages publishes | Pages' URLs stay identical; the PMO, content/ and labs/ can't go live (R08) | Claude Code (proposed) |
 | D18 | 2026-10-21 | The vault gets a phase page (Phase 9 — Lead chat & portal) mirroring this tracker's status; this file keeps the detail | Chris wants the build visible in Obsidian; this file sits outside the vault | Chris |
 | D17 | 2026-10-21 | Phase 2 DNS checklist drops the GoDaddy zone export and nameserver switch; cutover is one apex change inside Cloudflare | Nameservers are already Cloudflare (`arushi`, `wesley`), checked by Chris | Chris |
 | D16 | 2026-10-21 | Showreel moves to an R2 bucket; the site Worker serves it at the same URL, with seeking (range requests) | 93 MB > 25 MiB Workers file limit; keeps full quality and every URL; unblocks D10. Supersedes the vault decision of 20 Oct "stays on GitHub Pages" | Chris |
@@ -61,9 +65,10 @@
 | R05 | Bot abuse / prompt injection / spam | Med | Med | Turnstile, rate limits, input caps, data-not-instructions framing | Claude Code | Open |
 | R06 | PII scrubber misses personal data in anonymised chats | Med | Med | Regex + known-value scrub; document limits | Claude Code | Open |
 | R07 | Two SPF records after adding Resend | High | Low | Merge into one SPF record | Chris | Open |
-| R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | `.assetsignore` or copy-to-dist; URL-parity check in Phase 2 | Claude Code | Open |
-| R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hash inline scripts; ship report-only first; test every page | Claude Code | Open |
+| R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | Allowlist (D19); CI test; wrangler's upload list checked = 32 site files | Claude Code | Mitigated 2026-10-21 |
+| R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hashes rebuilt every deploy (D20); 0 violations on 5 pages locally; recheck on the preview | Claude Code | Mitigated locally; recheck on preview |
 | R10 | Public repo exposes the system prompt and blueprint map | Low | High | Nothing secret in them; blueprints already on the homepage | Chris | Open |
+| R12 | Cutover takes the site down for a minute or two if wrangler can't take over the DNS records | Low | Med | Quiet time; rollback steps in 02-migrate.md; Pages stays on until checks pass | Chris | Open |
 | R11 | Enabling R2 asks for a card | Low | Med | Charged only above the free tier (10 GB storage, 10M reads a month, free egress); showreel is 0.09 GB | Chris | Open |
 
 ### Assumptions
@@ -79,9 +84,10 @@
 |---|---|---|---|
 | I01 | Hosting conflict: D10 (migrate) vs. vault decision 20 Oct "stays on GitHub Pages"; 93 MB showreel > 25 MiB Workers file limit | Chris | Closed 2026-10-21 by D16 |
 | I02 | DNS location unclear: spec says GoDaddy; Labs Custom Domains imply a Cloudflare zone | Chris | Closed 2026-10-21: nameservers are Cloudflare (D17) |
-| I03 | Live site has no CSP (GitHub Pages can't set headers), so Phase 2 creates one | Claude Code | Open: Phase 2 |
+| I03 | Live site has no CSP (GitHub Pages can't set headers), so Phase 2 creates one | Claude Code | Closed 2026-10-21: built (D20) |
 | I04 | Two PMOs: docs/PMO.md (spec) vs. chrisdemetriou-PMO vault (AGENTS.md) | Chris | Closed 2026-10-21 by D18 |
 | I05 | Labs cards live in labs/projects.json, not labs.yml | Claude Code | Noted for Phase 10 |
+| I06 | After the move, merging to main no longer publishes the site by itself | Chris | Open: choose how it deploys (asked before cutover) |
 
 ### Dependencies
 | ID | Dependency | Owner | Status |
@@ -91,7 +97,7 @@
 | X03 | Resend account + domain verification | Chris | Open |
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
-| X06 | R2 bucket created and showreel uploaded (steps come in Phase 2) | Chris | Open |
+| X06 | R2 bucket created and showreel uploaded | Chris | Open: steps 1–2 in lead-chat/02-migrate.md |
 
 ---
 
@@ -103,4 +109,5 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-21 | 2 | Worker, allowlist, CSP, R2 video route, parity check, tests and CI; Pages excludes the new files | wrangler.jsonc, .assetsignore, worker/*, package.json, package-lock.json, .github/workflows/site-check.yml, _config.yml, .gitignore, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 1 | D18: vault phase page added and linked from the Dashboard | chrisdemetriou-PMO/10 Phases/Phase 9 — Lead chat & portal.md, chrisdemetriou-PMO/00 Start here/00 Dashboard.md, docs/PMO.md |
