@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Worker built and tested locally ([lead-chat/02-migrate.md](lead-chat/02-migrate.md)); showreel in R2. **Chris:** say "merge", run `npx wrangler deploy`, then `npm run parity -- https://preview.chrisdemetriou.com` and paste the result. |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Preview live at preview.chrisdemetriou.com; parity: all checks pass (21 Oct). **Chris:** say "merge", then add the 2 Cloudflare secrets ([02-migrate.md](lead-chat/02-migrate.md), "Auto-deploy"). |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D24 | 2026-10-21 | A GitHub Action deploys the site on every website change to main: tests, `wrangler deploy`, then the parity check on the live address | Merge = live, as on GitHub Pages; nothing to remember; a failed check emails Chris | Chris |
 | D23 | 2026-10-21 | Preview at preview.chrisdemetriou.com (Custom Domain, noindex); workers.dev off for this Worker | The account's workers.dev name (christian4collective) is shared with Genesis and isn't this brand; renaming it would break other Workers | Chris |
 | D22 | 2026-10-21 | Trailing-slash redirects are 301; the asset server's 307 is rewritten | Same as GitHub Pages; search engines keep the folder address | Claude Code (proposed) |
 | D21 | 2026-10-21 | HSTS max-age 1 year without includeSubDomains | Same as GitHub Pages; doesn't force HTTPS on subdomains nobody has checked | Claude Code (proposed) |
@@ -67,7 +68,7 @@
 | R06 | PII scrubber misses personal data in anonymised chats | Med | Med | Regex + known-value scrub; document limits | Claude Code | Open |
 | R07 | Two SPF records after adding Resend | High | Low | Merge into one SPF record | Chris | Open |
 | R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | Allowlist (D19); CI test; wrangler's upload list checked = 32 site files | Claude Code | Mitigated 2026-10-21 |
-| R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hashes rebuilt every deploy (D20); 0 violations on 5 pages locally; recheck on the preview | Claude Code | Mitigated locally; recheck on preview |
+| R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hashes rebuilt every deploy (D20); 0 violations on 5 pages locally; same headers confirmed on the preview | Claude Code | Mitigated; Chris's by-eye check pending |
 | R10 | Public repo exposes the system prompt and blueprint map | Low | High | Nothing secret in them; blueprints already on the homepage | Chris | Open |
 | R12 | Cutover takes the site down for a minute or two if wrangler can't take over the DNS records | Low | Med | Quiet time; rollback steps in 02-migrate.md; Pages stays on until checks pass | Chris | Open |
 | R11 | Enabling R2 asks for a card | Low | Med | Charged only above the free tier (10 GB storage, 10M reads a month, free egress); showreel is 0.09 GB | Chris | Open |
@@ -88,7 +89,7 @@
 | I03 | Live site has no CSP (GitHub Pages can't set headers), so Phase 2 creates one | Claude Code | Closed 2026-10-21: built (D20) |
 | I04 | Two PMOs: docs/PMO.md (spec) vs. chrisdemetriou-PMO vault (AGENTS.md) | Chris | Closed 2026-10-21 by D18 |
 | I05 | Labs cards live in labs/projects.json, not labs.yml | Claude Code | Noted for Phase 10 |
-| I06 | After the move, merging to main no longer publishes the site by itself | Chris | Open: choose how it deploys (asked before cutover) |
+| I06 | After the move, merging to main no longer publishes the site by itself | Chris | Closed 2026-10-21 by D24 |
 
 ### Dependencies
 | ID | Dependency | Owner | Status |
@@ -99,6 +100,7 @@
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
+| X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Open: steps in lead-chat/02-migrate.md, "Auto-deploy" |
 
 ---
 
@@ -110,6 +112,8 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-21 | 2 | Auto-deploy on merge (D24); parity defaults to the Worker's own address; test that the workflow watches every published path | .github/workflows/deploy-site.yml, worker/parity.mjs, worker/test/site.test.mjs, docs/lead-chat/02-migrate.md, docs/PMO.md |
+| 2026-10-21 | 2 | Preview deployed by Chris; parity run against it: all checks pass | — |
 | 2026-10-21 | 2 | Preview moved to preview.chrisdemetriou.com; workers.dev off (D23) | wrangler.jsonc, worker/index.js, worker/parity.mjs, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 2 | Worker, allowlist, CSP, R2 video route, parity check, tests and CI; Pages excludes the new files | wrangler.jsonc, .assetsignore, worker/*, package.json, package-lock.json, .github/workflows/site-check.yml, _config.yml, .gitignore, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 1 | D18: vault phase page added and linked from the Dashboard | chrisdemetriou-PMO/10 Phases/Phase 9 — Lead chat & portal.md, chrisdemetriou-PMO/00 Start here/00 Dashboard.md, docs/PMO.md |

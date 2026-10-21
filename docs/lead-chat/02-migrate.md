@@ -1,6 +1,6 @@
 # Phase 2: Move chrisdemetriou.com to Cloudflare Workers
 
-Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D23.
+Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D24.
 
 ## What changed
 
@@ -11,7 +11,7 @@ Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D23.
 - **`worker/build.mjs`**: hashes every inline script before each `dev` and `deploy`, so the CSP can't go stale.
 - **`worker/media.js`**: serves the showreel from R2 at its old address, with seeking (byte ranges).
 - **`worker/parity.mjs`**: the URL-parity check (`npm run parity -- <address>`).
-- **`worker/test/`**: 7 tests. They also run in CI (`.github/workflows/site-check.yml`).
+- **`worker/test/`**: 8 tests. They also run in CI (`.github/workflows/site-check.yml`).
 - **`_config.yml`**: keeps `worker/` and `wrangler.jsonc` off GitHub Pages.
 - **The live site is unchanged.** GitHub Pages keeps serving it until the cutover.
 
@@ -85,6 +85,22 @@ npm run parity -- https://preview.chrisdemetriou.com
 - **Pages refresh straight away.** HTML is revalidated on every visit. No more 10-minute wait after a release.
 - **New security headers.** GitHub Pages could only send HSTS.
 
+## 👉 Auto-deploy on merge (D24)
+
+`.github/workflows/deploy-site.yml` deploys whenever a website change reaches `main`. It tests first, then deploys, then runs the parity check against the live address. Until the two secrets below exist, it does nothing and stays green.
+
+**1. Create the token.** Cloudflare → **My Profile → API Tokens → Create Token**.
+- Template: **Edit Cloudflare Workers**.
+- **Account Resources:** Include → your account.
+- **Zone Resources:** Include → Specific zone → `chrisdemetriou.com`.
+- **Continue to summary → Create Token.** Copy it; Cloudflare shows it only once.
+
+**2. Add two secrets on GitHub.** fuzzy-parakeet → **Settings → Secrets and variables → Actions → New repository secret**.
+- `CLOUDFLARE_API_TOKEN`: the token.
+- `CLOUDFLARE_ACCOUNT_ID`: the long ID in your dashboard address (`dash.cloudflare.com/<this>/...`).
+
+**3. Test it.** GitHub → **Actions → Deploy site → Run workflow**. All steps should go green.
+
 ## 👉 Cutover checklist (later, after the preview passes)
 
 Your DNS is already on Cloudflare (D17). So the Zoho records never move, and only the apex and `www` change.
@@ -92,11 +108,12 @@ Your DNS is already on Cloudflare (D17). So the Zoho records never move, and onl
 1. **Check mail works now.** Send from Zoho to another address and reply. Both arrive?
 2. **Back up the DNS.** Cloudflare → chrisdemetriou.com → **DNS → Records → Export**. Keep the file.
 3. **Write down the records you must not touch:** MX (Zoho), TXT (SPF), `zmail._domainkey` (DKIM), `_dmarc` (DMARC), and `labs`, `demo` and the other Labs subdomains.
-4. **Claude swaps the routes** in a small PR: `chrisdemetriou.com` and `www` in, `preview` out. You merge it.
-5. **Deploy:** `npx wrangler deploy`.
+4. **Claude swaps the routes** in a small PR: `chrisdemetriou.com` and `www` in, `preview` out. **Don't merge it yet.**
+5. **Deploy that PR's branch from your Mac:** `git fetch && git switch <branch> && npx wrangler deploy`. By hand, because wrangler may ask a question the auto-deploy can't answer.
    - If it asks to replace the existing DNS records for `chrisdemetriou.com` and `www`, answer **y**.
    - If it stops with an error instead, delete only the GitHub records (A `185.199.108–111.153`, AAAA `2606:50c0:8000–8003::153`, CNAME `www` → `chrisdemetriouaudio.github.io`). Then run the deploy again. The site is down for a minute or two, so do it at a quiet time.
-6. **Check:** `npm run parity -- https://chrisdemetriou.com`. This also checks `www`, `http` and that Cloudflare is serving.
+6. **Merge the PR.** The auto-deploy runs the same thing again, then its parity check.
+   **Check:** `npm run parity -- https://chrisdemetriou.com`. This also checks `www`, `http` and that Cloudflare is serving.
 7. **Check mail again,** both directions. Then: `dig MX chrisdemetriou.com +short` should still show Zoho.
 8. **Turn off GitHub Pages:** repo **Settings → Pages → Unpublish site**. Only after steps 6 and 7 pass.
 

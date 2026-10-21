@@ -10,14 +10,14 @@ updated: 2026-10-21
 > [!info] At a glance
 > **What:** an AI chat on every page that helps a visitor describe one costly task, then turns it into a written audit request. Plus a passkey portal (sign-in with Face ID or a fingerprint, no password) where clients see their audit, scope and fixed price.
 > **When:** 20 Oct 2026 onwards.
-> **Status:** 👉 Step 2 of 10 built and tested (21 Oct 2026). Your turn: the preview.
+> **Status:** 👉 Step 2 of 10: the preview is live and passes every check (21 Oct 2026).
 > **Steps:** match Phases 1 to 10 in the spec. Say "next" to move on.
 > **Back to:** [[00 Dashboard]]
 
 ## 👉 To do
 
-- 👉 **Deploy the preview to preview.chrisdemetriou.com and run** `npm run parity` (steps 3–4).
-- 👉 **Choose how the site deploys after the move** (Claude will ask).
+- 👉 **Check preview.chrisdemetriou.com by eye** once your Wi-Fi's DNS catches up.
+- 👉 **Add 2 Cloudflare secrets on GitHub** for the auto-deploy (`02-migrate.md`, "Auto-deploy").
 - 👉 **Point chrisdemetriou.com at the Worker;** check e-mail still flows both ways.
 - 🛠️ **Step 3: build the database** (Cloudflare D1) and one config file.
 - 🛠️ **Step 4: build the chat API** with daily caps and the form as fallback.
@@ -38,6 +38,8 @@ updated: 2026-10-21
 ## ✅ Done
 
 > [!success]- Step 2 built 21 Oct 2026 (tap to open)
+> - [x] **Deployed the preview;** the parity check passed on Cloudflare.
+> - [x] **Decided: merging deploys the site by itself** (GitHub Action).
 > - [x] **Created the R2 bucket and uploaded the showreel** (Western Europe).
 > - [x] **Moved the preview to preview.chrisdemetriou.com;** workers.dev is off.
 > - [x] **Built the Worker:** only the 32 site files go live; private folders answer 404.
