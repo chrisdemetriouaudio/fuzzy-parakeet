@@ -29,8 +29,8 @@ export default {
 
     res = new Response(res.body, res);
     securityHeaders(res.headers, url.pathname, res.status);
-    // The workers.dev address is only a preview: keep it out of search results.
-    if (url.hostname.endsWith(".workers.dev")) res.headers.set("x-robots-tag", "noindex");
+    // Any other address (preview.chrisdemetriou.com) is only a preview: keep it out of search.
+    if (url.hostname !== APEX) res.headers.set("x-robots-tag", "noindex");
     return res;
   },
 };

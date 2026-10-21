@@ -1,5 +1,5 @@
 // URL-parity check: does an address serve the site exactly as the repo has it?
-//   npm run parity -- https://chrisdemetriou-site.<you>.workers.dev
+//   npm run parity -- https://preview.chrisdemetriou.com
 //   npm run parity -- https://chrisdemetriou.com        (after the move; also checks www and http)
 // Checks every published file byte for byte, the redirects, the 404 page, that private
 // files stay private, the security headers and the showreel's byte ranges.
@@ -10,7 +10,7 @@ import { ROOT, publishedFiles, urlFor } from "./site-files.mjs";
 
 const base = (process.argv[2] || "").replace(/\/$/, "");
 if (!/^https?:\/\//.test(base)) {
-  console.error("Usage: npm run parity -- <address>, e.g. https://chrisdemetriou-site.<you>.workers.dev");
+  console.error("Usage: npm run parity -- <address>, e.g. https://preview.chrisdemetriou.com");
   process.exit(2);
 }
 const VIDEO = "video/chrisdemetriou_musicREEL_FINAL2026.mp4";
@@ -62,7 +62,7 @@ for (const page of ["/", "/creative/"]) {
     .filter((k) => !h.get(k));
   row(missing.length === 0, `Security headers on ${page}`, missing.length ? "missing " + missing.join(", ") : "");
 }
-if (base.includes(".workers.dev")) {
+if (base !== "https://chrisdemetriou.com") {
   row((await get("/")).headers.get("x-robots-tag") === "noindex", "Preview address is hidden from search (noindex)");
 }
 

@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Worker built and tested locally ([lead-chat/02-migrate.md](lead-chat/02-migrate.md)). **Chris:** say "merge", then run the 4 preview steps in 02-migrate.md and paste the parity result. |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Worker built and tested locally ([lead-chat/02-migrate.md](lead-chat/02-migrate.md)); showreel in R2. **Chris:** say "merge", run `npx wrangler deploy`, then `npm run parity -- https://preview.chrisdemetriou.com` and paste the result. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D23 | 2026-10-21 | Preview at preview.chrisdemetriou.com (Custom Domain, noindex); workers.dev off for this Worker | The account's workers.dev name (christian4collective) is shared with Genesis and isn't this brand; renaming it would break other Workers | Chris |
 | D22 | 2026-10-21 | Trailing-slash redirects are 301; the asset server's 307 is rewritten | Same as GitHub Pages; search engines keep the folder address | Claude Code (proposed) |
 | D21 | 2026-10-21 | HSTS max-age 1 year without includeSubDomains | Same as GitHub Pages; doesn't force HTTPS on subdomains nobody has checked | Claude Code (proposed) |
 | D20 | 2026-10-21 | The Worker sets the CSP per page; inline scripts allowed by SHA-256 hashes rebuilt before every dev and deploy; styles allow inline | Strict scripts with no change to the pages; hashes can't go stale; /creative/ uses style attributes | Claude Code (proposed) |
@@ -97,7 +98,7 @@
 | X03 | Resend account + domain verification | Chris | Open |
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
-| X06 | R2 bucket created and showreel uploaded | Chris | Open: steps 1–2 in lead-chat/02-migrate.md |
+| X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
 
 ---
 
@@ -109,5 +110,6 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-21 | 2 | Preview moved to preview.chrisdemetriou.com; workers.dev off (D23) | wrangler.jsonc, worker/index.js, worker/parity.mjs, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 2 | Worker, allowlist, CSP, R2 video route, parity check, tests and CI; Pages excludes the new files | wrangler.jsonc, .assetsignore, worker/*, package.json, package-lock.json, .github/workflows/site-check.yml, _config.yml, .gitignore, docs/lead-chat/02-migrate.md, docs/PMO.md |
 | 2026-10-21 | 1 | D18: vault phase page added and linked from the Dashboard | chrisdemetriou-PMO/10 Phases/Phase 9 — Lead chat & portal.md, chrisdemetriou-PMO/00 Start here/00 Dashboard.md, docs/PMO.md |
