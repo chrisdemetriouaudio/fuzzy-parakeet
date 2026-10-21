@@ -88,3 +88,11 @@ test("works out the bytes in a range R2 reports", () => {
   assert.deepEqual(span({ suffix: 9000 }, 5000), { start: 0, end: 4999 });
   assert.deepEqual(span({ offset: 4900, length: 500 }, 5000), { start: 4900, end: 4999 });
 });
+
+test("the deploy workflow runs for every published path", () => {
+  const yml = readFileSync(join(ROOT, ".github/workflows/deploy-site.yml"), "utf8");
+  const watched = [...yml.matchAll(/^\s+-\s+"([^"]+)"\s*$/gm)].map((m) => m[1]);
+  const missing = allowlist().filter((entry) => !watched.includes(entry.endsWith("/") ? `${entry}**` : entry));
+  assert.deepEqual(missing, [], "add these to the paths in deploy-site.yml");
+  for (const f of ["worker/**", "wrangler.jsonc", ".assetsignore", "package-lock.json"]) assert.ok(watched.includes(f), f);
+});

@@ -1,4 +1,5 @@
 // URL-parity check: does an address serve the site exactly as the repo has it?
+//   npm run parity                                       (the Worker's own address, from wrangler.jsonc)
 //   npm run parity -- https://preview.chrisdemetriou.com
 //   npm run parity -- https://chrisdemetriou.com        (after the move; also checks www and http)
 // Checks every published file byte for byte, the redirects, the 404 page, that private
@@ -8,7 +9,13 @@ import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { ROOT, publishedFiles, urlFor } from "./site-files.mjs";
 
-const base = (process.argv[2] || "").replace(/\/$/, "");
+// With no address given: the first route in wrangler.jsonc (its comments are whole lines).
+function configured() {
+  const json = readFileSync(join(ROOT, "wrangler.jsonc"), "utf8").replace(/^\s*\/\/.*$/gm, "");
+  const route = (JSON.parse(json).routes || [])[0];
+  return route ? `https://${route.pattern}` : "";
+}
+const base = (process.argv[2] || configured()).replace(/\/$/, "");
 if (!/^https?:\/\//.test(base)) {
   console.error("Usage: npm run parity -- <address>, e.g. https://preview.chrisdemetriou.com");
   process.exit(2);
@@ -90,5 +97,5 @@ if (base === "https://chrisdemetriou.com") {
   row(/cloudflare/i.test((await get("/")).headers.get("server") || ""), "Served by Cloudflare, not GitHub");
 }
 
-console.log(failed ? `\n${failed} check(s) failed.` : "\nAll checks passed.");
+console.log(failed ? `\n${failed} check(s) failed on ${base}.` : `\nAll checks passed on ${base}.`);
 process.exit(failed ? 1 : 0);

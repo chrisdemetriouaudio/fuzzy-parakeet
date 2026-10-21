@@ -16,7 +16,7 @@ updated: 2026-10-21
 
 ## 👉 Your actions
 
-- 👉 **Phase 9, step 2:** deploy the preview to preview.chrisdemetriou.com, run the parity check; [[Phase 9 — Lead chat & portal]].
+- 👉 **Phase 9, step 2:** check the preview by eye; add 2 Cloudflare secrets on GitHub; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.
