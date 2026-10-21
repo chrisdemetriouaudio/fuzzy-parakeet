@@ -1,10 +1,10 @@
 # Phase 2: Move chrisdemetriou.com to Cloudflare Workers
 
-Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D22.
+Status: [../PMO.md](../PMO.md). Decisions D16, D17, D19–D23.
 
 ## What changed
 
-- **`wrangler.jsonc`**: Worker `chrisdemetriou-site`. The repo root is its assets folder; a `workers.dev` preview only (no routes yet).
+- **`wrangler.jsonc`**: Worker `chrisdemetriou-site`. The repo root is its assets folder. Until the cutover it serves only the preview, `https://preview.chrisdemetriou.com`. workers.dev is off (D23).
 - **`.assetsignore`**: an allowlist. Only the 32 website files go live. Checked against wrangler's own upload list.
 - **`worker/index.js`**: www and http → `https://chrisdemetriou.com` (301). Trailing slash → 301. Adds the security headers.
 - **`worker/headers.js`**: the CSP for each page, plus HSTS, nosniff, X-Frame-Options, Referrer-Policy and Permissions-Policy.
@@ -45,7 +45,7 @@ If it says R2 isn't enabled: Cloudflare dashboard → **R2** → enable it. It m
 npx wrangler r2 object put chrisdemetriou-media/video/chrisdemetriou_musicREEL_FINAL2026.mp4 --file video/chrisdemetriou_musicREEL_FINAL2026.mp4 --content-type video/mp4 --remote
 ```
 
-**3. Deploy the preview.** It prints a `https://chrisdemetriou-site.<you>.workers.dev` address.
+**3. Deploy the preview** to `https://preview.chrisdemetriou.com`. The first deploy creates that subdomain's DNS record and certificate (a minute or two). It also switches off the `workers.dev` address.
 
 ```bash
 npx wrangler deploy
@@ -54,7 +54,7 @@ npx wrangler deploy
 **4. Run the parity check** against that address.
 
 ```bash
-npm run parity -- https://chrisdemetriou-site.<you>.workers.dev
+npm run parity -- https://preview.chrisdemetriou.com
 ```
 
 ## URL-parity checklist
@@ -92,7 +92,7 @@ Your DNS is already on Cloudflare (D17). So the Zoho records never move, and onl
 1. **Check mail works now.** Send from Zoho to another address and reply. Both arrive?
 2. **Back up the DNS.** Cloudflare → chrisdemetriou.com → **DNS → Records → Export**. Keep the file.
 3. **Write down the records you must not touch:** MX (Zoho), TXT (SPF), `zmail._domainkey` (DKIM), `_dmarc` (DMARC), and `labs`, `demo` and the other Labs subdomains.
-4. **Claude adds the routes** (`chrisdemetriou.com` and `www` as Custom Domains) in a small PR. You merge it.
+4. **Claude swaps the routes** in a small PR: `chrisdemetriou.com` and `www` in, `preview` out. You merge it.
 5. **Deploy:** `npx wrangler deploy`.
    - If it asks to replace the existing DNS records for `chrisdemetriou.com` and `www`, answer **y**.
    - If it stops with an error instead, delete only the GitHub records (A `185.199.108–111.153`, AAAA `2606:50c0:8000–8003::153`, CNAME `www` → `chrisdemetriouaudio.github.io`). Then run the deploy again. The site is down for a minute or two, so do it at a quiet time.
@@ -100,4 +100,4 @@ Your DNS is already on Cloudflare (D17). So the Zoho records never move, and onl
 7. **Check mail again,** both directions. Then: `dig MX chrisdemetriou.com +short` should still show Zoho.
 8. **Turn off GitHub Pages:** repo **Settings → Pages → Unpublish site**. Only after steps 6 and 7 pass.
 
-**Rollback** (before step 8 it takes seconds; Pages is still running): Workers → `chrisdemetriou-site` → **Settings → Domains** → remove both domains. Then re-add the GitHub records from your export.
+**Rollback** (before step 8 it takes seconds; Pages is still running): Workers → `chrisdemetriou-site` → **Settings → Domains** → remove `chrisdemetriou.com` and `www`. Then re-add the GitHub records from your export.

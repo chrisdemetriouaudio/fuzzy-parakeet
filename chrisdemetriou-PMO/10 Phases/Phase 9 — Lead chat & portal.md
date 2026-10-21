@@ -16,8 +16,7 @@ updated: 2026-10-21
 
 ## 👉 To do
 
-- 👉 **Create the R2 bucket and upload the showreel** (steps 1–2 in `docs/lead-chat/02-migrate.md`).
-- 👉 **Deploy the preview and run** `npm run parity` (steps 3–4).
+- 👉 **Deploy the preview to preview.chrisdemetriou.com and run** `npm run parity` (steps 3–4).
 - 👉 **Choose how the site deploys after the move** (Claude will ask).
 - 👉 **Point chrisdemetriou.com at the Worker;** check e-mail still flows both ways.
 - 🛠️ **Step 3: build the database** (Cloudflare D1) and one config file.
@@ -39,6 +38,8 @@ updated: 2026-10-21
 ## ✅ Done
 
 > [!success]- Step 2 built 21 Oct 2026 (tap to open)
+> - [x] **Created the R2 bucket and uploaded the showreel** (Western Europe).
+> - [x] **Moved the preview to preview.chrisdemetriou.com;** workers.dev is off.
 > - [x] **Built the Worker:** only the 32 site files go live; private folders answer 404.
 > - [x] **Added security headers,** including a strict CSP: 0 violations on every page.
 > - [x] **Built the showreel route** for R2: old address, with seeking.
