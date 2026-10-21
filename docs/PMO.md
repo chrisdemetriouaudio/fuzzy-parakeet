@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Blocked | | | ⛔ Waiting on I02. **Chris:** run `dig NS chrisdemetriou.com +short` and paste the result. |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | | | Ready. **Chris:** say "next" to start. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D17 | 2026-10-21 | Phase 2 DNS checklist drops the GoDaddy zone export and nameserver switch; cutover is one apex change inside Cloudflare | Nameservers are already Cloudflare (`arushi`, `wesley`), checked by Chris | Chris |
 | D16 | 2026-10-21 | Showreel moves to an R2 bucket; the site Worker serves it at the same URL, with seeking (range requests) | 93 MB > 25 MiB Workers file limit; keeps full quality and every URL; unblocks D10. Supersedes the vault decision of 20 Oct "stays on GitHub Pages" | Chris |
 
 ---
@@ -52,7 +53,7 @@
 ### Risks
 | ID | Risk | Impact | Likelihood | Mitigation | Owner | Status |
 |---|---|---|---|---|---|---|
-| R01 | DNS migration breaks Zoho mail | High | Med | Verify MX/SPF/DKIM/DMARC imported exactly; test mail before cutover. May already be moot (see I02) | Chris | Open |
+| R01 | DNS migration breaks Zoho mail | High | Low | Zone is already on Cloudflare (D17), so mail records don't move; cutover touches only the apex and www; test mail after | Chris | Open |
 | R02 | Free-tier neuron cap hit on busy days | Med | Med | Daily cap + form fallback; monitor usage_daily | Claude Code | Open |
 | R03 | Llama breaks rules (lists services, invents prices) | Med | Med | Conversation evals in Phase 9; tune prompt | Claude Code | Open |
 | R04 | Cloudflare retires the model | Low | Med | Model ID in one config constant | Claude Code | Open |
@@ -70,13 +71,13 @@
 | A01 | Workers AI free tier remains 10,000 neurons/day | Open |
 | A02 | WebAuthn library runs on the Workers runtime | To verify in Phase 6 |
 | A03 | Site has no build step that blocks static-asset serving | Verified 2026-10-21: no build step; Jekyll only applies excludes |
-| A04 | chrisdemetriou.com is already an active Cloudflare zone (Labs Custom Domains need one) | To verify by Chris (I02) |
+| A04 | chrisdemetriou.com is already an active Cloudflare zone (Labs Custom Domains need one) | Verified 2026-10-21 (I02) |
 
 ### Issues
 | ID | Issue | Owner | Status |
 |---|---|---|---|
 | I01 | Hosting conflict: D10 (migrate) vs. vault decision 20 Oct "stays on GitHub Pages"; 93 MB showreel > 25 MiB Workers file limit | Chris | Closed 2026-10-21 by D16 |
-| I02 | DNS location unclear: spec says GoDaddy; Labs Custom Domains imply a Cloudflare zone | Chris | Open: run `dig NS chrisdemetriou.com +short` |
+| I02 | DNS location unclear: spec says GoDaddy; Labs Custom Domains imply a Cloudflare zone | Chris | Closed 2026-10-21: nameservers are Cloudflare (D17) |
 | I03 | Live site has no CSP (GitHub Pages can't set headers), so Phase 2 creates one | Claude Code | Open: Phase 2 |
 | I04 | Two PMOs: docs/PMO.md (spec) vs. chrisdemetriou-PMO vault (AGENTS.md) | Chris | Open: using docs/PMO.md for this build |
 | I05 | Labs cards live in labs/projects.json, not labs.yml | Claude Code | Noted for Phase 10 |
@@ -84,8 +85,8 @@
 ### Dependencies
 | ID | Dependency | Owner | Status |
 |---|---|---|---|
-| X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Open |
-| X02 | GoDaddy nameserver change | Chris | Open |
+| X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Done (already in place) |
+| X02 | GoDaddy nameserver change | Chris | Closed 2026-10-21: not needed (D17) |
 | X03 | Resend account + domain verification | Chris | Open |
 | X04 | Turnstile site key | Chris | Open |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
@@ -100,3 +101,4 @@
 | 2026-10-20 | Setup | Spec and PMO created | CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
+| 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |

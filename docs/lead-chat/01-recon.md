@@ -60,8 +60,8 @@ No code changed. Spec: [CLAUDE_CODE_PROMPT_lead-widget-portal.md](CLAUDE_CODE_PR
 
 ## Risks and conflicts
 
-1. 🔴 **Hosting conflict.** Spec D10 says migrate to Workers. The vault decision of 20 Oct 2026 says "stays on GitHub Pages", because the **93 MB showreel** is over the Workers static-asset limit (**25 MiB per file**). Phase 2 can't deploy as written.
-2. 🔴 **Where DNS lives.** Spec says GoDaddy. But Labs uses Workers **Custom Domains**, which need `chrisdemetriou.com` to be an active Cloudflare zone already. If so, the GoDaddy nameserver steps are already done. I can't check: DNS lookups are blocked here.
+1. ✅ **Hosting conflict** (settled by D16: showreel → R2). Spec D10 says migrate to Workers. The vault decision of 20 Oct 2026 says "stays on GitHub Pages", because the **93 MB showreel** is over the Workers static-asset limit (**25 MiB per file**). Phase 2 can't deploy as written.
+2. ✅ **Where DNS lives.** Spec says GoDaddy. But Labs uses Workers **Custom Domains**, which need `chrisdemetriou.com` to be an active Cloudflare zone already. If so, the GoDaddy nameserver steps are already done. **Checked 21 Oct 2026:** nameservers are `arushi` and `wesley.ns.cloudflare.com`. No GoDaddy steps (D17).
 3. 🟠 **Workers would publish the whole folder.** `_config.yml` excludes don't apply. Without `.assetsignore` (or a copy-to-`dist` step), the PMO, `content/`, `labs/` source and agent notes go live.
 4. 🟠 **New CSP may break pages.** Hash every inline script; ship as report-only first; test `/creative/` embeds.
 5. 🟡 **Two PMOs.** The spec wants `docs/PMO.md`; `AGENTS.md` says the vault is the live tracker. This build uses `docs/PMO.md`.
