@@ -16,7 +16,7 @@ changed: 21 Oct 2026, 23:08 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `6a48477` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `598801c` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
