@@ -10,7 +10,13 @@ updated: 2026-10-22
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 22 Oct 2026 · chrisdemetriou.com moved to Cloudflare Workers · live
+> [!success]+ 🚀 22 Oct 2026 · The lead chat is live; privacy notice updated · live
+> - **Chat:** an AI assistant on every page except Creative. It helps a visitor describe one costly task, then offers the written audit. The audit form stays as the fallback.
+> - **Portal:** passkey sign-in for clients who ask for an audit, plus Chris's admin view.
+> - **Privacy and cookies:** what the chat collects, the AI, Cloudflare and Resend, retention, two strictly necessary cookies. "GitHub Pages" corrected to Cloudflare.
+> - **Checked:** 47 tests; the bot's live tests pass after tuning; Chris's own test lead worked end to end.
+
+> [!success]- 🚀 22 Oct 2026 · chrisdemetriou.com moved to Cloudflare Workers · live
 > - **Cutover:** Chris swapped the GitHub Pages DNS records for the Worker (`chrisdemetriou-site`). `www` and `http` redirect to `https://chrisdemetriou.com`.
 > - **New:** security headers with a strict CSP; the showreel streams from R2; pages refresh straight away; merging to main deploys by itself, then checks every URL.
 > - **Checked live:** all site files byte for byte, redirects, 404 page, private files, headers and showreel. `robots.txt` matched once Cloudflare's AI-bot settings were set to Allow; GPTBot and ClaudeBot get through.

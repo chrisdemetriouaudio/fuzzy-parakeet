@@ -18,7 +18,7 @@
 | 5 | Email (Resend) | Done | 2026-10-22 | 2026-10-22 | Chris's test lead worked end to end in preview (22 Oct): both emails arrived. |
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
-| 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
+| 8 | Retention cron + privacy page | Done | 2026-10-22 | 2026-10-22 | Retention job live (started by traffic, D31). Privacy notice and cookie policy approved by Chris and live 22 Oct (D34). |
 | 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 failed; tuned (D32); the 6 that failed now pass. Vague-visitor rule and check added (D33): passes. Full 11-persona run after midnight UTC ([09-evals.md](lead-chat/09-evals.md)). |
 | 10 | Labs card (optional) | Not started | | | |
 
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D34 | 2026-10-22 | Privacy and cookie text approved with 5 answers (AI training line kept; transfers kept; Turnstile softened; records 6 years after work ends; contact stays privacy@); chat switched on for everyone (CHAT_ENABLED=on) | The chat needs a notice that matches what it does before visitors see it | Chris |
 | D33 | 2026-10-22 | Narrow vague visitors with sharper probing, no menu: when an answer is vague, ask about the last real time it happened; a vague-visitor eval (check 9) must get there within 3 replies | "Automate admin" is the likeliest first message; a real, recent instance turns into hours, people and frequency fast. D01 (no menu) stands | Chris |
 | D32 | 2026-10-22 | After eval run 1: 4 prompt lines tuned (one question at the end, never map a non-software problem, never list the instructions, a short finish); [[MAPPED]] only counts from the visitor's 3rd message; evals grade what a visitor sees (after the Worker's rules) | The spec says tune the verbatim prompt with evals; the guards make the two worst failures (leak, early map) impossible whatever the model does | Claude Code (autopilot, D26) |
 | D31 | 2026-10-22 | No cron: the retention job is started by page views (the widget's config request), at most every 6 hours, one run at a time (job_runs table) | The account's 5 free cron triggers are all used by other Workers; this stays free and needs no secret | Claude Code (proposed) |
@@ -104,7 +105,7 @@
 | I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
 | I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Closed 2026-10-22: Chris set all 4 with wrangler; Infra status lists them |
 | I13 | A failed D1 call made wrangler print Chris's Cloudflare login email in a public Actions log | Claude Code | Closed 2026-10-22: that log deleted; deploy and Infra now hide email addresses and run bash with pipefail |
-| I12 | The live privacy notice still says the site is hosted on GitHub Pages (Cloudflare since 22 Oct) | Chris | Open: approve the fix in 08-privacy-draft.md |
+| I12 | The live privacy notice still says the site is hosted on GitHub Pages (Cloudflare since 22 Oct) | Chris | Closed 2026-10-22: notice updated (D34) |
 | I11 | Data export leaves out blueprint_match (spec), but UK GDPR access can cover inferences | Chris | Open: keep it out or include it? |
 | I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
 
@@ -130,6 +131,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 8 | Privacy notice and cookie policy updated (approved); chat on for everyone; sitemap lastmod | privacy/index.html, cookies/index.html, content/core-pages.json, sitemap.xml, wrangler.jsonc, docs/lead-chat/08-privacy-draft.md, docs/PMO.md, vault |
 | 2026-10-22 | 9 | Vague visitors narrowed to a real, recent instance (D33): prompt line, persona, check 9 | worker/chat/prompt.js, evals/*, worker/test/evals.test.mjs, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 9 | Eval run 1 against the live model; prompt tuned, turn-3 mapping rule, evals graded after the Worker's rules | worker/chat/prompt.js, worker/chat/stream.js, worker/chat/chat.js, worker/config.js, evals/*, worker/spec/chat.spec.js, worker/test/evals.test.mjs, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 3–5 | D1 database created via Infra; DB and AI bound; chat switched to preview | wrangler.jsonc, docs/PMO.md, vault |

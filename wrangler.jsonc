@@ -20,10 +20,11 @@
     { "pattern": "www.chrisdemetriou.com", "custom_domain": true }
   ],
   "build": { "command": "node worker/build.mjs" },
-  // The lead chat (Phase 9). "off" until Chris approves; "preview" lets him try it first.
+  // The lead chat (Phase 9): "on" since Chris approved the privacy notice (22 Oct 2026).
+  // "preview" shows it only on ?chat=preview links; "off" hides it and the form takes over.
   // Secrets (wrangler secret put): SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY.
   "vars": {
-    "CHAT_ENABLED": "preview",
+    "CHAT_ENABLED": "on",
     "ADMIN_EMAIL": "hello@chrisdemetriou.com",
     // Public site key of the existing "Chris Demetriou contact form" Turnstile widget
     // (chrisdemetriou.com). Its secret goes in TURNSTILE_SECRET.

@@ -52,12 +52,13 @@
   <div class="shell">
     <p class="eyebrow">Legal</p>
     <h1>Cookie policy</h1>
-    <p class="updated">Last updated: 20 October 2026</p>
+    <p class="updated">Last updated: 22 October 2026</p>
 
     <div class="note">
       <p>
-        <strong>This site sets no cookies of its own.</strong> No analytics, no advertising, no
-        tracking. The only thing that would set cookies is the embedded YouTube player, and it
+        <strong>This site sets no tracking cookies.</strong> No analytics, no advertising, no
+        tracking. It sets two strictly necessary cookies only if you use the chat or your portal.
+        The only third party that would set cookies is the embedded YouTube player, and it
         does not load until you allow it.
       </p>
     </div>
@@ -88,6 +89,24 @@
           <td>Remembers the display settings you choose (theme, text size, font, spacing, contrast, motion, reading mask). Only set if you change one. Holds no identifier and is never sent anywhere.</td>
           <td>Until you press &ldquo;Reset all&rdquo; or clear your browser data</td>
         </tr>
+        <tr>
+          <td>__Host-cd_chat</td>
+          <td>Cookie (strictly necessary)</td>
+          <td>Keeps one chat conversation together. Only set if you use the chat.</td>
+          <td>24 hours</td>
+        </tr>
+        <tr>
+          <td>__Host-cd_portal</td>
+          <td>Cookie (strictly necessary)</td>
+          <td>Keeps you signed in to your portal. Only set if you sign in.</td>
+          <td>30 days</td>
+        </tr>
+        <tr>
+          <td>cd-chat-preview</td>
+          <td>Local storage</td>
+          <td>Shows the chat on a preview link Chris uses for testing. Holds no identifier.</td>
+          <td>Until you clear your browser data</td>
+        </tr>
       </tbody>
     </table>
     <p>That is the entire list.</p>
@@ -110,10 +129,12 @@
         <tr><th>Service</th><th>Role</th><th>Cookies</th></tr>
       </thead>
       <tbody>
-        <tr><td>GitHub Pages</td><td>Hosts and serves the site</td><td>None. Processes your IP address to deliver the page.</td></tr>
+        <tr><td>Cloudflare</td><td>Hosts and serves the site; runs the chat&rsquo;s AI and stores its data</td><td>None of its own. Processes your IP address to deliver the page.</td></tr>
+        <tr><td>Cloudflare Turnstile</td><td>The chat&rsquo;s bot check, only when you open the chat</td><td>Strictly necessary. Cloudflare says it isn&rsquo;t used to track you.</td></tr>
+        <tr><td>Resend</td><td>Sends the audit and portal emails</td><td>None. Acts only when you ask for an audit.</td></tr>
         <tr><td>Google Fonts</td><td>Supplies the typefaces</td><td>None. Your browser requests the font files, so your IP is visible to Google.</td></tr>
         <tr><td>Web3Forms</td><td>Delivers the enquiry forms to email</td><td>None. Acts only when you submit the form.</td></tr>
-        <tr><td>Showreel video</td><td>Plays the reel</td><td>None. The file is hosted on this site, not a video platform.</td></tr>
+        <tr><td>Showreel video</td><td>Plays the reel</td><td>None. The file is stored with this site (on Cloudflare), not on a video platform.</td></tr>
       </tbody>
     </table>
 

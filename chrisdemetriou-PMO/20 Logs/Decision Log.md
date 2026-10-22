@@ -9,6 +9,11 @@ updated: 2026-10-22
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
 
+> [!success]- 22 Oct 2026 · The lead chat goes live; privacy notice approved (Agreed)
+> - **Status:** Agreed by Chris after testing it in preview.
+> - **Decided:** the privacy and cookie text as drafted, with 5 answers; the chat is on for every visitor.
+> - **Details:** `docs/PMO.md` (D34) and `docs/lead-chat/08-privacy-draft.md`.
+
 > [!success]- 22 Oct 2026 · Lead chat: Claude builds on autopilot (Agreed)
 > - **Status:** Agreed by Chris.
 > - **Decided:** Claude builds steps 3–10 back to back and merges its own pull requests once the tests and the live check pass. Cloudflare changes run through GitHub Actions. Chris gets one batched list of the steps only he can do.
