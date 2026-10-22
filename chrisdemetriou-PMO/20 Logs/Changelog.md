@@ -13,7 +13,7 @@ updated: 2026-10-22
 > [!success]+ 🚀 22 Oct 2026 · chrisdemetriou.com moved to Cloudflare Workers · live
 > - **Cutover:** Chris swapped the GitHub Pages DNS records for the Worker (`chrisdemetriou-site`). `www` and `http` redirect to `https://chrisdemetriou.com`.
 > - **New:** security headers with a strict CSP; the showreel streams from R2; pages refresh straight away; merging to main deploys by itself, then checks every URL.
-> - **Checked live:** all site files byte for byte, redirects, 404 page, private files, headers and showreel. Only `robots.txt` differed (Cloudflare's AI-bot settings, being turned off).
+> - **Checked live:** all site files byte for byte, redirects, 404 page, private files, headers and showreel. `robots.txt` matched once Cloudflare's AI-bot settings were set to Allow; GPTBot and ClaudeBot get through.
 > - 🔴 **Outage:** about 12 hours overnight (23:49 21 Oct to 11:15 22 Oct). An old August route served an empty page; removed.
 
 > [!success]- 🚀 20 Oct 2026 · Aligned page titles; contact form default · live (Labs needs a release)

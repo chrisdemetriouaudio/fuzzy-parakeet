@@ -12,7 +12,7 @@
 | # | Phase | Status | Started | Finished | Outcome / next action |
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
-| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Cutover done 22 Oct: chrisdemetriou.com and www on the Worker; parity passes except robots.txt (I09). **Chris:** turn off Cloudflare's 2 AI-bot settings (D25), check mail both ways, merge PR #38, then turn off GitHub Pages. |
+| 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Cutover done 22 Oct: chrisdemetriou.com and www on the Worker; full parity passes on the apex (22 Oct, 15:17 UTC). **Chris:** check mail both ways, then turn off GitHub Pages. |
 | 3 | D1 schema + config | Not started | | | |
 | 4 | Chat API | Not started | | | |
 | 5 | Email (Resend) | Not started | | | |
@@ -92,7 +92,7 @@
 | I05 | Labs cards live in labs/projects.json, not labs.yml | Claude Code | Noted for Phase 10 |
 | I06 | After the move, merging to main no longer publishes the site by itself | Chris | Closed 2026-10-21 by D24 |
 | I08 | Outage: the apex served an empty 404 from about 23:49 21 Oct to 11:15 22 Oct (UK). An old Workers Route chrisdemetriou.com/* (Worker chrisdemetriou-v2, Aug 2026) took over once the apex ran through Cloudflare | Chris | Closed 2026-10-22: route removed. Lesson: list the zone's Workers Routes before a cutover (added to 02-migrate.md) |
-| I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Open: D25, turn both settings off |
+| I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
 | I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
 
 ### Dependencies
