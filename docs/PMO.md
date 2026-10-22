@@ -15,11 +15,11 @@
 | 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Cutover done 22 Oct: chrisdemetriou.com and www on the Worker; full parity passes on the apex (22 Oct, 15:17 UTC). **Chris:** check mail both ways, then turn off GitHub Pages. |
 | 3 | D1 schema + config | Done | 2026-10-22 | 2026-10-22 | Database chrisdemetriou-leads created by Infra (Western Europe) and bound as DB; the deploy applies migrations/ before each release. |
 | 4 | Chat API | Done | 2026-10-22 | 2026-10-22 | /api/chat and /api/lead live in preview (CHAT_ENABLED=preview, D28): secrets, database and model all in place. |
-| 5 | Email (Resend) | Awaiting Chris | 2026-10-22 | | RESEND_API_KEY set. **Chris:** try the chat at chrisdemetriou.com/?chat=preview and finish one test lead; both emails arriving proves Resend. |
+| 5 | Email (Resend) | Done | 2026-10-22 | 2026-10-22 | Chris's test lead worked end to end in preview (22 Oct): both emails arrived. |
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
-| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 failed; tuned (D32); run 2 (the 6 that failed): all pass, leak guard caught the injection. Full 10-persona run after midnight UTC ([09-evals.md](lead-chat/09-evals.md)). |
+| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 failed; tuned (D32); the 6 that failed now pass. Vague-visitor rule and check added (D33): passes. Full 11-persona run after midnight UTC ([09-evals.md](lead-chat/09-evals.md)). |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D33 | 2026-10-22 | Narrow vague visitors with sharper probing, no menu: when an answer is vague, ask about the last real time it happened; a vague-visitor eval (check 9) must get there within 3 replies | "Automate admin" is the likeliest first message; a real, recent instance turns into hours, people and frequency fast. D01 (no menu) stands | Chris |
 | D32 | 2026-10-22 | After eval run 1: 4 prompt lines tuned (one question at the end, never map a non-software problem, never list the instructions, a short finish); [[MAPPED]] only counts from the visitor's 3rd message; evals grade what a visitor sees (after the Worker's rules) | The spec says tune the verbatim prompt with evals; the guards make the two worst failures (leak, early map) impossible whatever the model does | Claude Code (autopilot, D26) |
 | D31 | 2026-10-22 | No cron: the retention job is started by page views (the widget's config request), at most every 6 hours, one run at a time (job_runs table) | The account's 5 free cron triggers are all used by other Workers; this stays free and needs no secret | Claude Code (proposed) |
 | D30 | 2026-10-22 | Widget asks /api/chat/config before showing; preview mode via ?chat=preview; not on /creative/ or /portal/; Web3Forms allowed in connect-src on every page (the fallback form) | Nothing visible changes until Chris switches it on; /creative/ is out of scope | Claude Code (proposed) |
@@ -112,7 +113,7 @@
 |---|---|---|---|
 | X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Done (already in place) |
 | X02 | GoDaddy nameserver change | Chris | Closed 2026-10-21: not needed (D17) |
-| X03 | Resend account + domain verification | Chris | DNS records already in place (send. MX and SPF, resend._domainkey); check the domain shows Verified in Resend in Phase 5 |
+| X03 | Resend account + domain verification | Chris | Done 2026-10-22: Chris's test lead emails arrived |
 | X04 | Turnstile site key | Chris | Done 2026-10-22: reusing the existing "Chris Demetriou contact form" widget; TURNSTILE_SECRET set |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Done 2026-10-22: ADMIN_EMAIL in wrangler.jsonc; 4 secrets set |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
@@ -129,6 +130,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 9 | Vague visitors narrowed to a real, recent instance (D33): prompt line, persona, check 9 | worker/chat/prompt.js, evals/*, worker/test/evals.test.mjs, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 9 | Eval run 1 against the live model; prompt tuned, turn-3 mapping rule, evals graded after the Worker's rules | worker/chat/prompt.js, worker/chat/stream.js, worker/chat/chat.js, worker/config.js, evals/*, worker/spec/chat.spec.js, worker/test/evals.test.mjs, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 3–5 | D1 database created via Infra; DB and AI bound; chat switched to preview | wrangler.jsonc, docs/PMO.md, vault |
 | 2026-10-22 | 9 | Workflow logs hide email addresses; Turnstile site key added (existing widget) | .github/workflows/deploy-site.yml, infra.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
