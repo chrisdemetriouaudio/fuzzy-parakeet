@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-22
-changed: 22 Oct 2026, 17:49 (UK time)
+changed: 22 Oct 2026, 17:50 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 22 Oct 2026, 17:49 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `59e8b18` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `61ab438` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
