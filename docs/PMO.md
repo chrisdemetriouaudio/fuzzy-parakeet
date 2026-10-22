@@ -18,7 +18,7 @@
 | 5 | Email (Resend) | In progress | 2026-10-22 | | Plain-text lead emails built (worker/email.js). Resend DNS already in place. **Chris:** RESEND_API_KEY as a Worker secret. |
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
-| 8 | Retention cron + privacy page | Not started | | | |
+| 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
 | 9 | Tests + conversation evals | Not started | | | |
 | 10 | Labs card (optional) | Not started | | | |
 
@@ -71,11 +71,12 @@
 | R03 | Llama breaks rules (lists services, invents prices) | Med | Med | Conversation evals in Phase 9; tune prompt | Claude Code | Open |
 | R04 | Cloudflare retires the model | Low | Med | Model ID in one config constant | Claude Code | Open |
 | R05 | Bot abuse / prompt injection / spam | Med | Med | Turnstile, rate limits, input caps, data-not-instructions framing | Claude Code | Open |
-| R06 | PII scrubber misses personal data in anonymised chats | Med | Med | Regex + known-value scrub; document limits | Claude Code | Open |
+| R06 | PII scrubber misses personal data in anonymised chats | Med | Med | Regex + known-value scrub; limits documented in worker/privacy.js and in the privacy draft; "email privacy@ and the whole chat is deleted" | Claude Code | Mitigated |
 | R07 | Two SPF records after adding Resend | High | Low | Not needed: Resend is already set up on send.chrisdemetriou.com with its own SPF; the apex SPF stays Zoho-only. DMARC is strict, so Resend mail must be DKIM-signed as chrisdemetriou.com (resend._domainkey exists) | Chris | Mitigated 2026-10-22 |
 | R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | Allowlist (D19); CI test; wrangler's upload list checked = 32 site files | Claude Code | Mitigated 2026-10-21 |
 | R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hashes rebuilt every deploy (D20); 0 violations on 5 pages locally; same headers confirmed on the preview | Claude Code | Mitigated; Chris's by-eye check pending |
 | R10 | Public repo exposes the system prompt and blueprint map | Low | High | Nothing secret in them; blueprints already on the homepage | Chris | Open |
+| R13 | Free plan's account-wide cron trigger limit is already used by other Workers, so the deploy with the retention cron fails | Med | Low | The deploy's CI would show it; move the cron into an existing schedule or upgrade | Claude Code | Open |
 | R12 | Cutover takes the site down for a minute or two if wrangler can't take over the DNS records | Low | Med | Quiet time; rollback steps in 02-migrate.md; Pages stays on until checks pass | Chris | Open |
 | R11 | Enabling R2 asks for a card | Low | Med | Charged only above the free tier (10 GB storage, 10M reads a month, free egress); showreel is 0.09 GB | Chris | Open |
 
@@ -99,6 +100,7 @@
 | I08 | Outage: the apex served an empty 404 from about 23:49 21 Oct to 11:15 22 Oct (UK). An old Workers Route chrisdemetriou.com/* (Worker chrisdemetriou-v2, Aug 2026) took over once the apex ran through Cloudflare | Chris | Closed 2026-10-22: route removed. Lesson: list the zone's Workers Routes before a cutover (added to 02-migrate.md) |
 | I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
 | I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Open: Chris sets them with wrangler (03-04-chat-api.md), or allows Claude to |
+| I12 | The live privacy notice still says the site is hosted on GitHub Pages (Cloudflare since 22 Oct) | Chris | Open: approve the fix in 08-privacy-draft.md |
 | I11 | Data export leaves out blueprint_match (spec), but UK GDPR access can cover inferences | Chris | Open: keep it out or include it? |
 | I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
 
@@ -123,6 +125,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 8 | Retention job (daily cron), scrubber fixes, privacy and cookie drafts | worker/retention.js, worker/privacy.js, worker/index.js, wrangler.jsonc, worker/spec/retention.spec.js, docs/lead-chat/08-privacy-draft.md |
 | 2026-10-22 | 7 | Chat widget, its styles, the config endpoint; script added to 4 pages; hero button opens the chat | scripts/chat.js, styles/chat.css, worker/api.js, worker/headers.js, index.html, privacy/index.html, cookies/index.html, 404.html, docs/lead-chat/07-widget.md |
 | 2026-10-22 | 6 | Portal: passkeys, client and admin views, export and delete, scrubber | portal/*, worker/portal/*, worker/privacy.js, worker/purge.js, worker/api.js, worker/spec/portal.spec.js, worker/spec/softauthn.js, .assetsignore, deploy-site.yml, docs/lead-chat/06-portal.md |
 | 2026-10-22 | 3–5 | D1 schema, config, Infra workflow, /api/chat, /api/lead, Resend emails, 19 Worker tests (vitest) in CI; chat off | migrations/0001_init.sql, worker/config.js, worker/api.js, worker/chat/*, worker/lib/*, worker/email.js, worker/spec/*, vitest.config.mjs, .github/workflows/infra.yml, site-check.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
