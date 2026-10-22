@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-22
-changed: 22 Oct 2026, 17:59 (UK time)
+changed: 22 Oct 2026, 18:39 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,19 +9,20 @@ changed: 22 Oct 2026, 17:59 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 2
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `2d9c755` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `6050c22` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
+- 👉 **#47 Lead chat: narrow vague visitors to a real, recent instance (D33)**: opened 22 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
@@ -34,4 +35,3 @@ changed: 22 Oct 2026, 17:59 (UK time)
 - 22 Oct 2026 · `d0bb79f` · feat(chat): daily retention job and privacy drafts (Phase 9 step 8)
 - 22 Oct 2026 · `0823acc` · feat(chat): the chat widget, hidden until switched on (Phase 9 step 7)
 - 22 Oct 2026 · `2b2207a` · feat(portal): passkey portal for clients and admin (Phase 9 step 6)
-- 22 Oct 2026 · `20aff08` · feat(chat): D1 schema, chat API, lead capture and emails (Phase 9 steps 3-5)
