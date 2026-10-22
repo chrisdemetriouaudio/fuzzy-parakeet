@@ -35,7 +35,7 @@ Status: [../PMO.md](../PMO.md). Spec: [CLAUDE_CODE_PROMPT_lead-widget-portal.md]
 | Token: D1, Turnstile, Workers AI | Chris | Cloudflare → API Tokens → edit the token |
 | D1 database | Claude | Actions → Infra → `d1-create`; then the binding and migrations go into the deploy |
 | `SESSION_SECRET`, `IP_HASH_SALT` | Chris | `openssl rand -base64 48 \| tr -d '\n' \| npx wrangler secret put SESSION_SECRET` (same for `IP_HASH_SALT`) |
-| Turnstile widget + `TURNSTILE_SECRET` | Chris | Dashboard → Turnstile → Add widget (`chrisdemetriou.com`, Managed); `npx wrangler secret put TURNSTILE_SECRET` |
+| `TURNSTILE_SECRET` | Chris | Reuse the existing "Chris Demetriou contact form" widget (its site key is already in `wrangler.jsonc`): Dashboard → Turnstile → that widget → copy the **Secret key** → `npx wrangler secret put TURNSTILE_SECRET` |
 | `RESEND_API_KEY` | Chris | `npx wrangler secret put RESEND_API_KEY` |
 
 Claude's own safety check stops it from writing code that sets Worker secrets, so those are Chris's (I10).

@@ -101,6 +101,7 @@
 | I08 | Outage: the apex served an empty 404 from about 23:49 21 Oct to 11:15 22 Oct (UK). An old Workers Route chrisdemetriou.com/* (Worker chrisdemetriou-v2, Aug 2026) took over once the apex ran through Cloudflare | Chris | Closed 2026-10-22: route removed. Lesson: list the zone's Workers Routes before a cutover (added to 02-migrate.md) |
 | I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
 | I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Open: Chris sets them with wrangler (03-04-chat-api.md), or allows Claude to |
+| I13 | A failed D1 call made wrangler print Chris's Cloudflare login email in a public Actions log | Claude Code | Closed 2026-10-22: that log deleted; deploy and Infra now hide email addresses and run bash with pipefail |
 | I12 | The live privacy notice still says the site is hosted on GitHub Pages (Cloudflare since 22 Oct) | Chris | Open: approve the fix in 08-privacy-draft.md |
 | I11 | Data export leaves out blueprint_match (spec), but UK GDPR access can cover inferences | Chris | Open: keep it out or include it? |
 | I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
@@ -111,7 +112,7 @@
 | X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Done (already in place) |
 | X02 | GoDaddy nameserver change | Chris | Closed 2026-10-21: not needed (D17) |
 | X03 | Resend account + domain verification | Chris | DNS records already in place (send. MX and SPF, resend._domainkey); check the domain shows Verified in Resend in Phase 5 |
-| X04 | Turnstile site key | Chris | Open: create the widget (03-04-chat-api.md); the site key is public, paste it to Claude |
+| X04 | Turnstile site key | Chris | Done 2026-10-22: reusing the existing "Chris Demetriou contact form" widget (site key in wrangler.jsonc); its secret still to set (I10) |
 | X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | ADMIN_EMAIL set in wrangler.jsonc; secrets open (I10) |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
 | X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Done 2026-10-21; test run green (tests, deploy, parity) |
@@ -126,6 +127,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 9 | Workflow logs hide email addresses; Turnstile site key added (existing widget) | .github/workflows/deploy-site.yml, infra.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
 | 2026-10-22 | 9 | Eval rules, personas, runner and workflow; retention started by traffic instead of a cron (D31); deploy applies D1 migrations once bound | evals/*, .github/workflows/evals.yml, worker/test/evals.test.mjs, migrations/0002_job_runs.sql, worker/retention.js, worker/api.js, wrangler.jsonc, deploy-site.yml, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 8 | Retention job (daily cron), scrubber fixes, privacy and cookie drafts | worker/retention.js, worker/privacy.js, worker/index.js, wrangler.jsonc, worker/spec/retention.spec.js, docs/lead-chat/08-privacy-draft.md |
 | 2026-10-22 | 7 | Chat widget, its styles, the config endpoint; script added to 4 pages; hero button opens the chat | scripts/chat.js, styles/chat.css, worker/api.js, worker/headers.js, index.html, privacy/index.html, cookies/index.html, 404.html, docs/lead-chat/07-widget.md |

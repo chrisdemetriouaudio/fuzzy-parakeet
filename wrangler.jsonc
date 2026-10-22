@@ -24,7 +24,10 @@
   // Secrets (wrangler secret put): SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY.
   "vars": {
     "CHAT_ENABLED": "off",
-    "ADMIN_EMAIL": "hello@chrisdemetriou.com"
+    "ADMIN_EMAIL": "hello@chrisdemetriou.com",
+    // Public site key of the existing "Chris Demetriou contact form" Turnstile widget
+    // (chrisdemetriou.com). Its secret goes in TURNSTILE_SECRET.
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAEGNlR_vCGl4yDDs"
   },
   "assets": {
     "directory": ".",

@@ -15,6 +15,10 @@ on:
         options: [status, d1-create, models]
 permissions:
   contents: read
+# bash -eo pipefail: a failing wrangler still fails the step when its output is piped.
+defaults:
+  run:
+    shell: bash
 concurrency:
   group: infra
   cancel-in-progress: false
@@ -28,6 +32,8 @@ jobs:
       DB_NAME: chrisdemetriou-leads
       WORKER: chrisdemetriou-site
       CF_API: https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # This repo is public, so are its Actions logs: hide any email address wrangler prints.
+      EMAIL_RE: '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
@@ -38,8 +44,8 @@ jobs:
       - name: Status
         if: inputs.task == 'status'
         run: |
-          echo "## D1 databases"; npx wrangler d1 list || true
-          echo "## Worker secrets (names only)"; npx wrangler secret list --name "$WORKER" || true
+          echo "## D1 databases"; npx wrangler d1 list 2>&1 | sed -E "s/$EMAIL_RE/[email hidden]/g" || true
+          echo "## Worker secrets (names only)"; npx wrangler secret list --name "$WORKER" 2>&1 | sed -E "s/$EMAIL_RE/[email hidden]/g" || true
           echo "## Turnstile widgets (public site keys)"
           curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$CF_API/challenges/widgets" \
             | jq -r '.success, (.errors[]?.message // empty), (.result[]? | "\(.name)  sitekey=\(.sitekey)  domains=\(.domains|join(","))")'
@@ -48,9 +54,9 @@ jobs:
         if: inputs.task == 'd1-create'
         run: |
           if npx wrangler d1 info "$DB_NAME" > /dev/null 2>&1; then
-            echo "Already exists:"; npx wrangler d1 info "$DB_NAME"
+            echo "Already exists:"; npx wrangler d1 info "$DB_NAME" 2>&1 | sed -E "s/$EMAIL_RE/[email hidden]/g"
           else
-            npx wrangler d1 create "$DB_NAME" --location weur
+            npx wrangler d1 create "$DB_NAME" --location weur 2>&1 | sed -E "s/$EMAIL_RE/[email hidden]/g"
           fi
 
       - name: Check the chat model
