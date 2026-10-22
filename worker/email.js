@@ -27,7 +27,7 @@ const LABELS = {
   consequence: "When it slips", ideal_outcome: "What fixed looks like",
 };
 
-export function leadEmailForChris({ lead, summary, proof, transcript, adminUrl }) {
+export function leadEmailForChris({ lead, summary, briefNote, proof, transcript, adminUrl }) {
   const who = lead.org || lead.name;
   const task = summary?.task || "(not extracted)";
   const lines = [
@@ -41,7 +41,7 @@ export function leadEmailForChris({ lead, summary, proof, transcript, adminUrl }
       ? `Blueprint match: ${(summary.blueprint_match || []).join(", ") || "-"} (confidence ${summary.confidence ?? "-"})`
       : "Blueprint match: the extraction didn't work. Check the transcript (flagged in the portal).",
     "",
-    "PAIN SUMMARY",
+    briefNote ? `PAIN SUMMARY (${briefNote})` : "PAIN SUMMARY",
     ...Object.entries(LABELS).map(([k, label]) => `${label}: ${summary?.[k] || "-"}`),
     "",
     "TRANSCRIPT",

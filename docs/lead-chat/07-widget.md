@@ -39,4 +39,33 @@ All 30 checks pass:
 ## To switch it on
 
 1. **Preview:** set `"CHAT_ENABLED": "preview"` in `wrangler.jsonc` (Claude does it). Then open `https://chrisdemetriou.com/?chat=preview`.
-2. **Launch:** set `"CHAT_ENABLED": "on"`, after Chris approves the privacy text (step 8) and has tried a passkey.
+2. **Launch:** set `"CHAT_ENABLED": "on"`, after Chris approves the privacy text (step 8) and has tried a passkey. Done 22 Oct 2026 (D34).
+
+## Fact buttons and the summary card (D35)
+
+Behind its own switch, `CHAT_NEXT` in `wrangler.jsonc`: `off`, `preview` (only on `?chat=preview` links) or `on`. Live visitors keep the chat as it is until Chris turns it on.
+
+- **Fact buttons.** When the bot asks how often, how many people, how many hours or the software spend, it ends with a hidden tag (`[[ASK:hours]]`).
+  - The Worker strips the tag; the widget shows the fixed set from `QUICK_ANSWERS` in `worker/config.js`.
+  - The visitor can always type their own answer. The bot never writes the options, so it can't invent a menu.
+  - The open questions (the task, what goes wrong) stay free text, as D01 requires.
+- **Summary card.** When the chat is mapped, the widget asks `/api/brief`:
+  - one extraction call, the one `/api/lead` used to make
+  - shown as "Your brief": the task, how often, who, what it costs, tools, when it slips, fixed means
+  - **That's right** or **Change something** (edit any line), then the contact form ("Where should Chris send it?")
+  - `/api/lead` uses the confirmed brief, so there's no second model call. Chris's email says whether the visitor confirmed or corrected it.
+  - If the brief can't be made (daily cap, model error), the usual contact form appears.
+  - The internal blueprint match never reaches the visitor.
+- **Data:** the brief waits on the chat (`migrations/0003_brief.sql`), moves into `pain_summary` with the lead, and is cleared by the retention job on chats that never became a lead.
+
+### Checked (22 Oct 2026, Chromium, real security headers, scripted replies)
+
+All 23 checks pass, and the original 30 still do:
+- ordinary visitors see no buttons
+- the frequency buttons match the fixed set; tapping sends the answer; typing clears them
+- focus stays in the message box, then moves to the brief
+- the card shows only filled lines; no contact form until it's confirmed
+- **Change something:** sends only the changed lines; the card then shows the corrected brief as confirmed
+- no brief: the usual contact form
+- axe 0 issues with buttons, on the card, while editing, and in dark mode on a phone
+- no CSP violations, no script errors

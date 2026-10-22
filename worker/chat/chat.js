@@ -3,8 +3,8 @@
 // daily cap, the chat's turn cap, the message length. If one is hit, or the model fails,
 // the answer is {"fallback":"form"} and the widget shows the audit form instead.
 import { MODEL_ID, DAILY_MODEL_CALL_CAP, PER_IP_DAILY_MSGS, MAX_TURNS_PER_CHAT, MAX_INPUT_CHARS,
-  MAX_REPLY_TOKENS, CHAT_COOKIE_TTL_HOURS } from "../config.js";
-import { SYSTEM_PROMPT, OPENING, PROOF_LINKS, LEAK_REPLY, asVisitorData } from "./prompt.js";
+  MAX_REPLY_TOKENS, CHAT_COOKIE_TTL_HOURS, nextOn } from "../config.js";
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_NEXT, OPENING, PROOF_LINKS, LEAK_REPLY, asVisitorData } from "./prompt.js";
 import { createTokenFilter, aiText, sse, leaked, visibleReply } from "./stream.js";
 import { passesTurnstile } from "./turnstile.js";
 import { json, readJson, readCookie, cookie, today } from "../lib/http.js";
@@ -78,8 +78,9 @@ export async function handleChat(request, env, ctx) {
   ]);
 
   const { results: history } = await env.DB.prepare("SELECT role, content FROM messages WHERE chat_id = ?1 ORDER BY id").bind(chatId).all();
+  // body.next: the widget has fact buttons and the summary card (D35), if CHAT_NEXT allows.
   const messages = [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: nextOn(env, body.next === true) ? SYSTEM_PROMPT_NEXT : SYSTEM_PROMPT },
     ...history.map((m) => ({ role: m.role, content: m.role === "user" ? asVisitorData(m.content) : m.content })),
   ];
 
@@ -106,7 +107,7 @@ function withCookie(res, setCookie) {
   return res;
 }
 
-// To the visitor: clean text as it arrives, then {done, mapped}.
+// To the visitor: clean text as it arrives, then {done, mapped, ask}.
 async function relay(stream, writable, turn) {
   const w = writable.getWriter();
   const enc = new TextEncoder();
@@ -121,7 +122,8 @@ async function relay(stream, writable, turn) {
     }
     const rest = filter.end();
     if (rest) await w.write(enc.encode(sse({ t: rest })));
-    await w.write(enc.encode(sse({ done: true, mapped: visibleReply(filter.raw, turn).mapped })));
+    const { mapped, ask } = visibleReply(filter.raw, turn);
+    await w.write(enc.encode(sse(ask ? { done: true, mapped, ask } : { done: true, mapped })));
   } catch {
     await w.write(enc.encode(sse({ fallback: "form", reason: "model" }))).catch(() => {});
   } finally {

@@ -11,6 +11,26 @@ export const MAX_INPUT_CHARS = 800;           // one visitor message
 export const MAX_REPLY_TOKENS = 220;          // the bot's replies are 60 words or fewer
 export const MIN_TURNS_TO_MAP = 3;            // [[MAPPED]] counts from the visitor's 3rd message (evals, 22 Oct)
 
+// Fact buttons and the summary card (D35). CHAT_NEXT (wrangler.jsonc) switches them on:
+// "off", "preview" (only for someone using a ?chat=preview link) or "on" (everyone).
+export const nextOn = (env, preview) => env.CHAT_NEXT === "on" || (env.CHAT_NEXT === "preview" && preview === true);
+
+// The bot only names a set ([[ASK:hours]]); the options are fixed here, so it can't invent a
+// menu. The visitor can always type their own answer instead.
+export const QUICK_ANSWERS = {
+  frequency: ["Daily", "Weekly", "Monthly", "Per client or event"],
+  people: ["Just me", "2–3 people", "4–10 people", "11–50 people", "More than 50"],
+  hours: ["Under an hour a week", "1–3 hours a week", "4–10 hours a week", "More than 10 hours a week"],
+  spend: ["Nothing", "Under £50 a month", "£50–£200 a month", "More than £200 a month", "Not sure"],
+};
+
+// The summary card's lines: pain_summary keys and the labels the visitor sees.
+export const BRIEF_FIELDS = [
+  ["task", "The task"], ["trigger_frequency", "How often"], ["who", "Who does it"],
+  ["time_cost", "What it costs"], ["current_tools", "Tools now"], ["consequence", "When it slips"],
+  ["ideal_outcome", "Fixed means"],
+];
+
 export const ANON_PURGE_DAYS = 30;            // chats with no lead: anonymised after this
 export const LEAD_PII_RETENTION_MONTHS = 12;  // quiet leads (not accepted, building or live)
 export const INVITE_TOKEN_TTL_HOURS = 24;     // portal invite and sign-in links

@@ -10,6 +10,12 @@ on:
         description: Only personas whose name contains this (blank = all ten)
         required: false
         default: ""
+      variant:
+        description: "live: the chat visitors get now; next: fact buttons and summary card (CHAT_NEXT)"
+        required: false
+        type: choice
+        options: [live, next]
+        default: live
 permissions:
   contents: read
 jobs:
@@ -25,6 +31,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          EVAL_VARIANT: ${{ inputs.variant }}
         run: node evals/run.mjs "${{ inputs.persona }}"
       - uses: actions/upload-artifact@v4
         if: always()

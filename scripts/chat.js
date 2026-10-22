@@ -3,6 +3,8 @@
 // the page works exactly as before ("Request a free workflow audit" scrolls to the form).
 // "preview" mode shows it only to someone who opened a page with ?chat=preview
 // (?chat=off forgets that). Turnstile, the bot check, loads only once the chat is opened.
+// With CHAT_NEXT on (D35), factual questions get tap-to-answer buttons and a mapped chat
+// shows a summary card to confirm or correct before the contact form.
 (function(){
   var PREVIEW_KEY = "cd-chat-preview";
   var WEB3FORMS_KEY = "38481c38-f460-483b-8941-23df4aa83522";   // public: it only routes mail to hello@
@@ -15,7 +17,7 @@
   } catch (e) {}
   function previewing(){ try { return localStorage.getItem(PREVIEW_KEY) === "1"; } catch (e) { return false; } }
 
-  fetch("/api/chat/config", { credentials: "same-origin" })
+  fetch("/api/chat/config" + (previewing() ? "?preview=1" : ""), { credentials: "same-origin" })
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(cfg){ if (cfg && (cfg.mode === "on" || (cfg.mode === "preview" && previewing()))) start(cfg); })
     .catch(function(){});
@@ -33,7 +35,7 @@
   }
 
   function start(cfg){
-    var css = el("link", { rel: "stylesheet", href: "/styles/chat.css?v=1" });
+    var css = el("link", { rel: "stylesheet", href: "/styles/chat.css?v=2" });
     document.head.appendChild(css);
 
     var launcher = el("button", { type: "button", "class": "chat-launch", "aria-haspopup": "dialog", "aria-controls": "chat-panel" },
@@ -54,6 +56,7 @@
     var input = panel.querySelector("#chat-text");
     var form = panel.querySelector(".chat-input");
     var opener = null, started = false, said = [], controller = null;
+    var next = cfg.next === true, quick = cfg.quick || {};
     var tsBox = panel.querySelector(".chat-ts"), tsWidget = null, tsToken = null, tsWaiters = [], tsLoaded = false;
 
     addMessage("assistant", cfg.opening);
@@ -144,6 +147,7 @@
 
     function send(text, retried){
       if (controller) controller.abort();          // a new message stops the reply in progress
+      removeChips();
       if (!retried) { said.push(text); addMessage("user", text); }
       var bubble = streamingBubble();
       (retried ? freshToken() : token()).then(function(t){
@@ -151,7 +155,7 @@
         return fetch("/api/chat", {
           method: "POST", credentials: "same-origin", signal: controller.signal,
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ message: text, turnstile: t || undefined, page: location.pathname })
+          body: JSON.stringify({ message: text, turnstile: t || undefined, page: location.pathname, next: next || undefined })
         });
       }).then(function(res){
         var type = res.headers.get("content-type") || "";
@@ -174,10 +178,11 @@
 
     function read(body, bubble){
       var reader = body.getReader(), dec = new TextDecoder(), buf = "", text = "";
-      function finish(mapped){
+      function finish(mapped, ask){
         bubble.remove();
         if (text) addMessage("assistant", text);
-        if (mapped) leadForm();
+        if (mapped) { if (next) brief(); else leadForm(); }
+        else if (ask && quick[ask]) chips(ask);
       }
       function pump(){
         return reader.read().then(function(r){
@@ -191,7 +196,7 @@
             if (ev.t) { text += ev.t; bubble.classList.remove("chat-typing"); bubble.innerHTML = linkify(text); log.scrollTop = log.scrollHeight; }
             if (ev.replace) { text = ev.replace; bubble.innerHTML = linkify(text); }
             if (ev.fallback) { bubble.remove(); return fallback(); }
-            if (ev.done) return finish(ev.mapped);
+            if (ev.done) return finish(ev.mapped, ev.ask);
           }
           return pump();
         });
@@ -199,11 +204,85 @@
       return pump();
     }
 
+    // ── Fact buttons (D35): tap an answer for a factual question, or type your own ──
+    function removeChips(){ var q = log.querySelector(".chat-quick"); if (q) q.remove(); }
+    function chips(key){
+      removeChips();
+      var g = el("div", { "class": "chat-quick", role: "group", "aria-label": "Quick answers" });
+      quick[key].forEach(function(label){
+        var b = el("button", { type: "button", "class": "chat-chip" });
+        b.textContent = label;
+        b.addEventListener("click", function(){ send(label); input.focus(); });
+        g.appendChild(b);
+      });
+      g.appendChild(el("p", { "class": "chat-quick-hint" }, "Or type your own answer."));
+      log.appendChild(g);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // ── The summary card (D35): the brief, confirmed or corrected before their details ──
+    function brief(){
+      var wait = streamingBubble();
+      fetch("/api/brief", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ next: true }) })
+        .then(function(r){ return r.ok ? r.json() : {}; })
+        .then(function(d){ wait.remove(); if (d.fields && d.labels) showBrief(d.fields, d.labels); else leadForm(); })
+        .catch(function(){ wait.remove(); leadForm(); });
+    }
+    function showBrief(fields, labels){
+      var card = el("section", { "class": "chat-brief", "aria-labelledby": "chat-brief-title" });
+      var head = '<h3 id="chat-brief-title" tabindex="-1">Your brief</h3>';
+      function lines(){
+        return "<dl>" + labels.filter(function(l){ return fields[l[0]]; }).map(function(l){
+          return "<dt>" + esc(l[1]) + "</dt><dd>" + esc(fields[l[0]]) + "</dd>";
+        }).join("") + "</dl>";
+      }
+      function view(){
+        card.innerHTML = head + "<p>Is this right? Chris writes your audit from it.</p>" + lines() +
+          '<div class="chat-brief-actions"><button type="button" class="chat-send" data-ok>That\'s right</button>' +
+          '<button type="button" class="chat-ghost" data-edit>Change something</button></div>';
+        card.querySelector("[data-ok]").addEventListener("click", function(){ confirm({}); });
+        card.querySelector("[data-edit]").addEventListener("click", edit);
+      }
+      function edit(){
+        card.innerHTML = head + '<form novalidate><p>Change anything that\'s wrong or missing.</p>' + labels.map(function(l){
+          return '<div class="chat-field"><label for="chat-brief-' + l[0] + '">' + esc(l[1]) + '</label>' +
+            '<textarea id="chat-brief-' + l[0] + '" name="' + l[0] + '" rows="2" maxlength="300">' + esc(fields[l[0]] || "") + "</textarea></div>";
+        }).join("") + '<button type="submit" class="chat-send">Save my brief</button></form>';
+        var f = card.querySelector("form");
+        f.querySelector("textarea").focus();
+        f.addEventListener("submit", function(e){
+          e.preventDefault();
+          var changed = {};
+          labels.forEach(function(l){
+            var v = f.elements[l[0]].value.trim();
+            if (v !== (fields[l[0]] || "")) { changed[l[0]] = v; fields[l[0]] = v; }
+          });
+          confirm(changed);
+        });
+      }
+      function confirm(changed){
+        Array.prototype.forEach.call(card.querySelectorAll("button"), function(b){ b.disabled = true; });
+        fetch("/api/brief/confirm", { method: "POST", credentials: "same-origin", headers: { "content-type": "application/json" },
+          body: JSON.stringify({ next: true, fields: changed }) })
+          .catch(function(){})
+          .then(function(){
+            card.innerHTML = head + lines() + '<p class="chat-brief-ok">✓ Confirmed</p>';
+            leadForm(true);
+          });
+      }
+      view();
+      log.appendChild(card);
+      log.scrollTop = log.scrollHeight;
+      card.querySelector("h3").focus();
+    }
+
     // ── "Want this as your written audit?" ──
-    function leadForm(){
+    function leadForm(afterBrief){
       if (log.querySelector(".chat-lead")) return;
       var f = el("form", { "class": "chat-lead", novalidate: "" },
-        '<p><strong>Want this as your written audit?</strong> Leave your details and Chris will send it, with a link to your private portal.</p>' +
+        (afterBrief
+          ? '<p><strong>Where should Chris send it?</strong> Leave your details for your written audit, with a link to your private portal.</p>'
+          : '<p><strong>Want this as your written audit?</strong> Leave your details and Chris will send it, with a link to your private portal.</p>') +
         field("lead-name", "name", "Your name", "text", "name") +
         field("lead-email", "email", "Work email", "email", "email") +
         field("lead-org", "org", 'Organisation <span class="chat-opt">(optional)</span>', "text", "organization") +

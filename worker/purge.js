@@ -26,7 +26,7 @@ export async function purgeLead(env, leadId, now = Date.now()) {
   updates.push(
     env.DB.prepare("UPDATE leads SET name = NULL, email = NULL, org = NULL, user_id = NULL, purged_at = ?2 WHERE id = ?1").bind(leadId, now),
     env.DB.prepare("UPDATE stage_events SET note = NULL WHERE lead_id = ?1").bind(leadId),
-    env.DB.prepare("UPDATE chats SET ip_hash = NULL, anonymised_at = COALESCE(anonymised_at, ?2) WHERE id = ?1").bind(lead.chat_id, now),
+    env.DB.prepare("UPDATE chats SET ip_hash = NULL, brief_json = NULL, brief_raw = NULL, anonymised_at = COALESCE(anonymised_at, ?2) WHERE id = ?1").bind(lead.chat_id, now),
   );
   await env.DB.batch(updates);
   return true;

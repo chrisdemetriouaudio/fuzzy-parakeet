@@ -6,11 +6,13 @@ import { handleChat } from "./chat/chat.js";
 import { OPENING } from "./chat/prompt.js";
 import { maybeRunRetention } from "./retention.js";
 import { handleLead } from "./chat/lead.js";
+import { handleBrief, handleBriefConfirm } from "./chat/brief.js";
+import { QUICK_ANSWERS, nextOn } from "./config.js";
 import { registerOptions, registerVerify, loginOptions, loginVerify, emailLink, logout } from "./portal/auth.js";
 import { currentUser, csrfOk } from "./portal/session.js";
 import { me, listLeads, leadDetail, exportData, acceptScope, deleteData, saveAudit, saveScope, changeStage, stats } from "./portal/data.js";
 
-const CHAT = { "/api/chat": handleChat, "/api/lead": handleLead };
+const CHAT = { "/api/chat": handleChat, "/api/lead": handleLead, "/api/brief": handleBrief, "/api/brief/confirm": handleBriefConfirm };
 // Signing in: POST, no session yet.
 const AUTH = {
   "/api/portal/register/options": registerOptions, "/api/portal/register/verify": registerVerify,
@@ -34,11 +36,16 @@ const SIGNED_IN = {
 const ready = (env) => env.DB && env.SESSION_SECRET && env.IP_HASH_SALT;
 
 // What the widget needs to know: whether to show itself ("preview" shows it only to
-// someone who opened a page with ?chat=preview), and Turnstile's public site key.
-function chatConfig(env) {
+// someone who opened a page with ?chat=preview), Turnstile's public site key, and whether
+// the fact buttons and summary card are on for this visitor (CHAT_NEXT; ?preview=1 is sent
+// by a widget on a preview link).
+function chatConfig(env, url) {
   const set = ready(env) && env.AI && env.TURNSTILE_SECRET && env.TURNSTILE_SITE_KEY;
   const mode = set && (env.CHAT_ENABLED === "on" || env.CHAT_ENABLED === "preview") ? env.CHAT_ENABLED : "off";
-  return json({ mode, sitekey: mode === "off" ? null : env.TURNSTILE_SITE_KEY, opening: OPENING }, 200, { "cache-control": "public, max-age=60" });
+  const next = mode !== "off" && nextOn(env, url.searchParams.get("preview") === "1");
+  const out = { mode, sitekey: mode === "off" ? null : env.TURNSTILE_SITE_KEY, opening: OPENING, next };
+  if (next) out.quick = QUICK_ANSWERS;
+  return json(out, 200, { "cache-control": "public, max-age=60" });
 }
 
 export async function handleApi(request, env, ctx, url) {
@@ -49,7 +56,7 @@ export async function handleApi(request, env, ctx, url) {
   if (path === "/api/chat/config") {
     if (request.method !== "GET") return json({ error: "method" }, 405, { allow: "GET" });
     await maybeRunRetention(env, ctx);   // page views keep the retention job going (no cron)
-    return chatConfig(env);
+    return chatConfig(env, url);
   }
 
   if (CHAT[path]) {

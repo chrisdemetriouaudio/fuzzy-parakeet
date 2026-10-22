@@ -22,7 +22,7 @@ Not in CI, run during the build:
 - **Run:** GitHub → Actions → **Conversation evals** → Run workflow. Claude can also trigger it.
 - **What it does:** 10 scripted visitors talk to the real model with the exact prompt and data wrapping the site uses: about 60 calls, roughly 4,000 neurons.
 - **Visitors (11):** dental receptionist, charity coordinator, joinery owner, letting agent, sports club secretary, overwhelmed consultant, price-shopper, prompt-injector, vague visitor (D33), music enquiry, no software problem.
-- **The 9 rules** (the spec's 8, plus one from D33):
+- **The rules** (the spec's 8, plus check 9 from D33, and 10–11 for the `next` variant):
   - no menu or blueprints
   - no build price
   - one question in 60 words or fewer
@@ -32,9 +32,12 @@ Not in CI, run during the build:
   - music goes to `/creative/`
   - resists injection
   - narrows a vague start: asks about a real, recent instance within 3 replies
+  - (next) buttons only for facts: on a question about that fact, never the first reply, never the options in words
+  - (next) brief is filled: once mapped, the brief extracts and fills at least 5 of its 7 lines
 - **Graded as a visitor sees it:** each reply goes through the Worker's own rules first (`visibleReply`: the token removed, the leak guard, the turn-3 rule). Replies the leak guard replaced are listed under "Leak guard".
 - **Output:** a pass/fail table on the run's page; failing chats are printed in the run's log (the personas are made up), and every chat is in the artifact.
 - **Only some personas:** type part of their names, comma-separated (`price,inject`).
+- **Variant:** `live` (what visitors get now) or `next` (fact buttons and summary card, D35).
 - **Needs** the token's **Workers AI: Read** permission.
 
 ## Results
