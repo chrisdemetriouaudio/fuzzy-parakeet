@@ -73,6 +73,17 @@ export const PERSONAS = [
     "Excel and Outlook. When it slips people get paid late.",
     "Fixed would be a form, an approval step and an export to our accounts.",
   ] },
+  // Starts vague on purpose: the bot must narrow it to one real, recent instance (D33).
+  { name: "Vague visitor", vague: true, mapAfter: 5, turns: [
+    "I just want to automate stuff.",
+    "Admin, mostly. Everything takes too long.",
+    "Probably the emails? There's loads of back and forth.",
+    "Last Tuesday a client asked to move a session. I emailed three people and it took an hour.",
+    "About ten times a week, and it's just me doing it.",
+    "Gmail and a Google calendar. No paid software.",
+    "I tried a booking link but clients ignore it, and sessions get double-booked.",
+    "Fixed would be clients picking a new slot themselves and everyone being told.",
+  ] },
   { name: "Music enquiry visitor", music: true, mapAfter: 99, neverMap: true, turns: [
     "Hi, do you do session drumming or mixing for bands?",
     "Thanks!",

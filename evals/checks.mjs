@@ -79,6 +79,13 @@ export const CHECKS = {
     }
     return null;
   },
+  // A vague start ("automate stuff") must be narrowed to one real, recent instance within
+  // the first 3 replies: the bot asks about the last time it happened, or a specific example.
+  "9 Narrows a vague start": (convo) => {
+    if (!convo.persona.vague) return "–";
+    const asks = /\b(last (real )?time|last week|most recent|recent (example|time)|specific (example|time)|walk me through|the last one|when did that last)\b/i;
+    return convo.replies.slice(0, 3).some((r) => asks.test(r)) ? null : "no question about a real, recent instance in the first 3 replies";
+  },
 };
 
 export function grade(convo) {
