@@ -1,16 +1,22 @@
 ---
 title: Changelog
-updated: 2026-10-20
+updated: 2026-10-22
 ---
 
 # 📜 Changelog
 
 > [!info] At a glance
-> **What:** everything that went live, newest first. GitHub Pages publishes each change to main within a minute or two.
+> **What:** everything that went live, newest first. Since 22 Oct 2026 a GitHub Action deploys each website change to main within a minute or two.
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 20 Oct 2026 · Aligned page titles; contact form default · live (Labs needs a release)
+> [!success]+ 🚀 22 Oct 2026 · chrisdemetriou.com moved to Cloudflare Workers · live
+> - **Cutover:** Chris swapped the GitHub Pages DNS records for the Worker (`chrisdemetriou-site`). `www` and `http` redirect to `https://chrisdemetriou.com`.
+> - **New:** security headers with a strict CSP; the showreel streams from R2; pages refresh straight away; merging to main deploys by itself, then checks every URL.
+> - **Checked live:** all site files byte for byte, redirects, 404 page, private files, headers and showreel. `robots.txt` matched once Cloudflare's AI-bot settings were set to Allow; GPTBot and ClaudeBot get through.
+> - 🔴 **Outage:** about 12 hours overnight (23:49 21 Oct to 11:15 22 Oct). An old August route served an empty page; removed.
+
+> [!success]- 🚀 20 Oct 2026 · Aligned page titles; contact form default · live (Labs needs a release)
 > - **Released:** pull request #33 (`f973bb0`).
 > - **Titles:** every page is "Page | Chris Demetriou"; Creative is "Creative: Music, Media & Worship | Chris Demetriou". Labs titles change with its next release.
 > - **`/creative/` contact form:** "What's this about?" defaults to "A web app or tool".

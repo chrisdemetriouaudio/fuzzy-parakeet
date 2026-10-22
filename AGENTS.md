@@ -1,6 +1,6 @@
 # chrisdemetriou.com — working notes for agents
 
-This repo is chrisdemetriou.com (GitHub Pages, published from `main`), plus two folders the website never publishes (`_config.yml` leaves them out):
+This repo is chrisdemetriou.com (the `chrisdemetriou-site` Cloudflare Worker, deployed from `main`), plus folders the website never publishes (`.assetsignore` lists the only files that go live):
 
 - `labs/`: labs.chrisdemetriou.com, the site's TECH page. A Cloudflare Worker (`demo-hub`) that lists every project, wherever its code lives.
 - `chrisdemetriou-PMO/`: the Obsidian project notes (PMO). This is the live to-do list and history.
@@ -18,7 +18,12 @@ The owner is neurodivergent (Autism / ADHD / dyslexia). Follow the writing rules
 
 ## The website
 
-Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or two after it reaches `main`. Check pages in a browser at desktop and phone widths before opening a pull request.
+Plain HTML, CSS and JavaScript, no build step. A change goes live a minute or two after it reaches `main`: `.github/workflows/deploy-site.yml` tests, deploys and runs the URL-parity check. Check pages in a browser at desktop and phone widths before opening a pull request.
+
+- **Served by a Worker** (`worker/`, `wrangler.jsonc`) with security headers and a per-page CSP (`worker/headers.js`). Inline scripts are allowed by hash, rebuilt on every deploy; a new third-party origin needs adding there.
+- **Only what `.assetsignore` lists goes live.** A new public file or folder must be added there; the tests fail until it is (and until `deploy-site.yml` watches it).
+- **The showreel** is in R2 (`chrisdemetriou-media`), served at `/video/...` by `worker/media.js`.
+- **Before a pull request:** `npm test`. Check any address with `npm run parity -- <address>`.
 
 ## Labs (labs/)
 

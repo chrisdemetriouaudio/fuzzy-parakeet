@@ -1,6 +1,6 @@
 ---
 title: Decision Log
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # 🧠 Decision Log
@@ -8,6 +8,17 @@ updated: 2026-10-21
 > [!info] At a glance
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
+
+> [!success]- 22 Oct 2026 · Lead chat: Claude builds on autopilot (Agreed)
+> - **Status:** Agreed by Chris.
+> - **Decided:** Claude builds steps 3–10 back to back and merges its own pull requests once the tests and the live check pass. Cloudflare changes run through GitHub Actions. Chris gets one batched list of the steps only he can do.
+> - **Safety:** the chat stays switched off until Chris approves the privacy text and tests a passkey.
+> - **Why:** the manual copy-paste was slowing things down. Tracked in `docs/PMO.md` (D26).
+
+> [!success]- 22 Oct 2026 · All crawlers welcome, AI training ones included (Agreed)
+> - **Status:** Agreed by Chris during the move to Cloudflare. Answers Phase 8's crawler question.
+> - **Decided:** Cloudflare's "Block AI bots" and managed robots.txt stay off; the site's own `robots.txt` is the only rule.
+> - **Why:** it's what GitHub Pages served, and it helps the site appear in AI answers. Tracked in `docs/PMO.md` (D25).
 
 > [!success]- 21 Oct 2026 · Site moves to Cloudflare Workers; showreel goes to R2 (Agreed)
 > - **Status:** Agreed by Chris. Supersedes "chrisdemetriou.com stays on GitHub Pages" (20 Oct 2026).

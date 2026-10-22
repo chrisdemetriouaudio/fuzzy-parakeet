@@ -96,3 +96,44 @@ test("the deploy workflow runs for every published path", () => {
   assert.deepEqual(missing, [], "add these to the paths in deploy-site.yml");
   for (const f of ["worker/**", "wrangler.jsonc", ".assetsignore", "package-lock.json"]) assert.ok(watched.includes(f), f);
 });
+
+test("the Worker redirects www and http, and only marks non-live addresses noindex", async () => {
+  const { default: worker } = await import("../index.js");
+  const seen = [];
+  const env = {
+    ASSETS: {
+      fetch: async (req) => {
+        seen.push(new URL(req.url).pathname);
+        if (new URL(req.url).pathname === "/privacy") return new Response(null, { status: 307, headers: { location: "/privacy/" } });
+        if (new URL(req.url).pathname === "/gone") return new Response("<p>404</p>", { status: 404, headers: { "content-type": "text/html" } });
+        return new Response("<p>ok</p>", { headers: { "content-type": "text/html; charset=utf-8" } });
+      },
+    },
+  };
+  const go = (url) => worker.fetch(new Request(url), env);
+
+  let res = await go("https://www.chrisdemetriou.com/privacy/?a=1");
+  assert.equal(res.status, 301);
+  assert.equal(res.headers.get("location"), "https://chrisdemetriou.com/privacy/?a=1");
+  res = await go("http://chrisdemetriou.com/cookies/");
+  assert.equal(res.status, 301);
+  assert.equal(res.headers.get("location"), "https://chrisdemetriou.com/cookies/");
+  assert.deepEqual(seen, [], "redirects never reach the assets");
+
+  res = await go("https://chrisdemetriou.com/");
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get("x-robots-tag"), null);
+  assert.match(res.headers.get("content-security-policy"), /connect-src 'self' https:\/\/api\.web3forms\.com/);
+  assert.equal(res.headers.get("x-frame-options"), "DENY");
+
+  res = await go("https://preview.chrisdemetriou.com/");
+  assert.equal(res.headers.get("x-robots-tag"), "noindex");
+
+  res = await go("https://chrisdemetriou.com/privacy");
+  assert.equal(res.status, 301, "trailing slash is permanent");
+  assert.equal(res.headers.get("location"), "/privacy/");
+
+  res = await go("https://chrisdemetriou.com/gone");
+  assert.equal(res.status, 404);
+  assert.doesNotMatch(res.headers.get("content-security-policy"), /web3forms/, "404 page gets the plain policy");
+});
