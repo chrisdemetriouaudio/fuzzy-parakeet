@@ -30,8 +30,8 @@ test("publishes exactly what GitHub Pages published, minus CNAME and the showree
 
 test("never publishes the repo's private folders and files", () => {
   for (const f of published) {
-    assert.doesNotMatch(f, /^(chrisdemetriou-PMO|content|publisher|docs|labs|worker|node_modules|video|\.git|\.github)\//, f);
-    assert.doesNotMatch(f, /^(AGENTS\.md|CLAUDE\.md|README\.md|CNAME|_config\.yml|wrangler\.jsonc|package(-lock)?\.json|\.assetsignore)$/, f);
+    assert.doesNotMatch(f, /^(chrisdemetriou-PMO|content|publisher|docs|labs|worker|migrations|node_modules|video|\.git|\.github)\//, f);
+    assert.doesNotMatch(f, /^(AGENTS\.md|CLAUDE\.md|README\.md|CNAME|_config\.yml|wrangler\.jsonc|vitest\.config\.mjs|package(-lock)?\.json|\.assetsignore)$/, f);
   }
   assert.ok(published.has("index.html") && published.has("404.html"));
 });

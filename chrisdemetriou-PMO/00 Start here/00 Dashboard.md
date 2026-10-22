@@ -16,7 +16,7 @@ updated: 2026-10-22
 
 ## 👉 Your actions
 
-- 👉 **Phase 9, step 2:** check mail both ways, then turn off GitHub Pages; [[Phase 9 — Lead chat & portal]].
+- 👉 **Phase 9:** widen the Cloudflare token; set 4 Worker secrets; check mail; turn off GitHub Pages; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.

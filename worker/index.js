@@ -1,15 +1,16 @@
 /**
  * chrisdemetriou.com on Cloudflare Workers. Serves the static site (the repo, filtered by
- * .assetsignore) with security headers, and the showreel from R2. The lead chat API and
- * the portal join here in later phases.
+ * .assetsignore) with security headers, the showreel from R2, and the lead chat API
+ * (/api/*, worker/api.js). The portal joins in step 6.
  */
 import { securityHeaders } from "./headers.js";
 import { serveMedia } from "./media.js";
+import { handleApi } from "./api.js";
 
 const APEX = "chrisdemetriou.com";
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     // www and plain http go to https://chrisdemetriou.com for good, as on GitHub Pages.
@@ -17,8 +18,8 @@ export default {
       return Response.redirect(`https://${APEX}${url.pathname}${url.search}`, 301);
     }
 
-    let res = url.pathname.startsWith("/video/")
-      ? await serveMedia(request, env, url)
+    let res = url.pathname.startsWith("/api/") ? await handleApi(request, env, ctx, url)
+      : url.pathname.startsWith("/video/") ? await serveMedia(request, env, url)
       : await env.ASSETS.fetch(request);
 
     // The asset server adds a missing trailing slash with a temporary (307) redirect.

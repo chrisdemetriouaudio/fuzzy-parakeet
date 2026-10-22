@@ -1,6 +1,6 @@
 # Checks the site Worker before it ships: only the website's files go live (.assetsignore),
 # every inline script is allowed by the CSP, and the showreel's byte ranges add up.
-# Plain Node, no install: the tests don't need wrangler.
+# Also runs the Worker tests (vitest, inside the Workers runtime, with a local D1).
 name: Site checks
 on:
   pull_request:
@@ -16,5 +16,5 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
         with:
           node-version: 22
-      - run: node worker/build.mjs
-      - run: node --test worker/test/*.test.mjs
+      - run: npm ci
+      - run: npm test

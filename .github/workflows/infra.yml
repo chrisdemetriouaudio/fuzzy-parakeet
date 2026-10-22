@@ -1,0 +1,63 @@
+# One-off Cloudflare jobs for the site Worker, run by hand (Actions → Infra → Run workflow)
+# or by Claude, instead of clicking in the dashboard (D26). Uses the deploy's two secrets.
+# Worker secrets are not set here: Chris sets those (see docs/lead-chat/03-database.md).
+#   status      list the D1 database, the Worker's secret names and the Turnstile widgets
+#   d1-create   create the D1 database chrisdemetriou-leads (Western Europe) if it's missing
+#   models      check the chat model is still offered by Workers AI
+name: Infra
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: What to do
+        required: true
+        type: choice
+        options: [status, d1-create, models]
+permissions:
+  contents: read
+concurrency:
+  group: infra
+  cancel-in-progress: false
+jobs:
+  infra:
+    if: github.repository == 'chrisdemetriouaudio/fuzzy-parakeet'
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DB_NAME: chrisdemetriou-leads
+      WORKER: chrisdemetriou-site
+      CF_API: https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        with:
+          node-version: 22
+      - run: npm ci
+
+      - name: Status
+        if: inputs.task == 'status'
+        run: |
+          echo "## D1 databases"; npx wrangler d1 list || true
+          echo "## Worker secrets (names only)"; npx wrangler secret list --name "$WORKER" || true
+          echo "## Turnstile widgets (public site keys)"
+          curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$CF_API/challenges/widgets" \
+            | jq -r '.success, (.errors[]?.message // empty), (.result[]? | "\(.name)  sitekey=\(.sitekey)  domains=\(.domains|join(","))")'
+
+      - name: Create the D1 database
+        if: inputs.task == 'd1-create'
+        run: |
+          if npx wrangler d1 info "$DB_NAME" > /dev/null 2>&1; then
+            echo "Already exists:"; npx wrangler d1 info "$DB_NAME"
+          else
+            npx wrangler d1 create "$DB_NAME" --location weur
+          fi
+
+      - name: Check the chat model
+        if: inputs.task == 'models'
+        run: |
+          model=$(grep -o '"@cf/[^"]*"' worker/config.js | head -1 | tr -d '"')
+          echo "Configured: $model"
+          curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$CF_API/ai/models/search?search=llama-3.3&per_page=50" \
+            | jq -r '.success, (.errors[]?.message // empty), (.result[]?.name)' | tee models.txt
+          grep -qx "$model" models.txt && echo "OK: $model is available." || { echo "Not found: $model"; exit 1; }
