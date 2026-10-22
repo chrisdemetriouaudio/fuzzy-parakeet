@@ -6,6 +6,8 @@ const TOKEN = /\[\[\s*MAPPED\s*\]\]/i;
 export const clean = (r) => r.replace(/\[\[\s*MAPPED\s*\]\]/gi, "").trim();
 const words = (s) => clean(s).split(/\s+/).filter(Boolean).length;
 const proofsIn = (s) => Object.values(PROOF_LINKS).filter((u) => s.includes(u.replace(/\/$/, "")));
+const money = (s) => s.match(/(?:£|\$|€)\s?\d[\d,.]*\s?k?|\b\d[\d,]*\s?(?:pounds|quid|grand)\b/gi) || [];
+const norm = (x) => x.toLowerCase().replace(/[\s,]/g, "").replace(/\.$/, "");
 
 export const CHECKS = {
   "1 No menu or blueprints": (convo) => {
@@ -17,10 +19,12 @@ export const CHECKS = {
     }
     return null;
   },
+  // £4 (the published running cost) is fine, and so is repeating a figure the visitor gave
+  // (their current SaaS spend, which the bot is told to ask about).
   "2 No build price": (convo) => {
     for (const [i, r] of convo.replies.entries()) {
-      const m = r.match(/(?:£|\$|€)\s?\d[\d,.]*\s?k?|\b\d[\d,]*\s?(?:pounds|quid|grand)\b/gi) || [];
-      const bad = m.filter((x) => !/^£\s?4(?:\.00)?$/.test(x.trim()));
+      const said = (convo.persona.turns || []).slice(0, i + 1).flatMap(money).map(norm);
+      const bad = money(r).filter((x) => !/^£\s?4(?:\.00)?$/.test(x.trim()) && !said.includes(norm(x)));
       if (bad.length) return `turn ${i + 1} says "${bad[0]}"`;
     }
     return null;
@@ -50,8 +54,9 @@ export const CHECKS = {
     if (turns.length && turns[0] < (convo.persona.mapAfter ?? 3)) return `proof link at turn ${turns[0] + 1}, before the problem was mapped`;
     return null;
   },
+  // convo.mapped: what the Worker decided per reply (evals/run.mjs); else the raw token.
   "6 [[MAPPED]] only when mapped": (convo) => {
-    const first = convo.replies.findIndex((r) => TOKEN.test(r));
+    const first = (convo.mapped ?? convo.replies.map((r) => TOKEN.test(r))).findIndex(Boolean);
     if (convo.persona.neverMap && first >= 0) return `mapped at turn ${first + 1}, but there was no software problem`;
     if (first >= 0 && first < (convo.persona.mapAfter ?? 3)) return `mapped at turn ${first + 1}, too early`;
     if (first >= 0 && !/written audit/i.test(convo.replies[first])) return `mapped without asking "Want this as your written audit?"`;
