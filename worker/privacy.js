@@ -10,8 +10,8 @@
 // someone", not "impossible to".
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
 const PHONE = /(?:\+|\b0)(?:[\s().-]?\d){9,13}\b/g;
-const LINK = /\bhttps?:\/\/[^\s/]+\/[^\s]+/gi;
-const INTRO = /\b(my name is|my name's|i am|i'm|this is|it's)\s+([A-Z][a-z]+(?:[\s-][A-Z][a-z]+)?)\b/g;
+const LINK = /\bhttps?:\/\/[^\s/]+\/[^\s]*[^\s.,;:!?)]/gi;
+const INTRO = /\b([Mm]y name is|[Mm]y name's|I am|I'm|I’m|[Tt]his is|[Ii]t's)\s+([A-Z][a-z]+(?:[\s-][A-Z][a-z]+)?)\b/g;
 const KEEP_LINKS = /^https?:\/\/(?:[\w-]+\.)*(?:chrisdemetriou\.com|cdcscontracts\.com|reach-children-uganda\.org\.uk)\//i;
 // Words that follow "I'm" / "this is" but aren't names.
 const NOT_NAMES = new Set(["Not", "Just", "The", "Our", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Excel", "Outlook"]);

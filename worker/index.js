@@ -1,11 +1,12 @@
 /**
  * chrisdemetriou.com on Cloudflare Workers. Serves the static site (the repo, filtered by
  * .assetsignore) with security headers, the showreel from R2, and the lead chat API
- * (/api/*, worker/api.js). The portal joins in step 6.
+ * and portal (/api/*, worker/api.js), and runs the daily retention job.
  */
 import { securityHeaders } from "./headers.js";
 import { serveMedia } from "./media.js";
 import { handleApi } from "./api.js";
+import { runRetention } from "./retention.js";
 
 const APEX = "chrisdemetriou.com";
 
@@ -33,5 +34,10 @@ export default {
     // Any other address (preview.chrisdemetriou.com) is only a preview: keep it out of search.
     if (url.hostname !== APEX) res.headers.set("x-robots-tag", "noindex");
     return res;
+  },
+
+  // Daily, from the cron trigger in wrangler.jsonc: the retention job (worker/retention.js).
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(runRetention(env));
   },
 };
