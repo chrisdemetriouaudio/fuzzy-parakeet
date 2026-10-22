@@ -9,24 +9,24 @@ changed: 22 Oct 2026, 17:15 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `d8e114a` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `fff17de` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#44 Hide email addresses in public workflow logs; reuse the Turnstile widget**: opened 22 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 22 Oct 2026 · `0903dce` · ci: hide email addresses in public workflow logs; reuse the Turnstile widget
 - 22 Oct 2026 · `f8a9415` · feat(chat): conversation evals; retention without a cron (Phase 9 step 9)
 - 22 Oct 2026 · `d0bb79f` · feat(chat): daily retention job and privacy drafts (Phase 9 step 8)
 - 22 Oct 2026 · `0823acc` · feat(chat): the chat widget, hidden until switched on (Phase 9 step 7)
