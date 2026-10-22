@@ -10,7 +10,12 @@ updated: 2026-10-22
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 22 Oct 2026 · The lead chat is live; privacy notice updated · live
+> [!success]+ 🚀 22 Oct 2026 · Chat: tap-to-answer buttons and a summary card · live
+> - **Buttons:** how often, how many people, hours a week and software spend can be tapped; typing still works.
+> - **Summary card:** before the contact form, the visitor sees "Your brief" and confirms or corrects it. Chris's email says which.
+> - **Checked:** 50 automated tests and 23 browser checks; the real-model run follows at midnight UTC.
+
+> [!success]- 🚀 22 Oct 2026 · The lead chat is live; privacy notice updated · live
 > - **Chat:** an AI assistant on every page except Creative. It helps a visitor describe one costly task, then offers the written audit. The audit form stays as the fallback.
 > - **Portal:** passkey sign-in for clients who ask for an audit, plus Chris's admin view.
 > - **Privacy and cookies:** what the chat collects, the AI, Cloudflare and Resend, retention, two strictly necessary cookies. "GitHub Pages" corrected to Cloudflare.
