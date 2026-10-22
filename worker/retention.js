@@ -1,4 +1,6 @@
-// The daily retention job (Phase 9, step 8), run by the Worker's cron trigger.
+// The retention job (Phase 9, step 8). The account's free cron triggers are all in use, so
+// it's started by ordinary traffic (maybeRunRetention, at most every RUN_EVERY hours); the
+// scheduled() handler in index.js runs it too, if a cron is ever added.
 // 1. Chats that never became a lead: after ANON_PURGE_DAYS of quiet, personal details are
 //    scrubbed from the messages (see privacy.js for what that catches, and what it can't)
 //    and the IP hash is dropped. The anonymised chat is kept.
@@ -12,8 +14,24 @@ import { ANON_PURGE_DAYS, LEAD_PII_RETENTION_MONTHS } from "./config.js";
 import { scrub } from "./privacy.js";
 import { purgeLead } from "./purge.js";
 
-const BATCH = 50;
+const BATCH = 25;
 const DAY = 86400_000;
+const RUN_EVERY = 6 * 3600_000;
+
+// Claims the next run (one request wins, even if several arrive at once), then runs it in
+// the background after the visitor already has their page.
+export async function maybeRunRetention(env, ctx, now = Date.now()) {
+  if (!env.DB) return false;
+  try {
+    const claimed = await env.DB.prepare(`INSERT INTO job_runs (name, last_run_at) VALUES ('retention', ?1)
+      ON CONFLICT (name) DO UPDATE SET last_run_at = ?1 WHERE last_run_at < ?2`).bind(now, now - RUN_EVERY).run();
+    if (!claimed.meta.changes) return false;
+  } catch {
+    return false;   // the table isn't there yet
+  }
+  ctx.waitUntil(runRetention(env, now).catch((err) => console.log(`retention failed: ${err.message}`)));
+  return true;
+}
 
 export async function runRetention(env, now = Date.now()) {
   if (!env.DB) return null;

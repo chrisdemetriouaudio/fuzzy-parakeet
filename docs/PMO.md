@@ -19,7 +19,7 @@
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
-| 9 | Tests + conversation evals | Not started | | | |
+| 9 | Tests + conversation evals | Awaiting Chris | 2026-10-22 | | 46 automated tests in CI; eval runner + 10 personas + workflow built ([09-evals.md](lead-chat/09-evals.md)). **Chris:** add "Workers AI: Read" to the token, then Claude runs the evals. |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D31 | 2026-10-22 | No cron: the retention job is started by page views (the widget's config request), at most every 6 hours, one run at a time (job_runs table) | The account's 5 free cron triggers are all used by other Workers; this stays free and needs no secret | Claude Code (proposed) |
 | D30 | 2026-10-22 | Widget asks /api/chat/config before showing; preview mode via ?chat=preview; not on /creative/ or /portal/; Web3Forms allowed in connect-src on every page (the fallback form) | Nothing visible changes until Chris switches it on; /creative/ is out of scope | Claude Code (proposed) |
 | D29 | 2026-10-22 | Portal = static page (portal/) + JSON API (/api/portal/*); discoverable passkeys; "email me a sign-in link" for lost passkeys and Chris's first sign-in; admin = ADMIN_EMAIL; every scope save is a new version | No framework, strict CSP (no inline scripts), one sign-in flow for both roles | Claude Code (proposed) |
 | D28 | 2026-10-22 | CHAT_ENABLED var: off (now), preview (Chris tries it), on (launch); the API answers "fallback: form" until the database, model and secrets all exist | Ship the backend dark; nothing public changes until Chris approves | Claude Code (proposed) |
@@ -76,7 +77,7 @@
 | R08 | Workers assets publish non-site folders (PMO, content/, labs/ source, agent notes) | High | High | Allowlist (D19); CI test; wrangler's upload list checked = 32 site files | Claude Code | Mitigated 2026-10-21 |
 | R09 | New CSP breaks inline scripts or /creative/ embeds | Med | Med | Hashes rebuilt every deploy (D20); 0 violations on 5 pages locally; same headers confirmed on the preview | Claude Code | Mitigated; Chris's by-eye check pending |
 | R10 | Public repo exposes the system prompt and blueprint map | Low | High | Nothing secret in them; blueprints already on the homepage | Chris | Open |
-| R13 | Free plan's account-wide cron trigger limit is already used by other Workers, so the deploy with the retention cron fails | Med | Low | The deploy's CI would show it; move the cron into an existing schedule or upgrade | Claude Code | Open |
+| R13 | Free plan's account-wide cron trigger limit is already used by other Workers, so the deploy with the retention cron fails | Med | Low | Happened 22 Oct (deploy failed at the cron step; site code and domains were already live). Fixed by D31 | Claude Code | Closed |
 | R12 | Cutover takes the site down for a minute or two if wrangler can't take over the DNS records | Low | Med | Quiet time; rollback steps in 02-migrate.md; Pages stays on until checks pass | Chris | Open |
 | R11 | Enabling R2 asks for a card | Low | Med | Charged only above the free tier (10 GB storage, 10M reads a month, free egress); showreel is 0.09 GB | Chris | Open |
 
@@ -125,6 +126,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 9 | Eval rules, personas, runner and workflow; retention started by traffic instead of a cron (D31); deploy applies D1 migrations once bound | evals/*, .github/workflows/evals.yml, worker/test/evals.test.mjs, migrations/0002_job_runs.sql, worker/retention.js, worker/api.js, wrangler.jsonc, deploy-site.yml, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 8 | Retention job (daily cron), scrubber fixes, privacy and cookie drafts | worker/retention.js, worker/privacy.js, worker/index.js, wrangler.jsonc, worker/spec/retention.spec.js, docs/lead-chat/08-privacy-draft.md |
 | 2026-10-22 | 7 | Chat widget, its styles, the config endpoint; script added to 4 pages; hero button opens the chat | scripts/chat.js, styles/chat.css, worker/api.js, worker/headers.js, index.html, privacy/index.html, cookies/index.html, 404.html, docs/lead-chat/07-widget.md |
 | 2026-10-22 | 6 | Portal: passkeys, client and admin views, export and delete, scrubber | portal/*, worker/portal/*, worker/privacy.js, worker/purge.js, worker/api.js, worker/spec/portal.spec.js, worker/spec/softauthn.js, .assetsignore, deploy-site.yml, docs/lead-chat/06-portal.md |

@@ -78,3 +78,18 @@ describe("the scrubber", async () => {
     expect(scrub("I'm Just checking. It's Monday again.")).toBe("I'm Just checking. It's Monday again.");
   });
 });
+
+describe("starting the job without a cron", async () => {
+  const { maybeRunRetention } = await import("../retention.js");
+  const { createExecutionContext, waitOnExecutionContext } = await import("cloudflare:test");
+  it("runs at most every 6 hours, however many requests arrive", async () => {
+    await chat("old", now - 40 * DAY);
+    const ctx = createExecutionContext();
+    const runs = await Promise.all([maybeRunRetention(env, ctx, now), maybeRunRetention(env, ctx, now), maybeRunRetention(env, ctx, now + 1000)]);
+    await waitOnExecutionContext(ctx);
+    expect(runs.filter(Boolean)).toHaveLength(1);
+    expect((await row("old")).anonymised_at).toBe(now);
+    expect(await maybeRunRetention(env, createExecutionContext(), now + 5 * 3600_000)).toBe(false);
+    expect(await maybeRunRetention(env, createExecutionContext(), now + 7 * 3600_000)).toBe(true);
+  });
+});

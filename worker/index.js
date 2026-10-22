@@ -1,7 +1,7 @@
 /**
  * chrisdemetriou.com on Cloudflare Workers. Serves the static site (the repo, filtered by
  * .assetsignore) with security headers, the showreel from R2, and the lead chat API
- * and portal (/api/*, worker/api.js), and runs the daily retention job.
+ * and portal (/api/*, worker/api.js), and starts the retention job.
  */
 import { securityHeaders } from "./headers.js";
 import { serveMedia } from "./media.js";
@@ -36,7 +36,8 @@ export default {
     return res;
   },
 
-  // Daily, from the cron trigger in wrangler.jsonc: the retention job (worker/retention.js).
+  // The retention job, if a cron trigger is ever added (the account's free ones are all in
+  // use, so page views start it instead: maybeRunRetention in worker/retention.js).
   async scheduled(controller, env, ctx) {
     ctx.waitUntil(runRetention(env));
   },
