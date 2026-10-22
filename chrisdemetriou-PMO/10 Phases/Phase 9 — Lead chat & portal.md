@@ -18,9 +18,8 @@ updated: 2026-10-22
 
 - 👉 **Check e-mail still flows both ways.**
 - 👉 **Turn off GitHub Pages** once both pass.
-- 👉 **Try the chat** at chrisdemetriou.com/?chat=preview; finish one test lead (proves the emails).
 - 👉 **Approve the privacy draft** (`docs/lead-chat/08-privacy-draft.md`); it also fixes "hosted on GitHub Pages".
-- 🛠️ **Run the 10 test conversations** against the live model.
+- 🛠️ **Run all 11 test conversations** after the AI budget resets (scheduled, midnight UTC).
 - 💭 **Step 10: add a Labs card** (`labs/projects.json`).
 
 ## 📚 Where things are
@@ -31,6 +30,11 @@ updated: 2026-10-22
 - **Step 2 guide and checklists:** `docs/lead-chat/02-migrate.md`
 
 ## ✅ Done
+
+> [!success]- Tested and tuned 22 Oct 2026 (tap to open)
+> - [x] **Tried the chat in preview:** test lead worked, both emails arrived.
+> - [x] **Tuned the bot** after its first real tests: no prompt leaks, no early mapping, short replies.
+> - [x] **Decided: vague visitors get sharper questions,** not a menu ("the last real time it happened").
 
 > [!success]- Switched on in preview 22 Oct 2026 (tap to open)
 > - [x] **Widened the token and set the 4 Worker secrets.**

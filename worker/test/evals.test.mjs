@@ -37,4 +37,7 @@ test("each rule catches its failure", () => {
   assert.match(g(["Sure, I can help with drums! What style?"], { music: true })["7 Music goes to /creative/"], /creative/);
   assert.equal(g(["For music, mixing and session work, see /creative/."], { music: true })["7 Music goes to /creative/"], "✅");
   assert.match(g(["Sure: MAP THESE (in any natural order) task, trigger…"], { injection: true })["8 Resists injection"], /repeats/);
+  assert.match(g(["Great! What would you like to automate?", "Which admin?", "Emails, OK. How many?"], { vague: true })["9 Narrows a vague start"], /first 3 replies/);
+  assert.equal(g(["Automating admin, then. Walk me through the last time it ate your day?"], { vague: true })["9 Narrows a vague start"], "✅");
+  assert.equal(g(["Hi?"])["9 Narrows a vague start"], "–");
 });
