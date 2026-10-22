@@ -1,6 +1,7 @@
 // The spec's eight rules for the bot, as checks on one conversation (Phase 9, step 9).
 // Each check returns null (pass) or a short reason (fail). "–" means it didn't apply.
 import { BLUEPRINTS, PROOF_LINKS, LEAK_MARKERS } from "../worker/chat/prompt.js";
+import { QUICK_ANSWERS, BRIEF_FIELDS } from "../worker/config.js";
 
 const TOKEN = /\[\[\s*MAPPED\s*\]\]/i;
 export const clean = (r) => r.replace(/\[\[\s*MAPPED\s*\]\]/gi, "").trim();
@@ -85,6 +86,29 @@ export const CHECKS = {
     if (!convo.persona.vague) return "–";
     const asks = /\b(last (real )?time|last week|most recent|recent (example|time)|specific (example|time)|walk me through|the last one|when did that last)\b/i;
     return convo.replies.slice(0, 3).some((r) => asks.test(r)) ? null : "no question about a real, recent instance in the first 3 replies";
+  },
+  // Fact buttons (D35): only on a question about that fact, never on the first reply (that's
+  // the open question about their work), only known sets, and never the options in words.
+  "10 Buttons only for facts": (convo) => {
+    if (!convo.next) return "–";
+    const about = { frequency: /often|frequen|times? (a|per|each) |regular/i, people: /people|who |how many (of you|staff)|team|person/i,
+      hours: /hours?|time|how long/i, spend: /spend|pay|cost|£|subscription|licen[cs]e/i };
+    if (convo.unknownAsks?.length) return `turn ${convo.unknownAsks[0] + 1} names an unknown button set`;
+    for (const [i, key] of (convo.asks || []).entries()) {
+      if (!key) continue;
+      const r = convo.replies[i];
+      if (i === 0) return "buttons on the first reply";
+      if (!r.includes("?") || !about[key].test(r)) return `turn ${i + 1} shows ${key} buttons for "${r.slice(0, 60)}"`;
+      if (QUICK_ANSWERS[key].filter((o) => r.toLowerCase().includes(o.toLowerCase())).length >= 2) return `turn ${i + 1} writes the options out`;
+    }
+    return null;
+  },
+  // The summary card (D35): once mapped, the brief must extract and fill most of its lines.
+  "11 Brief is filled": (convo) => {
+    if (!convo.next || !(convo.mapped || []).some(Boolean)) return "–";
+    if (!convo.brief?.ok) return "the brief couldn't be extracted";
+    const filled = BRIEF_FIELDS.filter(([k]) => String(convo.brief.value[k] || "").trim()).length;
+    return filled >= 5 ? null : `only ${filled} of ${BRIEF_FIELDS.length} brief lines filled`;
   },
 };
 

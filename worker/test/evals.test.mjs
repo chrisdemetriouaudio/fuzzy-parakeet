@@ -40,4 +40,15 @@ test("each rule catches its failure", () => {
   assert.match(g(["Great! What would you like to automate?", "Which admin?", "Emails, OK. How many?"], { vague: true })["9 Narrows a vague start"], /first 3 replies/);
   assert.equal(g(["Automating admin, then. Walk me through the last time it ate your day?"], { vague: true })["9 Narrows a vague start"], "✅");
   assert.equal(g(["Hi?"])["9 Narrows a vague start"], "–");
+  const nx = (replies, asks, extra = {}) => grade({ persona: persona(), replies, asks, next: true, mapped: replies.map(() => false), ...extra });
+  assert.equal(nx(["What eats your week?", "How often does it happen?"], [null, "frequency"])["10 Buttons only for facts"], "✅");
+  assert.match(nx(["What's the task?"], ["hours"])["10 Buttons only for facts"], /first reply/);
+  assert.match(nx(["Hi?", "What goes wrong?"], [null, "hours"])["10 Buttons only for facts"], /hours buttons/);
+  assert.match(nx(["Hi?", "How often: Daily, Weekly or Monthly?"], [null, "frequency"])["10 Buttons only for facts"], /options out/);
+  assert.match(nx(["Hi?", "How often?"], [null, null], { unknownAsks: [1] })["10 Buttons only for facts"], /unknown/);
+  assert.equal(g(["Hi?"])["10 Buttons only for facts"], "–");
+  const full = { task: "a", trigger_frequency: "b", who: "c", time_cost: "d", current_tools: "e", consequence: "", ideal_outcome: "" };
+  assert.equal(nx(["Ok?"], [null], { mapped: [true], brief: { ok: true, value: full } })["11 Brief is filled"], "✅");
+  assert.match(nx(["Ok?"], [null], { mapped: [true], brief: { ok: true, value: { task: "a" } } })["11 Brief is filled"], /only 1 of 7/);
+  assert.match(nx(["Ok?"], [null], { mapped: [true], brief: { ok: false, value: null } })["11 Brief is filled"], /couldn't/);
 });

@@ -1,5 +1,6 @@
-// POST /api/lead: the visitor asked for their written audit. Store their details, extract a
-// pain summary from the chat (one model call), set up their portal account and invite, and
+// POST /api/lead: the visitor asked for their written audit. Store their details, take the
+// brief they confirmed on the summary card (D35) or else extract a pain summary from the chat
+// (one model call), set up their portal account and invite, and
 // email Chris and the visitor (step 5). Contact details only ever come through this form,
 // never from chat text.
 import { MODEL_ID, DAILY_MODEL_CALL_CAP, INVITE_TOKEN_TTL_HOURS } from "../config.js";
@@ -58,15 +59,22 @@ export async function handleLead(request, env, ctx) {
 // The slow part runs after the visitor already has their answer.
 async function afterLead(env, { leadId, chatId, token, lead, proof, origin }) {
   const { results: transcript } = await env.DB.prepare("SELECT role, content FROM messages WHERE chat_id = ?1 ORDER BY id").bind(chatId).all();
-  const summary = await extract(env, transcript);
+  const chat = await env.DB.prepare("SELECT brief_json, brief_raw, brief_confirmed_at, brief_edited FROM chats WHERE id = ?1").bind(chatId).first();
+  const confirmed = Boolean(chat?.brief_confirmed_at && chat.brief_json);
+  const summary = confirmed
+    ? { ok: true, value: JSON.parse(chat.brief_json), raw: chat.brief_raw }
+    : await extract(env, transcript);
+  const briefNote = confirmed ? (chat.brief_edited ? "corrected by the visitor" : "confirmed by the visitor") : "extracted, not shown to the visitor";
   await env.DB.prepare(`INSERT INTO pain_summary (lead_id, ${PAIN_FIELDS.join(", ")}, blueprint_match, confidence, raw_json, needs_review, created_at)
     VALUES (?1, ${PAIN_FIELDS.map((_, i) => `?${i + 2}`).join(", ")}, ?11, ?12, ?13, ?14, ?15)`)
     .bind(leadId, ...PAIN_FIELDS.map((k) => summary.value?.[k] ?? ""), JSON.stringify(summary.value?.blueprint_match ?? []),
       summary.value?.confidence ?? null, summary.raw, summary.ok ? 0 : 1, Date.now()).run();
-  await sendLeadEmails(env, { leadId, lead, summary: summary.value, proof, transcript, inviteUrl: `${origin}/portal/?invite=${token}`, adminUrl: `${origin}/portal/#lead=${leadId}` });
+  // pain_summary has it now: no second copy on the chat.
+  await env.DB.prepare("UPDATE chats SET brief_json = NULL, brief_raw = NULL WHERE id = ?1").bind(chatId).run();
+  await sendLeadEmails(env, { leadId, lead, summary: summary.value, briefNote, proof, transcript, inviteUrl: `${origin}/portal/?invite=${token}`, adminUrl: `${origin}/portal/#lead=${leadId}` });
 }
 
-async function extract(env, transcript) {
+export async function extract(env, transcript) {
   const day = today();
   const usage = await env.DB.prepare("SELECT model_calls FROM usage_daily WHERE date = ?1").bind(day).first();
   if ((usage?.model_calls ?? 0) >= DAILY_MODEL_CALL_CAP + 10) return { ok: false, value: null, raw: "(daily cap: not extracted)" };

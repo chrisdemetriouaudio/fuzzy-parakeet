@@ -46,7 +46,7 @@ export async function runRetention(env, now = Date.now()) {
       .map((m) => ({ id: m.id, clean: scrub(m.content) }))
       .filter((m, i) => m.clean !== messages[i].content)
       .map((m) => env.DB.prepare("UPDATE messages SET content = ?2 WHERE id = ?1").bind(m.id, m.clean));
-    updates.push(env.DB.prepare(`UPDATE chats SET ip_hash = NULL, anonymised_at = ?2,
+    updates.push(env.DB.prepare(`UPDATE chats SET ip_hash = NULL, brief_json = NULL, brief_raw = NULL, anonymised_at = ?2,
       status = CASE WHEN status = 'open' THEN 'abandoned' ELSE status END WHERE id = ?1`).bind(id, now));
     await env.DB.batch(updates);
     counts.chats++;

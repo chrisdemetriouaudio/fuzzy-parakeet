@@ -60,6 +60,27 @@
 .chat-opt{ font-weight: 400; color: var(--ink-muted); }
 .chat-vh{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+/* Fact buttons (D35): tap an answer, or type your own. */
+.chat-quick{ display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.chat-chip{ min-height: 44px; padding: 8px 14px; font: inherit; font-size: 16px; font-weight: 700; color: var(--ink); background: var(--surface);
+  border: 2px solid var(--edge); border-radius: 999px; cursor: pointer; }
+.chat-chip:hover{ border-color: var(--accent); }
+.chat-quick-hint{ flex-basis: 100%; margin: 2px 0 0; font-size: 15px; color: var(--ink-muted); }
+
+/* The summary card (D35): the brief, confirmed or corrected before the contact form. */
+.chat-brief{ margin: 4px 0 12px; padding: 12px 14px; background: var(--surface); border: 2px solid var(--edge); border-radius: 14px; }
+.chat-brief h3{ margin: 0 0 6px; padding: 0; border: 0; font-family: var(--head, inherit); font-weight: 800; font-size: 1.1rem; color: var(--ink); }
+.chat-brief p{ margin: 0 0 10px; }
+.chat-brief dl{ margin: 0 0 10px; }
+.chat-brief dt{ font-weight: 700; font-size: 15px; color: var(--ink-muted); }
+.chat-brief dd{ margin: 0 0 8px; }
+.chat-brief-actions{ display: flex; flex-wrap: wrap; gap: 8px; }
+.chat-ghost{ min-height: 48px; padding: 8px 16px; font: inherit; font-weight: 700; color: var(--ink); background: transparent; border: 2px solid var(--edge);
+  border-radius: 12px; cursor: pointer; }
+.chat-ghost:hover{ background: var(--bg); }
+.chat-ghost[disabled], .chat-chip[disabled]{ opacity: .6; cursor: wait; }
+.chat-brief-ok{ font-weight: 700; }
+
 /* Phones: a full-screen sheet. */
 @media (max-width: 640px){
   .chat-panel{ inset: 0; width: auto; height: auto; max-height: none; border: 0; border-radius: 0; box-shadow: none; }
