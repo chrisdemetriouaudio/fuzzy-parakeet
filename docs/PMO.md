@@ -13,13 +13,13 @@
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
 | 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Cutover done 22 Oct: chrisdemetriou.com and www on the Worker; full parity passes on the apex (22 Oct, 15:17 UTC). **Chris:** check mail both ways, then turn off GitHub Pages. |
-| 3 | D1 schema + config | Awaiting Chris | 2026-10-22 | | Schema, config and Infra workflow built ([03-04-chat-api.md](lead-chat/03-04-chat-api.md)). **Chris:** widen the token (D1, Turnstile, Workers AI); then Claude creates the database. |
-| 4 | Chat API | Awaiting Chris | 2026-10-22 | | /api/chat and /api/lead built and tested (19 Worker tests); switched off. **Chris:** set the 4 Worker secrets (I10). |
-| 5 | Email (Resend) | In progress | 2026-10-22 | | Plain-text lead emails built (worker/email.js). Resend DNS already in place. **Chris:** RESEND_API_KEY as a Worker secret. |
+| 3 | D1 schema + config | Done | 2026-10-22 | 2026-10-22 | Database chrisdemetriou-leads created by Infra (Western Europe) and bound as DB; the deploy applies migrations/ before each release. |
+| 4 | Chat API | Done | 2026-10-22 | 2026-10-22 | /api/chat and /api/lead live in preview (CHAT_ENABLED=preview, D28): secrets, database and model all in place. |
+| 5 | Email (Resend) | Awaiting Chris | 2026-10-22 | | RESEND_API_KEY set. **Chris:** try the chat at chrisdemetriou.com/?chat=preview and finish one test lead; both emails arriving proves Resend. |
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
-| 9 | Tests + conversation evals | Awaiting Chris | 2026-10-22 | | 46 automated tests in CI; eval runner + 10 personas + workflow built ([09-evals.md](lead-chat/09-evals.md)). **Chris:** add "Workers AI: Read" to the token, then Claude runs the evals. |
+| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 46 automated tests in CI; Claude runs the 10-persona evals now the token has Workers AI ([09-evals.md](lead-chat/09-evals.md)). |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---
@@ -100,7 +100,7 @@
 | I06 | After the move, merging to main no longer publishes the site by itself | Chris | Closed 2026-10-21 by D24 |
 | I08 | Outage: the apex served an empty 404 from about 23:49 21 Oct to 11:15 22 Oct (UK). An old Workers Route chrisdemetriou.com/* (Worker chrisdemetriou-v2, Aug 2026) took over once the apex ran through Cloudflare | Chris | Closed 2026-10-22: route removed. Lesson: list the zone's Workers Routes before a cutover (added to 02-migrate.md) |
 | I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
-| I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Open: Chris sets them with wrangler (03-04-chat-api.md), or allows Claude to |
+| I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Closed 2026-10-22: Chris set all 4 with wrangler; Infra status lists them |
 | I13 | A failed D1 call made wrangler print Chris's Cloudflare login email in a public Actions log | Claude Code | Closed 2026-10-22: that log deleted; deploy and Infra now hide email addresses and run bash with pipefail |
 | I12 | The live privacy notice still says the site is hosted on GitHub Pages (Cloudflare since 22 Oct) | Chris | Open: approve the fix in 08-privacy-draft.md |
 | I11 | Data export leaves out blueprint_match (spec), but UK GDPR access can cover inferences | Chris | Open: keep it out or include it? |
@@ -112,10 +112,11 @@
 | X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Done (already in place) |
 | X02 | GoDaddy nameserver change | Chris | Closed 2026-10-21: not needed (D17) |
 | X03 | Resend account + domain verification | Chris | DNS records already in place (send. MX and SPF, resend._domainkey); check the domain shows Verified in Resend in Phase 5 |
-| X04 | Turnstile site key | Chris | Done 2026-10-22: reusing the existing "Chris Demetriou contact form" widget (site key in wrangler.jsonc); its secret still to set (I10) |
-| X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | ADMIN_EMAIL set in wrangler.jsonc; secrets open (I10) |
+| X04 | Turnstile site key | Chris | Done 2026-10-22: reusing the existing "Chris Demetriou contact form" widget; TURNSTILE_SECRET set |
+| X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Done 2026-10-22: ADMIN_EMAIL in wrangler.jsonc; 4 secrets set |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
 | X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Done 2026-10-21; test run green (tests, deploy, parity) |
+| X08 | Token widened (D1 Edit, Workers AI Read) and D1 database created | Chris, Claude | Done 2026-10-22: chrisdemetriou-leads (Western Europe); model check OK |
 
 ---
 
@@ -127,6 +128,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 3–5 | D1 database created via Infra; DB and AI bound; chat switched to preview | wrangler.jsonc, docs/PMO.md, vault |
 | 2026-10-22 | 9 | Workflow logs hide email addresses; Turnstile site key added (existing widget) | .github/workflows/deploy-site.yml, infra.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
 | 2026-10-22 | 9 | Eval rules, personas, runner and workflow; retention started by traffic instead of a cron (D31); deploy applies D1 migrations once bound | evals/*, .github/workflows/evals.yml, worker/test/evals.test.mjs, migrations/0002_job_runs.sql, worker/retention.js, worker/api.js, wrangler.jsonc, deploy-site.yml, docs/lead-chat/09-evals.md |
 | 2026-10-22 | 8 | Retention job (daily cron), scrubber fixes, privacy and cookie drafts | worker/retention.js, worker/privacy.js, worker/index.js, wrangler.jsonc, worker/spec/retention.spec.js, docs/lead-chat/08-privacy-draft.md |
