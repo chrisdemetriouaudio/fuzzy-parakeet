@@ -13,9 +13,9 @@
 |---|---|---|---|---|---|
 | 1 | Recon | Done | 2026-10-21 | 2026-10-21 | Report: [lead-chat/01-recon.md](lead-chat/01-recon.md). Hosting conflict settled by D16. |
 | 2 | Migrate to Workers static assets + DNS checklist | Awaiting Chris | 2026-10-21 | | Cutover done 22 Oct: chrisdemetriou.com and www on the Worker; full parity passes on the apex (22 Oct, 15:17 UTC). **Chris:** check mail both ways, then turn off GitHub Pages. |
-| 3 | D1 schema + config | Not started | | | |
-| 4 | Chat API | Not started | | | |
-| 5 | Email (Resend) | Not started | | | |
+| 3 | D1 schema + config | Awaiting Chris | 2026-10-22 | | Schema, config and Infra workflow built ([03-04-chat-api.md](lead-chat/03-04-chat-api.md)). **Chris:** widen the token (D1, Turnstile, Workers AI); then Claude creates the database. |
+| 4 | Chat API | Awaiting Chris | 2026-10-22 | | /api/chat and /api/lead built and tested (19 Worker tests); switched off. **Chris:** set the 4 Worker secrets (I10). |
+| 5 | Email (Resend) | In progress | 2026-10-22 | | Plain-text lead emails built (worker/email.js). Resend DNS already in place. **Chris:** RESEND_API_KEY as a Worker secret. |
 | 6 | Portal (client + admin) | Not started | | | |
 | 7 | Widget front end | Not started | | | |
 | 8 | Retention cron + privacy page | Not started | | | |
@@ -43,6 +43,8 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D28 | 2026-10-22 | CHAT_ENABLED var: off (now), preview (Chris tries it), on (launch); the API answers "fallback: form" until the database, model and secrets all exist | Ship the backend dark; nothing public changes until Chris approves | Claude Code (proposed) |
+| D27 | 2026-10-22 | Schema changes from the spec: chats (not sessions_chat), leads.user_id (not users.lead_id), new ip_usage and auth_challenges tables, from_stage/to_stage | Clearer names; returning clients see all their leads; per-IP cap needs a counter; single-use passkey challenges stop replays | Claude Code (proposed) |
 | D26 | 2026-10-22 | Autopilot for steps 3–10: Claude merges its own PRs when tests and live parity are green, makes Cloudflare changes (D1, Turnstile, Worker secrets) through GitHub Actions with Chris's token, and runs phases back to back; stops only when blocked. Human-only steps go to Chris as one batched list. The chat stays switched off until Chris approves the privacy text and tests a passkey | Manual copy-paste was slowing the build; the deploy pipeline makes it safe. Supersedes the spec's "STOP after each phase" and "never touch secrets" (secrets are generated or copied inside Actions, never shown) | Chris |
 | D25 | 2026-10-22 | Allow all crawlers, AI training ones included, as before the cutover: Cloudflare "Block AI bots" and managed robots.txt off; the repo's robots.txt is the only rule | Matches what GitHub Pages served and the site's own robots.txt; being found in AI answers (Phase 8). Answers Phase 8's crawler question | Chris |
 | D24 | 2026-10-21 | A GitHub Action deploys the site on every website change to main: tests, `wrangler deploy`, then the parity check on the live address | Merge = live, as on GitHub Pages; nothing to remember; a failed check emails Chris | Chris |
@@ -94,6 +96,7 @@
 | I06 | After the move, merging to main no longer publishes the site by itself | Chris | Closed 2026-10-21 by D24 |
 | I08 | Outage: the apex served an empty 404 from about 23:49 21 Oct to 11:15 22 Oct (UK). An old Workers Route chrisdemetriou.com/* (Worker chrisdemetriou-v2, Aug 2026) took over once the apex ran through Cloudflare | Chris | Closed 2026-10-22: route removed. Lesson: list the zone's Workers Routes before a cutover (added to 02-migrate.md) |
 | I09 | Zone AI-bot settings now apply to the apex: GPTBot and ClaudeBot got 403, and Cloudflare prepends its own robots.txt that disallows them | Chris | Closed 2026-10-22: Training, Search and Agent set to Allow, Bot Preference Sync off; GPTBot and ClaudeBot get 200, robots.txt matches the repo |
+| I10 | Claude's safety check blocks it from writing code that sets Worker secrets (SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY) | Chris | Open: Chris sets them with wrangler (03-04-chat-api.md), or allows Claude to |
 | I07 | Chris's Mac couldn't find preview.chrisdemetriou.com: NordVPN's DNS cached "not found" | Chris | Closed 2026-10-21: NordVPN off (or Custom DNS 1.1.1.1) during the cutover |
 
 ### Dependencies
@@ -102,8 +105,8 @@
 | X01 | Cloudflare account + zone for chrisdemetriou.com | Chris | Done (already in place) |
 | X02 | GoDaddy nameserver change | Chris | Closed 2026-10-21: not needed (D17) |
 | X03 | Resend account + domain verification | Chris | DNS records already in place (send. MX and SPF, resend._domainkey); check the domain shows Verified in Resend in Phase 5 |
-| X04 | Turnstile site key | Chris | Open |
-| X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | Open |
+| X04 | Turnstile site key | Chris | Open: create the widget (03-04-chat-api.md); the site key is public, paste it to Claude |
+| X05 | ADMIN_EMAIL and secrets set via wrangler | Chris | ADMIN_EMAIL set in wrangler.jsonc; secrets open (I10) |
 | X06 | R2 bucket created and showreel uploaded | Chris | Done 2026-10-21 (bucket chrisdemetriou-media, Western Europe) |
 | X07 | GitHub secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the auto-deploy | Chris | Done 2026-10-21; test run green (tests, deploy, parity) |
 
@@ -117,6 +120,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 3–5 | D1 schema, config, Infra workflow, /api/chat, /api/lead, Resend emails, 19 Worker tests (vitest) in CI; chat off | migrations/0001_init.sql, worker/config.js, worker/api.js, worker/chat/*, worker/lib/*, worker/email.js, worker/spec/*, vitest.config.mjs, .github/workflows/infra.yml, site-check.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
 | 2026-10-22 | 2 | Cutover: Chris deleted the 5 GitHub Pages records and deployed; chrisdemetriou.com and www on the Worker; old route removed after the outage (I08); crawler policy D25 | docs/PMO.md, docs/lead-chat/02-migrate.md, vault |
 | 2026-10-21 | 2 | Cutover PR prepared: routes → chrisdemetriou.com + www; AGENTS.md describes the Worker | wrangler.jsonc, AGENTS.md, docs/lead-chat/02-migrate.md, docs/PMO.md, vault |
 | 2026-10-21 | 2 | Secrets added by Chris; manual Deploy site run green; Chris checked the preview by eye | — |
