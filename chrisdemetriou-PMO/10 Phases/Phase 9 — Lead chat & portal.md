@@ -19,7 +19,6 @@ updated: 2026-10-22
 - 👉 **Check e-mail still flows both ways.**
 - 👉 **Turn off GitHub Pages** once both pass.
 - 🛠️ **Run all 11 test conversations,** live and with buttons, after the AI budget resets (midnight UTC).
-- 👉 **Try the buttons and summary card** at chrisdemetriou.com/?chat=preview, then say "switch it on".
 - 💭 **Step 10: add a Labs card** (`labs/projects.json`).
 
 ## 📚 Where things are
@@ -32,6 +31,7 @@ updated: 2026-10-22
 ## ✅ Done
 
 > [!success]- Buttons and summary card built 22 Oct 2026 (tap to open)
+> - [x] **Switched them on for every visitor** after trying them in preview.
 > - [x] **Decided: zero in with fact buttons and a confirm-or-correct brief** (no menu).
 > - [x] **Built them behind a preview switch;** visitors keep today's chat until you say.
 > - [x] **Checked in a real browser:** 23 checks, keyboard and screen reader, phone, dark mode.
