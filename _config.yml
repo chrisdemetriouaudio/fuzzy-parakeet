@@ -15,6 +15,7 @@ exclude:
   - worker/
   - wrangler.jsonc
   - migrations/
+  - evals/
   - vitest.config.mjs
   - AGENTS.md
   - CLAUDE.md

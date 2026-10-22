@@ -66,3 +66,5 @@ labs/public/*/index.html
 worker/csp-hashes.js
 # Local Worker secrets for wrangler dev: never commit
 .dev.vars
+# Conversation eval output (evals/run.mjs)
+evals/results.md

@@ -32,6 +32,7 @@ on:
       - "icon-512.png"
       - "og-image.jpg"
       - "worker/**"
+      - "migrations/**"
       - "wrangler.jsonc"
       - ".assetsignore"
       - "package.json"
@@ -66,6 +67,9 @@ jobs:
       - name: Test
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         run: npm test
+      - name: Apply database migrations (once the D1 database is bound)
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: if grep -q '"d1_databases"' wrangler.jsonc; then npx wrangler d1 migrations apply DB --remote; else echo "No D1 binding yet."; fi
       - name: Deploy
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         run: npx wrangler deploy

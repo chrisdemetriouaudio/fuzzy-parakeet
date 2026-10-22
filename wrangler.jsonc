@@ -22,8 +22,6 @@
   "build": { "command": "node worker/build.mjs" },
   // The lead chat (Phase 9). "off" until Chris approves; "preview" lets him try it first.
   // Secrets (wrangler secret put): SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY.
-  // The retention job, daily at 03:17 UTC (worker/retention.js).
-  "triggers": { "crons": ["17 3 * * *"] },
   "vars": {
     "CHAT_ENABLED": "off",
     "ADMIN_EMAIL": "hello@chrisdemetriou.com"

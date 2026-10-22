@@ -4,6 +4,7 @@
 import { json, sameOrigin } from "./lib/http.js";
 import { handleChat } from "./chat/chat.js";
 import { OPENING } from "./chat/prompt.js";
+import { maybeRunRetention } from "./retention.js";
 import { handleLead } from "./chat/lead.js";
 import { registerOptions, registerVerify, loginOptions, loginVerify, emailLink, logout } from "./portal/auth.js";
 import { currentUser, csrfOk } from "./portal/session.js";
@@ -45,7 +46,11 @@ export async function handleApi(request, env, ctx, url) {
   const post = request.method === "POST";
   if (post && !sameOrigin(request)) return json({ error: "origin" }, 403);
 
-  if (path === "/api/chat/config") return request.method === "GET" ? chatConfig(env) : json({ error: "method" }, 405, { allow: "GET" });
+  if (path === "/api/chat/config") {
+    if (request.method !== "GET") return json({ error: "method" }, 405, { allow: "GET" });
+    await maybeRunRetention(env, ctx);   // page views keep the retention job going (no cron)
+    return chatConfig(env);
+  }
 
   if (CHAT[path]) {
     if (!post) return json({ error: "method" }, 405, { allow: "POST" });
