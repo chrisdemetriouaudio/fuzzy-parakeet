@@ -1,0 +1,73 @@
+/* The client portal, in the site's "Your week" look (tokens from /styles/page.css and
+   /styles/display.css, so light, dark, high contrast and the Display panel all apply). */
+.portal{ padding-bottom: 12px; }
+.portal h1{ margin-bottom: 14px; }
+.portal h2{ margin-top: 36px; }
+.portal-status{ min-height: 1.4em; margin: 16px 0 0; font-weight: 700; color: var(--ink); }
+.portal-status.error{ color: var(--error, var(--accent)); }
+
+.pbtn{ display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 20px;
+  font: inherit; font-weight: 700; font-size: 17px; color: var(--accent-ink); background: var(--accent); border: 2px solid var(--edge);
+  border-radius: 12px; box-shadow: 3px 3px 0 var(--btn-shadow); cursor: pointer; text-decoration: none; }
+.pbtn:hover{ background: var(--accent-hover); }
+.pbtn:active{ transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--btn-shadow); }
+.pbtn[disabled]{ opacity: .6; cursor: wait; }
+.pbtn.quiet{ color: var(--ink); background: var(--surface); }
+.pbtn.quiet:hover{ background: var(--hover); }
+.pbtn.danger{ color: var(--ink); background: var(--surface); border-color: var(--error, var(--accent)); }
+.prow{ display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 18px 0; }
+
+.pcard{ margin: 0 0 16px; padding: 18px 20px; background: var(--surface); border: 2px solid var(--border); border-radius: 14px; }
+a.pcard{ display: block; color: var(--ink); text-decoration: none; }
+a.pcard:hover{ border-color: var(--edge); }
+.pcard h3{ margin: 0 0 6px; font-family: var(--head); font-size: 1.15rem; color: var(--ink); }
+.pcard p{ margin: 0; }
+
+.pfield{ margin: 0 0 16px; }
+.pfield label{ display: block; margin: 0 0 6px; font-weight: 700; color: var(--ink); }
+.pfield .hint{ margin: -2px 0 8px; font-size: 15px; }
+.pfield input, .pfield textarea, .pfield select{ width: 100%; min-height: 48px; padding: 10px 12px; font: inherit; font-size: 17px; color: var(--ink);
+  background: var(--bg); border: 2px solid var(--border-strong); border-radius: 10px; }
+.pfield textarea{ min-height: 220px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 15px; line-height: 1.5; }
+.pfield input:focus-visible, .pfield textarea:focus-visible, .pfield select:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.chip{ display: inline-block; padding: 2px 10px; font-weight: 700; font-size: 14px; color: var(--blk-ink, #1E1915); background: var(--c2, #FFD166);
+  border: 2px solid var(--edge); border-radius: 999px; white-space: nowrap; }
+.chip.flag{ background: var(--c1, #F7B7A3); }
+
+.timeline{ display: flex; flex-wrap: wrap; gap: 6px 0; margin: 8px 0 24px; padding: 0; list-style: none; counter-reset: st; }
+.timeline li{ display: flex; align-items: center; margin: 0; font-size: 15px; font-weight: 700; color: var(--ink-muted); }
+.timeline li::before{ counter-increment: st; content: counter(st); display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 6px;
+  border: 2px solid var(--border); border-radius: 50%; font-size: 13px; }
+.timeline li + li::after{ content: none; }
+.timeline li:not(:last-child){ margin-right: 10px; padding-right: 10px; border-right: 2px dashed var(--border); }
+.timeline .done{ color: var(--ink); }
+.timeline .done::before{ content: "✓"; color: var(--blk-ink, #1E1915); background: var(--done-line, #7FDDB4); border-color: var(--edge); }
+.timeline .now{ color: var(--ink); }
+.timeline .now::before{ color: var(--accent-ink); background: var(--accent); border-color: var(--edge); }
+
+.doc{ padding: 20px 22px; background: var(--surface); border: 2px solid var(--border); border-radius: 14px; }
+.doc :first-child{ margin-top: 0; }
+.doc h2, .doc h3, .doc h4{ margin: 22px 0 8px; padding: 0; border: 0; font-family: var(--head); color: var(--ink); }
+.doc pre{ overflow-x: auto; padding: 12px; background: var(--bg); border-radius: 8px; }
+.doc blockquote{ margin: 0 0 14px; padding-left: 14px; border-left: 4px solid var(--accent); }
+.price{ font-family: var(--head); font-weight: 800; font-size: 2rem; color: var(--ink); }
+
+.transcript{ margin: 0; }
+.transcript dt{ margin: 14px 0 2px; font-weight: 700; font-size: 14px; color: var(--ink-muted); }
+.transcript dd{ margin: 0; color: var(--ink); white-space: pre-wrap; }
+details.pbox{ margin: 0 0 16px; padding: 12px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: 14px; }
+details.pbox > summary{ cursor: pointer; font-weight: 700; color: var(--ink); min-height: 32px; }
+
+.ptable{ width: 100%; }
+.ptable td:first-child{ white-space: normal; }
+.ptable a{ font-weight: 700; }
+.stats{ display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 0 0 24px; }
+.stats div{ padding: 12px 14px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; }
+.stats b{ display: block; font-family: var(--head); font-size: 1.6rem; color: var(--ink); }
+.stats span{ font-size: 14px; color: var(--ink-muted); }
+.editor{ display: grid; gap: 16px; }
+@media (min-width: 900px){ .portal.wide{ max-width: 1100px; } .editor{ grid-template-columns: 1fr 1fr; } }
+.narrow{ max-width: 280px; }
+/* Headings get focus when a view changes (for screen readers); no ring needed for that. */
+.portal [tabindex="-1"]:focus{ outline: none; }

@@ -15,6 +15,7 @@ on:
       - "creative/**"
       - "privacy/**"
       - "cookies/**"
+      - "portal/**"
       - "work/**"
       - "resources/**"
       - "styles/**"
