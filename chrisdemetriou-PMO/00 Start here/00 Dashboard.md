@@ -11,12 +11,12 @@ updated: 2026-10-22
 > **Live status, updated by itself:** [[Live status]]
 > **Homepage rebuilt tech-first** (18 Oct 2026): web developer first, music and media as the roots.
 > **Checked against the live system:** 18 Oct 2026 (before the rebuild)
-> **Lead chat and portal started** (21 Oct 2026): [[Phase 9 — Lead chat & portal]].
+> **The lead chat is live** (22 Oct 2026): every page except Creative. [[Phase 9 — Lead chat & portal]].
 > New here? Read [[How this vault works]] (1 minute).
 
 ## 👉 Your actions
 
-- 👉 **Phase 9:** check mail; turn off GitHub Pages; approve the privacy draft, then the chat goes live; [[Phase 9 — Lead chat & portal]].
+- 👉 **Phase 9:** check mail both ways; turn off GitHub Pages; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.

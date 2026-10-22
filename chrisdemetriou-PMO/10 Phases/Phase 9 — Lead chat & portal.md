@@ -10,7 +10,7 @@ updated: 2026-10-22
 > [!info] At a glance
 > **What:** an AI chat on every page that helps a visitor describe one costly task, then turns it into a written audit request. Plus a passkey portal (sign-in with Face ID or a fingerprint, no password) where clients see their audit, scope and fixed price.
 > **When:** 20 Oct 2026 onwards.
-> **Status:** 👉 The chat is live in preview (22 Oct 2026): only you see it, at chrisdemetriou.com/?chat=preview.
+> **Status:** ✅ The chat is live for every visitor (22 Oct 2026). Privacy notice updated.
 > **Steps:** match Phases 1 to 10 in the spec. Say "next" to move on.
 > **Back to:** [[00 Dashboard]]
 
@@ -18,7 +18,6 @@ updated: 2026-10-22
 
 - 👉 **Check e-mail still flows both ways.**
 - 👉 **Turn off GitHub Pages** once both pass.
-- 👉 **Approve the privacy draft** (`docs/lead-chat/08-privacy-draft.md`); it also fixes "hosted on GitHub Pages".
 - 🛠️ **Run all 11 test conversations** after the AI budget resets (scheduled, midnight UTC).
 - 💭 **Step 10: add a Labs card** (`labs/projects.json`).
 
@@ -30,6 +29,10 @@ updated: 2026-10-22
 - **Step 2 guide and checklists:** `docs/lead-chat/02-migrate.md`
 
 ## ✅ Done
+
+> [!success]- Launched 22 Oct 2026 (tap to open)
+> - [x] **Approved the privacy and cookie text;** it's live and says Cloudflare, not GitHub Pages.
+> - [x] **Switched the chat on** for every visitor.
 
 > [!success]- Tested and tuned 22 Oct 2026 (tap to open)
 > - [x] **Tried the chat in preview:** test lead worked, both emails arrived.

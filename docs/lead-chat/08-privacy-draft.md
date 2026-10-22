@@ -4,7 +4,7 @@ Status: [../PMO.md](../PMO.md).
 
 ## The retention job (built)
 
-`worker/retention.js` runs every day at 03:17 UTC (the cron trigger in `wrangler.jsonc`). It logs counts only.
+`worker/retention.js` is started by site traffic (the widget's config request), at most every 6 hours and one run at a time (D31; no cron). It logs counts only.
 
 1. **Chats that never became an audit request:** after 30 quiet days, contact details and introduced names are scrubbed from the messages and the IP hash is deleted. The anonymised chat is kept.
 2. **Audit requests that never became work:** after 12 quiet months, name, email and organisation are deleted and scrubbed out of the chat, summary, audit and scope. The portal account goes too. Requests that were accepted, are being built or are live are kept as business records.
@@ -15,9 +15,17 @@ Status: [../PMO.md](../PMO.md).
 
 ---
 
-## 🔴 Fix now, before the chat: the live notice is out of date
+## ✅ Approved and live: 22 Oct 2026 (D34)
 
-The privacy notice still says the site is **hosted on GitHub Pages**. Since 22 Oct 2026 it's **Cloudflare**. That line should change now, whatever happens with the chat.
+Chris approved the draft below with these answers to its **(check)** lines:
+
+1. **AI training:** kept. Cloudflare's Workers AI privacy page says customer content isn't used to train models.
+2. **Transfers:** kept the general wording.
+3. **Turnstile:** softened to "Cloudflare says it isn't used to track you" (no-cookies couldn't be confirmed in Cloudflare's own addendum).
+4. **Business records:** 6 years after the work ends (covers HMRC's rules for a sole trader).
+5. **Contact address:** stays **privacy@chrisdemetriou.com**, matching the notice's existing Contact section. (The recommendation said hello@ on the mistaken belief privacy@ didn't exist; the live notice has used privacy@ since before this build.)
+
+The "hosted on GitHub Pages" line is fixed (Cloudflare). Below is the draft as reviewed.
 
 ---
 
