@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-22
-changed: 22 Oct 2026, 17:15 (UK time)
+changed: 22 Oct 2026, 17:16 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 22 Oct 2026, 17:15 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `fff17de` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `cfe25fa` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 22 Oct 2026, 17:15 (UK time)
 - 22 Oct 2026 · `4845c97` · docs(pmo): D26, lead chat build runs on autopilot
 - 22 Oct 2026 · `5a48521` · docs(pmo): AI crawlers allowed again; full parity passes on the apex
 - 22 Oct 2026 · `5215c62` · docs(pmo): log the cutover, the overnight outage and the crawler decision
-- 21 Oct 2026 · `ecd9e29` · feat(site): cutover routes, chrisdemetriou.com and www on the Worker
