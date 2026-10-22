@@ -19,7 +19,7 @@
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Awaiting Chris | 2026-10-22 | | Daily job built and tested (34 Worker tests); privacy and cookie drafts in [08-privacy-draft.md](lead-chat/08-privacy-draft.md). **Chris:** approve or change the draft (4 lines marked "check"), and the hosting fix. |
-| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 checks failed; prompt, Worker and grader tuned (D32); run 2 next ([09-evals.md](lead-chat/09-evals.md)). |
+| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 failed; tuned (D32); run 2 (the 6 that failed): all pass, leak guard caught the injection. Full 10-persona run after midnight UTC ([09-evals.md](lead-chat/09-evals.md)). |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---

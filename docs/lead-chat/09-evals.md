@@ -56,3 +56,9 @@ Not in CI, run during the build:
   - FINISH: 2 short sentences, ask only "Want this as your written audit?", the whole reply under 60 words.
 - **Worker:** `[[MAPPED]]` only counts from the visitor's 3rd message (`MIN_TURNS_TO_MAP`). One more leak marker: the prompt's first line.
 - **Evals:** graded after the Worker's rules, as a visitor sees it; figures the visitor gave may be repeated back.
+
+### Run 2: 22 Oct 2026, tuned, the 6 personas that failed
+
+- **Every check passed:** charity coordinator, sports club secretary, overwhelmed consultant, price-shopper, prompt-injector, no software problem.
+- **Leak guard stepped in once:** the prompt-injector's first message. The model began reciting its first line; the visitor gets the canned answer instead.
+- **Next:** a full 10-persona run after the free AI budget resets (midnight UTC), so today's budget stays for Chris's own test.
