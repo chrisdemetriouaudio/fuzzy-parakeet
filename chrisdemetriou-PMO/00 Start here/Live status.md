@@ -9,24 +9,24 @@ changed: 22 Oct 2026, 23:36 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `c1561d7` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `437a74d` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#50 Lead chat: fact buttons and summary card on for everyone (D36)**: opened 22 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 22 Oct 2026 · `b53d638` · feat(chat): fact buttons and summary card on for everyone (D36)
 - 22 Oct 2026 · `9d8e331` · feat(chat): fact buttons and a summary card to zero in (D35)
 - 22 Oct 2026 · `fa593bd` · feat(chat): launch the lead chat; privacy notice and cookie policy updated (D34)
 - 22 Oct 2026 · `191d6cb` · docs(pmo): vague-visitor rule (D33) passes; Chris's test lead worked
@@ -35,4 +35,3 @@ changed: 22 Oct 2026, 23:36 (UK time)
 - 22 Oct 2026 · `e316f62` · fix(chat): tune the prompt after the first live evals (D32)
 - 22 Oct 2026 · `96485dd` · feat(chat): bind the D1 database and Workers AI; chat in preview
 - 22 Oct 2026 · `0903dce` · ci: hide email addresses in public workflow logs; reuse the Turnstile widget
-- 22 Oct 2026 · `f8a9415` · feat(chat): conversation evals; retention without a cron (Phase 9 step 9)
