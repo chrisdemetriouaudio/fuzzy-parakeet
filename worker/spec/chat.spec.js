@@ -49,28 +49,41 @@ describe("POST /api/chat", () => {
     expect(JSON.parse(text).error).toBe("turnstile");
   });
 
-  it("streams the reply, strips [[MAPPED]] and marks the chat mapped", async () => {
+  it("streams the reply, strips [[MAPPED]] and marks the chat mapped (from the 3rd message)", async () => {
     mockOutbound(vi);
-    const ai = fakeAI(["So every Friday someone ", "chases invoices. Want this as your written audit? [[", "MAPPED]]"]);
+    const ai = fakeAI(["Every Friday, then?"], ["How long does it take?"],
+      ["So every Friday someone ", "chases invoices. Want this as your written audit? [[", "MAPPED]]"]);
     const e = testEnv({ AI: ai });
     const { res, events, cookie } = await startChat(e);
     expect(res.headers.get("content-type")).toContain("text/event-stream");
     expect(cookie).toMatch(/^__Host-cd_chat=/);
     expect(res.headers.get("set-cookie")).toMatch(/HttpOnly; SameSite=Strict/);
-    const text = events.filter((x) => x.t).map((x) => x.t).join("");
+    expect(events.at(-1)).toEqual({ done: true, mapped: false });
+    await call(post("/api/chat", { message: "Yes, every Friday." }, { cookie }), e);
+    const third = await call(post("/api/chat", { message: "About 4 hours." }, { cookie }), e);
+    const text = third.events.filter((x) => x.t).map((x) => x.t).join("");
     expect(text).toBe("So every Friday someone chases invoices. Want this as your written audit? ");
-    expect(events.at(-1)).toEqual({ done: true, mapped: true });
+    expect(third.events.at(-1)).toEqual({ done: true, mapped: true });
 
     const chat = await env.DB.prepare("SELECT * FROM chats ORDER BY created_at DESC LIMIT 1").first();
     expect(chat.status).toBe("mapped");
-    expect(chat.turn_count).toBe(1);
+    expect(chat.turn_count).toBe(3);
     expect(chat.ip_hash).toMatch(/^[0-9a-f]{64}$/);
     const msgs = (await env.DB.prepare("SELECT role, content FROM messages WHERE chat_id = ?1 ORDER BY id").bind(chat.id).all()).results;
-    expect(msgs.map((m) => m.role)).toEqual(["assistant", "user", "assistant"]);
-    expect(msgs[2].content).not.toContain("MAPPED");
+    expect(msgs.map((m) => m.role)).toEqual(["assistant", "user", "assistant", "user", "assistant", "user", "assistant"]);
+    expect(msgs.at(-1).content).not.toContain("MAPPED");
     const usage = await env.DB.prepare("SELECT * FROM usage_daily WHERE date = ?1").bind(day).first();
-    expect(usage.model_calls).toBe(1);
+    expect(usage.model_calls).toBe(3);
     expect(usage.chats_started).toBe(1);
+  });
+
+  it("ignores [[MAPPED]] before the visitor's 3rd message", async () => {
+    mockOutbound(vi);
+    const { events } = await startChat(testEnv({ AI: fakeAI(["That's a people problem. Want this as your written audit? [[MAPPED]]"]) }));
+    expect(events.at(-1)).toEqual({ done: true, mapped: false });
+    expect(events.filter((x) => x.t).map((x) => x.t).join("")).not.toContain("MAPPED");
+    const chat = await env.DB.prepare("SELECT status FROM chats ORDER BY created_at DESC LIMIT 1").first();
+    expect(chat.status).toBe("open");
   });
 
   it("sends the visitor's words as data, without the control token, and the system prompt first", async () => {

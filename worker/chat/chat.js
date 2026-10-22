@@ -4,8 +4,8 @@
 // the answer is {"fallback":"form"} and the widget shows the audit form instead.
 import { MODEL_ID, DAILY_MODEL_CALL_CAP, PER_IP_DAILY_MSGS, MAX_TURNS_PER_CHAT, MAX_INPUT_CHARS,
   MAX_REPLY_TOKENS, CHAT_COOKIE_TTL_HOURS } from "../config.js";
-import { SYSTEM_PROMPT, OPENING, PROOF_LINKS, LEAK_MARKERS, LEAK_REPLY, asVisitorData } from "./prompt.js";
-import { createTokenFilter, aiText, sse } from "./stream.js";
+import { SYSTEM_PROMPT, OPENING, PROOF_LINKS, LEAK_REPLY, asVisitorData } from "./prompt.js";
+import { createTokenFilter, aiText, sse, leaked, visibleReply } from "./stream.js";
 import { passesTurnstile } from "./turnstile.js";
 import { json, readJson, readCookie, cookie, today } from "../lib/http.js";
 import { randomId, hashIp, sign, verify } from "../lib/crypto.js";
@@ -91,10 +91,11 @@ export async function handleChat(request, env, ctx) {
   }
   const [forVisitor, forRecord] = stream.tee();
   const inChars = messages.reduce((n, m) => n + m.content.length, 0);
-  ctx.waitUntil(record(env, chatId, forRecord, inChars, day));
+  const turn = chat.turn_count + 1;   // this visitor message, counted above
+  ctx.waitUntil(record(env, chatId, forRecord, inChars, day, turn));
 
   const out = new TransformStream();
-  ctx.waitUntil(relay(forVisitor, out.writable));
+  ctx.waitUntil(relay(forVisitor, out.writable, turn));
   const headers = { "content-type": "text/event-stream; charset=utf-8", "cache-control": "no-store" };
   if (setCookie) headers["set-cookie"] = setCookie;
   return new Response(out.readable, { headers });
@@ -105,11 +106,8 @@ function withCookie(res, setCookie) {
   return res;
 }
 
-const squash = (s) => s.replace(/\s+/g, " ");
-const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(squash(m)));
-
 // To the visitor: clean text as it arrives, then {done, mapped}.
-async function relay(stream, writable) {
+async function relay(stream, writable, turn) {
   const w = writable.getWriter();
   const enc = new TextEncoder();
   const filter = createTokenFilter();
@@ -123,7 +121,7 @@ async function relay(stream, writable) {
     }
     const rest = filter.end();
     if (rest) await w.write(enc.encode(sse({ t: rest })));
-    await w.write(enc.encode(sse({ done: true, mapped: filter.mapped })));
+    await w.write(enc.encode(sse({ done: true, mapped: visibleReply(filter.raw, turn).mapped })));
   } catch {
     await w.write(enc.encode(sse({ fallback: "form", reason: "model" }))).catch(() => {});
   } finally {
@@ -133,15 +131,13 @@ async function relay(stream, writable) {
 
 // For the record: the full reply (cleaned), whether it mapped the problem, which proof it
 // showed, and a rough token count (about 4 characters a token).
-async function record(env, chatId, stream, inChars, day) {
+async function record(env, chatId, stream, inChars, day, turn) {
   const filter = createTokenFilter();
   try {
     for await (const piece of aiText(stream)) filter.push(piece);
   } catch { /* keep what arrived */ }
   filter.end();
-  let text = filter.text;
-  const mapped = filter.mapped && !leaked(text);
-  if (leaked(text)) text = LEAK_REPLY;
+  const { text, mapped } = visibleReply(filter.raw, turn);
   if (!text) return;
   const proof = Object.keys(PROOF_LINKS).find((k) => text.includes(PROOF_LINKS[k])) || null;
   const now = Date.now();

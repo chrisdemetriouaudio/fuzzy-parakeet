@@ -9,6 +9,7 @@ export const PER_IP_DAILY_MSGS = 25;          // one visitor, per UTC day
 export const MAX_TURNS_PER_CHAT = 20;         // visitor messages in one chat
 export const MAX_INPUT_CHARS = 800;           // one visitor message
 export const MAX_REPLY_TOKENS = 220;          // the bot's replies are 60 words or fewer
+export const MIN_TURNS_TO_MAP = 3;            // [[MAPPED]] counts from the visitor's 3rd message (evals, 22 Oct)
 
 export const ANON_PURGE_DAYS = 30;            // chats with no lead: anonymised after this
 export const LEAD_PII_RETENTION_MONTHS = 12;  // quiet leads (not accepted, building or live)
