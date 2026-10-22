@@ -23,7 +23,7 @@
   // The lead chat (Phase 9). "off" until Chris approves; "preview" lets him try it first.
   // Secrets (wrangler secret put): SESSION_SECRET, IP_HASH_SALT, TURNSTILE_SECRET, RESEND_API_KEY.
   "vars": {
-    "CHAT_ENABLED": "off",
+    "CHAT_ENABLED": "preview",
     "ADMIN_EMAIL": "hello@chrisdemetriou.com",
     // Public site key of the existing "Chris Demetriou contact form" Turnstile widget
     // (chrisdemetriou.com). Its secret goes in TURNSTILE_SECRET.
@@ -36,6 +36,13 @@
     "not_found_handling": "404-page",
     "run_worker_first": true
   },
+  // The chat model (MODEL_ID in worker/config.js), on the free tier with a daily cap.
+  "ai": { "binding": "AI" },
+  // Leads, chats and portal data. Created by Actions → Infra → d1-create (Western Europe);
+  // the deploy applies migrations/ before each release.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "chrisdemetriou-leads", "database_id": "dae5accf-567d-498c-8552-ad09a147b70f", "migrations_dir": "migrations" }
+  ],
   // The showreel is 93 MB, over the 25 MiB limit for one static asset (D16).
   "r2_buckets": [
     { "binding": "MEDIA", "bucket_name": "chrisdemetriou-media" }

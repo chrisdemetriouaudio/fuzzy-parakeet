@@ -10,7 +10,7 @@ updated: 2026-10-22
 > [!info] At a glance
 > **What:** an AI chat on every page that helps a visitor describe one costly task, then turns it into a written audit request. Plus a passkey portal (sign-in with Face ID or a fingerprint, no password) where clients see their audit, scope and fixed price.
 > **When:** 20 Oct 2026 onwards.
-> **Status:** 🛠️ Steps 3–9 built and tested (22 Oct 2026), switched off. Waiting on your token, secrets and privacy approval.
+> **Status:** 👉 The chat is live in preview (22 Oct 2026): only you see it, at chrisdemetriou.com/?chat=preview.
 > **Steps:** match Phases 1 to 10 in the spec. Say "next" to move on.
 > **Back to:** [[00 Dashboard]]
 
@@ -18,11 +18,9 @@ updated: 2026-10-22
 
 - 👉 **Check e-mail still flows both ways.**
 - 👉 **Turn off GitHub Pages** once both pass.
-- 👉 **Widen the Cloudflare token:** D1, Turnstile, Workers AI.
-- 👉 **Set 4 Worker secrets** (`docs/lead-chat/03-04-chat-api.md`).
-- 🛠️ **Create the database and switch on its binding** once the token allows it.
+- 👉 **Try the chat** at chrisdemetriou.com/?chat=preview; finish one test lead (proves the emails).
 - 👉 **Approve the privacy draft** (`docs/lead-chat/08-privacy-draft.md`); it also fixes "hosted on GitHub Pages".
-- 🛠️ **Run the 10 test conversations** against the live model (needs the token).
+- 🛠️ **Run the 10 test conversations** against the live model.
 - 💭 **Step 10: add a Labs card** (`labs/projects.json`).
 
 ## 📚 Where things are
@@ -33,6 +31,12 @@ updated: 2026-10-22
 - **Step 2 guide and checklists:** `docs/lead-chat/02-migrate.md`
 
 ## ✅ Done
+
+> [!success]- Switched on in preview 22 Oct 2026 (tap to open)
+> - [x] **Widened the token and set the 4 Worker secrets.**
+> - [x] **Created the database** (Western Europe) through a GitHub Action, no dashboard.
+> - [x] **Checked the chat model** is still offered by Cloudflare.
+> - [x] **Bound the database and model;** chat switched to preview.
 
 > [!success]- Step 9 built 22 Oct 2026 (tap to open)
 > - [x] **Added 46 automated tests** that run on every pull request.
