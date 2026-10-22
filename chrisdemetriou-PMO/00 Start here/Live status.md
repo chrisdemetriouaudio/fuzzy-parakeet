@@ -9,24 +9,25 @@ changed: 22 Oct 2026, 18:39 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `6050c22` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `f44e4da` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#47 Lead chat: narrow vague visitors to a real, recent instance (D33)**: opened 22 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 22 Oct 2026 · `191d6cb` · docs(pmo): vague-visitor rule (D33) passes; Chris's test lead worked
+- 22 Oct 2026 · `77500eb` · feat(chat): narrow vague visitors to one real, recent instance (D33)
 - 22 Oct 2026 · `8fbfc96` · docs(evals): run 2 after tuning: the 6 failing personas now pass
 - 22 Oct 2026 · `e316f62` · fix(chat): tune the prompt after the first live evals (D32)
 - 22 Oct 2026 · `96485dd` · feat(chat): bind the D1 database and Workers AI; chat in preview
