@@ -3,6 +3,7 @@
 // CHAT_ENABLED is "on" or "preview" (wrangler.jsonc); the portal works whenever it's set up.
 import { json, sameOrigin } from "./lib/http.js";
 import { handleChat } from "./chat/chat.js";
+import { OPENING } from "./chat/prompt.js";
 import { handleLead } from "./chat/lead.js";
 import { registerOptions, registerVerify, loginOptions, loginVerify, emailLink, logout } from "./portal/auth.js";
 import { currentUser, csrfOk } from "./portal/session.js";
@@ -31,10 +32,20 @@ const SIGNED_IN = {
 
 const ready = (env) => env.DB && env.SESSION_SECRET && env.IP_HASH_SALT;
 
+// What the widget needs to know: whether to show itself ("preview" shows it only to
+// someone who opened a page with ?chat=preview), and Turnstile's public site key.
+function chatConfig(env) {
+  const set = ready(env) && env.AI && env.TURNSTILE_SECRET && env.TURNSTILE_SITE_KEY;
+  const mode = set && (env.CHAT_ENABLED === "on" || env.CHAT_ENABLED === "preview") ? env.CHAT_ENABLED : "off";
+  return json({ mode, sitekey: mode === "off" ? null : env.TURNSTILE_SITE_KEY, opening: OPENING }, 200, { "cache-control": "public, max-age=60" });
+}
+
 export async function handleApi(request, env, ctx, url) {
   const path = url.pathname;
   const post = request.method === "POST";
   if (post && !sameOrigin(request)) return json({ error: "origin" }, 403);
+
+  if (path === "/api/chat/config") return request.method === "GET" ? chatConfig(env) : json({ error: "method" }, 405, { allow: "GET" });
 
   if (CHAT[path]) {
     if (!post) return json({ error: "method" }, 405, { allow: "POST" });

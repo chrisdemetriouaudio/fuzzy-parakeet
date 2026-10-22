@@ -8,15 +8,16 @@ const SOUNDCLOUD = "https://w.soundcloud.com";
 
 // What every page may load. Scripts: only the site's own files, its inline scripts (by hash)
 // and Turnstile, the chat's bot check: the chat opens from any page (D14). The chat API
-// itself is on this domain ('self'). Styles allow inline because every page has a <style>
-// block and /creative/ uses style="" attributes; scripts never get that.
+// itself is on this domain ('self'); its fallback form posts to Web3Forms. Styles allow
+// inline because every page has a <style> block and /creative/ uses style="" attributes;
+// scripts never get that.
 const BASE = {
   "default-src": ["'none'"],
   "script-src": ["'self'", TURNSTILE],
   "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
   "font-src": ["'self'", "https://fonts.gstatic.com"],
   "img-src": ["'self'"],
-  "connect-src": ["'self'"],
+  "connect-src": ["'self'", WEB3FORMS],
   "frame-src": [TURNSTILE],
   "form-action": ["'self'"],
   "base-uri": ["'none'"],
@@ -25,14 +26,14 @@ const BASE = {
 
 // Extra sources, only on the pages that use them.
 const PAGES = {
-  // the workflow audit form posts to Web3Forms
-  "/": { "connect-src": [WEB3FORMS], "form-action": [WEB3FORMS] },
+  // the workflow audit form posts to Web3Forms (with JavaScript off, as a plain form)
+  "/": { "form-action": [WEB3FORMS] },
   "/creative/": {
     "script-src": [SOUNDCLOUD],                 // the SoundCloud Widget API, for the CD player
     "frame-src": [SOUNDCLOUD],
     "img-src": ["https://i.ytimg.com", "https://*.sndcdn.com", "https://cdn.prod.website-files.com"],
     "media-src": ["'self'"],                     // the showreel
-    "connect-src": [WEB3FORMS], "form-action": [WEB3FORMS],
+    "form-action": [WEB3FORMS],
   },
 };
 
