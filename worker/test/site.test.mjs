@@ -75,7 +75,8 @@ test("the CSP is strict everywhere and widened only where a page needs it", () =
     assert.ok(dir(p, "connect-src").includes("'self'"), `${page}: chat API`);
   }
   assert.ok(dir(csp("/"), "connect-src").includes("https://api.web3forms.com"));
-  assert.ok(!dir(csp("/privacy/"), "connect-src").includes("https://api.web3forms.com"));
+  assert.ok(dir(csp("/"), "form-action").includes("https://api.web3forms.com"));
+  assert.ok(!dir(csp("/privacy/"), "form-action").includes("https://api.web3forms.com"));
   assert.ok(dir(csp("/creative/"), "frame-src").includes("https://w.soundcloud.com"));
   assert.ok(!dir(csp("/"), "frame-src").includes("https://w.soundcloud.com"));
   assert.deepEqual(dir(csp("/creative/"), "media-src"), ["'self'"]);
@@ -135,5 +136,5 @@ test("the Worker redirects www and http, and only marks non-live addresses noind
 
   res = await go("https://chrisdemetriou.com/gone");
   assert.equal(res.status, 404);
-  assert.doesNotMatch(res.headers.get("content-security-policy"), /web3forms/, "404 page gets the plain policy");
+  assert.doesNotMatch(res.headers.get("content-security-policy"), /form-action[^;]*web3forms/, "404 page gets the plain policy");
 });

@@ -17,7 +17,7 @@
 | 4 | Chat API | Awaiting Chris | 2026-10-22 | | /api/chat and /api/lead built and tested (19 Worker tests); switched off. **Chris:** set the 4 Worker secrets (I10). |
 | 5 | Email (Resend) | In progress | 2026-10-22 | | Plain-text lead emails built (worker/email.js). Resend DNS already in place. **Chris:** RESEND_API_KEY as a Worker secret. |
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
-| 7 | Widget front end | Not started | | | |
+| 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Not started | | | |
 | 9 | Tests + conversation evals | Not started | | | |
 | 10 | Labs card (optional) | Not started | | | |
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D30 | 2026-10-22 | Widget asks /api/chat/config before showing; preview mode via ?chat=preview; not on /creative/ or /portal/; Web3Forms allowed in connect-src on every page (the fallback form) | Nothing visible changes until Chris switches it on; /creative/ is out of scope | Claude Code (proposed) |
 | D29 | 2026-10-22 | Portal = static page (portal/) + JSON API (/api/portal/*); discoverable passkeys; "email me a sign-in link" for lost passkeys and Chris's first sign-in; admin = ADMIN_EMAIL; every scope save is a new version | No framework, strict CSP (no inline scripts), one sign-in flow for both roles | Claude Code (proposed) |
 | D28 | 2026-10-22 | CHAT_ENABLED var: off (now), preview (Chris tries it), on (launch); the API answers "fallback: form" until the database, model and secrets all exist | Ship the backend dark; nothing public changes until Chris approves | Claude Code (proposed) |
 | D27 | 2026-10-22 | Schema changes from the spec: chats (not sessions_chat), leads.user_id (not users.lead_id), new ip_usage and auth_challenges tables, from_stage/to_stage | Clearer names; returning clients see all their leads; per-IP cap needs a counter; single-use passkey challenges stop replays | Claude Code (proposed) |
@@ -122,6 +123,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-22 | 7 | Chat widget, its styles, the config endpoint; script added to 4 pages; hero button opens the chat | scripts/chat.js, styles/chat.css, worker/api.js, worker/headers.js, index.html, privacy/index.html, cookies/index.html, 404.html, docs/lead-chat/07-widget.md |
 | 2026-10-22 | 6 | Portal: passkeys, client and admin views, export and delete, scrubber | portal/*, worker/portal/*, worker/privacy.js, worker/purge.js, worker/api.js, worker/spec/portal.spec.js, worker/spec/softauthn.js, .assetsignore, deploy-site.yml, docs/lead-chat/06-portal.md |
 | 2026-10-22 | 3–5 | D1 schema, config, Infra workflow, /api/chat, /api/lead, Resend emails, 19 Worker tests (vitest) in CI; chat off | migrations/0001_init.sql, worker/config.js, worker/api.js, worker/chat/*, worker/lib/*, worker/email.js, worker/spec/*, vitest.config.mjs, .github/workflows/infra.yml, site-check.yml, wrangler.jsonc, docs/lead-chat/03-04-chat-api.md |
 | 2026-10-22 | 2 | Cutover: Chris deleted the 5 GitHub Pages records and deployed; chrisdemetriou.com and www on the Worker; old route removed after the outage (I08); crawler policy D25 | docs/PMO.md, docs/lead-chat/02-migrate.md, vault |
