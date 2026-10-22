@@ -1,12 +1,12 @@
 ---
 title: Dashboard
-updated: 2026-10-21
+updated: 2026-10-22
 ---
 
 # 🎛️ Dashboard
 
 > [!info] At a glance
-> **chrisdemetriou.com is live** on GitHub Pages. **labs.chrisdemetriou.com is live** on Cloudflare.
+> **chrisdemetriou.com is live** on Cloudflare Workers (since 22 Oct 2026). **labs.chrisdemetriou.com is live** on Cloudflare.
 > **Labs shows 4 projects** on one screen (17 Oct 2026): Genesis, chrisdemetriou.com, R.E.A.CH, CDCS Contracts.
 > **Live status, updated by itself:** [[Live status]]
 > **Homepage rebuilt tech-first** (18 Oct 2026): web developer first, music and media as the roots.
@@ -16,7 +16,7 @@ updated: 2026-10-21
 
 ## 👉 Your actions
 
-- 👉 **Phase 9, step 2:** the cutover: chrisdemetriou.com moves to the Worker; [[Phase 9 — Lead chat & portal]].
+- 👉 **Phase 9, step 2:** turn off Cloudflare's AI-bot settings, check mail, turn off GitHub Pages; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
 - 👉 **Search Console:** resubmit the sitemap; request indexing of `/` and `/creative/`.

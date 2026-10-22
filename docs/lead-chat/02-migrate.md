@@ -107,7 +107,8 @@ Your DNS is already on Cloudflare (D17). So the Zoho records never move, and onl
 
 1. **Check mail works now.** Send from Zoho to another address and reply. Both arrive?
 2. **Back up the DNS.** Cloudflare → chrisdemetriou.com → **DNS → Records → Export**. Keep the file.
-3. **Write down the records you must not touch:** MX (Zoho), TXT (SPF), `zmail._domainkey` (DKIM), `_dmarc` (DMARC), and `labs`, `demo` and the other Labs subdomains.
+3. **List the zone's Workers Routes** (chrisdemetriou.com → Workers Routes) and remove any old route on the apex. Learned the hard way: an old `chrisdemetriou.com/*` route took the site down overnight on 21–22 Oct (I08).
+   **Write down the records you must not touch:** MX (Zoho), TXT (SPF), `zmail._domainkey` (DKIM), `_dmarc` (DMARC), and `labs`, `demo` and the other Labs subdomains.
 4. **Claude swaps the routes** in a small PR (branch `claude/lead-chat-cutover`): `chrisdemetriou.com` and `www` in, `preview` out. **Don't merge it yet.**
 5. **Deploy that PR's branch from your Mac:** `git fetch && git switch <branch> && npx wrangler deploy`. By hand, because wrangler may ask a question the auto-deploy can't answer.
    - If it asks to replace the existing DNS records for `chrisdemetriou.com` and `www`, answer **y**.

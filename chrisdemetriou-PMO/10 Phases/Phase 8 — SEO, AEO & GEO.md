@@ -19,7 +19,6 @@ updated: 2026-10-20
 - 👉 **Answer V1:** is the *King Arthur* credit DreamWorks? (`/creative/`)
 - 👉 **Answer V2:** was the Gaydio work commissioned, volunteer or training?
 - 👉 **Answer V3:** whose band runs on Genesis? Can it be named?
-- 👉 **Decide:** allow AI *training* crawlers, or search crawlers only?
 - 👉 **Decide:** which music services you still sell, if any (podcast editing, radio imaging, session work).
 - 👉 **Fill in the intake** for one project (`content/intake-template.md`).
 - 👉 **Confirm what your one-page audit map contains,** then approve the worked example.
@@ -38,6 +37,9 @@ updated: 2026-10-20
 - **Evidence:** `content/` (records, claims inventory, intake template)
 
 ## ✅ Done
+
+> [!success]- Decided 22 Oct 2026 (tap to open)
+> - [x] **Crawler policy: all welcome,** AI training crawlers included (Phase 9, D25).
 
 > [!success]- Built 20 Oct 2026 (tap to open)
 > - [x] **Audited the live site:** redirects, canonicals, robots, sitemap, structured data, mobile, forms.
