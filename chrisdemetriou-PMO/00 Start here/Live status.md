@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-22
-changed: 22 Oct 2026, 18:39 (UK time)
+changed: 22 Oct 2026, 18:40 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 22 Oct 2026, 18:39 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `f44e4da` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `f54a8fe` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 22 Oct 2026, 18:39 (UK time)
 - 22 Oct 2026 · `f8a9415` · feat(chat): conversation evals; retention without a cron (Phase 9 step 9)
 - 22 Oct 2026 · `d0bb79f` · feat(chat): daily retention job and privacy drafts (Phase 9 step 8)
 - 22 Oct 2026 · `0823acc` · feat(chat): the chat widget, hidden until switched on (Phase 9 step 7)
-- 22 Oct 2026 · `2b2207a` · feat(portal): passkey portal for clients and admin (Phase 9 step 6)
