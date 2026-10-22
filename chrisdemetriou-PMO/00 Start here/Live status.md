@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-22
-changed: 22 Oct 2026, 16:58 (UK time)
+changed: 22 Oct 2026, 16:59 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,24 +9,24 @@ changed: 22 Oct 2026, 16:58 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `fcdec58` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `32683de` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#40 Lead chat step 6: passkey portal for clients and admin**: opened 22 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 22 Oct 2026 · `2b2207a` · feat(portal): passkey portal for clients and admin (Phase 9 step 6)
 - 22 Oct 2026 · `20aff08` · feat(chat): D1 schema, chat API, lead capture and emails (Phase 9 steps 3-5)
 - 22 Oct 2026 · `4845c97` · docs(pmo): D26, lead chat build runs on autopilot
 - 22 Oct 2026 · `5a48521` · docs(pmo): AI crawlers allowed again; full parity passes on the apex
@@ -36,4 +36,3 @@ changed: 22 Oct 2026, 16:58 (UK time)
 - 21 Oct 2026 · `ea09b21` · feat(site): preview on preview.chrisdemetriou.com, workers.dev off
 - 21 Oct 2026 · `c3b05b8` · feat(site): Worker for chrisdemetriou.com, with R2 showreel (Phase 9 step 2)
 - 21 Oct 2026 · `2d4ec72` · docs(pmo): add Phase 9, Lead chat & portal, to the vault
-- 21 Oct 2026 · `593ea33` · docs(lead-chat): log D17, DNS is already on Cloudflare
