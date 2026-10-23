@@ -8,25 +8,25 @@ changed: 23 Oct 2026, 01:20 (UK time)
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
-> **Open pull requests:** 2
+> **Everything answering:** 🔴 no: GitHub Pages build
+> **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `ca4f685` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `074283b` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#51 Lead chat: buttons and summary card back to preview (D37)**: opened 23 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 23 Oct 2026 · `58b3c6b` · fix(chat): buttons and summary card back to preview (D37)
 - 22 Oct 2026 · `b53d638` · feat(chat): fact buttons and summary card on for everyone (D36)
 - 22 Oct 2026 · `9d8e331` · feat(chat): fact buttons and a summary card to zero in (D35)
 - 22 Oct 2026 · `fa593bd` · feat(chat): launch the lead chat; privacy notice and cookie policy updated (D34)
@@ -35,4 +35,3 @@ changed: 23 Oct 2026, 01:20 (UK time)
 - 22 Oct 2026 · `8fbfc96` · docs(evals): run 2 after tuning: the 6 failing personas now pass
 - 22 Oct 2026 · `e316f62` · fix(chat): tune the prompt after the first live evals (D32)
 - 22 Oct 2026 · `96485dd` · feat(chat): bind the D1 database and Workers AI; chat in preview
-- 22 Oct 2026 · `0903dce` · ci: hide email addresses in public workflow logs; reuse the Turnstile widget
