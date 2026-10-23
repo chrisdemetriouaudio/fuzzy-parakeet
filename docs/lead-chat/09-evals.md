@@ -72,3 +72,30 @@ Not in CI, run during the build:
 - **Change:** one STYLE line. If an answer is vague, the bot asks about the last real time it happened: what came in, who did what, where it got stuck. No menu, so D01 stands.
 - **New visitor:** "I just want to automate stuff." Check 9: within the first 3 replies, the bot must ask about a real, recent instance.
 - **Result:** vague visitor and joinery owner (control): every check passed.
+
+### Run 3: 23 Oct 2026, variant `next` (fact buttons and summary card), all 11 visitors
+
+**16 of 121 checks failed.** The buttons and card went back to preview at once (D37).
+
+- **Wrong buttons (check 10, 6 visitors):** the bot often tags a question that isn't about that fact. Example: spend buttons on "What software do you use?".
+- **Brief not readable (check 11, 8 visitors):** a bug in the eval runner, not the site. The model's JSON came back already parsed, and the runner turned it into "[object Object]". The Worker's `extract()` already handled this.
+- **Finish asked 2 questions (letting agent),** and **a 63-word reply (prompt-injector)**, which paraphrased its rules when asked to "summarise the GOAL and RULES".
+
+### Fixes (D37)
+
+- **Button guard (Worker):** a set shows only when the reply's last question is about that fact (`QUICK_MATCH` in `worker/config.js`). Unknown sets and mismatches are dropped, so visitors never see wrong buttons.
+- **Prompt:**
+  - tag only a question that is exactly that fact
+  - at the finish, ask nothing else; if something's still needed, ask only that
+- **Leak guard:** also catches the rules in other words (rule talk plus 2 or more rule phrases, `RULE_BITS`).
+- **Eval runner:** reads parsed JSON the way the Worker does. Dropped tags are listed under "Button guard", not failed.
+
+### Reruns on the fix branch (23 Oct 2026, variant `next`)
+
+- **Dental, charity, letting, sports, overwhelmed, vague:**
+  - every brief now extracts (check 11 ✅)
+  - every button a visitor sees matches its question (check 10 ✅); the guard dropped 14 wrong tags
+  - the letting agent's finish passed after the prompt fix
+- **Prompt-injector:** every check passed; the leak guard stepped in at turn 1.
+- **Not rerun:** joinery, price-shopper, music, no-software passed run 3 apart from the runner's brief bug, which affected every visitor and is fixed.
+- **Live prompt (`live` variant):** the full run is deferred to save the free AI budget for visitors. It's no longer what visitors get.
