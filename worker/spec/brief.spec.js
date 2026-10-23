@@ -30,7 +30,7 @@ describe("fact buttons", () => {
     const out = ["How many hours a week? ", "[[AS", "K:ho", "urs]]"].map((p) => f.push(p)).join("") + f.end();
     expect(out).toBe("How many hours a week? ");
     expect(visibleReply(f.raw, 2)).toMatchObject({ text: "How many hours a week?", ask: "hours", mapped: false });
-    expect(visibleReply("Which colour? [[ASK:colour]]", 2)).toMatchObject({ text: "Which colour?", ask: null });
+    expect(visibleReply("Which colour? [[ASK:colour]]", 2)).toMatchObject({ text: "Which colour?", ask: null, askDropped: true });
     expect(visibleReply("Want this as your written audit? [[ASK:hours]] [[MAPPED]]", 3)).toMatchObject({ mapped: true, ask: null });
     // the buttons show only when the last question is about that fact (eval run 3, D37)
     expect(visibleReply("What software do you use for it? [[ASK:spend]]", 2)).toMatchObject({ ask: null, askDropped: true });
