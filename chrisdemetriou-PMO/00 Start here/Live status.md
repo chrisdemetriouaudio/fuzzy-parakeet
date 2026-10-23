@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-23
-changed: 23 Oct 2026, 20:44 (UK time)
+changed: 23 Oct 2026, 23:39 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 23 Oct 2026, 20:44 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `c0f1683` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `2402be2` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 23 Oct 2026, 20:44 (UK time)
 - 22 Oct 2026 · `b53d638` · feat(chat): fact buttons and summary card on for everyone (D36)
 - 22 Oct 2026 · `9d8e331` · feat(chat): fact buttons and a summary card to zero in (D35)
 - 22 Oct 2026 · `fa593bd` · feat(chat): launch the lead chat; privacy notice and cookie policy updated (D34)
-- 22 Oct 2026 · `191d6cb` · docs(pmo): vague-visitor rule (D33) passes; Chris's test lead worked
