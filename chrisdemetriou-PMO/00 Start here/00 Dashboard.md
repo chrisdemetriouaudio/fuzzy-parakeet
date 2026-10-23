@@ -1,6 +1,6 @@
 ---
 title: Dashboard
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # 🎛️ Dashboard
@@ -16,6 +16,7 @@ updated: 2026-10-22
 
 ## 👉 Your actions
 
+- 👉 **Pick the niche** for the pilot: clients bring their problems ([[Decision Log]], 23 Oct 2026).
 - 👉 **Phase 9:** check mail both ways; turn off GitHub Pages; [[Phase 9 — Lead chat & portal]].
 - 👉 **Phase 8:** answer the questions in [[Phase 8 — SEO, AEO & GEO]].
 - 👉 **Release Labs:** `npm run release` in `labs/`, from `main` (new nav, title, Neuro Support Checker).
