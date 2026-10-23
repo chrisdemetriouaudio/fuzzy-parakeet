@@ -63,14 +63,16 @@ export const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(s
 // token was there, nothing leaked and this is at least the visitor's MIN_TURNS_TO_MAP-th
 // message (turn counts the visitor's messages, this one included), and "ask" naming the fact
 // buttons to show (never alongside "mapped", and only when the reply's last question is about
-// that fact: QUICK_MATCH). askDropped: the bot named a set the Worker didn't show.
+// that fact: QUICK_MATCH). askDropped: the bot tagged the reply (even with a set that doesn't
+// exist) but the Worker shows no buttons.
 export function visibleReply(raw, turn) {
   const text = String(raw).replace(TOKEN, "").trim();
   if (leaked(text)) return { text: LEAK_REPLY, mapped: false, ask: null, askDropped: false, leaked: true };
   const mapped = MAPPED_TOKEN.test(raw) && turn >= MIN_TURNS_TO_MAP;
   const named = mapped ? null : askIn(raw);
   const ask = named && QUICK_MATCH[named].test(lastQuestion(text)) ? named : null;
-  return { text, mapped, ask, askDropped: Boolean(named && !ask), leaked: false };
+  const tagged = !mapped && /\[\[\s*ASK\s*:/i.test(raw);
+  return { text, mapped, ask, askDropped: tagged && !ask, leaked: false };
 }
 
 // Workers AI streams server-sent events: `data: {"response":"..."}` lines, then `data: [DONE]`.

@@ -70,8 +70,9 @@ sees buttons for it. Never write the options out yourself.
 const FINISH_NEXT = `FINISH
 When 6+ items are mapped, say in one short sentence that you have what Chris
 needs, ask only "Want this as your written audit?" and end your reply with
-[[MAPPED]]. Ask nothing else in that reply. A summary then appears for them to
-check, so don't summarise.`;
+[[MAPPED]]. Ask nothing else in that reply: if you still need to ask something,
+ask only that and finish next time. A summary then appears for them to check, so
+don't summarise.`;
 
 function nextPrompt() {
   const proof = SYSTEM_PROMPT.indexOf("PROOF (only once");
