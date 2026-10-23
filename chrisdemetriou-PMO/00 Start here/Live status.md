@@ -1,14 +1,14 @@
 ---
 title: Live status
 updated: 2026-10-23
-changed: 23 Oct 2026, 01:29 (UK time)
+changed: 23 Oct 2026, 01:30 (UK time)
 ---
 
 # 🟢 Live status
 
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
-> **Everything answering:** ✅ yes
+> **Everything answering:** 🔴 no: GitHub Pages build
 > **Open pull requests:** 1
 > **Back to:** [[00 Dashboard]]
 
@@ -16,7 +16,7 @@ changed: 23 Oct 2026, 01:29 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `5b74ab9` (GitHub Pages: building) |
+| chrisdemetriou.com | ✅ 200 | main `5b74ab9` (GitHub Pages: errored) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
