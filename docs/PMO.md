@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D37 | 2026-10-23 | Fact buttons and summary card back to preview (CHAT_NEXT=preview) until the real-model run passes | Run 3 (next): the bot tagged non-factual questions with buttons, and the eval couldn't read the brief; visitors keep the tested chat meanwhile | Claude Code (autopilot, D26; the rollback D36 set up) |
 | D36 | 2026-10-22 | Fact buttons and summary card switched on for every visitor (CHAT_NEXT=on) | Chris tried them in preview; the midnight real-model run (variant next) checks them, and they go back to preview if it fails | Chris |
 | D35 | 2026-10-22 | Zero in with fact buttons and a summary card: fixed tap-to-answer sets for how often, people, hours and spend (the bot only tags the question); a confirm-or-correct brief before the contact form, reused by /api/lead. Behind CHAT_NEXT (preview first) | Free text for the pain keeps the specifics; buttons make the facts fast and consistent; a brief the visitor signed off is the best start for the audit. D01 (no menu) stands | Chris |
 | D34 | 2026-10-22 | Privacy and cookie text approved with 5 answers (AI training line kept; transfers kept; Turnstile softened; records 6 years after work ends; contact stays privacy@); chat switched on for everyone (CHAT_ENABLED=on) | The chat needs a notice that matches what it does before visitors see it | Chris |
@@ -133,6 +134,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-23 | 9 | Buttons and summary card back to preview after eval run 3 (next) failed (D37) | wrangler.jsonc, docs/PMO.md |
 | 2026-10-22 | 9 | Fact buttons and summary card on for everyone (D36) | wrangler.jsonc, docs/PMO.md, vault |
 | 2026-10-22 | 9 | Fact buttons and summary card behind CHAT_NEXT=preview (D35): tags, /api/brief, migration 0003, widget, 7 Worker tests, 23 browser checks, evals next variant (checks 10–11) | worker/*, migrations/0003_brief.sql, scripts/chat.js, styles/chat.css, 4 pages (chat.js v2), wrangler.jsonc, evals/*, .github/workflows/evals.yml, docs/lead-chat/07-widget.md, 09-evals.md |
 | 2026-10-22 | 8 | Privacy notice and cookie policy updated (approved); chat on for everyone; sitemap lastmod | privacy/index.html, cookies/index.html, content/core-pages.json, sitemap.xml, wrangler.jsonc, docs/lead-chat/08-privacy-draft.md, docs/PMO.md, vault |

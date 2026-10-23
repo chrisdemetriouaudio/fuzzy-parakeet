@@ -26,8 +26,8 @@
   "vars": {
     "CHAT_ENABLED": "on",
     // Fact buttons and the summary card (D35): "off", "preview" (?chat=preview links only) or "on".
-    // "on" since Chris tried it in preview (22 Oct 2026, D36).
-    "CHAT_NEXT": "on",
+    // Back to "preview" 23 Oct 2026: the first real-model run (variant next) failed (D37).
+    "CHAT_NEXT": "preview",
     "ADMIN_EMAIL": "hello@chrisdemetriou.com",
     // Public site key of the existing "Chris Demetriou contact form" Turnstile widget
     // (chrisdemetriou.com). Its secret goes in TURNSTILE_SECRET.
