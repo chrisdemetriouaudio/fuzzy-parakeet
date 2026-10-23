@@ -1,7 +1,7 @@
 // Reads Workers AI's streamed reply and turns it into clean text: the control tokens
 // ([[MAPPED]], and [[ASK:hours]] and friends for the fact buttons) are removed, even when
 // they arrive split across chunks, and recorded instead.
-import { LEAK_MARKERS, LEAK_REPLY } from "./prompt.js";
+import { LEAK_MARKERS, LEAK_REPLY, RULE_TALK, RULE_BITS } from "./prompt.js";
 import { MIN_TURNS_TO_MAP, QUICK_ANSWERS, QUICK_MATCH } from "../config.js";
 
 const TOKEN = /\[\[\s*(?:MAPPED|ASK\s*:\s*[a-z]+)\s*\]\]/gi;
@@ -55,8 +55,9 @@ export function createTokenFilter() {
 
 const squash = (s) => s.replace(/\s+/g, " ");
 
-// Has the reply started repeating the bot's instructions?
-export const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(squash(m)));
+// Has the reply started repeating the bot's instructions, word for word or in other words?
+export const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(squash(m)))
+  || (RULE_TALK.test(text) && RULE_BITS.filter((r) => r.test(text)).length >= 2);
 
 // What a whole reply comes to for the visitor (the chat and the evals both use this): the
 // tokens removed, the canned answer if it leaked the instructions, "mapped" only when the
