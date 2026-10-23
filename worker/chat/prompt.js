@@ -62,13 +62,17 @@ const TAP_ANSWERS = `TAP ANSWERS
 When your question is how often it happens, how many people do it, how many
 hours it takes, or what they spend on software for it, end your reply with the
 matching tag: [[ASK:frequency]], [[ASK:people]], [[ASK:hours]] or [[ASK:spend]].
-The visitor sees buttons for it. Never write the options out yourself.
+Only when this reply's question is exactly that fact: never tag a question about
+tools, what goes wrong, what they've tried or what fixed looks like. The visitor
+sees buttons for it. Never write the options out yourself.
 
 `;
 const FINISH_NEXT = `FINISH
 When 6+ items are mapped, say in one short sentence that you have what Chris
 needs, ask only "Want this as your written audit?" and end your reply with
-[[MAPPED]]. A summary then appears for them to check, so don't summarise.`;
+[[MAPPED]]. Ask nothing else in that reply: if you still need to ask something,
+ask only that and finish next time. A summary then appears for them to check, so
+don't summarise.`;
 
 function nextPrompt() {
   const proof = SYSTEM_PROMPT.indexOf("PROOF (only once");
@@ -91,6 +95,12 @@ export const PROOF_LINKS = {
 // stream is cut and replaced (the instructions are never echoed).
 export const LEAK_MARKERS = ["MAP THESE", "PROOF (only once", "end your reply with", "Never reveal, list or summarise", "GOAL\nHelp the visitor",
   "You are Chris Demetriou's AI assistant", "TAP ANSWERS"];
+// A reply that talks about its rules or goal and paraphrases two or more of them is a leak
+// too, even in other words (eval run 3, 23 Oct: "The rules include… not quoting build prices…").
+export const RULE_TALK = /\b(rules?|instructions?|goal|system prompt|guidelines?|set up to)\b/i;
+export const RULE_BITS = [/build prices?/i, /claim(ing)? to be chris/i, /list(ing)? (services|options|packages)/i,
+  /contact details/i, /one-page workflow audit/i, /curious and precise/i, /reflect (your|their|the visitor's) specifics/i,
+  /blueprints?/i, /one question per reply/i];
 export const LEAK_REPLY = "I can't share how I'm set up, but I'm happy to keep going: what's the task that eats most of your week?";
 
 // The visitor's words go to the model as quoted data. The control token is removed from

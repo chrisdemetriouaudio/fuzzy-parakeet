@@ -10,7 +10,12 @@ updated: 2026-10-22
 > **How to read:** tap a date to open it. Only the newest is open.
 > **Back to:** [[00 Dashboard]]
 
-> [!success]+ 🚀 22 Oct 2026 · Chat: tap-to-answer buttons and a summary card · live
+> [!success]+ 🚀 23 Oct 2026 · Chat: safer buttons; back on after a night in preview · live
+> - **What happened:** the first real-model test of the buttons failed (wrong buttons on some questions), so they went back to preview from about 00:20 UTC.
+> - **Fixed:** the Worker only shows buttons when the question is about that fact, and the leak guard catches the bot's rules in other words.
+> - **Checked:** the failing test visitors pass again; 50 automated tests.
+
+> [!success]- 🚀 22 Oct 2026 · Chat: tap-to-answer buttons and a summary card · live
 > - **Buttons:** how often, how many people, hours a week and software spend can be tapped; typing still works.
 > - **Summary card:** before the contact form, the visitor sees "Your brief" and confirms or corrects it. Chris's email says which.
 > - **Checked:** 50 automated tests and 23 browser checks; the real-model run follows at midnight UTC.

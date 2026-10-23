@@ -19,7 +19,7 @@
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Done | 2026-10-22 | 2026-10-22 | Retention job live (started by traffic, D31). Privacy notice and cookie policy approved by Chris and live 22 Oct (D34). |
-| 9 | Tests + conversation evals | In progress | 2026-10-22 | | 47 automated tests in CI. Eval run 1 (spec prompt): 8 of 80 failed; tuned (D32); the 6 that failed now pass. Vague-visitor rule and check added (D33): passes. Full 11-persona run after midnight UTC ([09-evals.md](lead-chat/09-evals.md)). |
+| 9 | Tests + conversation evals | Done | 2026-10-22 | 2026-10-23 | 50 Worker + 11 Node tests in CI. Live prompt: run 2 passes after tuning (D32, D33). Button variant (what visitors get): run 3 failed 16 checks, fixed (D37), reruns pass ([09-evals.md](lead-chat/09-evals.md)). Full live-prompt run deferred to save AI budget. |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---
@@ -43,6 +43,7 @@
 | D13 | 2026-10-20 | Anonymised chats kept forever; personal data purged on schedule | Keep insight; UK GDPR storage limitation | Chris |
 | D14 | 2026-10-20 | Floating launcher + hero CTA opens chat; form stays as fallback | Visible everywhere; no-JS safe | Chris |
 | D15 | 2026-10-20 | PMO maintained in docs/PMO.md, updated every phase | Single source of truth for status | Chris |
+| D38 | 2026-10-23 | Fact buttons and summary card on again (CHAT_NEXT=on) with a button guard (QUICK_MATCH) and a paraphrase leak guard | Every check that failed in run 3 passes in the reruns; the guards make wrong buttons and paraphrased rules impossible to show | Claude Code (autopilot, D26; the condition D36 set) |
 | D37 | 2026-10-23 | Fact buttons and summary card back to preview (CHAT_NEXT=preview) until the real-model run passes | Run 3 (next): the bot tagged non-factual questions with buttons, and the eval couldn't read the brief; visitors keep the tested chat meanwhile | Claude Code (autopilot, D26; the rollback D36 set up) |
 | D36 | 2026-10-22 | Fact buttons and summary card switched on for every visitor (CHAT_NEXT=on) | Chris tried them in preview; the midnight real-model run (variant next) checks them, and they go back to preview if it fails | Chris |
 | D35 | 2026-10-22 | Zero in with fact buttons and a summary card: fixed tap-to-answer sets for how often, people, hours and spend (the bot only tags the question); a confirm-or-correct brief before the contact form, reused by /api/lead. Behind CHAT_NEXT (preview first) | Free text for the pain keeps the specifics; buttons make the facts fast and consistent; a brief the visitor signed off is the best start for the audit. D01 (no menu) stands | Chris |
@@ -134,6 +135,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-23 | 9 | Button guard, paraphrase leak guard, prompt and runner fixes; reruns pass; buttons and card on again (D38) | worker/config.js, worker/chat/stream.js, worker/chat/prompt.js, worker/spec/brief.spec.js, evals/*, worker/test/evals.test.mjs, wrangler.jsonc, docs/lead-chat/09-evals.md |
 | 2026-10-23 | 9 | Buttons and summary card back to preview after eval run 3 (next) failed (D37) | wrangler.jsonc, docs/PMO.md |
 | 2026-10-22 | 9 | Fact buttons and summary card on for everyone (D36) | wrangler.jsonc, docs/PMO.md, vault |
 | 2026-10-22 | 9 | Fact buttons and summary card behind CHAT_NEXT=preview (D35): tags, /api/brief, migration 0003, widget, 7 Worker tests, 23 browser checks, evals next variant (checks 10–11) | worker/*, migrations/0003_brief.sql, scripts/chat.js, styles/chat.css, 4 pages (chat.js v2), wrangler.jsonc, evals/*, .github/workflows/evals.yml, docs/lead-chat/07-widget.md, 09-evals.md |

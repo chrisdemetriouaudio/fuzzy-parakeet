@@ -27,7 +27,8 @@ async function ask(messages, maxTokens = MAX_REPLY_TOKENS) {
       body: JSON.stringify({ messages, max_tokens: maxTokens }),
     });
     const data = await res.json().catch(() => ({}));
-    if (res.ok && data.success) return String(data.result?.response ?? "");
+    // JSON replies (the brief) can come back already parsed; the Worker's extract() does the same.
+    if (res.ok && data.success) { const r = data.result?.response; return typeof r === "string" ? r : JSON.stringify(r ?? ""); }
     if (attempt === 3) throw new Error(`Workers AI ${res.status}: ${JSON.stringify(data.errors || data).slice(0, 300)}`);
     await new Promise((r) => setTimeout(r, 2000 * attempt));
   }
@@ -35,6 +36,7 @@ async function ask(messages, maxTokens = MAX_REPLY_TOKENS) {
 
 const results = [];
 const guarded = [];
+const buttonGuard = [];
 for (const persona of PERSONAS.filter((p) => !only.length || only.some((o) => p.name.toLowerCase().includes(o)))) {
   const history = [{ role: "assistant", content: OPENING }];
   const replies = [];
@@ -51,7 +53,7 @@ for (const persona of PERSONAS.filter((p) => !only.length || only.some((o) => p.
     replies.push(seen.text);
     mapped.push(seen.mapped);
     asks.push(seen.ask);
-    if (!seen.ask && !seen.leaked && /\[\[\s*ASK\s*:/i.test(raw) && !seen.mapped) unknownAsks.push(i);
+    if (seen.askDropped) buttonGuard.push(`${persona.name}, turn ${i + 1}: tagged "${raw.match(/\[\[\s*ASK\s*:\s*([a-z]+)/i)?.[1]}" on "${seen.text.slice(-80)}"`);
     history.push({ role: "assistant", content: seen.text });
     if (seen.mapped) break;   // the widget switches to the contact form here
   }
@@ -78,6 +80,8 @@ const report = [
   "", `Model: \`${MODEL_ID}\`. ${failed ? `**${failed} check(s) failed.**` : "**Every check passed.**"}`, "", ...table, "",
   "## Leak guard", "", guarded.length ? "The Worker replaced these replies with its canned answer (the model started repeating its instructions):" : "It didn't have to step in.",
   ...guarded.map((g) => `- ${g}`), "",
+  ...(next ? ["## Button guard", "", buttonGuard.length ? "The Worker didn't show these buttons (the question wasn't about that fact, or the set doesn't exist):" : "Every tag the bot added matched its question.",
+    ...buttonGuard.map((g) => `- ${g}`), ""] : []),
   "## Conversations", "",
   ...results.flatMap((r) => [`### ${r.persona.name}`, "",
     ...r.history.map((m) => `- **${m.role === "user" ? "Visitor" : "Bot"}:** ${m.content.replace(/\n+/g, " ")}`), ""]),
@@ -86,6 +90,7 @@ writeFileSync(new URL("./results.md", import.meta.url), report);
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, report);
 console.log("\n" + table.join("\n") + `\n\n${failed ? `${failed} check(s) failed.` : "Every check passed."}`);
 if (guarded.length) console.log("\nLeak guard stepped in:\n" + guarded.join("\n"));
+if (buttonGuard.length) console.log("\nButton guard dropped:\n" + buttonGuard.join("\n"));
 // The personas are made up, so the failing chats can go in the (public) log.
 for (const r of results.filter((x) => cols.some((c) => x.grades[c].startsWith("❌")))) {
   console.log(`\n--- ${r.persona.name}`);

@@ -1,8 +1,8 @@
 // Reads Workers AI's streamed reply and turns it into clean text: the control tokens
 // ([[MAPPED]], and [[ASK:hours]] and friends for the fact buttons) are removed, even when
 // they arrive split across chunks, and recorded instead.
-import { LEAK_MARKERS, LEAK_REPLY } from "./prompt.js";
-import { MIN_TURNS_TO_MAP, QUICK_ANSWERS } from "../config.js";
+import { LEAK_MARKERS, LEAK_REPLY, RULE_TALK, RULE_BITS } from "./prompt.js";
+import { MIN_TURNS_TO_MAP, QUICK_ANSWERS, QUICK_MATCH } from "../config.js";
 
 const TOKEN = /\[\[\s*(?:MAPPED|ASK\s*:\s*[a-z]+)\s*\]\]/gi;
 const MAPPED_TOKEN = /\[\[\s*MAPPED\s*\]\]/i;
@@ -19,6 +19,12 @@ function askIn(raw) {
   const keys = [...String(raw).matchAll(ASK_TOKEN)].map((m) => m[1].toLowerCase());
   const key = keys.at(-1);
   return key && Object.hasOwn(QUICK_ANSWERS, key) ? key : null;
+}
+
+// The reply's last question (the sentence ending in its last "?").
+function lastQuestion(text) {
+  const upto = text.slice(0, text.lastIndexOf("?") + 1);
+  return upto.split(/(?<=[.!?])\s+/).filter(Boolean).at(-1) || "";
 }
 
 // Text is passed on as it arrives, except a trailing piece that could still turn into the
@@ -49,19 +55,25 @@ export function createTokenFilter() {
 
 const squash = (s) => s.replace(/\s+/g, " ");
 
-// Has the reply started repeating the bot's instructions?
-export const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(squash(m)));
+// Has the reply started repeating the bot's instructions, word for word or in other words?
+export const leaked = (text) => LEAK_MARKERS.some((m) => squash(text).includes(squash(m)))
+  || (RULE_TALK.test(text) && RULE_BITS.filter((r) => r.test(text)).length >= 2);
 
 // What a whole reply comes to for the visitor (the chat and the evals both use this): the
 // tokens removed, the canned answer if it leaked the instructions, "mapped" only when the
 // token was there, nothing leaked and this is at least the visitor's MIN_TURNS_TO_MAP-th
 // message (turn counts the visitor's messages, this one included), and "ask" naming the fact
-// buttons to show (never alongside "mapped").
+// buttons to show (never alongside "mapped", and only when the reply's last question is about
+// that fact: QUICK_MATCH). askDropped: the bot tagged the reply (even with a set that doesn't
+// exist) but the Worker shows no buttons.
 export function visibleReply(raw, turn) {
   const text = String(raw).replace(TOKEN, "").trim();
-  if (leaked(text)) return { text: LEAK_REPLY, mapped: false, ask: null, leaked: true };
+  if (leaked(text)) return { text: LEAK_REPLY, mapped: false, ask: null, askDropped: false, leaked: true };
   const mapped = MAPPED_TOKEN.test(raw) && turn >= MIN_TURNS_TO_MAP;
-  return { text, mapped, ask: mapped ? null : askIn(raw), leaked: false };
+  const named = mapped ? null : askIn(raw);
+  const ask = named && QUICK_MATCH[named].test(lastQuestion(text)) ? named : null;
+  const tagged = !mapped && /\[\[\s*ASK\s*:/i.test(raw);
+  return { text, mapped, ask, askDropped: tagged && !ask, leaked: false };
 }
 
 // Workers AI streams server-sent events: `data: {"response":"..."}` lines, then `data: [DONE]`.

@@ -2,7 +2,7 @@
 phase: 9
 status: now
 health: green
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # 💬 Phase 9 — Lead chat & portal
@@ -18,7 +18,6 @@ updated: 2026-10-22
 
 - 👉 **Check e-mail still flows both ways.**
 - 👉 **Turn off GitHub Pages** once both pass.
-- 🛠️ **Run all 11 test conversations,** live and with buttons, after the AI budget resets (midnight UTC).
 - 💭 **Step 10: add a Labs card** (`labs/projects.json`).
 
 ## 📚 Where things are
@@ -29,6 +28,11 @@ updated: 2026-10-22
 - **Step 2 guide and checklists:** `docs/lead-chat/02-migrate.md`
 
 ## ✅ Done
+
+> [!success]- Tested on the real model 23 Oct 2026 (tap to open)
+> - [x] **First run with buttons failed,** so they went back to preview straight away.
+> - [x] **Fixed it:** wrong buttons can't show, and the bot can't recite its rules, even in other words.
+> - [x] **Reran the failing visitors;** all pass. Buttons and card are on again.
 
 > [!success]- Buttons and summary card built 22 Oct 2026 (tap to open)
 > - [x] **Switched them on for every visitor** after trying them in preview.
