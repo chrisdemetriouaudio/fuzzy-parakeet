@@ -42,7 +42,7 @@ test("each rule catches its failure", () => {
   assert.equal(g(["Hi?"])["9 Narrows a vague start"], "–");
   const nx = (replies, asks, extra = {}) => grade({ persona: persona(), replies, asks, next: true, mapped: replies.map(() => false), ...extra });
   assert.equal(nx(["What eats your week?", "How often does it happen?"], [null, "frequency"])["10 Buttons only for facts"], "✅");
-  assert.match(nx(["What's the task?"], ["hours"])["10 Buttons only for facts"], /first reply/);
+  assert.equal(nx(["How many hours a week does it take?"], ["hours"])["10 Buttons only for facts"], "✅");
   assert.match(nx(["Hi?", "What goes wrong?"], [null, "hours"])["10 Buttons only for facts"], /hours buttons/);
   assert.match(nx(["Hi?", "How often: Daily, Weekly or Monthly?"], [null, "frequency"])["10 Buttons only for facts"], /options out/);
   assert.match(nx(["Hi?", "How often?"], [null, null], { unknownAsks: [1] })["10 Buttons only for facts"], /unknown/);

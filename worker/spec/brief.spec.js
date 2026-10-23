@@ -32,6 +32,9 @@ describe("fact buttons", () => {
     expect(visibleReply(f.raw, 2)).toMatchObject({ text: "How many hours a week?", ask: "hours", mapped: false });
     expect(visibleReply("Which colour? [[ASK:colour]]", 2)).toMatchObject({ text: "Which colour?", ask: null });
     expect(visibleReply("Want this as your written audit? [[ASK:hours]] [[MAPPED]]", 3)).toMatchObject({ mapped: true, ask: null });
+    // the buttons show only when the last question is about that fact (eval run 3, D37)
+    expect(visibleReply("What software do you use for it? [[ASK:spend]]", 2)).toMatchObject({ ask: null, askDropped: true });
+    expect(visibleReply("Got it. How much do you spend a month on that software? [[ASK:spend]]", 2)).toMatchObject({ ask: "spend", askDropped: false });
   });
 
   it("uses the button prompt and sends the set only when CHAT_NEXT allows it", async () => {

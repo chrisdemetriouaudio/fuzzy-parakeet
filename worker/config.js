@@ -24,6 +24,15 @@ export const QUICK_ANSWERS = {
   spend: ["Nothing", "Under £50 a month", "£50–£200 a month", "More than £200 a month", "Not sure"],
 };
 
+// What the question must be about for its buttons to show. The bot sometimes tags the wrong
+// question (eval run 3, 23 Oct), so the Worker checks the reply's last question (D37).
+export const QUICK_MATCH = {
+  frequency: /\b(how often|how frequently|how many times|frequency)\b/i,
+  people: /\b(how many (people|of you|staff|volunteers|members|person)|who('s| is)? (usually |currently |normally )?(does|do|handles|deals|is involved|responsible|in charge|looks after|runs))\b/i,
+  hours: /\b(how (many|much) (hours|time)|how long)\b/i,
+  spend: /\b(spend|pay|cost)\b.*\b(software|subscriptions?|month|licen[cs]es?|tools?|apps?)\b|\b(software|subscriptions?|licen[cs]es?|tools?|apps?)\b.*\b(spend|pay|cost)\b/i,
+};
+
 // The summary card's lines: pain_summary keys and the labels the visitor sees.
 export const BRIEF_FIELDS = [
   ["task", "The task"], ["trigger_frequency", "How often"], ["who", "Who does it"],

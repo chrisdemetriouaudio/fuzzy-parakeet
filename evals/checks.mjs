@@ -1,7 +1,7 @@
 // The spec's eight rules for the bot, as checks on one conversation (Phase 9, step 9).
 // Each check returns null (pass) or a short reason (fail). "–" means it didn't apply.
 import { BLUEPRINTS, PROOF_LINKS, LEAK_MARKERS } from "../worker/chat/prompt.js";
-import { QUICK_ANSWERS, BRIEF_FIELDS } from "../worker/config.js";
+import { QUICK_ANSWERS, QUICK_MATCH, BRIEF_FIELDS } from "../worker/config.js";
 
 const TOKEN = /\[\[\s*MAPPED\s*\]\]/i;
 export const clean = (r) => r.replace(/\[\[\s*MAPPED\s*\]\]/gi, "").trim();
@@ -87,18 +87,15 @@ export const CHECKS = {
     const asks = /\b(last (real )?time|last week|most recent|recent (example|time)|specific (example|time)|walk me through|the last one|when did that last)\b/i;
     return convo.replies.slice(0, 3).some((r) => asks.test(r)) ? null : "no question about a real, recent instance in the first 3 replies";
   },
-  // Fact buttons (D35): only on a question about that fact, never on the first reply (that's
-  // the open question about their work), only known sets, and never the options in words.
+  // Fact buttons (D35): the buttons a visitor sees sit on a question about that fact
+  // (QUICK_MATCH, which the Worker also enforces), only known sets, never the options in words.
   "10 Buttons only for facts": (convo) => {
     if (!convo.next) return "–";
-    const about = { frequency: /often|frequen|times? (a|per|each) |regular/i, people: /people|who |how many (of you|staff)|team|person/i,
-      hours: /hours?|time|how long/i, spend: /spend|pay|cost|£|subscription|licen[cs]e/i };
     if (convo.unknownAsks?.length) return `turn ${convo.unknownAsks[0] + 1} names an unknown button set`;
     for (const [i, key] of (convo.asks || []).entries()) {
       if (!key) continue;
       const r = convo.replies[i];
-      if (i === 0) return "buttons on the first reply";
-      if (!r.includes("?") || !about[key].test(r)) return `turn ${i + 1} shows ${key} buttons for "${r.slice(0, 60)}"`;
+      if (!r.includes("?") || !QUICK_MATCH[key].test(r)) return `turn ${i + 1} shows ${key} buttons for "${r.slice(0, 60)}"`;
       if (QUICK_ANSWERS[key].filter((o) => r.toLowerCase().includes(o.toLowerCase())).length >= 2) return `turn ${i + 1} writes the options out`;
     }
     return null;

@@ -62,13 +62,16 @@ const TAP_ANSWERS = `TAP ANSWERS
 When your question is how often it happens, how many people do it, how many
 hours it takes, or what they spend on software for it, end your reply with the
 matching tag: [[ASK:frequency]], [[ASK:people]], [[ASK:hours]] or [[ASK:spend]].
-The visitor sees buttons for it. Never write the options out yourself.
+Only when this reply's question is exactly that fact: never tag a question about
+tools, what goes wrong, what they've tried or what fixed looks like. The visitor
+sees buttons for it. Never write the options out yourself.
 
 `;
 const FINISH_NEXT = `FINISH
 When 6+ items are mapped, say in one short sentence that you have what Chris
 needs, ask only "Want this as your written audit?" and end your reply with
-[[MAPPED]]. A summary then appears for them to check, so don't summarise.`;
+[[MAPPED]]. Ask nothing else in that reply. A summary then appears for them to
+check, so don't summarise.`;
 
 function nextPrompt() {
   const proof = SYSTEM_PROMPT.indexOf("PROOF (only once");
