@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-24
-changed: 24 Oct 2026, 01:16 (UK time)
+changed: 24 Oct 2026, 01:19 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,17 +16,18 @@ changed: 24 Oct 2026, 01:16 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `bad842d` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `f6a1434` (GitHub Pages: building) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
-- 👉 **#53 docs(pmo): niche pilot, problem-led (D39)**: opened 24 Oct 2026
+- 👉 **#54 docs(evals): run 4, live prompt, every check passes**: opened 24 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
 
+- 24 Oct 2026 · `f6a1434` · docs(pmo): niche pilot, problem-led (D39); niche still to pick (#53)
 - 23 Oct 2026 · `9ee5991` · feat(chat): buttons and summary card on again (D38); eval run 3 written up
 - 23 Oct 2026 · `a1d22ef` · fix(chat): the leak guard catches the rules in other words (D37)
 - 23 Oct 2026 · `acbd055` · fix(evals): list unknown button sets under the guard, not as failures
