@@ -1,7 +1,7 @@
 ---
 title: Live status
-updated: 2026-10-23
-changed: 23 Oct 2026, 23:39 (UK time)
+updated: 2026-10-24
+changed: 24 Oct 2026, 01:16 (UK time)
 ---
 
 # 🟢 Live status
@@ -9,19 +9,20 @@ changed: 23 Oct 2026, 23:39 (UK time)
 > [!info] At a glance
 > **This page writes itself.** Don't edit it: changes are overwritten.
 > **Everything answering:** ✅ yes
-> **Open pull requests:** 1
+> **Open pull requests:** 2
 > **Back to:** [[00 Dashboard]]
 
 ## 🌐 Sites
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `2402be2` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `bad842d` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
 ## 🔀 Open pull requests
 
+- 👉 **#53 docs(pmo): niche pilot, problem-led (D39)**: opened 24 Oct 2026
 - 👉 **#12 CEO agent phase 1: design and local Fix-it ticket prototype**: opened 18 Oct 2026
 
 ## 🕑 Latest changes on main
