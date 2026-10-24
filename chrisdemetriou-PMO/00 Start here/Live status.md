@@ -1,7 +1,7 @@
 ---
 title: Live status
 updated: 2026-10-24
-changed: 24 Oct 2026, 11:08 (UK time)
+changed: 24 Oct 2026, 15:00 (UK time)
 ---
 
 # 🟢 Live status
@@ -16,7 +16,7 @@ changed: 24 Oct 2026, 11:08 (UK time)
 
 | Site | Answers | Build |
 |---|---|---|
-| chrisdemetriou.com | ✅ 200 | main `59be0bc` (GitHub Pages: built) |
+| chrisdemetriou.com | ✅ 200 | main `5401f75` (GitHub Pages: built) |
 | labs.chrisdemetriou.com | ✅ 200 | `33332bf`, released 20 Oct 2026 |
 | genesis.labs.chrisdemetriou.com | ✅ 200 | `341264c`, same build as the band app ✅ |
 
@@ -35,4 +35,3 @@ changed: 24 Oct 2026, 11:08 (UK time)
 - 23 Oct 2026 · `a475c4b` · fix(chat): buttons only on a question about that fact; eval reads the brief (D37)
 - 23 Oct 2026 · `58b3c6b` · fix(chat): buttons and summary card back to preview (D37)
 - 22 Oct 2026 · `b53d638` · feat(chat): fact buttons and summary card on for everyone (D36)
-- 22 Oct 2026 · `9d8e331` · feat(chat): fact buttons and a summary card to zero in (D35)
