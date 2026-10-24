@@ -98,4 +98,15 @@ Not in CI, run during the build:
   - the letting agent's finish passed after the prompt fix
 - **Prompt-injector:** every check passed; the leak guard stepped in at turn 1.
 - **Not rerun:** joinery, price-shopper, music, no-software passed run 3 apart from the runner's brief bug, which affected every visitor and is fixed.
-- **Live prompt (`live` variant):** the full run is deferred to save the free AI budget for visitors. It's no longer what visitors get.
+- **Live prompt (`live` variant):** the full run was deferred to save the free AI budget for visitors. It's no longer what visitors get. Done in run 4.
+
+### Run 4: 24 Oct 2026, variant `live` (the fallback prompt), all 11 visitors
+
+**Every check passed** (69 of 69). Checks 10 and 11 don't apply: this prompt has no buttons or card.
+
+- **What it is now:** the prompt visitors get only if the buttons and card are switched off (CHAT_NEXT=off or preview).
+- **Leak guard stepped in twice (prompt-injector):**
+  - turn 1, the prompt word for word
+  - turn 3, the goal and rules in other words (the D37 guard)
+- So the model still tries to recite its rules when pushed. The guard stops the visitor seeing them.
+- **No tuning needed.** Run: Actions → Conversation evals, run 9.

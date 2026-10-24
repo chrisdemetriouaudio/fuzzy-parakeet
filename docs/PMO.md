@@ -19,7 +19,7 @@
 | 6 | Portal (client + admin) | Done | 2026-10-22 | 2026-10-22 | Passkey portal built ([06-portal.md](lead-chat/06-portal.md)); 28 Worker tests + full browser run with a virtual passkey; works once step 3's database and secrets exist. |
 | 7 | Widget front end | Done | 2026-10-22 | 2026-10-22 | scripts/chat.js + styles/chat.css on /, privacy, cookies, 404 ([07-widget.md](lead-chat/07-widget.md)); 30 browser checks pass; hidden until CHAT_ENABLED is preview or on. |
 | 8 | Retention cron + privacy page | Done | 2026-10-22 | 2026-10-22 | Retention job live (started by traffic, D31). Privacy notice and cookie policy approved by Chris and live 22 Oct (D34). |
-| 9 | Tests + conversation evals | Done | 2026-10-22 | 2026-10-23 | 50 Worker + 11 Node tests in CI. Live prompt: run 2 passes after tuning (D32, D33). Button variant (what visitors get): run 3 failed 16 checks, fixed (D37), reruns pass ([09-evals.md](lead-chat/09-evals.md)). Full live-prompt run deferred to save AI budget. |
+| 9 | Tests + conversation evals | Done | 2026-10-22 | 2026-10-23 | 50 Worker + 11 Node tests in CI. Live prompt: run 2 passes after tuning (D32, D33). Button variant (what visitors get): run 3 failed 16 checks, fixed (D37), reruns pass ([09-evals.md](lead-chat/09-evals.md)). Live prompt full run 4 (24 Oct): every check passes. |
 | 10 | Labs card (optional) | Not started | | | |
 
 ---
@@ -135,6 +135,7 @@
 | 2026-10-21 | 1 | Recon report; spec and PMO saved in docs/ (never published) | docs/lead-chat/01-recon.md, docs/lead-chat/CLAUDE_CODE_PROMPT_lead-widget-portal.md, docs/PMO.md |
 | 2026-10-21 | 1 | D16 logged (showreel → R2); I01 closed | docs/PMO.md, chrisdemetriou-PMO/20 Logs/Decision Log.md |
 | 2026-10-21 | 1 | D17 logged (DNS already on Cloudflare); I02, X02 closed | docs/PMO.md |
+| 2026-10-24 | 9 | Eval run 4, live prompt (the fallback), all 11 visitors: every check passes; leak guard stepped in twice | docs/lead-chat/09-evals.md, docs/PMO.md |
 | 2026-10-23 | 9 | Button guard, paraphrase leak guard, prompt and runner fixes; reruns pass; buttons and card on again (D38) | worker/config.js, worker/chat/stream.js, worker/chat/prompt.js, worker/spec/brief.spec.js, evals/*, worker/test/evals.test.mjs, wrangler.jsonc, docs/lead-chat/09-evals.md |
 | 2026-10-23 | 9 | Buttons and summary card back to preview after eval run 3 (next) failed (D37) | wrangler.jsonc, docs/PMO.md |
 | 2026-10-22 | 9 | Fact buttons and summary card on for everyone (D36) | wrangler.jsonc, docs/PMO.md, vault |
