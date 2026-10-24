@@ -1,6 +1,6 @@
 ---
 title: Decision Log
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # 🧠 Decision Log
@@ -8,6 +8,13 @@ updated: 2026-10-22
 > [!info] At a glance
 > **What:** what we decided, and why. One box per decision, newest first.
 > **Back to:** [[00 Dashboard]]
+
+> [!success]- 23 Oct 2026 · Niche pilot: clients bring their problems (Agreed)
+> - **Status:** Agreed by Chris, answering Claude's sales critique.
+> - **Decided:** pick one niche and invite it to bring its own problems. Don't market the six blueprints or Labs projects as products.
+> - **Not adopted:** the SaaS price tiers from the critique. A fix several clients need may become a product later.
+> - **Still to decide:** which niche.
+> - **Details:** `docs/PMO.md` (D39).
 
 > [!success]- 22 Oct 2026 · The lead chat goes live; privacy notice approved (Agreed)
 > - **Status:** Agreed by Chris after testing it in preview.
